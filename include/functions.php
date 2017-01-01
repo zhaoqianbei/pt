@@ -2237,7 +2237,7 @@ if ($CURUSER){
 <script type="text/javascript" src="domTT_drag.js<?php echo $cssupdatedate?>"></script>
 <script type="text/javascript" src="fadomatic.js<?php echo $cssupdatedate?>"></script>
 <!-- 分享页面 -->
-<script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.js"></script>
+<script src="lib/jquery.min.js"></script>
 <link rel="stylesheet" href="lib/share/css/share.min.css">
 <script src="lib/share/js/jquery.share.min.js"></script>
 </head>
@@ -2543,8 +2543,8 @@ function stdfoot() {
 	print("</div>");
 	if ($analyticscode_tweak)
 		print("\n".$analyticscode_tweak."\n");
-	// $zhixing = '<script type="text/javascript">$(".social-share").share($config);</script>';
-	// print($zhixing);
+	$zhixing = '<script type="text/javascript">$(".social-share").share($config);</script>';
+	print($zhixing);
 	print("</body></html>");
 
 	//echo replacePngTags(ob_get_clean());

@@ -65,9 +65,7 @@ else {
 		    disabled: ["google", "facebook", "twitter"], 
 		    wechatQrcodeTitle: "微信扫一扫：分享",
 		    wechatQrcodeHelper: "<p>微信里点“发现”，扫一下</p><p>二维码便可将本文分享至朋友圈。</p>",
-		    target: "_blank" //打开方式
-		};
-		socialShare(".social-share", $config)
+		    target: "_blank" //打开方式};
 		</script>';
 
 		print($js);
