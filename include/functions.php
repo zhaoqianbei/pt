@@ -3270,12 +3270,12 @@ function get_username($id, $big = false, $link = true, $bold = true, $target = f
 		$username = ($bold == true ? "<b>" . $username . "</b>" : $username);
 		$username = ($link == true ? "<a ". $link_ext . " href=\"userdetails.php?id=" . $id . "\"" . ($target == true ? " target=\"_blank\"" : "") . " class='". get_user_class_name($arr['class'],true) . "_Name'>" . $username . "</a>" : $username) . $pics . ($withtitle == true ? " (" . ($arr['title'] == "" ?  get_user_class_name($arr['class'],false,true,true) : "<span class='".get_user_class_name($arr['class'],true) . "_Name'><b>".htmlspecialchars($arr['title'])) . "</b></span>)" : "");
 
-		$username = "<span class=\"nowrap\">" . ( $bracket == true ? "(" . $username . ")" : $username) . "</span>";
+		$username = "<span class=\'nowrap\'>" . ( $bracket == true ? "(" . $username . ")" : $username) . "</span>";
 	}
 	else
 	{
 		$username = "<i>".$lang_functions['text_orphaned']."</i>";
-		$username = "<span class=\"nowrap\">" . ( $bracket == true ? "(" . $username . ")" : $username) . "</span>";
+		$username = "<span class=\'nowrap\'>" . ( $bracket == true ? "(" . $username . ")" : $username) . "</span>";
 	}
 	if (func_num_args() == 1) { //One argument=is default display of username, save it in static array
 		$usernameArray[$id] = $username;
