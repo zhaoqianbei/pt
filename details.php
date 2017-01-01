@@ -48,7 +48,24 @@ else {
 		$sp_torrent = get_torrent_promotion_append($row[sp_state],'word');
 
 		$s=htmlspecialchars($row["name"]).($sp_torrent ? "&nbsp;&nbsp;&nbsp;".$sp_torrent : "");
-		
+		// 分享按钮
+		$sh = '<div class="social-share tal"></div>';
+		print($sh);
+
+		$js = '<script type="text/javascript">var $config = {
+		    url: window.location.href, // 网址，默认使用 window.location.href
+		    source: "找前辈网 - 7500学编程，手把手教到就业满意！就业没有5000元/月，少多少退多少！", 
+		    title: "'.htmlspecialchars($row["name"]).'", 
+		    description: "上传者："'.$lang_details['row_upped_by'].'", 
+		    image: "", 
+		    sites: ["wechat", "qq", "qzone", "weibo"], 
+		    disabled: ["google", "facebook", "twitter"], 
+		    wechatQrcodeTitle: "微信扫一扫：分享",
+		    wechatQrcodeHelper: "<p>微信里点“发现”，扫一下</p><p>二维码便可将本文分享至朋友圈。</p>",
+		    target:"_blank"};
+		</script>';
+
+		print($js);
 		print("<h1 align=\"center\" id=\"top\">".$s."</h1>\n");
 		print("<table width=\"1000\" cellspacing=\"0\" cellpadding=\"5\">\n");
 
@@ -68,25 +85,6 @@ else {
 		else {
 			$uprow = (isset($row['owner']) ? get_username($row['owner'], false, true, true, false, false, true) : "<i>".$lang_details['text_unknown']."</i>");
 		}
-
-		// 分享按钮
-		$sh = '<div class="social-share tal"></div>';
-		print($sh);
-
-		$js = '<script type="text/javascript">var $config = {
-		    url: window.location.href, // 网址，默认使用 window.location.href
-		    source: "找前辈网 - 7500学编程，手把手教到就业满意！就业没有5000元/月，少多少退多少！", 
-		    title: "'.htmlspecialchars($row["name"]).'", 
-		    description: "上传者："'.$lang_details['row_upped_by'].'", 
-		    image: "", 
-		    sites: ["wechat", "qq", "qzone", "wseibo"], 
-		    disabled: ["google", "facebook", "twitter"], 
-		    wechatQrcodeTitle: "微信扫一扫：分享",
-		    wechatQrcodeHelper: "<p>微信里点“发现”，扫一下</p><p>二维码便可将本文分享至朋友圈。</p>",
-		    target:"_blank"};
-		</script>';
-
-		print($js);
 
 		if ($CURUSER["id"] == $row["owner"])
 			$CURUSER["downloadpos"] = "yes";
