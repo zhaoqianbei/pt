@@ -64,8 +64,8 @@ else {
 		$js = '<script type="text/javascript">var $config = {
 		    url: window.location.href,
 		    source: "找前辈网 - 7500学编程，手把手教到就业满意！就业没有5000元/月，少多少退多少！", 
-		    title: "资源分享：'.htmlspecialchars($row["name"]).'\n'.htmlspecialchars(trim($row["small_descr"])).'", 
-		    description: "上传者：'.$zuozhe.'，文件大小：'.mksize($row["size"]).'", 
+		    title: "资源分享：'.htmlspecialchars($row["name"]).'\n'.'"上传者：'.$zuozhe.' 资源大小：'.mksize($row["size"]).', 
+		    description: "'.htmlspecialchars(trim($row["small_descr"])).'", 
 		    image: "ico.png", 
 		    sites: ["wechat", "qq", "qzone", "weibo"], 
 		    disabled: ["google", "facebook", "twitter"], 
