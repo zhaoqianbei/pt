@@ -8,6 +8,16 @@ body {
 .fs1{font-size: 12pt}
 .fs2{font-size: 16pt}
 .fs3{font-size: 20pt}
+.left{float: left}
+.right{float: right;}
+/*清除浮动类*/
+.clearfix::before, .clearfix::after{
+  display: table;
+  content: " ";
+}
+.clearfix::after {
+  clear: both;
+}
 body.inframe {
     background: transparent none;
 }
