@@ -66,7 +66,7 @@ else {
 		    source: "找前辈网 - 7500学编程，手把手教到就业满意！就业没有5000元/月，少多少退多少！", 
 		    title: "'.htmlspecialchars($row["name"]).'", 
 		    description: "上传者：'.$zuozhe.'", 
-		    image: "", 
+		    image: "ico.png", 
 		    sites: ["wechat", "qq", "qzone", "weibo"], 
 		    disabled: ["google", "facebook", "twitter"], 
 		    wechatQrcodeTitle: "微信扫一扫：分享",
