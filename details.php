@@ -49,10 +49,7 @@ else {
 
 		$s=htmlspecialchars($row["name"]).($sp_torrent ? "&nbsp;&nbsp;&nbsp;".$sp_torrent : "");
 		// 分享按钮
-		$sh = '<div class="share clearfix">
-		    <span class="fc2 left mt10">分享给他人：</span>
-		    <div class="social-share left"></div>
-		</div>';
+		$sh = '<div class="social-share"></div>';
 		print($sh);
 
 		$js = '<script type="text/javascript">var $config = {
