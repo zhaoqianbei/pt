@@ -62,10 +62,10 @@ else {
 		print($sh);
 
 		$js = '<script type="text/javascript">var $config = {
-		    url: window.location.href, // 网址，默认使用 window.location.href
+		    url: window.location.href,
 		    source: "找前辈网 - 7500学编程，手把手教到就业满意！就业没有5000元/月，少多少退多少！", 
-		    title: "'.htmlspecialchars($row["name"]).'", 
-		    description: "上传者：'.$zuozhe.'", 
+		    title: "资源分享：'.htmlspecialchars($row["name"]).'", 
+		    description: "'.htmlspecialchars(trim($row["small_descr"])).'", 
 		    image: "ico.png", 
 		    sites: ["wechat", "qq", "qzone", "weibo"], 
 		    disabled: ["google", "facebook", "twitter"], 
@@ -96,8 +96,6 @@ else {
 		else {
 			$uprow = (isset($row['owner']) ? get_username($row['owner'], false, true, true, false, false, true) : "<i>".$lang_details['text_unknown']."</i>");
 		}
-
-
 
 		if ($CURUSER["id"] == $row["owner"])
 			$CURUSER["downloadpos"] = "yes";
