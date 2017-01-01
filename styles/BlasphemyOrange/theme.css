@@ -18,6 +18,10 @@ body {
 .clearfix::after {
   clear: both;
 }
+/*字符浮动类*/
+.tac{text-align:center;}
+.tal{text-align:left;}
+.tar{text-align:right;}
 body.inframe {
     background: transparent none;
 }

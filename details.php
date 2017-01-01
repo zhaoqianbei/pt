@@ -49,7 +49,7 @@ else {
 
 		$s=htmlspecialchars($row["name"]).($sp_torrent ? "&nbsp;&nbsp;&nbsp;".$sp_torrent : "");
 		// 分享按钮
-		$sh = '<div class="social-share"></div>';
+		$sh = '<div class="social-share tal"></div>';
 		print($sh);
 
 		$js = '<script type="text/javascript">var $config = {
