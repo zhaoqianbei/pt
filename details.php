@@ -56,7 +56,7 @@ else {
 		    url: window.location.href, // 网址，默认使用 window.location.href
 		    source: "找前辈网 - 7500学编程，手把手教到就业满意！就业没有5000元/月，少多少退多少！", 
 		    title: "'.htmlspecialchars($row["name"]).'", 
-		    description: "上传者："'.$lang_details['row_upped_by'].'", 
+		    description: "上传者：'.$lang_details['row_upped_by'].'", 
 		    image: "", 
 		    sites: ["wechat", "qq", "qzone", "weibo"], 
 		    disabled: ["google", "facebook", "twitter"], 
