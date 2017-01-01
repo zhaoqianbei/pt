@@ -53,10 +53,10 @@ else {
 			if (get_user_class() < $viewanonymous_class)
 			$zuozhe = "<i>".$lang_details['text_anonymous']."</i>";
 			else
-			$zuozhe = "<i>".$lang_details['text_anonymous']."</i> (" . get_username($row['owner'], false, false, true, false, false, true) . ")";
+			$zuozhe = "<i>".$lang_details['text_anonymous']."</i> (" . get_username($row['owner'],  false, false, false, false, false, false) . ")";
 		}
 		else {
-			$zuozhe= (isset($row['owner']) ? get_username($row['owner'], false, false, true, false, false, true) : "<i>".$lang_details['text_unknown']."</i>");
+			$zuozhe= (isset($row['owner']) ? get_username($row['owner'], false, false, false, false, false, false) : "<i>".$lang_details['text_unknown']."</i>");
 		}
 		$sh = '<div class="social-share tal"></div>';
 		print($sh);
