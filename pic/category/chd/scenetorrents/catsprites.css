@@ -22,6 +22,7 @@ width:45px;
 height:46px;
 background-position: -45px -46px;
 }
+
 img.c_tvshows
 {
 width:45px;
@@ -34,21 +35,30 @@ width:45px;
 height:46px;
 background-position: -45px -92px;
 }
-img.c_sports
+img.c_resource
 {
 width:45px;
 height:46px;
 background-position: 0 -138px;
 }
-img.c_misc
+img.c_course
 {
 width:45px;
 height:46px;
 background-position: -45px -138px;
 }
+
 img.c_hqaudio
 {
 width:45px;
 height:46px;
 background-position: 0 -184px;
 }
+
+img.c_other
+{
+width:45px;
+height:46px;
+background-position: -45px -184px;
+}
+
