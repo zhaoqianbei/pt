@@ -440,7 +440,7 @@ a.altlink_green:hover {
 
 .btn {
     display: inline-block;
-    background-color: #ff9718;
+    background-color: #587993;
     color: #fff;
     white-space: nowrap;
     text-align: center;
@@ -545,7 +545,7 @@ ul.menu li {
 ul.menu li a {
     color: #fff;
     border: 1px solid white;
-    background-color: #ff9718;
+    background-color: #587993;
     margin-right: 1px;
     padding: 5px;
     text-decoration: none;
@@ -836,12 +836,12 @@ A.Peasant_Name:visited {
 }
 
 .logo {
-    color: #ffa531;
+    color: #587993;
     font-family: tahoma, arial, helvetica, sans-serif;
 }
 
 .slogan {
-    color: #de9332;
+    color: #7C98AE;
     font-family: tahoma, arial, helvetica, sans-serif;
 }
 
