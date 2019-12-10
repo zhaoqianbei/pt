@@ -12,6 +12,7 @@ body.inframe {
     background: transparent none;
 }
 input,select,select.med{font-size: 10pt}
+
 input[type="checkbox"] {
     width: 15px;
     height: 15px;
@@ -23,7 +24,9 @@ input[type="checkbox"] {
     margin-right: 6px;
     margin-top:0; 
 }
-
+#ksearchboxmain tr:nth-child(2) input[type="checkbox"]{
+    bottom: 7px;
+}
 input[type="checkbox"]::before {
     content: "";
     position: absolute;
