@@ -2292,7 +2292,7 @@ if ($enabledonation == 'yes'){?>
 <table class="mainouter" width="1000" cellspacing="0" cellpadding="5" align="center">
 	<tr><td id="nav_block" class="text" align="center">
 <?php if (!$CURUSER) { ?>
-			<a href="login.php"><font class="big"><b><?php echo $lang_functions['text_login'] ?></b></font></a> / <a href="signup.php"><font class="big"><b><?php echo $lang_functions['text_signup'] ?></b></font></a>
+		<a href="login.php" class="fs2"><?php echo $lang_functions['text_login'] ?></a> / <a href="signup.php" class="fs2"><?php echo $lang_functions['text_signup'] ?></a>
 <?php } 
 else {
 	begin_main_frame();

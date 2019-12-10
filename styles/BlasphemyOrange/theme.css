@@ -4,7 +4,10 @@ body {
     color: #000000;
     font-family: tahoma, arial, helvetica, sans-serif;
 }
-
+.dn{display: none;}
+.fs1{font-size: 12pt}
+.fs2{font-size: 16pt}
+.fs3{font-size: 20pt}
 body.inframe {
     background: transparent none;
 }
@@ -208,13 +211,6 @@ td.bottom {
 
 td.heading {
     font-weight: bold
-}
-
-td.text {
-    padding-right: 10pt;
-    padding-left: 10pt;
-    padding-bottom: 10pt;
-    padding-top: 10pt
 }
 
 td.comment {
