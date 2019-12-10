@@ -448,6 +448,13 @@ a.altlink_green:hover {
     padding: 0 10px;
     font-size: 12px;
 }
+
+.btn-mini {
+    height: 22px;
+    line-height: 22px;
+    padding: 0 5px;
+    font-size: 12px;
+}
 a.btn-danger {
     background-color: #FF5722;
     color: #fff
