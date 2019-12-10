@@ -2281,7 +2281,7 @@ else
 		}
 }
 if ($enabledonation == 'yes'){?>
-			<a href="donate.php"><img src="<?php echo get_forum_pic_folder()?>/donate.gif" alt="Make a donation" style="margin-left: 5px; margin-top: 50px;" /></a>
+			<a href="donate.php" class="btn btn-danger">捐赠</a>
 <?php
 }
 ?>
@@ -2390,7 +2390,7 @@ else {
 
 </td></tr>
 
-<tr><td id="outer" align="center" class="outer" style="padding-top: 20px; padding-bottom: 20px">
+<tr><td id="outer" align="center" class="outer">
 <?php
 	if ($Advertisement->enable_ad()){
 			$belownavad=$Advertisement->get_ad('belownav');

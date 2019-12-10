@@ -864,14 +864,14 @@ if (isset($searchstr))
 elseif ($sectiontype == $browsecatmode)
 	stdhead($lang_torrents['head_torrents']);
 else stdhead($lang_torrents['head_music']);
-print("<table width=\"940\" class=\"main\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\"><tr><td class=\"embedded\">");
+print("<table align=\"left\" width=\"940\" class=\"main\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\"><tr><td class=\"embedded\">");
 if ($allsec != 1 || $enablespecial != 'yes'){ //do not print searchbox if showing bookmarked torrents from all sections;
 ?>
 <form method="get" name="searchbox" action="?">
 	<table border="1" class="searchbox" cellspacing="0" cellpadding="5" width="100%">
 		<tbody>
 		<tr>
-		<td class="colhead" align="center" colspan="2"><a href="javascript: klappe_news('searchboxmain')"><img class="minus" src="pic/trans.gif" id="picsearchboxmain" alt="Show/Hide" /><?php echo $lang_torrents['text_search_box'] ?></a></td>
+		<td class="colhead" align="left" colspan="2"><a href="javascript: klappe_news('searchboxmain')"><img class="minus" src="pic/trans.gif" id="picsearchboxmain" alt="Show/Hide" /> <?php echo $lang_torrents['text_search_box'] ?></a></td>
 		</tr></tbody>
 		<tbody id="ksearchboxmain">
 		<tr>
@@ -893,7 +893,6 @@ if ($allsec != 1 || $enablespecial != 'yes'){ //do not print searchbox if showin
 							}
 							$checker = "<input name=\"".$btname."\" value='" .  $lang_torrents['input_check_all'] . "' class=\"btn medium\" type=\"button\" onclick=\"javascript:SetChecked('".$cbname."','".$btname."','". $lang_torrents['input_check_all'] ."','" . $lang_torrents['input_uncheck_all'] . "',-1,10)\" />";
 							print("<td colspan=\"2\" class=\"bottom\" align=\"left\" style=\"padding-left: 15px\">".$checker."</td>\n");
-							print("</tr>");
 						}
 					printcat($lang_torrents['text_category'],$cats,"cat",$wherecatina,"cat_check",true);
 
@@ -917,7 +916,7 @@ if ($allsec != 1 || $enablespecial != 'yes'){ //do not print searchbox if showin
 				</table>
 			</td>
 			
-			<td class="rowfollow" valign="middle">
+			<td class="rowfollow" valign="right">
 				<table>
 					<tr>
 						<td class="bottom" style="padding: 1px;padding-left: 10px">
@@ -935,7 +934,6 @@ if ($allsec != 1 || $enablespecial != 'yes'){ //do not print searchbox if showin
 				 	</tr>
 				 	<tr>
 						<td class="bottom" style="padding: 1px;padding-left: 10px">
-							<br />
 						</td>
 				 	</tr>
 					<tr>
@@ -953,7 +951,6 @@ if ($allsec != 1 || $enablespecial != 'yes'){ //do not print searchbox if showin
 					</tr>
 				 	<tr>
 						<td class="bottom" style="padding: 1px;padding-left: 10px">
-							<br />
 						</td>
 					</tr>
 					<tr>
@@ -976,7 +973,7 @@ if ($allsec != 1 || $enablespecial != 'yes'){ //do not print searchbox if showin
 		</tbody>
 		<tbody>
 		<tr>
-			<td class="rowfollow" align="center">
+			<td class="rowfollow" align="left">
 				<table>
 					<tr>
 						<td class="embedded">
@@ -1050,7 +1047,7 @@ echo $Cache->next_row();
 ?>
 				</table>
 			</td>
-			<td class="rowfollow" align="center">
+			<td class="rowfollow" align="left">
 				<input type="submit" class="btn" value="<?php echo $lang_torrents['submit_go'] ?>" />
 			</td>
 		</tr>
@@ -1061,15 +1058,15 @@ echo $Cache->next_row();
 }
 	if ($Advertisement->enable_ad()){
 			$belowsearchboxad = $Advertisement->get_ad('belowsearchbox');
-			echo "<div align=\"center\" style=\"margin-top: 10px\" id=\"ad_belowsearchbox\">".$belowsearchboxad[0]."</div>";
+			echo "<div align=\"left\" style=\"margin-top: 10px\" id=\"ad_belowsearchbox\">".$belowsearchboxad[0]."</div>";
 	}
 if($inclbookmarked == 1)
 {
-	print("<h1 align=\"center\">" . get_username($CURUSER['id']) . $lang_torrents['text_s_bookmarked_torrent'] . "</h1>");
+	print("<h1 align=\"left\">" . get_username($CURUSER['id']) . $lang_torrents['text_s_bookmarked_torrent'] . "</h1>");
 }
 elseif($inclbookmarked == 2)
 {
-	print("<h1 align=\"center\">" . get_username($CURUSER['id']) . $lang_torrents['text_s_not_bookmarked_torrent'] . "</h1>");
+	print("<h1 align=\"left\">" . get_username($CURUSER['id']) . $lang_torrents['text_s_not_bookmarked_torrent'] . "</h1>");
 }
 
 if ($count) {
@@ -1083,7 +1080,6 @@ if ($count) {
 }
 else {
 	if (isset($searchstr)) {
-		print("<br />");
 		stdmsg($lang_torrents['std_search_results_for'] . $searchstr_ori . "\"",$lang_torrents['std_try_again']);
 	}
 	else {
