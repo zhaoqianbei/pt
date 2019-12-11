@@ -152,7 +152,7 @@ function print_sub_category_list($type)
 		list($pagertop, $pagerbottom, $limit) = pager($perpage, $num, "?");
 		$res = sql_query("SELECT * FROM ".$dbtablename." ORDER BY id DESC ".$limit) or sqlerr(__FILE__, __LINE__);
 ?>
-<table border="1" cellspacing="0" cellpadding="5" width="940">
+<table border="1" cellspacing="0" cellpadding="5" width="1000">
 <tr>
 <td class="colhead"><?php echo $lang_catmanage['col_id']?></td>
 <td class="colhead"><?php echo $lang_catmanage['col_name']?></td>
@@ -187,7 +187,7 @@ function print_category_editor($type, $row='')
 	{
 		$typename=return_type_name($type);
 ?>
-<div style="width: 940px">
+<div style="width: 1000px">
 <h1 align="center"><a class="faqlink" href="?action=view&amp;type=<?php echo $type?>"><?php echo $typename?></a></h1>
 <div>
 <table border="1" cellspacing="0" cellpadding="10" width="100%">
@@ -340,7 +340,7 @@ function print_sub_category_editor($type, $row='')
 		$sort_index = 0;
 	}
 ?>
-<div style="width: 940px">
+<div style="width: 1000px">
 <h1 align="center"><a class="faqlink" href="?action=view&amp;type=<?php echo $type?>"><?php echo $typename?></a></h1>
 <table border="1" cellspacing="0" cellpadding="10" width="100%">
 <?php
@@ -384,7 +384,7 @@ if ($action == 'view')
 		list($pagertop, $pagerbottom, $limit) = pager($perpage, $num, "?");
 		$res = sql_query("SELECT * FROM ".$dbtablename." ORDER BY id ASC ".$limit) or sqlerr(__FILE__, __LINE__);
 ?>
-<table border="1" cellspacing="0" cellpadding="5" width="940">
+<table border="1" cellspacing="0" cellpadding="5" width="1000">
 <tr>
 <td class="colhead"><?php echo $lang_catmanage['col_id']?></td>
 <td class="colhead"><?php echo $lang_catmanage['col_name']?></td>
@@ -438,7 +438,7 @@ print($pagerbottom);
 		list($pagertop, $pagerbottom, $limit) = pager($perpage, $num, "?");
 		$res = sql_query("SELECT * FROM ".$dbtablename." ORDER BY id ASC ".$limit) or sqlerr(__FILE__, __LINE__);
 ?>
-<table border="1" cellspacing="0" cellpadding="5" width="940">
+<table border="1" cellspacing="0" cellpadding="5" width="1000">
 <tr>
 <td class="colhead"><?php echo $lang_catmanage['col_id']?></td>
 <td class="colhead"><?php echo $lang_catmanage['col_name']?></td>
@@ -484,7 +484,7 @@ print($pagerbottom);
 		list($pagertop, $pagerbottom, $limit) = pager($perpage, $num, "?");
 		$res = sql_query("SELECT * FROM ".$dbtablename." ORDER BY id ASC ".$limit) or sqlerr(__FILE__, __LINE__);
 ?>
-<table border="1" cellspacing="0" cellpadding="5" width="940">
+<table border="1" cellspacing="0" cellpadding="5" width="1000">
 <tr>
 <td class="colhead"><?php echo $lang_catmanage['col_id']?></td>
 <td class="colhead"><?php echo $lang_catmanage['col_name']?></td>
@@ -536,7 +536,7 @@ print($pagerbottom);
 		list($pagertop, $pagerbottom, $limit) = pager($perpage, $num, "?");
 		$res = sql_query("SELECT ".$dbtablename.".*, searchbox.name AS catmodename FROM ".$dbtablename." LEFT JOIN searchbox ON ".$dbtablename.".mode=searchbox.id ORDER BY ".$dbtablename.".mode ASC, ".$dbtablename.".id ASC ".$limit) or sqlerr(__FILE__, __LINE__);
 ?>
-<table border="1" cellspacing="0" cellpadding="5" width="940">
+<table border="1" cellspacing="0" cellpadding="5" width="1000">
 <tr>
 <td class="colhead"><?php echo $lang_catmanage['col_id']?></td>
 <td class="colhead"><?php echo $lang_catmanage['col_mode']?></td>

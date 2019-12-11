@@ -85,10 +85,10 @@ else{
 	stdhead("Rules Manangement");
 	//print("<td valign=top style=\"padding: 10px;\" colspan=2 align=center>");
 	print("<h1 align=center>Rules Manangement</h1>");
-	print("<br /><table width=940 border=0 cellspacing=0 cellpadding=5>");
+	print("<br /><table width=1000 border=0 cellspacing=0 cellpadding=5>");
 	print("<tr><td align=center><a href=modrules.php?act=newsect>Add Section</a></td></tr></table>\n");
 	while ($arr=mysql_fetch_assoc($res)){
-		print("<br /><table width=940 border=1 cellspacing=0 cellpadding=5>");
+		print("<br /><table width=1000 border=1 cellspacing=0 cellpadding=5>");
 		print("<tr><td class=colhead>$arr[title] - $arr[lang_name]</td></tr>\n");
 		print("<tr><td align=left>" . format_comment($arr["text"])."</td></tr>");
 		print("<tr><td align=left><a href=?act=edit&id=$arr[id]>Edit</a>&nbsp;&nbsp;<a href=?act=del&id=$arr[id]>Delete</a></td></tr></table>");

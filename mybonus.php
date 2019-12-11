@@ -123,7 +123,7 @@ if (isset($do)) {
 
 	$bonus = number_format($CURUSER['seedbonus'], 1);
 if (!$action) {
-	print("<table align=\"center\" width=\"940\" border=\"1\" cellspacing=\"0\" cellpadding=\"3\">\n");
+	print("<table align=\"center\" width=\"1000\" border=\"1\" cellspacing=\"0\" cellpadding=\"3\">\n");
 	print("<tr><td class=\"colhead\" colspan=\"4\" align=\"center\"><font class=\"big\">".$SITENAME.$lang_mybonus['text_karma_system']."</font></td></tr>\n");
 	if ($msg)
 	print("<tr><td align=\"center\" colspan=\"4\"><font class=\"striking\">". $msg ."</font></td></tr>");
@@ -220,7 +220,7 @@ for ($i=1; $i <=9; $i++)
 print("</table><br />");
 ?>
 
-<table width="940" cellpadding="3">
+<table width="1000" cellpadding="3">
 <tr><td class="colhead" align="center"><font class="big"><?php echo $lang_mybonus['text_what_is_karma'] ?></font></td></tr>
 <tr><td class="text" align="left">
 <?php
@@ -469,7 +469,7 @@ if ($action == "exchange") {
 				redirect("" . get_protocol_prefix() . "$BASEURL/mybonus.php?do=transfer");
 			}
 			else{
-				print("<table width=\"940\"><tr><td class=\"colhead\" align=\"left\" colspan=\"2\"><h1>".$lang_mybonus['text_oups']."</h1></td></tr>");
+				print("<table width=\"1000\"><tr><td class=\"colhead\" align=\"left\" colspan=\"2\"><h1>".$lang_mybonus['text_oups']."</h1></td></tr>");
 				print("<tr><td align=\"left\"></td><td align=\"left\">".$lang_mybonus['text_not_enough_karma']."<br /><br /></td></tr></table>");
 			}
 		}

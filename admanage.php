@@ -118,7 +118,7 @@ function print_ad_editor($position, $row = "")
 		$type = 'image';
 	}
 ?>
-<div style="width: 940px">
+<div style="width: 1000px">
 <h1 align="center"><a class="faqlink" href="admanage.php"><?php echo $lang_admanage['text_ad']?></a> - <?php echo get_position_name($position)?></h1>
 <div><p align="center"><?php echo $note?></p></div>
 <h2 align="left"><?php echo $lang_admanage['text_ad_detail']?></h2>
@@ -382,7 +382,7 @@ begin_main_frame();
 		list($pagertop, $pagerbottom, $limit) = pager($perpage, $num, "?");
 		$res = sql_query("SELECT * FROM advertisements ORDER BY id DESC ".(int)$limit) or sqlerr(__FILE__, __LINE__);
 ?>
-<table border="1" cellspacing="0" cellpadding="5" width="940">
+<table border="1" cellspacing="0" cellpadding="5" width="1000">
 <tr>
 <td class="colhead"><?php echo $lang_admanage['col_enabled']?></td>
 <td class="colhead"><?php echo $lang_admanage['col_name']?></td>

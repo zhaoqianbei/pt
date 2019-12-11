@@ -30,7 +30,7 @@ function logmenu($selected = "dailylog"){
 
 function searchtable($title, $action, $opts = array()){
 		global $lang_log;
-		print("<table border=1 cellspacing=0 width=940 cellpadding=5>\n");
+		print("<table border=1 cellspacing=0 width=1000 cellpadding=5>\n");
 		print("<tr><td class=colhead align=left>".$title."</td></tr>\n");
 		print("<tr><td class=toolbox align=left><form method=\"get\" action='" . $_SERVER['PHP_SELF'] . "'>\n");
 		print("<input type=\"text\" name=\"query\" style=\"width:500px\" value=\"".$_GET['query']."\">\n");
@@ -47,7 +47,7 @@ function searchtable($title, $action, $opts = array()){
 
 function additem($title, $action){
 		global $lang_log;
-		print("<table border=1 cellspacing=0 width=940 cellpadding=5>\n");
+		print("<table border=1 cellspacing=0 width=1000 cellpadding=5>\n");
 		print("<tr><td class=colhead align=left>".$title."</td></tr>\n");
 		print("<tr><td class=toolbox align=left><form method=\"post\" action='" . $_SERVER['PHP_SELF'] . "'>\n");
 		print("<textarea name=\"txt\" style=\"width:500px\" rows=\"3\" >".$row["txt"]."</textarea>\n");
@@ -61,7 +61,7 @@ function edititem($title, $action, $id){
 		global $lang_log;
 		$result = sql_query ("SELECT * FROM ".$action." where id = ".sqlesc($id)) or sqlerr(__FILE__, __LINE__);
 		if ($row = mysql_fetch_array($result)) {
-		print("<table border=1 cellspacing=0 width=940 cellpadding=5>\n");
+		print("<table border=1 cellspacing=0 width=1000 cellpadding=5>\n");
 		print("<tr><td class=colhead align=left>".$title."</td></tr>\n");
 		print("<tr><td class=toolbox align=left><form method=\"post\" action='" . $_SERVER['PHP_SELF'] . "'>\n");
 		print("<textarea name=\"txt\" style=\"width:500px\" rows=\"3\" >".$row["txt"]."</textarea>\n");
@@ -127,7 +127,7 @@ else {
 
 		//echo $pagertop;
 
-			print("<table width=940 border=1 cellspacing=0 cellpadding=5>\n");
+			print("<table width=1000 border=1 cellspacing=0 cellpadding=5>\n");
 			print("<tr><td class=colhead align=center><img class=\"time\" src=\"pic/trans.gif\" alt=\"time\" title=\"".$lang_log['title_time_added']."\" /></td><td class=colhead align=left>".$lang_log['col_event']."</td></tr>\n");
 			while ($arr = mysql_fetch_assoc($res))
 			{
@@ -198,7 +198,7 @@ else {
 
 		//echo $pagertop;
 
-			print("<table width=940 border=1 cellspacing=0 cellpadding=5>\n");
+			print("<table width=1000 border=1 cellspacing=0 cellpadding=5>\n");
 			print("<tr><td class=colhead align=center>".$lang_log['col_date']."</td><td class=colhead align=left>".$lang_log['col_event']."</td>".(get_user_class() >= $chrmanage_class ? "<td class=colhead align=center>".$lang_log['col_modify']."</td>" : "")."</tr>\n");
 			while ($arr = mysql_fetch_assoc($res))
 			{
@@ -248,7 +248,7 @@ else {
 		//echo $pagertop;
 			while ($arr = mysql_fetch_assoc($res)){
 				$date = gettime($arr['added'],true,false);
-			print("<table width=940 border=1 cellspacing=0 cellpadding=5>\n");
+			print("<table width=1000 border=1 cellspacing=0 cellpadding=5>\n");
 			print("<tr><td class=rowhead width='10%'>".$lang_log['col_title']."</td><td class=rowfollow align=left>".$arr["title"]." - <b>".$arr["status"]."</b></td></tr><tr><td class=rowhead width='10%'>".$lang_log['col_date']."</td><td class=rowfollow align=left>".$date."</td></tr><tr><td class=rowhead width='10%'>".$lang_log['col_body']."</td><td class=rowfollow align=left>".format_comment($arr["body"],false,false,true)."</td></tr>\n");
 			print("</table><br />");
 			}
@@ -295,7 +295,7 @@ else {
 		//echo $pagertop;
 			while ($arr = mysql_fetch_assoc($res)){
 				$date = gettime($arr['added'],true,false);
-			print("<table width=940 border=1 cellspacing=0 cellpadding=5>\n");
+			print("<table width=1000 border=1 cellspacing=0 cellpadding=5>\n");
 			print("<tr><td class=rowhead width='10%'>".$lang_log['col_title']."</td><td class=rowfollow align=left>".$arr["title"]."</td></tr><tr><td class=rowhead width='10%'>".$lang_log['col_date']."</td><td class=rowfollow align=left>".$date."</td></tr><tr><td class=rowhead width='10%'>".$lang_log['col_body']."</td><td class=rowfollow align=left>".format_comment($arr["body"],false,false,true)."</td></tr>\n");
 			print("</table><br />");
 			}
@@ -342,7 +342,7 @@ else {
   $polls = sql_query("SELECT * FROM polls ORDER BY id DESC LIMIT 1," . ($pollcount - 1 )) or sqlerr();
   stdhead($lang_log['head_previous_polls']);
   		logmenu("poll");
-  		print("<table border=1 cellspacing=0 width=940 cellpadding=5>\n");
+  		print("<table border=1 cellspacing=0 width=1000 cellpadding=5>\n");
 		//print("<tr><td class=colhead align=center>".$lang_log['text_previous_polls']."</td></tr>\n");
 
     function srt($a,$b)

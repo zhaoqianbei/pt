@@ -18,7 +18,7 @@ if ($count){
 	$perpage = 25;
 	list($pagertop, $pagerbottom, $limit) = pager($perpage, $count, $_SERVER["SCRIPT_NAME"] . "?id=" . htmlspecialchars($id) . "&" );
 	print("<p align=center>".$lang_viewsnatches['text_users_top_finished_recently']."</p>");
-	print("<table border=1 cellspacing=0 cellpadding=5 align=center width=940>\n");
+	print("<table border=1 cellspacing=0 cellpadding=5 align=center width=1000>\n");
 	print("<tr><td class=colhead align=center>".$lang_viewsnatches['col_username']."</td>".(get_user_class() >= $userprofile_class ? "<td class=colhead align=center>".$lang_viewsnatches['col_ip']."</td>" : "")."<td class=colhead align=center>".$lang_viewsnatches['col_uploaded']."/".$lang_viewsnatches['col_downloaded']."</td><td class=colhead align=center>".$lang_viewsnatches['col_ratio']."</td><td class=colhead align=center>".$lang_viewsnatches['col_se_time']."</td><td class=colhead align=center>".$lang_viewsnatches['col_le_time']."</td><td class=colhead align=center>".$lang_viewsnatches['col_when_completed']."</td><td class=colhead align=center>".$lang_viewsnatches['col_last_action']."</td><td class=colhead align=center>".$lang_viewsnatches['col_report_user']."</td></tr>");
 
 	$res = sql_query("SELECT * FROM snatched WHERE finished='yes' AND torrentid =" . sqlesc($id) . " ORDER BY completedat DESC $limit");
