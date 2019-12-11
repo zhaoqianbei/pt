@@ -167,7 +167,8 @@ td.embedded {
     border-left: medium none;
     padding-top: 0px;
     border-bottom: medium none;
-    text-align: left
+    text-align: left;
+    color: #888
 }
 
 td.no_border {
