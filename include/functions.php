@@ -2347,7 +2347,7 @@ else {
 		$Cache->cache_value('user_'.$CURUSER["id"].'_unread_message_count', $unread, 60);
 	}
 	
-	$inboxpic = "<img class=\"".($unread ? "inboxnew" : "inbox")."\" src=\"pic/trans.gif\" alt=\"inbox\" title=\"".($unread ? $lang_functions['title_inbox_new_messages'] : $lang_functions['title_inbox_no_new_messages'])."\" />";
+	$inboxpic = ($unread ? $lang_functions['title_inbox_new_messages'] : $lang_functions['title_inbox_no_new_messages']);
 ?>
 
 <table id="info_block" cellpadding="4" cellspacing="0" border="0" width="100%"><tr>
@@ -2375,13 +2375,13 @@ else {
 		$totalcheaters = get_row_count("cheaters");
 		$Cache->cache_value('staff_cheater_count', $totalcheaters, 900);
 	}
-	print("<a href=\"cheaterbox.php\"><img class=\"cheaterbox\" alt=\"cheaterbox\" title=\"".$lang_functions['title_cheaterbox']."\" src=\"pic/trans.gif\" />  </a>".$totalcheaters."  <a href=\"reports.php\"><img class=\"reportbox\" alt=\"reportbox\" title=\"".$lang_functions['title_reportbox']."\" src=\"pic/trans.gif\" />  </a>".$totalreports."  <a href=\"staffbox.php\"><img class=\"staffbox\" alt=\"staffbox\" title=\"".$lang_functions['title_staffbox']."\" src=\"pic/trans.gif\" />  </a>".$totalsm."  ");
+	print("<a href=\"cheaterbox.php\">".$lang_functions['title_cheaterbox'].":</a>".$totalcheaters."  <a href=\"reports.php\">".$lang_functions['title_reportbox'].":</a>".$totalreports."  <a href=\"staffbox.php\">".$lang_functions['title_staffbox'].":</a>".$totalsm."  ");
 	}
 
 	print("<a href=\"messages.php\">".$inboxpic."</a> ".($messages ? $messages." (".$unread.$lang_functions['text_message_new'].")" : "0"));
-	print("  <a href=\"messages.php?action=viewmailbox&amp;box=-1\"><img class=\"sentbox\" alt=\"sentbox\" title=\"".$lang_functions['title_sentbox']."\" src=\"pic/trans.gif\" /></a> ".($outmessages ? $outmessages : "0"));
-	print(" <a href=\"friends.php\"><img class=\"buddylist\" alt=\"Buddylist\" title=\"".$lang_functions['title_buddylist']."\" src=\"pic/trans.gif\" /></a>");
-	print(" <a href=\"getrss.php\"><img class=\"rss\" alt=\"RSS\" title=\"".$lang_functions['title_get_rss']."\" src=\"pic/trans.gif\" /></a>");
+	print("  <a href=\"messages.php?action=viewmailbox&amp;box=-1\">".$lang_functions['title_sentbox'].":</a> ".($outmessages ? $outmessages : "0"));
+	print(" <a href=\"friends.php\">".$lang_functions['title_buddylist']."</a>");
+	print(" <a href=\"getrss.php\">".$lang_functions['title_get_rss']."</a>");
 ?>
 
 	</span></td>
