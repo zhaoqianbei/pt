@@ -313,7 +313,7 @@ $lang_settings = array
 	'text_random_promotion_note_one' => "种子在发布时由系统自动随机促销。",
 	'text_halfleech_chance_becoming' => "%的可能成为<b><font class='halfdown'>50%</font></b>。默认'5'。",
 	'text_free_chance_becoming' => "%的可能成为<b><font class='free'>免费</font></b>。默认'2'。",
-	'text_twoup_chance_becoming' => "%的可能成为<b><font class='twoup'>2X</font></b>。默认'2'。",
+	'text_twoup_chance_becoming' => "%的可能成为<b><font class='twoup'>2X上传</font></b>。默认'2'。",
 	'text_freetwoup_chance_becoming' => "%的可能成为<b><font class='twoupfree'>2X免费</font></b>。默认'1'。",
 	'text_twouphalfleech_chance_becoming' => "%的可能成为<b><font class='twouphalfdown'>2x 50%</font></b>。默认'0'。",
 	'text_random_promotion_note_two' => "将值设为'0'来禁止相应规则。",
