@@ -3083,7 +3083,7 @@ while ($row = mysql_fetch_assoc($res))
 	else $max_length_of_torrent_name = 70;
 
 	if($count_dispname > $max_length_of_torrent_name)
-		$dispname=mb_substr($dispname, 0, $max_length_of_torrent_name-2,"UTF-8") . "..";
+		$dispname=mb_substr($dispname, 0, $max_length_of_torrent_name-5,"UTF-8") . "..";
 
 	if ($row['pos_state'] == 'sticky' && $CURUSER['appendsticky'] == 'yes')
 		$stickyicon = "<img class=\"sticky\" src=\"pic/trans.gif\" alt=\"Sticky\" title=\"".$lang_functions['title_sticky']."\" />&nbsp;";
@@ -3900,18 +3900,24 @@ function get_torrent_promotion_append($promotion = 1,$forcemode = "",$showtimele
 		}
 	}
 	elseif (($CURUSER['appendpromotion'] == 'icon' && $forcemode == "") || $forcemode == 'icon'){
-		if(($promotion==2 && get_global_sp_state() == 1) || get_global_sp_state() == 2)
-			$sp_torrent = " <img class=\"pro_free\" src=\"pic/trans.gif\" alt=\"Free\" ".($onmouseover ? $onmouseover : "title=\"".$lang_functions['text_free']."\"")." />";
-		elseif(($promotion==3 && get_global_sp_state() == 1) || get_global_sp_state() == 3)
-			$sp_torrent = " <img class=\"pro_2up\" src=\"pic/trans.gif\" alt=\"2X\" ".($onmouseover ? $onmouseover : "title=\"".$lang_functions['text_two_times_up']."\"")." />";
-		elseif(($promotion==4 && get_global_sp_state() == 1) || get_global_sp_state() == 4)
-			$sp_torrent = " <img class=\"pro_free2up\" src=\"pic/trans.gif\" alt=\"2X Free\" ".($onmouseover ? $onmouseover : "title=\"".$lang_functions['text_free_two_times_up']."\"")." />";
-		elseif(($promotion==5 && get_global_sp_state() == 1) || get_global_sp_state() == 5)
-			$sp_torrent = " <img class=\"pro_50pctdown\" src=\"pic/trans.gif\" alt=\"50%\" ".($onmouseover ? $onmouseover : "title=\"".$lang_functions['text_half_down']."\"")." />";
-		elseif(($promotion==6 && get_global_sp_state() == 1) || get_global_sp_state() == 6)
-			$sp_torrent = " <img class=\"pro_50pctdown2up\" src=\"pic/trans.gif\" alt=\"2X 50%\" ".($onmouseover ? $onmouseover : "title=\"".$lang_functions['text_half_down_two_up']."\"")." />";
-		elseif(($promotion==7 && get_global_sp_state() == 1) || get_global_sp_state() == 7)
-			$sp_torrent = " <img class=\"pro_30pctdown\" src=\"pic/trans.gif\" alt=\"30%\" ".($onmouseover ? $onmouseover : "title=\"".$lang_functions['text_thirty_percent_down']."\"")." />";
+		if(($promotion==2 && get_global_sp_state() == 1) || get_global_sp_state() == 2){
+			$sp_torrent = " <font class='promotion free' ".$onmouseover.">".$lang_functions['text_free']."</font>";
+		}
+		elseif(($promotion==3 && get_global_sp_state() == 1) || get_global_sp_state() == 3){
+			$sp_torrent = " <font class='promotion twoup' ".$onmouseover.">".$lang_functions['text_two_times_up']."</font>";
+		}
+		elseif(($promotion==4 && get_global_sp_state() == 1) || get_global_sp_state() == 4){
+			$sp_torrent = " <font class='promotion twoupfree' ".$onmouseover.">".$lang_functions['text_free_two_times_up']."</font>";
+		}
+		elseif(($promotion==5 && get_global_sp_state() == 1) || get_global_sp_state() == 5){
+			$sp_torrent = " <font class='promotion halfdown' ".$onmouseover.">".$lang_functions['text_half_down']."</font>";
+		}
+		elseif(($promotion==6 && get_global_sp_state() == 1) || get_global_sp_state() == 6){
+			$sp_torrent = " <font class='promotion twouphalfdown' ".$onmouseover.">".$lang_functions['text_half_down_two_up']."</font>";
+		}
+		elseif(($promotion==7 && get_global_sp_state() == 1) || get_global_sp_state() == 7){
+			$sp_torrent = " <font class='promotion thirtypercent' ".$onmouseover.">".$lang_functions['text_thirty_percent_down']."</font>";
+		}
 	}
 	return $sp_torrent;
 }

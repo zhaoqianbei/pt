@@ -851,29 +851,38 @@ A.Peasant_Name:visited {
     color: #7C98AE;
     font-family: tahoma, arial, helvetica, sans-serif;
 }
-
-.free {
-    color: #5AA064
+/*种子页面促销样式*/
+font.promotion{
+    color: #fff;
+    padding: 0 5px;
+    line-height: 17px;
+    word-break: keep-all;
+    height: 17px;
+    display: inline-block;
+    border-radius: 3px;
+}
+font.promotion.free {
+    background-color: #5AA064;
 }
 
-.twoup {
-    color: #aaaaaa
+font.promotion.twoup {
+    background-color: #aaaaaa
 }
 
-.twoupfree {
-    color: #99cc66
+font.promotion.twoupfree {
+    background-color: #99cc66
 }
 
-.halfdown {
-    color: #7c7ff6
+font.promotion.halfdown {
+    background-color: #7c7ff6
 }
 
-.twouphalfdown {
-    color: #7ad6ea
+font.promotion.twouphalfdown {
+    background-color: #7ad6ea
 }
 
 .thirtypercent {
-    color: #70328d
+    background-color: #70328d
 }
 
 .free_bg {
