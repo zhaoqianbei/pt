@@ -2347,7 +2347,7 @@ else {
 		$Cache->cache_value('user_'.$CURUSER["id"].'_unread_message_count', $unread, 60);
 	}
 	
-	$inboxpic = "<img class=\"".($unread ? "inboxnew" : "inbox")."\" src=\"pic/trans.gif\" alt=\"inbox\" title=\"".($unread ? $lang_functions['title_inbox_new_messages'] : $lang_functions['title_inbox_no_new_messages'])."\" />";
+	$inboxpic = ($unread ? $lang_functions['title_inbox_new_messages'] : $lang_functions['title_inbox_no_new_messages']);
 ?>
 
 <table id="info_block" cellpadding="4" cellspacing="0" border="0" width="100%"><tr>
@@ -2375,13 +2375,13 @@ else {
 		$totalcheaters = get_row_count("cheaters");
 		$Cache->cache_value('staff_cheater_count', $totalcheaters, 900);
 	}
-	print("<a href=\"cheaterbox.php\"><img class=\"cheaterbox\" alt=\"cheaterbox\" title=\"".$lang_functions['title_cheaterbox']."\" src=\"pic/trans.gif\" />  </a>".$totalcheaters."  <a href=\"reports.php\"><img class=\"reportbox\" alt=\"reportbox\" title=\"".$lang_functions['title_reportbox']."\" src=\"pic/trans.gif\" />  </a>".$totalreports."  <a href=\"staffbox.php\"><img class=\"staffbox\" alt=\"staffbox\" title=\"".$lang_functions['title_staffbox']."\" src=\"pic/trans.gif\" />  </a>".$totalsm."  ");
+	print("<a href=\"cheaterbox.php\">".$lang_functions['title_cheaterbox'].":</a>".$totalcheaters."  <a href=\"reports.php\">".$lang_functions['title_reportbox'].":</a>".$totalreports."  <a href=\"staffbox.php\">".$lang_functions['title_staffbox'].":</a>".$totalsm."  ");
 	}
 
 	print("<a href=\"messages.php\">".$inboxpic."</a> ".($messages ? $messages." (".$unread.$lang_functions['text_message_new'].")" : "0"));
-	print("  <a href=\"messages.php?action=viewmailbox&amp;box=-1\"><img class=\"sentbox\" alt=\"sentbox\" title=\"".$lang_functions['title_sentbox']."\" src=\"pic/trans.gif\" /></a> ".($outmessages ? $outmessages : "0"));
-	print(" <a href=\"friends.php\"><img class=\"buddylist\" alt=\"Buddylist\" title=\"".$lang_functions['title_buddylist']."\" src=\"pic/trans.gif\" /></a>");
-	print(" <a href=\"getrss.php\"><img class=\"rss\" alt=\"RSS\" title=\"".$lang_functions['title_get_rss']."\" src=\"pic/trans.gif\" /></a>");
+	print("  <a href=\"messages.php?action=viewmailbox&amp;box=-1\">".$lang_functions['title_sentbox'].":</a> ".($outmessages ? $outmessages : "0"));
+	print(" <a href=\"friends.php\">".$lang_functions['title_buddylist']."</a>");
+	print(" <a href=\"getrss.php\">".$lang_functions['title_get_rss']."</a>");
 ?>
 
 	</span></td>
@@ -3083,7 +3083,7 @@ while ($row = mysql_fetch_assoc($res))
 	else $max_length_of_torrent_name = 70;
 
 	if($count_dispname > $max_length_of_torrent_name)
-		$dispname=mb_substr($dispname, 0, $max_length_of_torrent_name-2,"UTF-8") . "..";
+		$dispname=mb_substr($dispname, 0, $max_length_of_torrent_name-5,"UTF-8") . "..";
 
 	if ($row['pos_state'] == 'sticky' && $CURUSER['appendsticky'] == 'yes')
 		$stickyicon = "<img class=\"sticky\" src=\"pic/trans.gif\" alt=\"Sticky\" title=\"".$lang_functions['title_sticky']."\" />&nbsp;";
@@ -3900,18 +3900,24 @@ function get_torrent_promotion_append($promotion = 1,$forcemode = "",$showtimele
 		}
 	}
 	elseif (($CURUSER['appendpromotion'] == 'icon' && $forcemode == "") || $forcemode == 'icon'){
-		if(($promotion==2 && get_global_sp_state() == 1) || get_global_sp_state() == 2)
-			$sp_torrent = " <img class=\"pro_free\" src=\"pic/trans.gif\" alt=\"Free\" ".($onmouseover ? $onmouseover : "title=\"".$lang_functions['text_free']."\"")." />";
-		elseif(($promotion==3 && get_global_sp_state() == 1) || get_global_sp_state() == 3)
-			$sp_torrent = " <img class=\"pro_2up\" src=\"pic/trans.gif\" alt=\"2X\" ".($onmouseover ? $onmouseover : "title=\"".$lang_functions['text_two_times_up']."\"")." />";
-		elseif(($promotion==4 && get_global_sp_state() == 1) || get_global_sp_state() == 4)
-			$sp_torrent = " <img class=\"pro_free2up\" src=\"pic/trans.gif\" alt=\"2X Free\" ".($onmouseover ? $onmouseover : "title=\"".$lang_functions['text_free_two_times_up']."\"")." />";
-		elseif(($promotion==5 && get_global_sp_state() == 1) || get_global_sp_state() == 5)
-			$sp_torrent = " <img class=\"pro_50pctdown\" src=\"pic/trans.gif\" alt=\"50%\" ".($onmouseover ? $onmouseover : "title=\"".$lang_functions['text_half_down']."\"")." />";
-		elseif(($promotion==6 && get_global_sp_state() == 1) || get_global_sp_state() == 6)
-			$sp_torrent = " <img class=\"pro_50pctdown2up\" src=\"pic/trans.gif\" alt=\"2X 50%\" ".($onmouseover ? $onmouseover : "title=\"".$lang_functions['text_half_down_two_up']."\"")." />";
-		elseif(($promotion==7 && get_global_sp_state() == 1) || get_global_sp_state() == 7)
-			$sp_torrent = " <img class=\"pro_30pctdown\" src=\"pic/trans.gif\" alt=\"30%\" ".($onmouseover ? $onmouseover : "title=\"".$lang_functions['text_thirty_percent_down']."\"")." />";
+		if(($promotion==2 && get_global_sp_state() == 1) || get_global_sp_state() == 2){
+			$sp_torrent = " <font class='promotion free' ".$onmouseover.">".$lang_functions['text_free']."</font>";
+		}
+		elseif(($promotion==3 && get_global_sp_state() == 1) || get_global_sp_state() == 3){
+			$sp_torrent = " <font class='promotion twoup' ".$onmouseover.">".$lang_functions['text_two_times_up']."</font>";
+		}
+		elseif(($promotion==4 && get_global_sp_state() == 1) || get_global_sp_state() == 4){
+			$sp_torrent = " <font class='promotion twoupfree' ".$onmouseover.">".$lang_functions['text_free_two_times_up']."</font>";
+		}
+		elseif(($promotion==5 && get_global_sp_state() == 1) || get_global_sp_state() == 5){
+			$sp_torrent = " <font class='promotion halfdown' ".$onmouseover.">".$lang_functions['text_half_down']."</font>";
+		}
+		elseif(($promotion==6 && get_global_sp_state() == 1) || get_global_sp_state() == 6){
+			$sp_torrent = " <font class='promotion twouphalfdown' ".$onmouseover.">".$lang_functions['text_half_down_two_up']."</font>";
+		}
+		elseif(($promotion==7 && get_global_sp_state() == 1) || get_global_sp_state() == 7){
+			$sp_torrent = " <font class='promotion thirtypercent' ".$onmouseover.">".$lang_functions['text_thirty_percent_down']."</font>";
+		}
 	}
 	return $sp_torrent;
 }
