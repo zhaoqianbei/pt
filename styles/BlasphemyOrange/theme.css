@@ -862,15 +862,15 @@ font.promotion{
     border-radius: 3px;
 }
 font.promotion.free {
-    background-color: #5AA064;
+    background-color: #99cc66
 }
 
 font.promotion.twoup {
-    background-color: #aaaaaa
+    background-color: #006D5C
 }
 
 font.promotion.twoupfree {
-    background-color: #99cc66
+    background-color: #5AA064;
 }
 
 font.promotion.halfdown {
