@@ -29,4 +29,7 @@ RewriteRule !\.(ico|js|gif|jpeg|jpg|png|css|swf|flv)$ index.php
 #RewriteCond %{HTTP_USER_AGENT} "(baidu.Transcoder|mini|android|blackberry|googlebot-mobile|iemobile|Mobile|ipad|iphone|ipod|opera mobile|palmos|webos|ucweb|Windows Phone|Symbian|hpwOS)" [NC]
 #RewriteRule ^(.*)$ https://www.zhaoqianbei.com/Index/tishi [L,R=302]
 
+RewriteCond %{HTTPS} !=on
+RewriteRule ^(.*) https://%{SERVER_NAME}/$1 [R,L]
+
 </IfModule>
