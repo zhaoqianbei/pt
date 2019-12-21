@@ -58,7 +58,7 @@ if ($_COOKIE["c_secure_tracker_ssl"] == base64("yeah")){
 	$tracker_ssl = false;
 }
 
-$tracker_ssl == true
+$tracker_ssl == true;
 if ($tracker_ssl == true){
 	$ssl_torrent = "https://";
 	if ($https_announce_urls[0] != "")
