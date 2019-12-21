@@ -1,10 +1,12 @@
 <?php
 require_once("include/bittorrent.php");
 dbconn();
-$id = (int)$_GET["id"];
-if (!$id)
+$id = (int)$_GET["id"];//种子序号
+if (!$id){
 	httperr();
-$passkey = $_GET['passkey'];
+}
+
+$passkey = $_GET['passkey'];//用户key
 if ($passkey){
 	$res = sql_query("SELECT * FROM users WHERE passkey=". sqlesc($passkey)." LIMIT 1");
 	$user = mysql_fetch_array($res);
@@ -15,9 +17,7 @@ if ($passkey){
 	$oldip = $user['ip'];
 	$user['ip'] = getip();
 	$CURUSER = $user;
-}
-else
-{
+}else{//不存在key
 	loggedinorreturn();
 	parked();
 	$letdown = $_GET['letdown'];
@@ -52,18 +52,20 @@ if (@ini_get('output_handler') == 'ob_gzhandler' AND @ob_get_length() !== false)
 	header('Content-Encoding:');
 }
 */
-if ($_COOKIE["c_secure_tracker_ssl"] == base64("yeah"))
-$tracker_ssl = true;
-else
-$tracker_ssl = false;
+if ($_COOKIE["c_secure_tracker_ssl"] == base64("yeah")){
+	$tracker_ssl = true;
+}else{
+	$tracker_ssl = false;
+}
+
+$tracker_ssl == true
 if ($tracker_ssl == true){
 	$ssl_torrent = "https://";
 	if ($https_announce_urls[0] != "")
 		$base_announce_url = $https_announce_urls[0];
 	else
 		$base_announce_url = $announce_urls[0];
-}
-else{
+}else{
 	$ssl_torrent = "http://";
 	$base_announce_url = $announce_urls[0];
 }
