@@ -844,12 +844,11 @@ A.Peasant_Name:visited {
 
 .logo {
     color: #587993;
-    font-family: tahoma, arial, helvetica, sans-serif;
 }
 
 .slogan {
     color: #7C98AE;
-    font-family: tahoma, arial, helvetica, sans-serif;
+    margin-top: 5px;
 }
 /*种子页面促销样式*/
 font.promotion{
