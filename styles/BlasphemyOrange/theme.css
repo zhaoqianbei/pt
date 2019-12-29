@@ -460,7 +460,7 @@ a.altlink_green:hover {
     font-size: 12px;
 }
 a.btn-danger {
-    background-color: #FF5722;
+    background-color: #00AAEE;
     color: #fff
 }
 
@@ -811,15 +811,15 @@ A.Peasant_Name:visited {
 }
 
 .color_bonus {
-    color: #1900d1
+    color: #00AAEE
 }
 
 .color_invite {
-    color: #1900d1
+    color: #00AAEE
 }
 
 .color_slots {
-    color: #1900d1
+    color: #00AAEE
 }
 
 .color_downloaded {
@@ -831,15 +831,15 @@ A.Peasant_Name:visited {
 }
 
 .color_ratio {
-    color: #1900d1
+    color: #00AAEE
 }
 
 .color_active {
-    color: #1900d1
+    color: #00AAEE
 }
 
 .color_connectable {
-    color: #1900d1
+    color: #00AAEE
 }
 
 .logo {
