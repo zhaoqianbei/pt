@@ -247,7 +247,8 @@ td.rowhead_center {
 td.rowhead {
     font-weight: bold;
     vertical-align: top;
-    text-align: right
+    text-align: right;
+    display: inline-block;
 }
 
 td.colfollow {
@@ -257,7 +258,9 @@ td.colfollow {
 table.torrents {
     text-align: center;
 }
-
+table.torrents td{
+    display: table-cell;
+}
 table.torrents td.rowfollow {
     text-align: center;
 }

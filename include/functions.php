@@ -121,7 +121,6 @@ function format_quotes($s)
 	for ($i=0; $i < count($openval); $i++)
 	if ($openval[$i] > $closeval[$i]) return $s; // Cannot close before opening. Return raw string...
 
-
 	$s = preg_replace("/\\[quote\\]/i","<fieldset><legend> ".$lang_functions['text_quote']." </legend><br />",$s);
 	$s = preg_replace("/\\[quote=(.+?)\\]/i", "<fieldset><legend> ".$lang_functions['text_quote'].": \\1 </legend><br />", $s);
 	$s = preg_replace("/\\[\\/quote\\]/i","</fieldset><br />",$s);
