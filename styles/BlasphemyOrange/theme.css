@@ -582,7 +582,7 @@ ul.menu li a:active {
 }
 
 ul.menu li.selected a {
-    background-color: #8a8a8a;
+    background-color: #00AAEE;
 }
 
 ul.menu li.selected a:hover {
