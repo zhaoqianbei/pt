@@ -2314,20 +2314,23 @@ else {
 		$outmessages = get_row_count("messages","WHERE sender=" . sqlesc($CURUSER["id"]) . " AND saved='yes'");
 		$Cache->cache_value('user_'.$CURUSER["id"].'_outbox_count', $outmessages, 900);
 	}
-	if (!$connect = $Cache->get_value('user_'.$CURUSER["id"].'_connect')){
+	// 用户连接性
+	if (!$connect = $Cache->get_value('user_'.$CURUSER["id"].'_connect')){//!$connect==flase
 		$res3 = sql_query("SELECT connectable FROM peers WHERE userid=" . sqlesc($CURUSER["id"]) . " LIMIT 1");
-		if($row = mysql_fetch_row($res3))
+		if($row = mysql_fetch_row($res3)){
 			$connect = $row[0];
-		else $connect = 'unknown';
+		}else {
+			$connect = 'unknown';//未知
+		}
 		$Cache->cache_value('user_'.$CURUSER["id"].'_connect', $connect, 900);
 	}
 
 	if($connect == "yes")
-		$connectable = "<b><font color=\"green\">".$lang_functions['text_yes']."</font></b>";
+		$connectable = "<b><font color=\"green\">".$lang_functions['text_yes']."</font></b>";//是
 	elseif ($connect == 'no')
-		$connectable = "<a href=\"faq.php#id21\"><b><font color=\"red\">".$lang_functions['text_no']."</font></b></a>";
+		$connectable = "<a href=\"faq.php#id21\"><b><font color=\"red\">".$lang_functions['text_no']."</font></b></a>";//否
 	else
-		$connectable = $lang_functions['text_unknown'];
+		$connectable = $lang_functions['text_unknown'];//未知
 
 	//// check every 60 seconds //////////////////
 	$activeseed = $Cache->get_value('user_'.$CURUSER["id"].'_active_seed_count');
