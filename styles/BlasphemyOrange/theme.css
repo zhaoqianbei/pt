@@ -156,6 +156,9 @@ td {
     line-height: 25px;
     font-size: 10pt;
     border: none;
+}
+
+form table.searchbox td{
     display: inline-block;
 }
 
