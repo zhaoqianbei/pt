@@ -2318,7 +2318,7 @@ else {
 	if (!$connect = $Cache->get_value('user_'.$CURUSER["id"].'_connect')){//!$connect==flase
 		$res3 = sql_query("SELECT connectable FROM peers WHERE userid=" . sqlesc($CURUSER["id"]) . " LIMIT 1");
 		if($row = mysql_fetch_row($res3)){
-			$connect = $row[0];
+			$connect = $row[0];//直接判断的连接性
 		}else {
 			$connect = 'unknown';//未知
 		}

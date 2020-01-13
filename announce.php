@@ -354,9 +354,7 @@ else
 	if (!$sockres)
 	{
 		$connectable = "no";
-	}
-	else
-	{
+	}else{
 		$connectable = "yes";
 		@fclose($sockres);
 	}
