@@ -81,13 +81,8 @@ if ($showalipay){
 ?>
 <td class=text align=left valign=top <?php echo $tdattr?>>
 <b><?php echo $lang_donate['text_donate_with_alipay']?></b><br /><br />
-<form action="https://www.alipay.com/trade/fast_pay.htm" method="get">
-<?php echo $lang_donate['text_donate_alipay_note_one']."<b>".$alipay."</b>".$lang_donate['text_donate_alipay_note_two']?>
-<br /><br /><br /><br /><br />
-<p align="center">
-<input type="image" src="pic/alipaybutton.gif" border="0" name="I2" alt="Make payments with Alipay" />
-<br /><br /></p>
-</form></td>
+<img src="pic/alipay.png">
+</td>
 <?php
 }
 print("</tr>");
