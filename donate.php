@@ -79,7 +79,7 @@ foreach ($allowedDonationUsdAmounts as $amount) {
 }
 if ($showalipay){
 ?>
-<td class=text align=left valign=top <?php echo $tdattr?>>
+<td class=text align=center valign=top <?php echo $tdattr?>>
 <b><?php echo $lang_donate['text_donate_with_alipay']?></b><br /><br />
 <img src="pic/alipay.png">
 </td>
