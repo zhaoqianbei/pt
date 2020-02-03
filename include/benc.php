@@ -1,4 +1,5 @@
 <?php
+set_time_limit(0);
 function benc($obj) {
 	if (!is_array($obj) || !isset($obj["type"]) || !isset($obj["value"]))
 		return;
