@@ -929,26 +929,10 @@ print("<tr>");
 print("<td align=\"left\"><textarea class=\"bbcode\" cols=\"100\" style=\"width: 650px;\" name=\"".$text."\" id=\"".$text."\" rows=\"20\" onkeydown=\"ctrlenter(event,'compose','qr')\">".$content."</textarea>");
 ?>
 </td>
-<td align="center" width="99%">
-<table cellspacing="1" cellpadding="3">
-<tr>
-<?php
-$i = 0;
-$quickSmilies = array(1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 13, 16, 17, 19, 20, 21, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 39, 40, 41);
-foreach ($quickSmilies as $smily) {
-	if ($i%4 == 0 && $i > 0) {
-		print('</tr><tr>');
-	}
-	print("<td class=\"embedded\" style=\"padding: 3px;\">".getSmileIt($form, $text, $smily)."</td>");
-	$i++;
-}
-?>
+
+
 </tr></table>
-<br />
-<a href="javascript:winop();"><?php echo $lang_functions['text_more_smilies'] ?></a>
-</td></tr></table>
-<?php
-}
+<?php }
 
 function begin_compose($title = "",$type="new", $body="", $hassubject=true, $subject="", $maxsubjectlength=100){
 	global $lang_functions;

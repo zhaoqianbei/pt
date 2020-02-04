@@ -915,60 +915,6 @@ if ($allsec != 1 || $enablespecial != 'yes'){ //do not print searchbox if showin
 					?>
 				</table>
 			</td>
-			
-			<td class="rowfollow" valign="right">
-				<table>
-					<tr>
-						<td class="bottom" style="padding: 1px;padding-left: 10px">
-							<font class="medium"><?php echo $lang_torrents['text_show_dead_active'] ?></font>
-						</td>
-				 	</tr>				
-					<tr>
-						<td class="bottom" style="padding: 1px;padding-left: 10px">
-							<select class="med" name="incldead" style="width: 100px;">
-								<option value="0"><?php echo $lang_torrents['select_including_dead'] ?></option>
-								<option value="1"<?php print($include_dead == 1 ? " selected=\"selected\"" : ""); ?>><?php echo $lang_torrents['select_active'] ?> </option>
-								<option value="2"<?php print($include_dead == 2 ? " selected=\"selected\"" : ""); ?>><?php echo $lang_torrents['select_dead'] ?></option>
-							</select>
-						</td>
-				 	</tr>
-				 	<tr>
-						<td class="bottom" style="padding: 1px;padding-left: 10px">
-						</td>
-				 	</tr>
-					<tr>
-						<td class="bottom" style="padding: 1px;padding-left: 10px">
-							<font class="medium"><?php echo $lang_torrents['text_show_special_torrents'] ?></font>
-						</td>
-				 	</tr>
-				 	<tr>
-						<td class="bottom" style="padding: 1px;padding-left: 10px">
-							<select class="med" name="spstate" style="width: 100px;">
-								<option value="0"><?php echo $lang_torrents['select_all'] ?></option>
-<?php echo promotion_selection($special_state, 0)?>
-							</select>
-						</td>
-					</tr>
-				 	<tr>
-						<td class="bottom" style="padding: 1px;padding-left: 10px">
-						</td>
-					</tr>
-					<tr>
-						<td class="bottom" style="padding: 1px;padding-left: 10px">
-							<font class="medium"><?php echo $lang_torrents['text_show_bookmarked'] ?></font>
-						</td>
-				 	</tr>
-				 	<tr>
-						<td class="bottom" style="padding: 1px;padding-left: 10px">
-							<select class="med" name="inclbookmarked" style="width: 100px;">
-								<option value="0"><?php echo $lang_torrents['select_all'] ?></option>
-								<option value="1"<?php print($inclbookmarked == 1 ? " selected=\"selected\"" : ""); ?>><?php echo $lang_torrents['select_bookmarked'] ?></option>
-								<option value="2"<?php print($inclbookmarked == 2 ? " selected=\"selected\"" : ""); ?>><?php echo $lang_torrents['select_bookmarked_exclude'] ?></option>
-							</select>
-						</td>
-					</tr>
-				</table>
-			</td>
 		</tr>
 		</tbody>
 		<tbody>
