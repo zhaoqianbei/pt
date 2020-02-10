@@ -2227,6 +2227,7 @@ if ($CURUSER){
 	}
 }
 ?>
+<script src="https://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
 <link rel="alternate" type="application/rss+xml" title="Latest Torrents" href="torrentrss.php" />
 <script type="text/javascript" src="curtain_imageresizer.js<?php echo $cssupdatedate?>"></script>
 <script type="text/javascript" src="ajaxbasic.js<?php echo $cssupdatedate?>"></script>

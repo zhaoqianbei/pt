@@ -54,7 +54,9 @@ else {
 		    <span class="fc2 left mt10">分享给他人：</span>
 		    <div class="social-share left"></div>
 		</div>
+
 		<script type="text/javascript">
+
 		var $config = {
 		    url: window.location.href, // 网址，默认使用 window.location.href
 		    source: "找前辈网 - 7500学编程，手把手教到就业满意！就业没有5000元/月，少多少退多少！", 
@@ -67,6 +69,7 @@ else {
 		    wechatQrcodeHelper: "<p>微信里点“发现”，扫一下</p><p>二维码便可将本文分享至朋友圈。</p>",
 		    target: "_blank" //打开方式
 		};
+		$(.social-share").share($config);
 		</script>';
 
 		print($sh);
