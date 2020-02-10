@@ -87,6 +87,9 @@ if ($action == 'view')
 <link rel="stylesheet" href="<?php echo get_css_uri()."theme.css"?>" type="text/css">
 <link rel="stylesheet" href="styles/curtain_imageresizer.css" type="text/css">
 <script src="curtain_imageresizer.js" type="text/javascript"></script><style type="text/css">body {overflow-y:scroll; overflow-x: hidden}</style>
+<!-- 分享页面 -->
+<link rel="stylesheet" href="lib/share/css/share.min.css">
+<script src="lib/share/js/jquery.share.min.js"></script>
 </head><body class='inframe'>
 <?php
 print(get_style_addicode());

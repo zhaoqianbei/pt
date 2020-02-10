@@ -48,6 +48,29 @@ else {
 		$sp_torrent = get_torrent_promotion_append($row[sp_state],'word');
 
 		$s=htmlspecialchars($row["name"]).($sp_torrent ? "&nbsp;&nbsp;&nbsp;".$sp_torrent : "");
+		// 分享按钮
+		$share = '
+		<div class="share clearfix">
+		    <span class="fc2 left mt10">注册后，分享赚佣金：</span>
+		    <div class="social-share left"></div>
+		</div>
+		<?php $shareStr = $view["post_title"];?>
+		<script type="text/javascript">
+		var $config = {
+		    url: window.location.href, // 网址，默认使用 window.location.href
+		    source: "找前辈网 - 7500学编程，手把手教到就业满意！就业没有5000元/月，少多少退多少！", 
+		    title: '.$s.', 
+		    description: "作者：高新软件", 
+		    image: "", 
+		    sites: ["wechat", "qq", "qzone", "weibo"], 
+		    disabled: ["google", "facebook", "twitter"], 
+		    wechatQrcodeTitle: "微信扫一扫：分享",
+		    wechatQrcodeHelper: "<p>微信里点“发现”，扫一下</p><p>二维码便可将本文分享至朋友圈。</p>",
+		    target: "_blank" //打开方式
+		};
+		</script>';
+
+		print($share);
 		print("<h1 align=\"center\" id=\"top\">".$s."</h1>\n");
 		print("<table width=\"1000\" cellspacing=\"0\" cellpadding=\"5\">\n");
 
