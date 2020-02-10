@@ -2217,9 +2217,6 @@ $cssupdatedate=($cssupdatedate ? "?".htmlspecialchars($cssupdatedate) : "");
 <link rel="stylesheet" href="<?php echo $css_uri."theme.css".$cssupdatedate?>" type="text/css" />
 <link rel="stylesheet" href="<?php echo $css_uri."DomTT.css".$cssupdatedate?>" type="text/css" />
 <link rel="stylesheet" href="styles/curtain_imageresizer.css<?php echo $cssupdatedate?>" type="text/css" />
-<!-- 分享页面 -->
-<link rel="stylesheet" href="lib/share/css/share.min.css">
-<script src="lib/share/js/jquery.share.min.js"></script>
 <?php
 if ($CURUSER){
 	$caticonrow = get_category_icon_row($CURUSER['caticon']);
@@ -2238,6 +2235,13 @@ if ($CURUSER){
 <script type="text/javascript" src="domTT.js<?php echo $cssupdatedate?>"></script>
 <script type="text/javascript" src="domTT_drag.js<?php echo $cssupdatedate?>"></script>
 <script type="text/javascript" src="fadomatic.js<?php echo $cssupdatedate?>"></script>
+<!-- 分享页面 -->
+<link rel="stylesheet" href="lib/share/css/share.min.css">
+<script src="lib/share/js/jquery.share.min.js"></script>
+<script type="text/javascript">
+// 分享插件
+$('.social-share').share($config);
+</script>
 </head>
 <body>
 <table class="head" cellspacing="0" cellpadding="0" align="center">
