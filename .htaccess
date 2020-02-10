@@ -4,9 +4,7 @@ RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
 #RewriteRule ^(.*)$ index.php?/$1 [QSA,PT,L]
 
-#rewriteCond %{HTTP_HOST} ^zhaoqianbei.com [NC]
-#rewriteRule ^(.*)$ https://www.zhaoqianbei.com/$1 [L,R=301]
-
+#反爬虫
 #apache Rewrite 规则
 RewriteRule !\.(ico|js|gif|jpeg|jpg|png|css|swf|flv)$ index.php
 
@@ -15,21 +13,16 @@ RewriteRule !\.(ico|js|gif|jpeg|jpg|png|css|swf|flv)$ index.php
 #arphp的全部请求转发到index.php
 #RewriteRule (.*) /index.php [L,U]
 
-#禁止图片盗链
-#RewriteCond %{HTTP_REFERER} !^$
-#RewriteCond %{HTTP_REFERER} !^http(s)?://(.+\.)?itbulu.com [NC]
-#RewriteRule \.(jpg|jpeg|png|gif|bmp)$ - [NC,F,L]
-
-#禁止被其他网页套用
-#SetEnvIf Request_URI "/starry-night" allow_framing=true
-#Header set X-Frame-Options SAMEORIGIN env=!allow_framing
-
 #RewriteCond %{HTTP_HOST} ^www\.zhaoqianbei\.com [NC]
 #RewriteCond %{HTTP_HOST} !^www\.zhaoqianbei\.com.\api(.*)$ [NC]
 #RewriteCond %{HTTP_USER_AGENT} "(baidu.Transcoder|mini|android|blackberry|googlebot-mobile|iemobile|Mobile|ipad|iphone|ipod|opera mobile|palmos|webos|ucweb|Windows Phone|Symbian|hpwOS)" [NC]
-#RewriteRule ^(.*)$ https://www.zhaoqianbei.com/Index/tishi [L,R=302]
+#RewriteRule ^(.*)$ https://www.zhaoqianbei.com/m [L,R=302]
 
+#ssl
+RewriteCond %{SERVER_PORT} !^443$
+RewriteRule ^(.*)?$ https://%{SERVER_NAME}%{REQUEST_URI} [L,R]
+
+#ssl
 RewriteCond %{HTTPS} !=on
 RewriteRule ^(.*) https://%{SERVER_NAME}/$1 [R,L]
-
 </IfModule>
