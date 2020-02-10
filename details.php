@@ -49,12 +49,11 @@ else {
 
 		$s=htmlspecialchars($row["name"]).($sp_torrent ? "&nbsp;&nbsp;&nbsp;".$sp_torrent : "");
 		// 分享按钮
-		$share = '
+		$sh = '
 		<div class="share clearfix">
-		    <span class="fc2 left mt10">注册后，分享赚佣金：</span>
+		    <span class="fc2 left mt10">分享给他人：</span>
 		    <div class="social-share left"></div>
 		</div>
-		<?php $shareStr = $view["post_title"];?>
 		<script type="text/javascript">
 		var $config = {
 		    url: window.location.href, // 网址，默认使用 window.location.href
@@ -68,9 +67,10 @@ else {
 		    wechatQrcodeHelper: "<p>微信里点“发现”，扫一下</p><p>二维码便可将本文分享至朋友圈。</p>",
 		    target: "_blank" //打开方式
 		};
+		$(".social-share").share($config);
 		</script>';
 
-		print($share);
+		print($sh);
 		print("<h1 align=\"center\" id=\"top\">".$s."</h1>\n");
 		print("<table width=\"1000\" cellspacing=\"0\" cellpadding=\"5\">\n");
 
