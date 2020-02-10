@@ -49,7 +49,6 @@ else {
 
 		$s=htmlspecialchars($row["name"]).($sp_torrent ? "&nbsp;&nbsp;&nbsp;".$sp_torrent : "");
 		// 分享按钮
-		$title = htmlspecialchars($row["name"]).($sp_torrent ? $sp_torrent : "");
 		$sh = '
 		<div class="share clearfix">
 		    <span class="fc2 left mt10">分享给他人：</span>
@@ -61,7 +60,7 @@ else {
 		var $config = {
 		    url: window.location.href, // 网址，默认使用 window.location.href
 		    source: "找前辈网 - 7500学编程，手把手教到就业满意！就业没有5000元/月，少多少退多少！", 
-		    title: '.$title.', 
+		    title: '.htmlspecialchars($row["name"]).', 
 		    description: "作者：高新软件", 
 		    image: "", 
 		    sites: ["wechat", "qq", "qzone", "weibo"], 
