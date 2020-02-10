@@ -67,7 +67,7 @@ else {
 		    wechatQrcodeHelper: "<p>微信里点“发现”，扫一下</p><p>二维码便可将本文分享至朋友圈。</p>",
 		    target: "_blank" //打开方式
 		};
-		$(".social-share").share($config);
+		socialShare(".social-share", $config)
 		</script>';
 
 		print($js);
