@@ -2227,7 +2227,7 @@ if ($CURUSER){
 	}
 }
 ?>
-<script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.js"></script>
+
 <link rel="alternate" type="application/rss+xml" title="Latest Torrents" href="torrentrss.php" />
 <script type="text/javascript" src="curtain_imageresizer.js<?php echo $cssupdatedate?>"></script>
 <script type="text/javascript" src="ajaxbasic.js<?php echo $cssupdatedate?>"></script>
@@ -2237,6 +2237,7 @@ if ($CURUSER){
 <script type="text/javascript" src="domTT_drag.js<?php echo $cssupdatedate?>"></script>
 <script type="text/javascript" src="fadomatic.js<?php echo $cssupdatedate?>"></script>
 <!-- 分享页面 -->
+<script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.js"></script>
 <link rel="stylesheet" href="lib/share/css/share.min.css">
 <script src="lib/share/js/jquery.share.min.js"></script>
 </head>
