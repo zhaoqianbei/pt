@@ -2238,10 +2238,6 @@ if ($CURUSER){
 <!-- 分享页面 -->
 <link rel="stylesheet" href="lib/share/css/share.min.css">
 <script src="lib/share/js/jquery.share.min.js"></script>
-<script type="text/javascript">
-// 分享插件
-$('.social-share').share($config);
-</script>
 </head>
 <body>
 <table class="head" cellspacing="0" cellpadding="0" align="center">
@@ -2545,6 +2541,8 @@ function stdfoot() {
 	print("</div>");
 	if ($analyticscode_tweak)
 		print("\n".$analyticscode_tweak."\n");
+	$zhixing = '<script type="text/javascript">$(".social-share").share($config);</script>';
+	print($zhixing);
 	print("</body></html>");
 
 	//echo replacePngTags(ob_get_clean());
