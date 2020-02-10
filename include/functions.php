@@ -2217,6 +2217,9 @@ $cssupdatedate=($cssupdatedate ? "?".htmlspecialchars($cssupdatedate) : "");
 <link rel="stylesheet" href="<?php echo $css_uri."theme.css".$cssupdatedate?>" type="text/css" />
 <link rel="stylesheet" href="<?php echo $css_uri."DomTT.css".$cssupdatedate?>" type="text/css" />
 <link rel="stylesheet" href="styles/curtain_imageresizer.css<?php echo $cssupdatedate?>" type="text/css" />
+<!-- 分享页面 -->
+<link rel="stylesheet" href="lib/share/css/share.min.css">
+<script src="lib/share/js/jquery.share.min.js"></script>
 <?php
 if ($CURUSER){
 	$caticonrow = get_category_icon_row($CURUSER['caticon']);
