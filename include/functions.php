@@ -2380,8 +2380,8 @@ else {
 </tr></table>
 
 </td></tr>
-<!-- 
-<tr><td id="outer" align="center" class="outer"> -->
+
+<tr><td id="outer" align="center" class="outer">
 <?php
 	if ($Advertisement->enable_ad()){
 			$belownavad=$Advertisement->get_ad('belownav');
