@@ -2701,17 +2701,17 @@ if ($Advertisement->enable_ad()) {
                 $text = $lang_functions['text_you_have'] . $unread . $lang_functions['text_new_message'] . add_s($unread) . $lang_functions['text_click_here_to_read'];
                 msgalert("messages.php", $text, "red");
             }
-/*
-$pending_invitee = $Cache->get_value('user_'.$CURUSER["id"].'_pending_invitee_count');
-if ($pending_invitee == ""){
-$pending_invitee = get_row_count("users","WHERE status = 'pending' AND invited_by = ".sqlesc($CURUSER[id]));
-$Cache->cache_value('user_'.$CURUSER["id"].'_pending_invitee_count', $pending_invitee, 900);
-}
-if ($pending_invitee > 0)
-{
-$text = $lang_functions['text_your_friends'].add_s($pending_invitee).is_or_are($pending_invitee).$lang_functions['text_awaiting_confirmation'];
-msgalert("invite.php?id=".$CURUSER[id],$text, "red");
-}*/
+			/*
+			$pending_invitee = $Cache->get_value('user_'.$CURUSER["id"].'_pending_invitee_count');
+			if ($pending_invitee == ""){
+			$pending_invitee = get_row_count("users","WHERE status = 'pending' AND invited_by = ".sqlesc($CURUSER[id]));
+			$Cache->cache_value('user_'.$CURUSER["id"].'_pending_invitee_count', $pending_invitee, 900);
+			}
+			if ($pending_invitee > 0)
+			{
+			$text = $lang_functions['text_your_friends'].add_s($pending_invitee).is_or_are($pending_invitee).$lang_functions['text_awaiting_confirmation'];
+			msgalert("invite.php?id=".$CURUSER[id],$text, "red");
+			}*/
             $settings_script_name = $_SERVER["SCRIPT_FILENAME"];
             if (!preg_match("/index/i", $settings_script_name)) {
                 $new_news = $Cache->get_value('user_' . $CURUSER["id"] . '_unread_news_count');
