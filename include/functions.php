@@ -2656,7 +2656,111 @@ if (get_user_class() >= $staffmem_class) {
 
 </td></tr>
 
-        
+<tr><td id="outer" align="center" class="outer">
+<?php
+if ($Advertisement->enable_ad()) {
+            $belownavad = $Advertisement->get_ad('belownav');
+            if ($belownavad) {
+                echo "<div align=\"center\" style=\"margin-bottom: 10px\" id=\"ad_belownav\">" . $belownavad[0] . "</div>";
+            }
+
+        }
+        if ($msgalert) {
+            function msgalert($url, $text, $bgcolor = "red")
+            {
+                print("<p><table border=\"0\" cellspacing=\"0\" cellpadding=\"10\"><tr><td style='border: none; padding: 10px; background: " . $bgcolor . "'>\n");
+                print("<b><a href=\"" . $url . "\"><font color=\"white\">" . $text . "</font></a></b>");
+                print("</td></tr></table></p><br />");
+            }
+            if ($CURUSER['leechwarn'] == 'yes') {
+                $kicktimeout = gettime($CURUSER['leechwarnuntil'], false, false, true);
+                $text = $lang_functions['text_please_improve_ratio_within'] . $kicktimeout . $lang_functions['text_or_you_will_be_banned'];
+                msgalert("faq.php#id17", $text, "orange");
+            }
+            if ($deletenotransfertwo_account) //inactive account deletion notice
+            {
+                if ($CURUSER['downloaded'] == 0 && ($CURUSER['uploaded'] == 0 || $CURUSER['uploaded'] == $iniupload_main)) {
+                    $neverdelete_account = ($neverdelete_account <= UC_VIP ? $neverdelete_account : UC_VIP);
+                    if (get_user_class() < $neverdelete_account) {
+                        $secs = $deletenotransfertwo_account * 24 * 60 * 60;
+                        $addedtime = strtotime($CURUSER['added']);
+                        if (TIMENOW > $addedtime + ($secs / 3)) // start notification if one third of the time has passed
+                        {
+                            $kicktimeout = gettime(date("Y-m-d H:i:s", $addedtime + $secs), false, false, true);
+                            $text = $lang_functions['text_please_download_something_within'] . $kicktimeout . $lang_functions['text_inactive_account_be_deleted'];
+                            msgalert("rules.php", $text, "gray");
+                        }
+                    }
+                }
+            }
+            if ($CURUSER['showclienterror'] == 'yes') {
+                $text = $lang_functions['text_banned_client_warning'];
+                msgalert("faq.php#id29", $text, "black");
+            }
+            if ($unread) {
+                $text = $lang_functions['text_you_have'] . $unread . $lang_functions['text_new_message'] . add_s($unread) . $lang_functions['text_click_here_to_read'];
+                msgalert("messages.php", $text, "red");
+            }
+/*
+$pending_invitee = $Cache->get_value('user_'.$CURUSER["id"].'_pending_invitee_count');
+if ($pending_invitee == ""){
+$pending_invitee = get_row_count("users","WHERE status = 'pending' AND invited_by = ".sqlesc($CURUSER[id]));
+$Cache->cache_value('user_'.$CURUSER["id"].'_pending_invitee_count', $pending_invitee, 900);
+}
+if ($pending_invitee > 0)
+{
+$text = $lang_functions['text_your_friends'].add_s($pending_invitee).is_or_are($pending_invitee).$lang_functions['text_awaiting_confirmation'];
+msgalert("invite.php?id=".$CURUSER[id],$text, "red");
+}*/
+            $settings_script_name = $_SERVER["SCRIPT_FILENAME"];
+            if (!preg_match("/index/i", $settings_script_name)) {
+                $new_news = $Cache->get_value('user_' . $CURUSER["id"] . '_unread_news_count');
+                if ($new_news == "") {
+                    $new_news = get_row_count("news", "WHERE notify = 'yes' AND added > " . sqlesc($CURUSER['last_home']));
+                    $Cache->cache_value('user_' . $CURUSER["id"] . '_unread_news_count', $new_news, 300);
+                }
+                if ($new_news > 0) {
+                    $text = $lang_functions['text_there_is'] . is_or_are($new_news) . $new_news . $lang_functions['text_new_news'];
+                    msgalert("index.php", $text, "green");
+                }
+            }
+
+            if (get_user_class() >= $staffmem_class) {
+                $numreports = $Cache->get_value('staff_new_report_count');
+                if ($numreports == "") {
+                    $numreports = get_row_count("reports", "WHERE dealtwith=0");
+                    $Cache->cache_value('staff_new_report_count', $numreports, 900);
+                }
+                if ($numreports) {
+                    $text = $lang_functions['text_there_is'] . is_or_are($numreports) . $numreports . $lang_functions['text_new_report'] . add_s($numreports);
+                    msgalert("reports.php", $text, "blue");
+                }
+                $nummessages = $Cache->get_value('staff_new_message_count');
+                if ($nummessages == "") {
+                    $nummessages = get_row_count("staffmessages", "WHERE answered='no'");
+                    $Cache->cache_value('staff_new_message_count', $nummessages, 900);
+                }
+                if ($nummessages > 0) {
+                    $text = $lang_functions['text_there_is'] . is_or_are($nummessages) . $nummessages . $lang_functions['text_new_staff_message'] . add_s($nummessages);
+                    msgalert("staffbox.php", $text, "blue");
+                }
+                $numcheaters = $Cache->get_value('staff_new_cheater_count');
+                if ($numcheaters == "") {
+                    $numcheaters = get_row_count("cheaters", "WHERE dealtwith=0");
+                    $Cache->cache_value('staff_new_cheater_count', $numcheaters, 900);
+                }
+                if ($numcheaters) {
+                    $text = $lang_functions['text_there_is'] . is_or_are($numcheaters) . $numcheaters . $lang_functions['text_new_suspected_cheater'] . add_s($numcheaters);
+                    msgalert("cheaterbox.php", $text, "blue");
+                }
+            }
+        }
+        if ($offlinemsg) {
+            print("<p><table width=\"737\" border=\"1\" cellspacing=\"0\" cellpadding=\"10\"><tr><td style='padding: 10px; background: red' class=\"text\" align=\"center\">\n");
+            print("<font color=\"white\">" . $lang_functions['text_website_offline_warning'] . "</font>");
+            print("</td></tr></table></p><br />\n");
+        }
+    }
 }
 
 function stdfoot()
