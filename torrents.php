@@ -917,6 +917,10 @@ if ($allsec != 1 || $enablespecial != 'yes'){ //do not print searchbox if showin
 							
 							<?php echo $lang_torrents['text_mode'] ?>
 						</td>
+						
+						<td class="rowfollow" align="left">
+							<input type="submit" class="btn btn-mini" value="<?php echo $lang_torrents['submit_go'] ?>" />
+						</td>
 					</tr>
 <?php
 $Cache->new_page('hot_search', 3670, true);
@@ -944,9 +948,6 @@ if (!$Cache->get_page()){
 echo $Cache->next_row();
 ?>
 				</table>
-			</td>
-			<td class="rowfollow" align="left">
-				<input type="submit" class="btn" value="<?php echo $lang_torrents['submit_go'] ?>" />
 			</td>
 		</tr>
 		</tbody>

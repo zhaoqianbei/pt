@@ -25,7 +25,7 @@ body {
 body.inframe {
     background: transparent none;
 }
-input,select,select.med{font-size: 10pt}
+input,select,select.med{font-size: 12pt}
 
 input[type="checkbox"] {
     width: 15px;
@@ -474,9 +474,9 @@ a.altlink_green:hover {
 }
 
 .btn-mini {
-    height: 22px;
-    line-height: 22px;
-    padding: 0 5px;
+    height: 23px;
+    line-height: 23px;
+    padding: 0 8px;
     font-size: 12px;
 }
 a.btn-danger {
