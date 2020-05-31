@@ -78,7 +78,7 @@ else {
 
 		
 		print("<h1 align=\"center\" id=\"top\">".$s."</h1>\n");
-		print("<table width=\"1000\" cellspacing=\"0\" cellpadding=\"5\">\n");
+		print("<table width=\"1200\" cellspacing=\"0\" cellpadding=\"5\">\n");
 
 		$url = "edit.php?id=" . $row["id"];
 		if (isset($_GET["returnto"])) {
