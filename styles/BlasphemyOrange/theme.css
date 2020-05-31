@@ -160,7 +160,7 @@ h2.transparentbg {
     background-image: none
 }
 
-p {}
+p { margin: 0;}
 
 p.sub {
     margin-bottom: 4pt

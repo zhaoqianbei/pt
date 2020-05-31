@@ -957,7 +957,6 @@ echo $Cache->next_row();
 }
 	if ($Advertisement->enable_ad()){
 			$belowsearchboxad = $Advertisement->get_ad('belowsearchbox');
-			echo "<div align=\"left\" style=\"margin-top: 10px\" id=\"ad_belowsearchbox\">".$belowsearchboxad[0]."</div>";
 	}
 if($inclbookmarked == 1)
 {
