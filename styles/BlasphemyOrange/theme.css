@@ -246,7 +246,7 @@ td.comment {
 td.colhead {
     white-space: nowrap;
     font-weight: bold;
-    color: #ffffff;
+    color: #333;
     text-align: left;
 }
 
@@ -277,6 +277,9 @@ table.torrents {
 }
 table.torrents td{
     display: table-cell;
+}
+table.torrents td.colhead, table.torrents td.rowfollow {
+    border: 1px solid #ddd;
 }
 table.torrents td.rowfollow {
     text-align: center;

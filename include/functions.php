@@ -3107,7 +3107,7 @@ function commenttable($rows, $type, $parent_id, $review = false)
         $secs = 900;
         $dt = sqlesc(date("Y-m-d H:i:s", (TIMENOW - $secs))); // calculate date.
         print("<tr>\n");
-        print("<td class=\"rowfollow\" width=\"150\" valign=\"top\" style=\"padding: 0px;\">" . return_avatar_image($avatar) . "</td>\n");
+        print("<td class=\"rowfollow\" width=\"150\" valign=\"top\" >" . return_avatar_image($avatar) . "</td>\n");
         print("<td class=\"rowfollow\" valign=\"top\"><br />" . $text . $text_editby . "</td>\n");
         print("</tr>\n");
         $actionbar = "<a href=\"comment.php?action=add&amp;sub=quote&amp;cid=" . $row[id] . "&amp;pid=" . $parent_id . "&amp;type=" . $type . "\"><img class=\"f_quote\" src=\"pic/trans.gif\" alt=\"Quote\" title=\"" . $lang_functions['title_reply_with_quote'] . "\" /></a>" .
@@ -3310,7 +3310,7 @@ $count_get = 0;
 
     }
     ?>
-<td class="colhead" style="padding: 0px"><?php echo $lang_functions['col_type'] ?></td>
+<td class="colhead"><?php echo $lang_functions['col_type'] ?></td>
 <td class="colhead"><a href="?<?php echo $oldlink ?>sort=1&amp;type=<?php echo $link[1] ?>"><?php echo $lang_functions['col_name'] ?></a></td>
 <?php
 
@@ -3353,7 +3353,7 @@ $caticonrow = get_category_icon_row($CURUSER['caticon']);
         $sphighlight = get_torrent_bg_color($row['sp_state']);
         print("<tr" . $sphighlight . ">\n");
 
-        print("<td class=\"rowfollow nowrap\" valign=\"middle\" style='padding: 0px'>");
+        print("<td class=\"rowfollow nowrap\" valign=\"middle\">");
         if (isset($row["category"])) {
             print(return_category_image($row["category"], "?"));
             if ($has_secondicon) {
