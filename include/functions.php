@@ -73,7 +73,7 @@ function stdmsg($heading, $text, $htmlstrip = false)
         $heading = htmlspecialchars(trim($heading));
         $text = htmlspecialchars(trim($text));
     }
-    print("<table align=\"left\" class=\"main\" width=\"1000\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tr><td class=\"embedded\">\n");
+    print("<table align=\"left\" class=\"main\" width=\"1200\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tr><td class=\"embedded\">\n");
     if ($heading) {
         print("<h2>" . $heading . "</h2>\n");
     }
@@ -559,7 +559,7 @@ function begin_main_frame($caption = "", $center = false, $width = 100)
         $tdextra .= " align=\"center\"";
     }
 
-    $width = 1000 * $width / 100;
+    $width = 1200 * $width / 100;
 
     print("<table class=\"main\" width=\"" . $width . "\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">" .
         "<tr><td class=\"embedded\" $tdextra>");
@@ -2547,7 +2547,7 @@ if ($logo_main == "") {
 	</tr>
 </table>
 
-<table class="mainouter" width="1000" cellspacing="0" cellpadding="5" align="center">
+<table class="mainouter" width="1200" cellspacing="0" cellpadding="5" align="center">
 	<tr><td id="nav_block" class="text" align="center">
 <?php if (!$CURUSER) {?>
 		<a href="login.php" class="fs2"><?php echo $lang_functions['text_login'] ?></a> / <a href="signup.php" class="fs2"><?php echo $lang_functions['text_signup'] ?></a>
