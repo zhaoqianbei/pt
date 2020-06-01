@@ -93,7 +93,7 @@ $width = "50";
 }
 stdhead($lang_staffbox['head_view_staff_pm']);
 print("<h1 align=\"center\"><a class=\"faqlink\" href=\"staffbox.php\">".$lang_staffbox['text_staff_pm']."</a>-->".$subject."</h1>");
-print("<table width=\"737\" border=\"0\" cellpadding=\"4\" cellspacing=\"0\">");
+print("<table width=\"1200\" border=\"0\" cellpadding=\"4\" cellspacing=\"0\">");
 print("<tr><td width=\"".$width."%\" class=\"colhead\" align=\"left\">".$lang_staffbox['col_from']."</td>");
 if ($arr4["answered"] == 1)
 print("<td width=\"34%\" class=\"colhead\" align=\"left\">".$lang_staffbox['col_answered_by']."</td>");

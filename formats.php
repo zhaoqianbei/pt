@@ -4,7 +4,7 @@ dbconn();
 loggedinorreturn();
 stdhead("Downloaded Files");
 ?>
-<table class=main width=737 border=0 cellspacing=0 cellpadding=0><tr><td class=embedded>
+<table class=main width=1200 border=0 cellspacing=0 cellpadding=0><tr><td class=embedded>
 <h2>A Handy Guide to Using the Files You've Downloaded</h2>
 <table width=100% border=1 cellspacing=0 cellpadding=10><tr><td class=text> 
 
@@ -16,7 +16,7 @@ get the show on the road!<br />
 </td></tr></table>
 </td></tr></table>
 <br />
-<table class=main width=737 border=0 cellspacing=0 cellpadding=0><tr><td class=embedded>
+<table class=main width=1200 border=0 cellspacing=0 cellpadding=0><tr><td class=embedded>
 <h2>Compression Files</h2>
 <table width=100% border=1 cellspacing=0 cellpadding=10><tr><td class=text> 
 
@@ -45,7 +45,7 @@ CDisplay</a>.<br />
 </td></tr></table>
 </td></tr></table>
 <br />
-<table class=main width=737 border=0 cellspacing=0 cellpadding=0><tr><td class=embedded>
+<table class=main width=1200 border=0 cellspacing=0 cellpadding=0><tr><td class=embedded>
 <h2>Multimedia Files</h2>
 <table width=100% border=1 cellspacing=0 cellpadding=10><tr><td class=text> 
 
@@ -119,7 +119,7 @@ DirectShow Ogg filter</a> to play back OGM files. Any new version of
 </td></tr></table>
 </td></tr></table>
 <br />
-<table class=main width=737 border=0 cellspacing=0 cellpadding=0><tr><td class=embedded>
+<table class=main width=1200 border=0 cellspacing=0 cellpadding=0><tr><td class=embedded>
 <h2>CD Image Files</h2>
 <table width=100% border=1 cellspacing=0 cellpadding=10><tr><td class=text> 
 
@@ -158,7 +158,7 @@ see the .bin and .cue section if you're having problems with these files.<br />
 </td></tr></table>
 </td></tr></table>
 <br />
-<table class=main width=737 border=0 cellspacing=0 cellpadding=0><tr><td class=embedded>
+<table class=main width=1200 border=0 cellspacing=0 cellpadding=0><tr><td class=embedded>
 <h2>Other Files</h2>
 <table width=100% border=1 cellspacing=0 cellpadding=10><tr><td class=text> 
 
@@ -203,7 +203,7 @@ Open them with <a href="http://www.pbclements.co.uk/QuickPar/">QuickPar</a>.
 </td></tr></table>
 </td></tr></table>
 <br />
-<table class=main width=737 border=0 cellspacing=0 cellpadding=0><tr><td class=embedded>
+<table class=main width=1200 border=0 cellspacing=0 cellpadding=0><tr><td class=embedded>
 <table width=100% border=1 cellspacing=0 cellpadding=10><tr><td class=text> 
 
 If you have any suggestion/changes <a href=staff.php><b>PM</b></a> one of the Admins/SysOp!<br />

@@ -48,7 +48,7 @@ print("<p><table class=main border=0 cellspacing=0 cellpadding=0>".
 if (!$enabled)
   print($lang_checkuser['text_account_disabled']);
 ?>
-<table width=737 border=1 cellspacing=0 cellpadding=5>
+<table width=1200 border=1 cellspacing=0 cellpadding=5>
 <tr><td class=rowhead width=1%><?php echo $lang_checkuser['row_join_date'] ?></td><td align=left width=99%><?php echo $joindate;?></td></tr>
 <tr><td class=rowhead width=1%><?php echo $lang_checkuser['row_gender'] ?></td><td align=left width=99%><?php echo $gender;?></td></tr>
 <tr><td class=rowhead width=1%><?php echo $lang_checkuser['row_email'] ?></td><td align=left width=99%><a href=mailto:<?php echo $user[email];?>><?php echo $user[email];?></a></td></tr>

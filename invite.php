@@ -46,7 +46,7 @@ if ($type == 'new'){
 	$invitation_body =  $lang_invite['text_invitation_body'].$CURUSER[username];
 	//$invitation_body_insite = str_replace("<br />","\n",$invitation_body);
 	print("<form method=post action=takeinvite.php?id=".htmlspecialchars($id).">".
-	"<table border=1 width=737 cellspacing=0 cellpadding=5>".
+	"<table border=1 width=1200 cellspacing=0 cellpadding=5>".
 	"<tr align=center><td colspan=2><b>".$lang_invite['text_invite_someone']."$SITENAME ($inv[invites]".$lang_invite['text_invitation'].$_s.$lang_invite['text_left'] .")</b></td></tr>".
 	"<tr><td class=\"rowhead nowrap\" valign=\"top\" align=\"right\">".$lang_invite['text_email_address']."</td><td align=left><input type=text size=40 name=email><br /><font align=left class=small>".$lang_invite['text_email_address_note']."</font>".($restrictemaildomain == 'yes' ? "<br />".$lang_invite['text_email_restriction_note'].allowedemails() : "")."</td></tr>".
 	"<tr><td class=\"rowhead nowrap\" valign=\"top\" align=\"right\">".$lang_invite['text_message']."</td><td align=left><textarea name=body rows=8 cols=120>" .$invitation_body.
@@ -63,7 +63,7 @@ if ($type == 'new'){
 	$ret = sql_query("SELECT id, username, email, uploaded, downloaded, status, warned, enabled, donor, email FROM users WHERE invited_by = ".mysql_real_escape_string($id)) or sqlerr();
 	$num = mysql_num_rows($ret);
 
-	print("<table border=1 width=737 cellspacing=0 cellpadding=5>".
+	print("<table border=1 width=1200 cellspacing=0 cellpadding=5>".
 	"<h2 align=center>".$lang_invite['text_invite_status']." ($number)</h2><form method=post action=takeconfirm.php?id=".htmlspecialchars($id).">");
 
 	if(!$num){
@@ -130,7 +130,7 @@ if ($type == 'new'){
 	$num1 = mysql_num_rows($rer);
 
 
-	print("<table border=1 width=737 cellspacing=0 cellpadding=5>".
+	print("<table border=1 width=1200 cellspacing=0 cellpadding=5>".
 	"<h2 align=center>".$lang_invite['text_sent_invites_status']." ($number1)</h2>");
 
 	if(!$num1){

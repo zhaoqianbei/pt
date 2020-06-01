@@ -2756,7 +2756,7 @@ if ($Advertisement->enable_ad()) {
             }
         }
         if ($offlinemsg) {
-            print("<p><table width=\"737\" border=\"1\" cellspacing=\"0\" cellpadding=\"10\"><tr><td style='padding: 10px; background: red' class=\"text\" align=\"center\">\n");
+            print("<p><table width=\"1200\" border=\"1\" cellspacing=\"0\" cellpadding=\"10\"><tr><td style='padding: 10px; background: red' class=\"text\" align=\"center\">\n");
             print("<font color=\"white\">" . $lang_functions['text_website_offline_warning'] . "</font>");
             print("</td></tr></table></p><br />\n");
         }

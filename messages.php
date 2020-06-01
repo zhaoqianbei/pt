@@ -51,7 +51,7 @@ else
 stdhead($mailbox_name);
 ?>
 <?php messagemenu($mailbox)?>
-<table border="0" cellpadding="4" cellspacing="0" width="737">
+<table border="0" cellpadding="4" cellspacing="0" width="1200">
 <tr><td class=colhead align=left><?php echo $lang_messages['col_search_message'] ?></td></tr>
 <tr><td class=toolbox align=center><?php echo insertJumpTo($mailbox);?></td></tr>
 </table>
@@ -110,7 +110,7 @@ echo $pagertop;
 ?>
 <form action="messages.php" method="post">
 <input type="hidden" name="action" value="moveordel">
-<table border="0" cellpadding="4" cellspacing="0" width="737">
+<table border="0" cellpadding="4" cellspacing="0" width="1200">
 <tr>
 <td width="1%" class="colhead" align="center"><?php echo $lang_messages['col_status'] ?></td>
 <td class="colhead" align="left"><?php echo $lang_messages['col_subject'] ?> </td>
@@ -254,7 +254,7 @@ stdhead("PM ($subject)"); ?>
 $mailbox = ($message['sender'] == $CURUSER['id'] ? -1 : $message['location']);
 messagemenu($mailbox);
 ?>
-<table width="737" border="0" cellpadding="4" cellspacing="0">
+<table width="1200" border="0" cellpadding="4" cellspacing="0">
 <tr>
 <td width="50%" class="colhead" align="left"><?php echo $from?></td>
 <td width="50%" class="colhead" align="left"><?php echo $lang_messages['col_date'] ?></td>
@@ -452,7 +452,7 @@ $body = "-------- Original Message from " . $orig_name2 . " --------<br />" . fo
 
 stdhead($subject);?>
 <h1 align="center"><?php echo $lang_messages['text_forward_pm'] ?></h1>
-<table border="0" cellpadding="4" cellspacing="0"  width="737">
+<table border="0" cellpadding="4" cellspacing="0"  width="1200">
 <form action="takemessage.php" method="post">
 <input type="hidden" name="forward" value="1">
 <input type="hidden" name="origmsg" value="<?php echo $pm_id?>">
@@ -491,7 +491,7 @@ $res = sql_query("SELECT * FROM pmboxes WHERE userid=" . sqlesc($CURUSER['id']))
 
 stdhead($lang_messages['head_editing_mailboxes']); ?>
 <h1><?php echo $lang_messages['text_editing_mailboxes'] ?></h1>
-<table width="737" border="0" cellpadding="4" cellspacing="0">
+<table width="1200" border="0" cellpadding="4" cellspacing="0">
 <tr>
 <td class="colhead" align="left"><?php echo $lang_messages['text_add_mailboxes'] ?></td>
 </tr>

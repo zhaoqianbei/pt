@@ -6,7 +6,7 @@ if (get_user_class() < UC_SYSOP)
 stderr("Sorry", "Access denied.");
 stdhead("Add Upload", false);
 ?>
-<table class=main width=737 border=0 cellspacing=0 cellpadding=0><tr><td class=embedded>
+<table class=main width=1200 border=0 cellspacing=0 cellpadding=0><tr><td class=embedded>
 <div align=center>
 <h1>Add upload to all staff members and users:</a></h1>
 <form method=post action=takeamountupload.php>

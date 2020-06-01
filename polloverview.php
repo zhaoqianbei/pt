@@ -17,7 +17,7 @@ if ($pollid)
 	stdhead($lang_polloverview['head_poll_overview']);
 	print("<h1 align=\"center\">".$lang_polloverview['text_polls_overview']."</h1>\n");
 
-	print("<table width=737 border=1 cellspacing=0 cellpadding=5><tr>\n" . 
+	print("<table width=1200 border=1 cellspacing=0 cellpadding=5><tr>\n" . 
  "<td class=colhead align=center><nobr>".$lang_polloverview['col_id']."</nobr></td><td class=colhead><nobr>".$lang_polloverview['col_added']."</nobr></td><td class=colhead><nobr>".$lang_polloverview['col_question']."</nobr></td></tr>\n");
   
 	while ($poll = mysql_fetch_assoc($res))
@@ -30,7 +30,7 @@ if ($pollid)
 	print("</table>\n");
  
 	print("<h1 align=\"center\">".$lang_polloverview['text_poll_question']."</h1><br />\n");
-	print("<table width=737 border=1 cellspacing=0 cellpadding=5><tr><td class=colhead>".$lang_polloverview['col_option_no']."</td><td class=colhead>".$lang_polloverview['col_options']."</td></tr>\n");
+	print("<table width=1200 border=1 cellspacing=0 cellpadding=5><tr><td class=colhead>".$lang_polloverview['col_option_no']."</td><td class=colhead>".$lang_polloverview['col_options']."</td></tr>\n");
 	foreach($o as $key=>$value) {
 		if($value != "")
 			print("<tr><td>".$key."</td><td>".$value."</td></tr>\n");
@@ -48,7 +48,7 @@ if ($pollid)
 		list($pagertop, $pagerbottom, $limit) = pager($perpage, $count, "?id=".$pollid."&");
 		$res2 = sql_query("SELECT pollanswers.*, users.username FROM pollanswers LEFT JOIN users ON pollanswers.userid = users.id WHERE pollid = ".sqlesc($pollid)." AND selection < 20 ORDER BY username ASC ".$limit) or sqlerr();
 		print($pagertop);
- 		print("<table width=737 border=1 cellspacing=0 cellpadding=5>");
+ 		print("<table width=1200 border=1 cellspacing=0 cellpadding=5>");
 		print("<tr><td class=colhead align=center><nobr>".$lang_polloverview['col_username']."</nobr></td><td class=colhead align=center><nobr>".$lang_polloverview['col_selection']."<nobr></td></tr>\n");
 		while ($useras = mysql_fetch_assoc($res2))
 		{
@@ -68,7 +68,7 @@ else
 	stdhead($lang_polloverview['head_poll_overview']);
 	print("<h1 align=\"center\">".$lang_polloverview['text_polls_overview']."</h1>\n");
 
-	print("<table width=737 border=1 cellspacing=0 cellpadding=5><tr>\n" . 
+	print("<table width=1200 border=1 cellspacing=0 cellpadding=5><tr>\n" . 
  "<td class=colhead align=center><nobr>".$lang_polloverview['col_id']."</nobr></td><td class=colhead>".$lang_polloverview['col_added']."</td><td class=colhead><nobr>".$lang_polloverview['col_question']."</nobr></td></tr>\n");
 	while ($poll = mysql_fetch_assoc($res))
 	{

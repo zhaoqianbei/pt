@@ -109,12 +109,12 @@ print("<p><table class=main border=0 cellspacing=0 cellpadding=0>".
 "<tr><td class=embedded><h1 style='margin:0px'> " . $lang_friends['text_personallist'] . " ".get_username($user[id])."</h1></td></tr></table></p>\n");
 
 //Start: Friends
-print("<table class=main width=737 border=0 cellspacing=0 cellpadding=0><tr><td class=embedded>");
+print("<table class=main width=1200 border=0 cellspacing=0 cellpadding=0><tr><td class=embedded>");
 
 print("<br />");
 print("<h2 align=left><a name=\"friends\">" . $lang_friends['text_friendlist'] . "</a></h2>\n");
 
-print("<table width=737 border=1 cellspacing=0 cellpadding=5><tr class=tablea><td>");
+print("<table width=1200 border=1 cellspacing=0 cellpadding=5><tr class=tablea><td>");
 
 $i = 0;
 
@@ -164,12 +164,12 @@ print("</td></tr></table><br />\n");
 
 //Start: Neighbors
 /*
-print("<table class=main width=737 border=0 cellspacing=0 cellpadding=0><tr><td class=embedded>");
+print("<table class=main width=1200 border=0 cellspacing=0 cellpadding=0><tr><td class=embedded>");
 
 print("<br />");
 print("<h2 align=left><a name=\"friendsadded\">".$lang_friends['text_neighbors']."</a></h2>\n");
 
-print("<table width=737 border=1 cellspacing=0 cellpadding=5><tr class=tablea><td>");
+print("<table width=1200 border=1 cellspacing=0 cellpadding=5><tr class=tablea><td>");
 
 $i = 0;
 $cachefile = "cache/" . get_langfolder_cookie() . "/neighbors/" . $CURUSER['id'] . ".html";
@@ -343,7 +343,7 @@ else
 	$blocks .= "</table>\n";
 }
 print("<br /><br />");
-print("<table class=main width=737 border=0 cellspacing=0 cellpadding=5><tr><td class=embedded>");
+print("<table class=main width=1200 border=0 cellspacing=0 cellpadding=5><tr><td class=embedded>");
 print("<h2 align=left><a name=\"blocks\">".$lang_friends['text_blocked_users']."</a></h2></td></tr>");
 print("<tr class=tableb><td style='padding: 10px;'>");
 print($blocks);
