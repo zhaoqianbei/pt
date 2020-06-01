@@ -3,7 +3,6 @@ body {
     margin-bottom: 0px;
     color: #000000;
     font-family: tahoma, arial, helvetica, sans-serif;
-    background: #ccc;
 }
 .dn{display: none;}
 .fs1{font-size: 12pt}
@@ -95,7 +94,7 @@ table.mainouter {
     border-top: gray;
     border-left: gray;
     border-bottom: gray;
-    background-color: #dedede
+    background-color: white
 }
 
 table.message {
@@ -282,7 +281,6 @@ table.torrents td{
 }
 table.torrents td.colhead, table.torrents td.rowfollow {
     border: 1px solid #ddd;
-    background: #eee;
 }
 table.torrents td.rowfollow {
     text-align: center;
@@ -577,8 +575,9 @@ ul.menu li {
 
 ul.menu li a {
     color: #fff;
+    border: 1px solid white;
     background-color: #587993;
-    margin-right: 4px;
+    margin-right: 1px;
     padding: 5px;
     text-decoration: none;
     font-style: normal;
