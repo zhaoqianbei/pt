@@ -76,8 +76,9 @@ table {
 
 table.head {
     background: transparent;
-    height: 100px;
-    width: 1000px;
+    width: 1200px;
+    margin-top: 20px;
+    margin-bottom: 5px;
 }
 
 table.main {
