@@ -2,6 +2,7 @@
 
 $lang_settings = array
 (
+	'ali_icon' => "//at.alicdn.com/t/font_1856866_xdga1hh4i0b.css",
 	'text_yes' => "是",
 	'text_no' => "否",
 	'text_website_settings' => "站点设定",

@@ -2482,6 +2482,7 @@ print(get_style_addicode());
     $cssupdatedate = ($cssupdatedate ? "?" . htmlspecialchars($cssupdatedate) : "");
     ?>
 <title><?php echo $title ?></title>
+
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <link rel="search" type="application/opensearchdescription+xml" title="<?php echo $SITENAME ?> Torrents" href="opensearch.php" />
 <link rel="stylesheet" href="<?php echo get_font_css_uri() . $cssupdatedate ?>" type="text/css" />
@@ -2490,7 +2491,9 @@ print(get_style_addicode());
 <link rel="stylesheet" href="<?php echo $css_uri . "theme.css" . $cssupdatedate ?>" type="text/css" />
 <link rel="stylesheet" href="<?php echo $css_uri . "DomTT.css" . $cssupdatedate ?>" type="text/css" />
 <link rel="stylesheet" href="styles/curtain_imageresizer.css<?php echo $cssupdatedate ?>" type="text/css" />
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1856866_dt5w0v06u7.css" type="text/css" />
+<!-- ali_icon_cdn -->
+<link rel="stylesheet" href="'.<?php echo $lang_settings["ali_icon"];?>.'" type="text/css" />
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1856866_xdga1hh4i0b.css" type="text/css" />
 <link rel="stylesheet" href="styles/mp.css<?php echo $cssupdatedate ?>" type="text/css" />
 <?php
 if ($CURUSER) {
@@ -3464,7 +3467,7 @@ $caticonrow = get_category_icon_row($CURUSER['caticon']);
 
         $act = "";
         if ($CURUSER["dlicon"] != 'no' && $CURUSER["downloadpos"] != "no") {
-            $act .= "<a href=\"download.php?id=" . $id . "\"><img class=\"download\" src=\"pic/trans.gif\" style='padding-bottom: 2px;' alt=\"download\" title=\"" . $lang_functions['title_download_torrent'] . "\" /></a>";
+            $act .= "<a href=\"download.php?id=" . $id . "\"><i class=\"download icon pt-xiazai\" alt=\"download\" title=\"" . $lang_functions['title_download_torrent'] . "\" ></i></a>";
         }
 
         if ($CURUSER["bmicon"] == 'yes') {
