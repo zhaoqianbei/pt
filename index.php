@@ -522,7 +522,7 @@ if ($showstats_main == "yes")
 ?>
 <tr>
 <?php
-	twotd(get_user_class_name(UC_PEASANT,false,false,true)." <i class=\"leechwarned icon pt-jingzhi fcy\" alt=\"leechwarned\" /></i>",$peasants);
+	twotd(get_user_class_name(UC_PEASANT,false,false,true)." <i class=\"leechwarned icon pt-jinggao fcy\" alt=\"leechwarned\" /></i>",$peasants);
 	twotd(get_user_class_name(UC_USER,false,false,true),$users);
 ?>
 </tr>
