@@ -416,7 +416,7 @@ if ($showstats_main == "yes")
 <tr>
 <?php
 	twotd(get_user_class_name(UC_VIP,false,false,true),$VIP);
-	twotd($lang_index['row_donors']." <i class=\"star icon pt-fangyuangongxian fcy\" alt=\"Donor\"></i>",$donated);
+	twotd($lang_index['row_donors']." <i class=\"star icon pt-aixinjuankuan fcy\" alt=\"Donor\"></i>",$donated);
 ?>
 </tr>
 <tr>
