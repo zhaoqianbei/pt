@@ -161,7 +161,7 @@ if ($_GET["off_details"]){
 	if (get_user_class() >= $offermanage_class && $num["allowed"] == "pending")
 	tr($lang_offers['row_allow'], "<table><tr><td class=\"embedded\"><form method=\"post\" action=\"?allow_offer=1\"><input type=\"hidden\" value=\"".$id."\" name=\"offerid\" />".
 	"<input class=\"btn\" type=\"submit\" value=\"".$lang_offers['submit_allow']."\" />&nbsp;&nbsp;</form></td><td class=\"embedded\"><form method=\"post\" action=\"?id=".$id."&amp;finish_offer=1\">".
-	"<input type=\"hidden\" value=\"".$id."\" name=\"finish\" /><input class=\"btn\" type=\"submit\" value=\"".$lang_offers['submit_let_votes_decide']."\" /></form></td></tr></table>", 1);
+	"<input type=\"hidden\" value=\"".$id."\" name=\"finish\" /><input class=\"btn btn-mini\" type=\"submit\" value=\"".$lang_offers['submit_let_votes_decide']."\" /></form></td></tr></table>", 1);
 
 	$zres = sql_query("SELECT COUNT(*) from offervotes where vote='yeah' and offerid=$id");
 	$arr = mysql_fetch_row($zres);
@@ -360,7 +360,7 @@ if ($_GET["edit_offer"]) {
 	print("<tr><td class=\"rowhead\" align=\"right\" valign=\"top\"><b>".$lang_offers['row_description']."<font color=\"red\">*</font></b></td><td class=\"rowfollow\" align=\"left\">");
 	textbbcode("compose","body",$body,false);
 	print("</td></tr>");
-	print("<tr><td class=\"toolbox\" style=\"vertical-align: middle; padding-top: 10px; padding-bottom: 10px;\" align=\"center\" colspan=\"2\"><input id=\"qr\" type=\"submit\" value=\"".$lang_offers['submit_edit_offer']."\" class=\"btn\" /></td></tr></table></form><br />\n");
+	print("<tr><td class=\"toolbox\" style=\"vertical-align: middle; padding-top: 10px; padding-bottom: 10px;\" align=\"center\" colspan=\"2\"><input id=\"qr\" type=\"submit\" value=\"".$lang_offers['submit_edit_offer']."\" class=\"btn btn-btn-mini\" /></td></tr></table></form><br />\n");
 	stdfoot();
 	die;
 }
@@ -716,7 +716,7 @@ foreach ($cats as $cat) {
 	$catdropdown .= "<option value=\"" . $cat["id"] . "\"";
 	$catdropdown .= ">" . htmlspecialchars($cat["name"]) . "</option>\n";
 }
-print("<select name=\"category\"><option value=\"0\">".$lang_offers['select_show_all']."</option>".$catdropdown."</select>&nbsp;&nbsp;<input type=\"submit\" class=\"btn\" value=\"".$lang_offers['submit_search']."\" /></form></div>");
+print("<select name=\"category\"><option value=\"0\">".$lang_offers['select_show_all']."</option>".$catdropdown."</select>&nbsp;&nbsp;<input type=\"submit\" class=\"btn btn-mini\" value=\"".$lang_offers['submit_search']."\" /></form></div>");
 end_frame();
 print("<br /><br />");
 

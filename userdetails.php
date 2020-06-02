@@ -303,9 +303,11 @@ elseif ($user["acceptpms"] == "friends")
 if ($CURUSER["id"] != $user["id"]){
 print("<tr><td colspan=\"2\" align=\"center\">");
 if ($showpmbutton)
-print("<a href=\"sendmessage.php?receiver=".htmlspecialchars($user[id])."\"><img class=\"f_pm\" src=\"pic/trans.gif\" alt=\"PM\" title=\"".$lang_userdetails['title_send_pm']."\" /></a>");
+// print("<a href=\"sendmessage.php?receiver=".htmlspecialchars($user[id])."\"><img class=\"f_pm\" src=\"pic/trans.gif\" alt=\"PM\" title=\"".$lang_userdetails['title_send_pm']."\" /></a>");
+print("<a class=\"pr10 pl10\" href=\"sendmessage.php?receiver=".htmlspecialchars($user[id])."\"><i class=\"icon pt-iconfontcolor06\" title=\"".$lang_userdetails['title_send_pm']."\" ></i></a>");
 
-print("<a href=\"report.php?user=".htmlspecialchars($user[id])."\"><img class=\"f_report\" src=\"pic/trans.gif\" alt=\"Report\" title=\"".$lang_userdetails['title_report_user']."\" /></a>");
+// print("<a href=\"report.php?user=".htmlspecialchars($user[id])."\"><img class=\"f_report\" src=\"pic/trans.gif\" alt=\"Report\" title=\"".$lang_userdetails['title_report_user']."\" /></a>");
+print("<a class=\"pr10 pl10\" href=\"report.php?user=".htmlspecialchars($user[id])."\"><i class=\"icon pt-jubao\" title=\"".$lang_userdetails['title_report_user']."\" ></i></a>");
 print("</td></tr>");
 }
 print("</table>\n");

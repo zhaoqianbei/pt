@@ -38,6 +38,12 @@ input[type="checkbox"] {
     margin-right: 6px;
     margin-top:0; 
 }
+input[type="button"]{
+    background: #ddd;
+    border: none;
+    padding: 4px 10px;
+    border: 1px solid #aaa;
+}
 #ksearchboxmain tr:nth-child(2) input[type="checkbox"]{
     bottom: 7px;
 }
@@ -187,7 +193,7 @@ td.embedded {
     padding-top: 0px;
     border-bottom: medium none;
     text-align: left;
-    color: #888
+    color: #333
 }
 
 td.no_border {

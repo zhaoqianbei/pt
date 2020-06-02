@@ -1081,7 +1081,7 @@ if ($enableattach_attachment == 'yes') {
         ?>
 <tr>
 <td colspan="2" valign="middle">
-<iframe src="<?php echo get_protocol_prefix() . $BASEURL ?>/attachment.php" width="100%" height="24" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+<iframe src="<?php echo get_protocol_prefix() . $BASEURL ?>/attachment.php" width="100%" height="30" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
 </td>
 </tr>
 <?php
@@ -2490,6 +2490,8 @@ print(get_style_addicode());
 <link rel="stylesheet" href="<?php echo $css_uri . "theme.css" . $cssupdatedate ?>" type="text/css" />
 <link rel="stylesheet" href="<?php echo $css_uri . "DomTT.css" . $cssupdatedate ?>" type="text/css" />
 <link rel="stylesheet" href="styles/curtain_imageresizer.css<?php echo $cssupdatedate ?>" type="text/css" />
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1856866_p44yp8r72ue.css" type="text/css" />
+<link rel="stylesheet" href="styles/mp.css<?php echo $cssupdatedate ?>" type="text/css" />
 <?php
 if ($CURUSER) {
         $caticonrow = get_category_icon_row($CURUSER['caticon']);
@@ -2620,10 +2622,11 @@ if ($logo_main == "") {
 	<td><table width="100%" cellspacing="0" cellpadding="0" border="0"><tr>
 		<td class="bottom" align="left"><span class="medium"><?php echo $lang_functions['text_welcome_back'] ?>, <?php echo get_username($CURUSER['id']) ?>  [<a href="logout.php"><?php echo $lang_functions['text_logout'] ?></a>]<?php if (get_user_class() >= UC_MODERATOR) {?> [<a href="staffpanel.php"><?php echo $lang_functions['text_staff_panel'] ?></a>] <?php }?> <?php if (get_user_class() >= UC_SYSOP) {?> [<a href="settings.php"><?php echo $lang_functions['text_site_settings'] ?></a>]<?php }?> [<a href="torrents.php?inclbookmarked=1&amp;allsec=1&amp;incldead=0"><?php echo $lang_functions['text_bookmarks'] ?></a>] <font class = 'color_bonus'><?php echo $lang_functions['text_bonus'] ?></font>[<a href="mybonus.php"><?php echo $lang_functions['text_use'] ?></a>]: <?php echo number_format($CURUSER['seedbonus'], 1) ?> <font class = 'color_invite'><?php echo $lang_functions['text_invite'] ?></font>[<a href="invite.php?id=<?php echo $CURUSER['id'] ?>"><?php echo $lang_functions['text_send'] ?></a>]: <?php echo $CURUSER['invites'] ?><br />
 
-	<font class="color_ratio"><?php echo $lang_functions['text_ratio'] ?></font> <?php echo $ratio ?>  <font class='color_uploaded'><?php echo $lang_functions['text_uploaded'] ?></font> <?php echo mksize($CURUSER['uploaded']) ?><font class='color_downloaded'> <?php echo $lang_functions['text_downloaded'] ?></font> <?php echo mksize($CURUSER['downloaded']) ?>  <font class='color_active'><?php echo $lang_functions['text_active_torrents'] ?></font> <img class="arrowup" alt="Torrents seeding" title="<?php echo $lang_functions['title_torrents_seeding'] ?>" src="pic/trans.gif" /><?php echo $activeseed ?>  <img class="arrowdown" alt="Torrents leeching" title="<?php echo $lang_functions['title_torrents_leeching'] ?>" src="pic/trans.gif" /><?php echo $activeleech ?>&nbsp;&nbsp;<font class='color_connectable'><?php echo $lang_functions['text_connectable'] ?></font><?php echo $connectable ?> <?php echo maxslots(); ?></span></td>
+    <font class="color_ratio"><?php echo $lang_functions['text_ratio'] ?></font> <?php echo $ratio ?>  <font class='color_uploaded'><?php echo $lang_functions['text_uploaded'] ?></font> <?php echo mksize($CURUSER['uploaded']) ?><font class='color_downloaded'> <?php echo $lang_functions['text_downloaded'] ?></font> <?php echo mksize($CURUSER['downloaded']) ?>  <font class='color_active'><?php echo $lang_functions['text_active_torrents'] ?></font> 
+    <i alt="Torrents seeding" title="<?php echo $lang_functions['title_torrents_seeding'] ?>" class="arrowup icon pt-shangsheng fcr"></i><?php echo $activeseed ?> 
+    <i alt="Torrents seeding" title="<?php echo $lang_functions['title_torrents_leeching'] ?>" class="arrowdown icon pt-xiajiang fcg"></i><?php echo $activeleech ?>&nbsp;&nbsp;<font class='color_connectable'><?php echo $lang_functions['text_connectable'] ?></font><?php echo $connectable ?> <?php echo maxslots(); ?></span></td>
 
 	<td class="bottom" align="right"><span class="medium"><?php echo $lang_functions['text_the_time_is_now'] ?><?php echo $datum[hours] . ":" . $datum[minutes] ?><br />
-
 <?php
 if (get_user_class() >= $staffmem_class) {
             $totalreports = $Cache->get_value('staff_report_count');
@@ -2641,12 +2644,12 @@ if (get_user_class() >= $staffmem_class) {
                 $totalcheaters = get_row_count("cheaters");
                 $Cache->cache_value('staff_cheater_count', $totalcheaters, 900);
             }
-            print("<a href=\"cheaterbox.php\">" . $lang_functions['title_cheaterbox'] . ":</a>" . $totalcheaters . "  <a href=\"reports.php\">" . $lang_functions['title_reportbox'] . ":</a>" . $totalreports . "  <a href=\"staffbox.php\">" . $lang_functions['title_staffbox'] . ":</a>" . $totalsm . "  ");
+            print("<a class=\"mr10\" href=\"cheaterbox.php\">" . $lang_functions['title_cheaterbox'] . ":".$totalcheaters . "</a>" . "  <a class=\"mr10\" href=\"reports.php\">" . $lang_functions['title_reportbox'] . ":" . $totalreports . "</a><a class=\"mr10\" href=\"staffbox.php\">" . $lang_functions['title_staffbox'] . ":".$totalsm . "</a>");
         }
 
-        print("<a href=\"messages.php\">" . $inboxpic . "</a> " . ($messages ? $messages . " (" . $unread . $lang_functions['text_message_new'] . ")" : "0"));
-        print("  <a href=\"messages.php?action=viewmailbox&amp;box=-1\">" . $lang_functions['title_sentbox'] . ":</a> " . ($outmessages ? $outmessages : "0"));
-        print(" <a href=\"friends.php\">" . $lang_functions['title_buddylist'] . "</a>");
+        print("<a class=\"mr10\" href=\"messages.php\">" . $inboxpic .($messages ? $messages . " (" . $unread . $lang_functions['text_message_new'] . ")" : "0")."</a>");
+        print("<a class=\"mr10\" href=\"messages.php?action=viewmailbox&amp;box=-1\">" . $lang_functions['title_sentbox'] . ":".($outmessages ? $outmessages : "0")."</a> ");
+        print(" <a class=\"mr10\" href=\"friends.php\">" . $lang_functions['title_buddylist'] . "</a>");
         print(" <a href=\"getrss.php\">" . $lang_functions['title_get_rss'] . "</a>");
         ?>
 

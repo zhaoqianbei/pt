@@ -421,8 +421,9 @@ if ($showstats_main == "yes")
 </tr>
 <tr>
 <?php
-	twotd($lang_index['row_warned_users']." <img class=\"warned\" src=\"pic/trans.gif\" alt=\"warned\" />",$warned);
-	twotd($lang_index['row_banned_users']." <img class=\"disabled\" src=\"pic/trans.gif\" alt=\"disabled\" />",$disabled);
+	// twotd($lang_index['row_warned_users']." <img class=\"warned\" src=\"pic/trans.gif\" alt=\"warned\" />",$warned);
+	twotd($lang_index['row_warned_users']." <i class=\"warned icon pt-jinggao fcr\"></i>",$warned);
+	twotd($lang_index['row_banned_users']." <i class=\"disabled icon pt-export fcr\"></i>",$disabled);
 ?>
 </tr>
 <tr>
@@ -521,7 +522,7 @@ if ($showstats_main == "yes")
 ?>
 <tr>
 <?php
-	twotd(get_user_class_name(UC_PEASANT,false,false,true)." <img class=\"leechwarned\" src=\"pic/trans.gif\" alt=\"leechwarned\" />",$peasants);
+	twotd(get_user_class_name(UC_PEASANT,false,false,true)." <i class=\"leechwarned icon pt-jingzhi fcy\" alt=\"leechwarned\" /></i>",$peasants);
 	twotd(get_user_class_name(UC_USER,false,false,true),$users);
 ?>
 </tr>
