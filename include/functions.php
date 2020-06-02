@@ -2490,7 +2490,7 @@ print(get_style_addicode());
 <link rel="stylesheet" href="<?php echo $css_uri . "theme.css" . $cssupdatedate ?>" type="text/css" />
 <link rel="stylesheet" href="<?php echo $css_uri . "DomTT.css" . $cssupdatedate ?>" type="text/css" />
 <link rel="stylesheet" href="styles/curtain_imageresizer.css<?php echo $cssupdatedate ?>" type="text/css" />
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1856866_p44yp8r72ue.css" type="text/css" />
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1856866_dt5w0v06u7.css" type="text/css" />
 <link rel="stylesheet" href="styles/mp.css<?php echo $cssupdatedate ?>" type="text/css" />
 <?php
 if ($CURUSER) {
