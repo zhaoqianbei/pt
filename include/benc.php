@@ -51,33 +51,101 @@ function bdec_file($f, $ms) {
 	fclose($fp);
 	return bdec($e);
 }
-function bdec($s) {
-	if (preg_match('/^(\d+):/', $s, $m)) {
-		$l = $m[1];
-		$pl = strlen($l) + 1;
-		$v = substr($s, $pl, $l);
-		$ss = substr($s, 0, $pl + $l);
-		if (strlen($v) != $l)
-			return;
-		return array('type' => "string", 'value' => $v, 'strlen' => strlen($ss), 'string' => $ss);
-	}
-	if (preg_match('/^i(\d+)e/', $s, $m)) {
-		$v = $m[1];
-		$ss = "i" . $v . "e";
-		if ($v === "-0")
-			return;
-		if ($v[0] == "0" && strlen($v) != 1)
-			return;
-		return array('type' => "integer", 'value' => $v, 'strlen' => strlen($ss), 'string' => $ss);
-	}
-	switch ($s[0]) {
-		case "l":
-			return bdec_list($s);
-		case "d":
-			return bdec_dict($s);
-		default:
-			return;
-	}
+/**
+ * https://tautcony.xyz/2019/08/02/high-performance-bdec-for-nexusphp/
+ * Bencode decoder for NexusPHP by TautCony(https://github.com/tautcony)
+ * Reference from https://github.com/OPSnet/bencode-torrent
+ *
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ *
+ * @param string $data
+ * @param int $pos
+ * @return mixed
+ */
+function bdec($data, &$pos = 0) {
+    $is_root = $pos === 0;
+    $type = $data[$pos];
+    $ret = array();
+    switch ($type) {
+        case "d": // dict
+            ++$pos;
+            $dict = array();
+            while ($data[$pos] !== "e") {
+                $key = bdec($data, $pos);
+                $value = bdec($data, $pos);
+                if ($key === null || $value === null) {
+                    break;
+                }
+                if ($key["type"] !== "string") {
+                    throw new RuntimeException("Invalid key type, must be string: " . $key["type"]);
+                }
+                $dict[$key["value"]] = $value;
+            }
+            ++$pos;
+            // ksort($dict);
+            $ret["type"] = "dictionary";
+            $ret["value"] = $dict;
+            break;
+        case "l": // list
+            ++$pos;
+            $list = array();
+            while($data[$pos] !== "e") {
+                $value = bdec($data, $pos);
+                $list[] = $value;
+            }
+            ++$pos;
+            $ret["type"] = "list";
+            $ret["value"] = $list;
+            break;
+        case "i": // integer
+            ++$pos;
+            $digits = strpos($data, "e", $pos) - $pos;
+            if ($digits < 0) {
+                throw new RuntimeException("Could not fully decode integer value");
+            }
+            $integer = substr($data, $pos, $digits);
+            if ($integer === "-0") {
+                throw new RuntimeException("Cannot have integer value -0");
+            }
+            if (preg_match("/^-?\d+$/", $integer) === 0) {
+                throw new RuntimeException("Cannot have non-digit values in integer number: " . $integer);
+            }
+            $pos += $digits + 1;
+            $ret["type"] = "integer";
+            $ret["value"] = (int) $integer;
+            break;
+        default: // string
+            $digits = strpos($data, ":", $pos) - $pos;
+            if ($digits < 0) {
+                throw new RuntimeException("Could not fully decode string value's length");
+            }
+            $len = (int) substr($data, $pos, $digits);
+            $pos += $digits + 1; // $digits + len(":")
+            if (strlen($data) < $pos + $len) {
+                throw new RuntimeException("Could not fully decode string value");
+            }
+            $ret["type"] = "string";
+            $ret["value"] = substr($data, $pos, $len);
+            $pos += $len;
+            break;
+    }
+    if ($is_root && $pos !== strlen($data)) {
+        throw new RuntimeException("Could not fully decode bencode string");
+    }
+    return $ret;
 }
 function bdec_list($s) {
 	if ($s[0] != "l")
