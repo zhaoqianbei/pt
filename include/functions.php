@@ -2493,7 +2493,7 @@ print(get_style_addicode());
 <link rel="stylesheet" href="styles/curtain_imageresizer.css<?php echo $cssupdatedate ?>" type="text/css" />
 <!-- ali_icon_cdn -->
 <link rel="stylesheet" href="'.<?php echo $lang_settings["ali_icon"];?>.'" type="text/css" />
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1856866_xdga1hh4i0b.css" type="text/css" />
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1856866_uc4ieifsci.css" type="text/css" />
 <link rel="stylesheet" href="styles/mp.css<?php echo $cssupdatedate ?>" type="text/css" />
 <?php
 if ($CURUSER) {
@@ -3229,9 +3229,9 @@ function get_torrent_bookmark_state($userid, $torrentid, $text = false)
     $ret = return_torrent_bookmark_array($userid);
     if (!count($ret) || !in_array($torrentid, $ret, false)) // already bookmarked
     {
-        $act = ($text == true ? $lang_functions['title_bookmark_torrent'] : "<img class=\"delbookmark\" src=\"pic/trans.gif\" alt=\"Unbookmarked\" title=\"" . $lang_functions['title_bookmark_torrent'] . "\" />");
+        $act = ($text == true ? $lang_functions['title_bookmark_torrent'] : "<i class=\"delbookmark icon pt-wuxing fc8\" alt=\"Unbookmarked\" title=\"" . $lang_functions['title_bookmark_torrent'] . "\" ></i>");
     } else {
-        $act = ($text == true ? $lang_functions['title_delbookmark_torrent'] : "<img class=\"bookmark\" src=\"pic/trans.gif\" alt=\"Bookmarked\" title=\"" . $lang_functions['title_delbookmark_torrent'] . "\" />");
+        $act = ($text == true ? $lang_functions['title_delbookmark_torrent'] : "<i  class=\"bookmark icon pt-wuxing fc2\" alt=\"Bookmarked\" title=\"" . $lang_functions['title_delbookmark_torrent'] . "\"></i>");
     }
 
     return $act;
@@ -3467,7 +3467,7 @@ $caticonrow = get_category_icon_row($CURUSER['caticon']);
 
         $act = "";
         if ($CURUSER["dlicon"] != 'no' && $CURUSER["downloadpos"] != "no") {
-            $act .= "<a href=\"download.php?id=" . $id . "\"><i class=\"download icon pt-xiazai\" alt=\"download\" title=\"" . $lang_functions['title_download_torrent'] . "\" ></i></a>";
+            $act .= "<a href=\"download.php?id=" . $id . "\"><i class=\"download icon pt-xiazai fcb\" alt=\"download\" title=\"" . $lang_functions['title_download_torrent'] . "\" ></i></a>";
         }
 
         if ($CURUSER["bmicon"] == 'yes') {
