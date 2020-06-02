@@ -287,10 +287,10 @@ table.torrents td{
 }
 table.torrents td.colhead, table.torrents td.rowfollow {
     border: 1px solid #ddd;
-    word-break: keep-all;
 }
 table.torrents td.rowfollow {
     text-align: center;
+    word-break: keep-all;
 }
 
 
