@@ -2491,9 +2491,9 @@ print(get_style_addicode());
 <link rel="stylesheet" href="<?php echo $css_uri . "theme.css" . $cssupdatedate ?>" type="text/css" />
 <link rel="stylesheet" href="<?php echo $css_uri . "DomTT.css" . $cssupdatedate ?>" type="text/css" />
 <link rel="stylesheet" href="styles/curtain_imageresizer.css<?php echo $cssupdatedate ?>" type="text/css" />
-<!-- ali_icon_cdn -->
+<!-- ali_icon_xiugai -->
 <link rel="stylesheet" href="'.<?php echo $lang_settings["ali_icon"];?>.'" type="text/css" />
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1856866_uc4ieifsci.css" type="text/css" />
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1856866_k7v1kb6jeyj.css" type="text/css" />
 <link rel="stylesheet" href="styles/mp.css<?php echo $cssupdatedate ?>" type="text/css" />
 <?php
 if ($CURUSER) {
@@ -3566,8 +3566,8 @@ $caticonrow = get_category_icon_row($CURUSER['caticon']);
         }
 
         if (get_user_class() >= $torrentmanage_class) {
-            print("<td class=\"rowfollow\"><a href=\"" . htmlspecialchars("fastdelete.php?id=" . $row[id]) . "\"><img class=\"staff_delete\" src=\"pic/trans.gif\" alt=\"D\" title=\"" . $lang_functions['text_delete'] . "\" /></a>");
-            print("<br /><a href=\"edit.php?returnto=" . rawurlencode($_SERVER["REQUEST_URI"]) . "&amp;id=" . $row["id"] . "\"><img class=\"staff_edit\" src=\"pic/trans.gif\" alt=\"E\" title=\"" . $lang_functions['text_edit'] . "\" /></a></td>\n");
+            print("<td class=\"rowfollow\"><a href=\"" . htmlspecialchars("fastdelete.php?id=" . $row[id]) . "\"><i class=\"staff_delete icon pt-delete fcr\" alt=\"D\" title=\"" . $lang_functions['text_delete'] . "\" ></i></></a>");
+            print("<br /><a href=\"edit.php?returnto=" . rawurlencode($_SERVER["REQUEST_URI"]) . "&amp;id=" . $row["id"] . "\"><i class=\"staff_edit icon pt-gongju fcg\" alt=\"E\" title=\"" . $lang_functions['text_edit'] . "\"></i></a></td>\n");
         }
         print("</tr>\n");
         $counter++;
