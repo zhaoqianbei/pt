@@ -48,6 +48,8 @@ else {
 		$sp_torrent = get_torrent_promotion_append($row[sp_state],'word');
 
 		$s=htmlspecialchars($row["name"]).($sp_torrent ? "&nbsp;&nbsp;&nbsp;".$sp_torrent : "");
+		if ($smalldescription_main == 'yes')
+		$fubiao = htmlspecialchars(trim($row["small_descr"]));
 		// 分享按钮
 		if($row['anonymous'] == 'yes') {
 			if (get_user_class() < $viewanonymous_class)
@@ -65,7 +67,7 @@ else {
 		    url: window.location.href,
 		    source: "找前辈网 - 7500学编程，手把手教到就业满意！就业没有5000元/月，少多少退多少！", 
 		    title: "'.htmlspecialchars($row["name"]).'\n'.htmlspecialchars(trim($row["small_descr"])).'", 
-		    description: "类型：'.$row["cat_name"].'，上传者：'.$zuozhe.'，文件大小：'.mksize($row["size"]).'", 
+		    description:副标题：'.$fubiao.'类型：'.$row["cat_name"].'，上传者：'.$zuozhe.'，文件大小：'.mksize($row["size"]).'", 
 		    image: "https://pt.24di.cn/ico.png", 
 		    sites: ["wechat", "qq", "qzone", "weibo"], 
 		    disabled: ["google", "facebook", "twitter"], 
