@@ -867,6 +867,22 @@ else stdhead($lang_torrents['head_music']);
 print("<table align=\"left\" width=\"1200\" class=\"main\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\"><tr><td class=\"embedded\">");
 if ($allsec != 1 || $enablespecial != 'yes'){ //do not print searchbox if showing bookmarked torrents from all sections;
 ?>
+<div class="social-share tal">分享给想分享的人：</div>
+
+<script type="text/javascript">
+var $config = {
+	url: window.location.href,
+	source: "找前辈网 - https://www.zhaoqianbei.com！", 
+	title: "PT时间：高速下载各种教程，高清影视资源！", 
+	description:"PT时间：免费下载各种教程，高清影视！", 
+	image: "https://www.pttime.org/ico.png", 
+	sites: ["wechat", "qq", "qzone", "weibo"], 
+	disabled: ["google", "facebook", "twitter"], 
+	wechatQrcodeTitle: "微信扫一扫：分享",
+	wechatQrcodeHelper: "<p>微信里点“发现”，扫一下</p><p>二维码便可将本文分享至朋友圈。</p>",
+	target:"_blank"};
+</script>
+
 <form method="get" name="searchbox" action="?">
 	<table border="1" class="searchbox" cellspacing="0" cellpadding="5" width="100%">
 		<tbody>
