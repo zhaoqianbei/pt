@@ -1079,15 +1079,11 @@ print("<td class=\"embedded\"><input class=\"codebuttons\" style=\"font-size:11p
 <?php
 if ($enableattach_attachment == 'yes') {
         ?>
-<tr>
-<td colspan="2" valign="middle">
-<iframe src="<?php echo get_protocol_prefix() . $BASEURL ?>/attachment.php" width="100%" height="30" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
-</td>
-</tr>
+
 <?php
 }
     print("<tr>");
-    print("<td align=\"left\"><textarea class=\"bbcode\" cols=\"100\" style=\"width: 650px;\" name=\"" . $text . "\" id=\"" . $text . "\" rows=\"20\" onkeydown=\"ctrlenter(event,'compose','qr')\">" . $content . "</textarea>");
+    print("<td align=\"left\"><textarea class=\"bbcode\" cols=\"100\" style=\"width: 1000px;\" name=\"" . $text . "\" id=\"" . $text . "\" rows=\"20\" onkeydown=\"ctrlenter(event,'compose','qr')\">" . $content . "</textarea>");
     ?>
 </td>
 
@@ -1133,7 +1129,7 @@ function begin_compose($title = "", $type = "new", $body = "", $hassubject = tru
     print("<table class=\"main\" width=\"100%\" border=\"1\" cellspacing=\"0\" cellpadding=\"5\">\n");
     if ($hassubject) {
         print("<tr><td class=\"rowhead\">" . $lang_functions['row_subject'] . "</td>" .
-            "<td class=\"rowfollow\" align=\"left\"><input type=\"text\" style=\"width: 650px;\" name=\"subject\" maxlength=\"" . $maxsubjectlength . "\" value=\"" . $subject . "\" /></td></tr>\n");
+            "<td class=\"rowfollow\" align=\"left\"><input type=\"text\" style=\"width: 1000px;\" name=\"subject\" maxlength=\"" . $maxsubjectlength . "\" value=\"" . $subject . "\" /></td></tr>\n");
     }
 
     print("<tr><td class=\"rowhead\" valign=\"top\">" . $lang_functions['row_body'] . "</td><td class=\"rowfollow\" align=\"left\"><span style=\"display: none;\" id=\"previewouter\"></span><div id=\"editorouter\">");
@@ -1170,7 +1166,7 @@ function get_external_tr($imdb_url = "")
     global $lang_functions;
     global $showextinfo;
     $imdbNumber = parse_imdb_id($imdb_url);
-    ($showextinfo['imdb'] == 'yes' ? tr($lang_functions['row_imdb_url'], "<input type=\"text\" style=\"width: 650px;\" name=\"url\" value=\"" . ($imdbNumber ? "http://www.imdb.com/title/tt" . parse_imdb_id($imdb_url) : "") . "\" /><br /><font class=\"medium\">" . $lang_functions['text_imdb_url_note'] . "</font>", 1) : "");
+    ($showextinfo['imdb'] == 'yes' ? tr($lang_functions['row_imdb_url'], "<input type=\"text\" style=\"width: 1000px;\" name=\"url\" value=\"" . ($imdbNumber ? "http://www.imdb.com/title/tt" . parse_imdb_id($imdb_url) : "") . "\" /><br /><font class=\"medium\">" . $lang_functions['text_imdb_url_note'] . "</font>", 1) : "");
 }
 
 function get_torrent_extinfo_identifier($torrentid)

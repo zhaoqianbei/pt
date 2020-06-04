@@ -38,7 +38,7 @@ input[type="checkbox"] {
     margin-right: 6px;
     margin-top:0; 
 }
-input[type="button"]{
+td.embedded input[type="button"]{
     background: #ddd;
     border: none;
     padding: 4px 10px;
