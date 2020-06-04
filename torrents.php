@@ -884,7 +884,7 @@ var $config = {
 </script>
 
 <form method="get" name="searchbox" action="?">
-	<table border="1" class="searchbox" cellspacing="0" cellpadding="5" width="100%">
+	<table border="1" class="searchbox tac" cellspacing="0" cellpadding="5" width="100%">
 		<tbody>
 		<tr>
 			<td class="rowfollow" align="left">
@@ -935,7 +935,7 @@ var $config = {
 						</td>
 						
 						<td class="rowfollow" align="left">
-							<input type="submit" class="btn btn-mini" value="<?php echo $lang_torrents['submit_go'] ?>" />
+							<input type="submit" class="btn" value="<?php echo $lang_torrents['submit_go'] ?>" />
 						</td>
 					</tr>
 <?php
