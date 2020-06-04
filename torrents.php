@@ -956,8 +956,8 @@ if (!$Cache->get_page()){
 			break;
 	}
 	$Cache->add_whole_row();
-	if ($hotsearch)
-	print("<tr><td class=\"embedded\" colspan=\"3\">&nbsp;&nbsp;".$hotsearch."</td></tr>");
+	// if ($hotsearch)
+	// print("<tr><td class=\"embedded\" colspan=\"3\">&nbsp;&nbsp;".$hotsearch."</td></tr>");
 	$Cache->end_whole_row();
 	$Cache->cache_page();
 }
