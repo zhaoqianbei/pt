@@ -179,6 +179,9 @@ td {
     border: none;
 }
 
+.searchbox .btn{font-size: 16px;}
+.searchbox select,.searchbox input{height: 30px;}
+
 form table.searchbox td{
     display: inline-block;
 }
