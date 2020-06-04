@@ -78,6 +78,7 @@ function bdec($s) {
 		default:
 			return;
 	}
+}
 /**
  * https://tautcony.xyz/2019/08/02/high-performance-bdec-for-nexusphp/
  * Bencode decoder for NexusPHP by TautCony(https://github.com/tautcony)
