@@ -3971,7 +3971,7 @@ function quickreply($formname, $taname, $submit)
 function smile_row($formname, $taname)
 {
     $quickSmilesNumbers = array(4, 5, 39, 25, 11, 8, 10, 15, 27, 57, 42, 122, 52, 28, 29, 30, 176);
-    $smilerow = "<div align=\"center\">";
+    $smilerow = "<div align=\"left\">";
     foreach ($quickSmilesNumbers as $smilyNumber) {
         $smilerow .= getSmileIt($formname, $taname, $smilyNumber);
     }
