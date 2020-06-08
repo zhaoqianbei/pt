@@ -2,6 +2,7 @@
 
 $lang_faq = array
 (
+	'head_pt'=>"<a class='tal'>这是一个连接</a>",
 	'head_faq' => "常见问题",
 	'text_welcome_to' => "欢迎来到",
 	'text_welcome_content_one' => "我们的目标是提供纯粹高品质的东西。因此，只有授权的用户才能发布种子。如果你有0-day资源的来源，请不要迟疑<a class=\"faqlink\" href=\"contactstaff.php\">联系</a>我们！<br /><br />这是非公开BT站点，你必须注册后才能访问。",

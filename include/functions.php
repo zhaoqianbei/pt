@@ -2490,7 +2490,7 @@ print(get_style_addicode());
 <link rel="stylesheet" href="styles/curtain_imageresizer.css<?php echo $cssupdatedate ?>" type="text/css" />
 <!-- ali_icon_xiugai -->
 <link rel="stylesheet" href="'.<?php echo $lang_settings["ali_icon"];?>.'" type="text/css" />
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1856866_jgnn07yoeli.css" type="text/css" />
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1856866_54qyy57w1p.css" type="text/css" />
 <link rel="stylesheet" href="styles/mp.css<?php echo $cssupdatedate ?>" type="text/css" />
 <?php
 if ($CURUSER) {
@@ -2659,7 +2659,10 @@ if (get_user_class() >= $staffmem_class) {
 
 </td></tr>
 
-<tr><td id="outer" align="center" class="outer">
+<tr>
+    <td align="left" class="outer"><a class="fcs" href="https://www.zhaoqianbei.com/Index/xiaokeZhuye/k/99221774" target="_blank"><i class="icon pt-lianjie"></i> 关于PT下载相关问题，从入门到发药</a></td></tr>
+<tr>
+    <td id="outer" align="center" class="outer">
 <?php
 if ($Advertisement->enable_ad()) {
             $belownavad = $Advertisement->get_ad('belownav');
