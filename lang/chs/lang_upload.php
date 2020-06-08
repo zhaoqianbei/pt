@@ -7,7 +7,7 @@ $lang_upload = array
 	'std_unauthorized_to_upload' => "你没有发布种子的权限。请阅读(<a class=\"faqlink\" href=\"messages.php\">收件箱</a>)",
 	'std_please_offer' => "你没有发布种子的权限。如果你是普通会员，请到<a class=\"faqlink\" href=\"offers.php\">候选区</a>提交你的发布请求（请查看常见问题中的<a class=\"faqlink\" href=\"faq.php#id36\"><b>“发布”</b></a>）部分<br />",
 	'text_red_star_required' => "红星号(<font color=\"red\">*</font>)标记的区域必须填写",
-	'text_tracker_url' => "Tracker服务器的URL是",
+	'text_tracker_url' => "Tracker服务器",
 	'row_torrent_file' => "种子文件",
 	'row_torrent_name' => "标题",
 	'text_torrent_name_note' => "(若不填将使用种子文件名。<b>要求规范填写</b>，如<i>银翼杀手 Blade Runner 1982 Final Cut 720p HDDVD DTS x264-ESiR</i>)\n",
