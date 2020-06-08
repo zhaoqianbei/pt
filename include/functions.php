@@ -2489,7 +2489,7 @@ print(get_style_addicode());
 <link rel="stylesheet" href="styles/curtain_imageresizer.css<?php echo $cssupdatedate ?>" type="text/css" />
 <!-- ali_icon_xiugai -->
 <link rel="stylesheet" href="'.<?php echo $lang_settings["ali_icon"];?>.'" type="text/css" />
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1856866_pds3vugro2j.css" type="text/css" />
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1856866_24ui53q95og.css" type="text/css" />
 <link rel="stylesheet" href="styles/mp.css<?php echo $cssupdatedate ?>" type="text/css" />
 <?php
 if ($CURUSER) {

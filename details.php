@@ -38,7 +38,6 @@ else {
 			print("<h1 align=\"center\">".$lang_details['text_successfully_uploaded']."</h1>");
 			print("<p>".$lang_details['text_redownload_torrent_note']."</p>");
 			header("refresh: 1; url=download.php?id=$id");
-			//header("refresh: 1; url=getimdb.php?id=$id&type=1");
 		}
 		elseif ($_GET["edited"]) {
 			print("<h1 align=\"center\">".$lang_details['text_successfully_edited']."</h1>");
@@ -130,8 +129,8 @@ else {
 		// if (isset($row["standard_name"]))
 		// 	$standard_info = "&nbsp;&nbsp;&nbsp;<b>".$lang_details['text_stardard']."&nbsp;</b>".$row[standard_name];
 
-		if (isset($row["processing_name"]))
-			$processing_info = "&nbsp;&nbsp;&nbsp;<b>".$lang_details['text_processing']."&nbsp;</b>".$row[processing_name];
+		// if (isset($row["processing_name"]))
+		// 	$processing_info = "&nbsp;&nbsp;&nbsp;<b>".$lang_details['text_processing']."&nbsp;</b>".$row[processing_name];
 		// if (isset($row["team_name"]))
 		// 	$team_info = "&nbsp;&nbsp;&nbsp;<b>".$lang_details['text_team']."&nbsp;</b>".$row[team_name];
 		if (isset($row["audiocodec_name"]))
@@ -139,52 +138,57 @@ else {
 
 		tr($lang_details['row_basic_info'], $size_info.$type_info.$source_info . $medium_info. $codec_info . $audiocodec_info. $standard_info . $processing_info . $team_info, 1);
 		if ($CURUSER["downloadpos"] != "no")
-			$download = "<a title=\"".$lang_details['title_download_torrent']."\" href=\"download.php?id=".$id."\"><img class=\"dt_download\" src=\"pic/trans.gif\" alt=\"download\" />&nbsp;<b><font class=\"small\">".$lang_details['text_download_torrent']."</font></b></a>&nbsp;|&nbsp;";
+			$download = "<a title=\"".$lang_details['title_download_torrent']."\" href=\"download.php?id=".$id."\"><i class=\"dt_download icon pt-xiazai fcs\" alt=\"download\" ></i>&nbsp;<b><font class=\"small\">".$lang_details['text_download_torrent']."</font></b></a>&nbsp;|&nbsp;";
 		else $download = "";
 
-		tr($lang_details['row_action'], $download. ($owned == 1 ? "<$editlink><img class=\"dt_edit\" src=\"pic/trans.gif\" alt=\"edit\" />&nbsp;<b><font class=\"small\">".$lang_details['text_edit_torrent'] . "</font></b></a>&nbsp;|&nbsp;" : "").  (get_user_class() >= $askreseed_class && $row[seeders] == 0 ? "<a title=\"".$lang_details['title_ask_for_reseed']."\" href=\"takereseed.php?reseedid=$id\"><img class=\"dt_reseed\" src=\"pic/trans.gif\" alt=\"reseed\">&nbsp;<b><font class=\"small\">".$lang_details['text_ask_for_reseed'] ."</font></b></a>&nbsp;|&nbsp;" : "") . "<a title=\"".$lang_details['title_report_torrent']."\" href=\"report.php?torrent=$id\"><img class=\"dt_report\" src=\"pic/trans.gif\" alt=\"report\" />&nbsp;<b><font class=\"small\">".$lang_details['text_report_torrent']."</font></b></a>", 1);
+		tr($lang_details['row_action'], $download. ($owned == 1 ? "<$editlink><i class=\"dt_edit icon pt-gongju fcg\" alt=\"edit\"></i>&nbsp;<b><font class=\"small\">".$lang_details['text_edit_torrent'] . "</font></b></a>&nbsp;|&nbsp;" : "") 
+		. (get_user_class() >= $askreseed_class && $row[seeders] == 0 ? "<a title=\"".$lang_details['title_ask_for_reseed']."\" href=\"takereseed.php?reseedid=$id\"><i class=\"dt_reseed icon pt-shangchuan fcy\" alt=\"reseed\"></i>&nbsp;<b><font class=\"small\">".$lang_details['text_ask_for_reseed'] ."</font></b></a>&nbsp;|&nbsp;" : "") 
+		. "<a title=\"".$lang_details['title_report_torrent']."\" href=\"report.php?torrent=$id\"><i class=\"dt_report icon pt-jinggao fcr\" alt=\"report\"></i>&nbsp;<b><font class=\"small\">".$lang_details['text_report_torrent']."</font></b></a>", 1);
 
 		// ---------------- start subtitle block -------------------//
-		$r = sql_query("SELECT subs.*, language.flagpic, language.lang_name FROM subs LEFT JOIN language ON subs.lang_id=language.id WHERE torrent_id = " . sqlesc($row["id"]). " ORDER BY subs.lang_id ASC") or sqlerr(__FILE__, __LINE__);
+		// $r = sql_query("SELECT subs.*, language.flagpic, language.lang_name FROM subs LEFT JOIN language ON subs.lang_id=language.id WHERE torrent_id = " . sqlesc($row["id"]). " ORDER BY subs.lang_id ASC") or sqlerr(__FILE__, __LINE__);
 		print("<tr><td class=\"rowhead\" valign=\"top\">".$lang_details['row_subtitles']."</td>");
 		print("<td class=\"rowfollow\" align=\"left\" valign=\"top\">");
-		print("<table border=\"0\" cellspacing=\"0\">");
-		if (mysql_num_rows($r) > 0)
-		{
-			while($a = mysql_fetch_assoc($r))
-			{
-				$lang = "<tr><td class=\"embedded\"><img border=\"0\" src=\"pic/flag/". $a["flagpic"] . "\" alt=\"" . $a["lang_name"] . "\" title=\"" . $a["lang_name"] . "\" style=\"padding-bottom: 4px\" /></td>";
-				$lang .= "<td class=\"embedded\">&nbsp;&nbsp;<a href=\"downloadsubs.php?torrentid=".$a[torrent_id]."&subid=".$a[id]."\"><u>". $a["title"]. "</u></a>".(get_user_class() >= $submanage_class || (get_user_class() >= $delownsub_class && $a["uppedby"] == $CURUSER["id"]) ? " <font class=\"small\"><a href=\"subtitles.php?delete=".$a[id]."\">[".$lang_details['text_delete']."</a>]</font>" : "")."</td><td class=\"embedded\">&nbsp;&nbsp;".($a["anonymous"] == 'yes' ? $lang_details['text_anonymous'] . (get_user_class() >= $viewanonymous_class ? get_username($a['uppedby'],false,true,true,false,true) : "") : get_username($a['uppedby']))."</td></tr>";
-				print($lang);
-			}
-		}
-		else
-			print("<tr><td class=\"embedded\">".$lang_details['text_no_subtitles']."</td></tr>");
-		print("</table>");
-		print("<table border=\"0\" cellspacing=\"0\"><tr>");
-		if($CURUSER['id']==$row['owner']  ||  get_user_class() >= $uploadsub_class)
-		{
-			print("<td class=\"embedded\"><form method=\"post\" action=\"subtitles.php\"><input type=\"hidden\" name=\"torrent_name\" value=\"" . $row["name"]. "\" /><input type=\"hidden\" name=\"detail_torrent_id\" value=\"" . $row["id"]. "\" /><input type=\"hidden\" name=\"in_detail\" value=\"in_detail\" /><input type=\"submit\" value=\"".$lang_details['submit_upload_subtitles']."\" /></form></td>");
-		}
-		$moviename = "";
-		$imdb_id = parse_imdb_id($row["url"]);
-		if ($imdb_id && $showextinfo['imdb'] == 'yes')
-		{
-			$thenumbers = $imdb_id;
-			if (!$moviename = $Cache->get_value('imdb_id_'.$thenumbers.'_movie_name')){
-				$movie = new imdb ($thenumbers);
-				$target = array('Title');
-				switch ($movie->cachestate($target)){
-					case "1":{
-						$moviename = $movie->title (); break;
-						$Cache->cache_value('imdb_id_'.$thenumbers.'_movie_name', $moviename, 1296000);
-					}
-					default: break;
-				}
-			}
-		}
-		print("<td class=\"embedded\"><form method=\"get\" action=\"http://shooter.cn/sub/\" target=\"_blank\"><input type=\"text\" name=\"searchword\" id=\"keyword\" style=\"width: 250px\" value=\"".$moviename."\" /><input type=\"submit\" value=\"".$lang_details['submit_search_at_shooter']."\" /></form></td><td class=\"embedded\"><form method=\"get\" action=\"http://www.opensubtitles.org/en/search2/\" target=\"_blank\"><input type=\"hidden\" id=\"moviename\" name=\"MovieName\" /><input type=\"hidden\" name=\"action\" value=\"search\" /><input type=\"hidden\" name=\"SubLanguageID\" value=\"all\" /><input onclick=\"document.getElementById('moviename').value=document.getElementById('keyword').value;\" type=\"submit\" value=\"".$lang_details['submit_search_at_opensubtitles']."\" /></form></td>\n");
-		print("</tr></table>");
+		print("<a class=\"mr10\" href=\"http://www.zimuku.la/\" target=\" _blank\">".$lang_details['submit_search_at_zmk']."</a>"
+			 ."<a class=\"mr10\" href=\"https://assrt.net/xml/list/sub/\" target=\" _blank\">".$lang_details['submit_search_at_shooter']."</a>"
+			 ."<a class=\"mr10\" href=\"https://www.opensubtitles.org/zh\" target=\" _blank\">".$lang_details['submit_search_at_opensubtitles']."</a>");
+		// print("<table border=\"0\" cellspacing=\"0\">");
+		// if (mysql_num_rows($r) > 0)
+		// {
+		// 	while($a = mysql_fetch_assoc($r))
+		// 	{
+		// 		$lang = "<tr><td class=\"embedded\"><img border=\"0\" src=\"pic/flag/". $a["flagpic"] . "\" alt=\"" . $a["lang_name"] . "\" title=\"" . $a["lang_name"] . "\" style=\"padding-bottom: 4px\" /></td>";
+		// 		$lang .= "<td class=\"embedded\">&nbsp;&nbsp;<a href=\"downloadsubs.php?torrentid=".$a[torrent_id]."&subid=".$a[id]."\"><u>". $a["title"]. "</u></a>".(get_user_class() >= $submanage_class || (get_user_class() >= $delownsub_class && $a["uppedby"] == $CURUSER["id"]) ? " <font class=\"small\"><a href=\"subtitles.php?delete=".$a[id]."\">[".$lang_details['text_delete']."</a>]</font>" : "")."</td><td class=\"embedded\">&nbsp;&nbsp;".($a["anonymous"] == 'yes' ? $lang_details['text_anonymous'] . (get_user_class() >= $viewanonymous_class ? get_username($a['uppedby'],false,true,true,false,true) : "") : get_username($a['uppedby']))."</td></tr>";
+		// 		print($lang);
+		// 	}
+		// }
+		// else
+		// 	print("<tr><td class=\"embedded\">".$lang_details['text_no_subtitles']."</td></tr>");
+		// print("</table>");
+		// print("<table border=\"0\" cellspacing=\"0\"><tr>");
+		// if($CURUSER['id']==$row['owner']  ||  get_user_class() >= $uploadsub_class)
+		// {
+		// 	print("<td class=\"embedded\"><form method=\"post\" action=\"subtitles.php\"><input type=\"hidden\" name=\"torrent_name\" value=\"" . $row["name"]. "\" /><input type=\"hidden\" name=\"detail_torrent_id\" value=\"" . $row["id"]. "\" /><input type=\"hidden\" name=\"in_detail\" value=\"in_detail\" /><input type=\"submit\" value=\"".$lang_details['submit_upload_subtitles']."\" /></form></td>");
+		// }
+		// $moviename = "";
+		// $imdb_id = parse_imdb_id($row["url"]);
+		// if ($imdb_id && $showextinfo['imdb'] == 'yes')
+		// {
+		// 	$thenumbers = $imdb_id;
+		// 	if (!$moviename = $Cache->get_value('imdb_id_'.$thenumbers.'_movie_name')){
+		// 		$movie = new imdb ($thenumbers);
+		// 		$target = array('Title');
+		// 		switch ($movie->cachestate($target)){
+		// 			case "1":{
+		// 				$moviename = $movie->title (); break;
+		// 				$Cache->cache_value('imdb_id_'.$thenumbers.'_movie_name', $moviename, 1296000);
+		// 			}
+		// 			default: break;
+		// 		}
+		// 	}
+		// }
+		// print("<td class=\"embedded\"><form method=\"get\" action=\"http://shooter.cn/sub/\" target=\"_blank\"><input type=\"text\" name=\"searchword\" id=\"keyword\" style=\"width: 250px\" value=\"".$moviename."\" /><input type=\"submit\" value=\"".$lang_details['submit_search_at_shooter']."\" /></form></td><td class=\"embedded\"><form method=\"get\" action=\"http://www.opensubtitles.org/en/search2/\" target=\"_blank\"><input type=\"hidden\" id=\"moviename\" name=\"MovieName\" /><input type=\"hidden\" name=\"action\" value=\"search\" /><input type=\"hidden\" name=\"SubLanguageID\" value=\"all\" /><input onclick=\"document.getElementById('moviename').value=document.getElementById('keyword').value;\" type=\"submit\" value=\"".$lang_details['submit_search_at_opensubtitles']."\" /></form></td>\n");
+		// print("</tr></table>");
 		print("</td></tr>\n");
 		// ---------------- end subtitle block -------------------//
 
