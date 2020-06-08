@@ -185,7 +185,10 @@ td {
 form table.searchbox td{
     display: inline-block;
 }
-
+td .codebuttons {
+    font-size: 13pt;
+    margin-right: 5px;
+}
 td.embedded {
     border-right: medium none;
     padding-right: 0px;
