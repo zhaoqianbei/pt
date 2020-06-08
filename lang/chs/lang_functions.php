@@ -49,6 +49,7 @@ $lang_functions = array
 	'text_rules' => "&nbsp;规&nbsp;&nbsp;则&nbsp;",
 	'text_faq' => "&nbsp;常见问题&nbsp;",
 	'text_staff' => "管&nbsp;理&nbsp;组",
+	'text_zqb' => "编程及兼职",
 	'std_site_down_for_maintenance' => "站点关闭维护中，请稍后再访问...谢谢",
 	'text_click_view_full_image' => "点击这里查看完整图像",
 	'text_image_resized' => "图像被缩小，点击这里查看完整图像",
