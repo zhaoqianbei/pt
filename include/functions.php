@@ -144,9 +144,9 @@ function format_quotes($s)
 
     // Cannot close before opening. Return raw string...
 
-    $s = preg_replace("/\\[quote\\]/i", "<fieldset><legend> " . $lang_functions['text_quote'] . " </legend><br />", $s);
-    $s = preg_replace("/\\[quote=(.+?)\\]/i", "<fieldset><legend> " . $lang_functions['text_quote'] . ": \\1 </legend><br />", $s);
-    $s = preg_replace("/\\[\\/quote\\]/i", "</fieldset><br />", $s);
+    $s = preg_replace("/\\[quote\\]/i", "<fieldset class=\" mb10\"><legend> " . $lang_functions['text_quote'] . " </legend>", $s);
+    $s = preg_replace("/\\[quote=(.+?)\\]/i", "<fieldset class=\" mb10\"><legend> " . $lang_functions['text_quote'] . ": \\1 </legend>", $s);
+    $s = preg_replace("/\\[\\/quote\\]/i", "</fieldset>", $s);
     return $s;
 }
 
@@ -3110,16 +3110,16 @@ function commenttable($rows, $type, $parent_id, $review = false)
         $secs = 900;
         $dt = sqlesc(date("Y-m-d H:i:s", (TIMENOW - $secs))); // calculate date.
         print("<tr>\n");
-        print("<td class=\"rowfollow\" width=\"150\" valign=\"top\" >" . return_avatar_image($avatar) . "</td>\n");
-        print("<td class=\"rowfollow\" valign=\"top\"><br />" . $text . $text_editby . "</td>\n");
+        print("<td class=\"rowfollow\" width=\"10\" valign=\"top\" >" . return_avatar_image($avatar) . "</td>\n");
+        print("<td class=\"rowfollow\" valign=\"top\">" . $text . $text_editby . "</td>\n");
         print("</tr>\n");
         $actionbar = "<a class=\"mr10\" href=\"comment.php?action=add&amp;sub=quote&amp;cid=" . $row[id] . "&amp;pid=" . $parent_id . "&amp;type=" . $type . "\"><i class=\"f_quote icon pt-quote\" alt=\"Quote\" title=\"" . $lang_functions['title_reply_with_quote'] . "\"></i>引用</a>" 
             . "<a class=\"mr10\" href=\"comment.php?action=add&amp;pid=" . $parent_id . "&amp;type=" . $type . "\"><i class=\"f_reply icon pt-huifu\" alt=\"Add Reply\" title=\"" . $lang_functions['title_add_reply'] . "\"></i> 回复</a>" 
             . (get_user_class() >= $commanage_class ? "<a class=\"mr10\" href=\"comment.php?action=delete&amp;cid=" . $row[id] . "&amp;type=" . $type . "\"><i class=\"f_delete icon pt-delete\" alt=\"Delete\" title=\"" . $lang_functions['title_delete'] . "\"></i> 删除</a>" : "") 
             . ($row["user"] == $CURUSER["id"] || get_user_class() >= $commanage_class ? "<a href=\"comment.php?action=edit&amp;cid=" . $row[id] . "&amp;type=" . $type . "\"><i class=\"f_edit icon pt-bianji\" alt=\"Edit\" title=\"" . $lang_functions['title_edit'] . "\"></i> 编辑" . "</a>" : "");
-        print("<tr><td class=\"toolbox\"> " . ("'" . $userRow['last_access'] . "'" > $dt ? "<i class=\"f_online icon pt-zaixian fcg\" alt=\"Online\" title=\"" . $lang_functions['title_online'] . "\"></i>" : "<i class=\"f_offline icon pt-lixian mr10\" alt=\"Offline\" title=\"" . $lang_functions['title_offline'] . "\"></i>") 
+        print("<tr><td class=\"toolbox tac\"> " . ("'" . $userRow['last_access'] . "'" > $dt ? "<i class=\"f_online icon pt-zaixian fcg\" alt=\"Online\" title=\"" . $lang_functions['title_online'] . "\"></i>" : "<i class=\"f_offline icon pt-lixian mr10\" alt=\"Offline\" title=\"" . $lang_functions['title_offline'] . "\"></i>") 
              . "<a class=\"mr10\" href=\"sendmessage.php?receiver=" . htmlspecialchars(trim($row["user"])) . "\"><i class=\"f_pm icon pt-xinxi\" alt=\"PM\" title=\"" . $lang_functions['title_send_message_to'] . htmlspecialchars($userRow["username"]) . "\"></i></a>" 
-             . "<a class=\"mr10\" href=\"report.php?commentid=" . htmlspecialchars(trim($row["id"])) . "\"><i class=\"f_report icon pt-jubao\" alt=\"Report\" title=\"" . $lang_functions['title_report_this_comment'] . "\"></i></a></td><td class=\"toolbox\" align=\"right\">" . $actionbar . "</td>");
+             . "<a class=\"fcr\" href=\"report.php?commentid=" . htmlspecialchars(trim($row["id"])) . "\"><i class=\"f_report icon pt-jubao\" alt=\"Report\" title=\"" . $lang_functions['title_report_this_comment'] . "\"></i></a></td><td class=\"toolbox\" align=\"right\">" . $actionbar . "</td>");
 
         print("</tr></table>\n");
         $count++;
@@ -4781,7 +4781,7 @@ function valid_class_name($filename)
 function return_avatar_image($url)
 {
     global $CURLANGDIR;
-    return "<img src=\"" . $url . "\" alt=\"avatar\" width=\"150px\" onload=\"check_avatar(this, '" . $CURLANGDIR . "');\" />";
+    return "<img src=\"" . $url . "\" alt=\"avatar\" width=\"100px\" onload=\"check_avatar(this, '" . $CURLANGDIR . "');\" />";
 }
 function return_category_image($categoryid, $link = "")
 {
