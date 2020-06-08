@@ -37,15 +37,14 @@ stdhead($lang_upload['head_upload']);
 			?>
 			<table border="1" cellspacing="0" cellpadding="5" width="1000">
 				<tr>
-					<td class='colhead' colspan='2' align='center'>
-						<?php echo $lang_upload['text_tracker_url'] ?>: &nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo  get_protocol_prefix() . $announce_urls[0]?></b>
+				<td class="rowhead nowrap" valign="top" align="right"><?php echo $lang_upload['text_tracker_url']; ?><font color="red">*</font></td>
+				<td class="rowfollow" valign="top" align="left"><span><?php echo  get_protocol_prefix() . $announce_urls[0]?></span>
 						<?php
 						if(!is_writable($torrent_dir))
-						print("<br /><br /><b>ATTENTION</b>: Torrent directory isn't writable. Please contact the administrator about this problem!");
+						print("<br /><br /><b>ATTENTION</b>: 种子文件夹不可写，请联系管理员！");
 						if(!$max_torrent_size)
-						print("<br /><br /><b>ATTENTION</b>: Max. Torrent Size not set. Please contact the administrator about this problem!");
-						?>
-					</td>
+						print("<br /><br /><b>ATTENTION</b>: 种子文件超过大小限制，请联系管理员解决！");
+						?></td>
 				</tr>
 				<?php
 				tr($lang_upload['row_torrent_file']."<font color=\"red\">*</font>", "<input type=\"file\" class=\"file\" id=\"torrent\" name=\"file\" onchange=\"getname()\" />\n", 1);
