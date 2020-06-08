@@ -2489,7 +2489,7 @@ print(get_style_addicode());
 <link rel="stylesheet" href="styles/curtain_imageresizer.css<?php echo $cssupdatedate ?>" type="text/css" />
 <!-- ali_icon_xiugai -->
 <link rel="stylesheet" href="'.<?php echo $lang_settings["ali_icon"];?>.'" type="text/css" />
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1856866_k7v1kb6jeyj.css" type="text/css" />
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1856866_pds3vugro2j.css" type="text/css" />
 <link rel="stylesheet" href="styles/mp.css<?php echo $cssupdatedate ?>" type="text/css" />
 <?php
 if ($CURUSER) {
@@ -3676,7 +3676,8 @@ function get_ratio_img($ratio)
         $s = "52";
     }
 
-    return "<img src=\"pic/smilies/" . $s . ".gif\" alt=\"\" />";
+    // return "<img src=\"pic/smilies/" . $s . ".gif\" alt=\"\" />";
+    return '';
 }
 
 function GetVar($name)
@@ -4473,29 +4474,29 @@ function getmicrotime()
 function get_user_class_image($class)
 {
     $UC = array(
-        "Staff Leader" => "pic/staffleader.gif",
-        "SysOp" => "pic/sysop.gif",
-        "Administrator" => "pic/administrator.gif",
-        "Moderator" => "pic/moderator.gif",
-        "Forum Moderator" => "pic/forummoderator.gif",
-        "Uploader" => "pic/uploader.gif",
-        "Retiree" => "pic/retiree.gif",
-        "VIP" => "pic/vip.gif",
-        "Nexus Master" => "pic/nexus.gif",
-        "Ultimate User" => "pic/ultimate.gif",
-        "Extreme User" => "pic/extreme.gif",
-        "Veteran User" => "pic/veteran.gif",
-        "Insane User" => "pic/insane.gif",
-        "Crazy User" => "pic/crazy.gif",
-        "Elite User" => "pic/elite.gif",
-        "Power User" => "pic/power.gif",
-        "User" => "pic/user.gif",
-        "Peasant" => "pic/peasant.gif",
+        "Staff Leader" => "pic/degree/staffleader.gif",
+        "SysOp" => "pic/degree/sysop.gif",
+        "Administrator" => "pic/degree/administrator.gif",
+        "Moderator" => "pic/degree/moderator.gif",
+        "Forum Moderator" => "pic/degree/forummoderator.gif",
+        "Uploader" => "pic/degree/uploader.gif",
+        "Retiree" => "pic/degree/retiree.gif",
+        "VIP" => "pic/degree/vip.gif",
+        "Nexus Master" => "pic/degree/nexus.gif",
+        "Ultimate User" => "pic/degree/ultimate.gif",
+        "Extreme User" => "pic/degree/extreme.gif",
+        "Veteran User" => "pic/degree/veteran.gif",
+        "Insane User" => "pic/degree/insane.gif",
+        "Crazy User" => "pic/degree/crazy.gif",
+        "Elite User" => "pic/degree/elite.gif",
+        "Power User" => "pic/degree/power.gif",
+        "User" => "pic/degree/user.gif",
+        "Peasant" => "pic/degree/peasant.gif",
     );
     if (isset($class)) {
         $uclass = $UC[get_user_class_name($class, false, false, false)];
     } else {
-        $uclass = "pic/banned.gif";
+        $uclass = "pic/degree/banned.gif";
     }
 
     return $uclass;

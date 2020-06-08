@@ -59,11 +59,11 @@ $forumposts = $arr3[0];
 	$isp = $arr[name];
 
 if ($user["gender"] == "Male")
-$gender = "<img class='male' src='pic/trans.gif' alt='Male' title='".$lang_userdetails['title_male']."' style='margin-left: 4pt' />";
+$gender = "<i class=\"icon pt-xingbienan\" alt='Male' title='".$lang_userdetails['title_male']."' style='margin-left: 4pt'> 男</i>";
 elseif ($user["gender"] == "Female")
-$gender = "<img class='female' src='pic/trans.gif' alt='Female' title='".$lang_userdetails['title_female']."' style='margin-left: 4pt' />";
+$gender = "<i class=\"icon pt-xingbienv\" alt='Female' title='".$lang_userdetails['title_female']."' style='margin-left: 4pt'> 女</i>";
 elseif ($user["gender"] == "N/A")
-$gender = "<img class='no_gender' src='pic/trans.gif' alt='N/A' title='".$lang_userdetails['title_not_available']."' style='margin-left: 4pt' />";
+$gender = "<i class=\"icon pt-xingbie\" alt='N/A' title='".$lang_userdetails['title_not_available']."' style='margin-left: 4pt'> 其他</i>";
 
 stdhead($lang_userdetails['head_details_for']. $user["username"]);
 $enabled = $user["enabled"] == 'yes';
@@ -255,7 +255,8 @@ tr_small($lang_userdetails['row_donated'], "$".htmlspecialchars($user[donated]).
 if ($user["avatar"])
 tr_small($lang_userdetails['row_avatar'], return_avatar_image(htmlspecialchars(trim($user["avatar"]))), 1);
 $uclass = get_user_class_image($user["class"]);
-tr_small($lang_userdetails['row_class'], "<img alt=\"".get_user_class_name($user["class"],false,false,true)."\" title=\"".get_user_class_name($user["class"],false,false,true)."\" src=\"".$uclass."\" /> ".($user[title]!=="" ? "&nbsp;".htmlspecialchars(trim($user["title"]))."" :  ""), 1);
+// tr_small($lang_userdetails['row_class'], "<img alt=\"".get_user_class_name($user["class"],false,false,true)."\" title=\"".get_user_class_name($user["class"],false,false,true)."\" src=\"".$uclass."\" /> ".($user[title]!=="" ? "&nbsp;".htmlspecialchars(trim($user["title"]))."" :  ""), 1);
+tr_small($lang_userdetails['row_class'], "<span>".get_user_class_name($user["class"],false,false,true)."</span>".($user[title]!=="" ? "&nbsp;".htmlspecialchars(trim($user["title"]))."" :  ""), 1);
 
 tr_small($lang_userdetails['row_torrent_comment'], ($torrentcomments && ($user["id"] == $CURUSER["id"] || get_user_class() >= $viewhistory_class) ? "<a href=\"userhistory.php?action=viewcomments&amp;id=".$id."\" title=\"".$lang_userdetails['link_view_comments']."\">".$torrentcomments."</a>" : $torrentcomments), 1);
 
@@ -304,7 +305,7 @@ if ($CURUSER["id"] != $user["id"]){
 print("<tr><td colspan=\"2\" align=\"center\">");
 if ($showpmbutton)
 // print("<a href=\"sendmessage.php?receiver=".htmlspecialchars($user[id])."\"><img class=\"f_pm\" src=\"pic/trans.gif\" alt=\"PM\" title=\"".$lang_userdetails['title_send_pm']."\" /></a>");
-print("<a class=\"pr10 pl10\" href=\"sendmessage.php?receiver=".htmlspecialchars($user[id])."\">发送信息：<i class=\"icon pt-iconfontcolor06\" title=\"".$lang_userdetails['title_send_pm']."\" ></i></a>");
+print("<a class=\"pr10 pl10\" href=\"sendmessage.php?receiver=".htmlspecialchars($user[id])."\">发送信息：<i class=\"icon pt-xinxi\" title=\"".$lang_userdetails['title_send_pm']."\" ></i></a>");
 
 // print("<a href=\"report.php?user=".htmlspecialchars($user[id])."\"><img class=\"f_report\" src=\"pic/trans.gif\" alt=\"Report\" title=\"".$lang_userdetails['title_report_user']."\" /></a>");
 print("<a class=\"pr10 pl30\" href=\"report.php?user=".htmlspecialchars($user[id])."\">举报用户：<i class=\"icon pt-jubao\" title=\"".$lang_userdetails['title_report_user']."\" ></i></a>");
