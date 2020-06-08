@@ -2317,7 +2317,7 @@ function menu($selected = "home")
     } else {
         print("<li" . ($selected == "forums" ? " class=\"selected\"" : "") . "><a href=\"" . $extforumurl . "\" target=\"_blank\">" . $lang_functions['text_forums'] . "</a></li>");
     }
-    print("<li><a href=\"https://www.zhaoqianbei.com\">" . $lang_functions['text_zqb'] . "</a></li>");
+    print("<li><a href=\"https://www.zhaoqianbei.com\" target=\"_blank\">" . $lang_functions['text_zqb'] . "</a></li>");
     print("</ul></div>");
 
     if ($CURUSER) {
