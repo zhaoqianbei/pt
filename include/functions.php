@@ -3426,7 +3426,7 @@ $caticonrow = get_category_icon_row($CURUSER['caticon']);
         }
 
         if ($row['pos_state'] == 'sticky' && $CURUSER['appendsticky'] == 'yes') {
-            $stickyicon = "<img class=\"sticky\" src=\"pic/trans.gif\" alt=\"Sticky\" title=\"" . $lang_functions['title_sticky'] . "\" />&nbsp;";
+            $stickyicon = "<span class='fwb fcr'>[".$lang_functions['title_sticky']."]</span>&nbsp;";
         } else {
             $stickyicon = "";
         }

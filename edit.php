@@ -120,14 +120,15 @@ else {
 		tr($lang_edit['row_quality'], $source_select . $medium_select . $codec_select . $audiocodec_select. $standard_select . $processing_select, 1);
 	}
 
-	if ($showteam){
-		if ($showteam){
-			$team_select = torrent_selection($lang_edit['text_team'],"team_sel","teams",$row["team"]);
-		}
-		else $showteam = "";
+	// if ($showteam){
+	// 	if ($showteam){
+	// 		$team_select = torrent_selection($lang_edit['text_team'],"team_sel","teams",$row["team"]);
+	// 	}
+	// 	else $showteam = "";
 
-		tr($lang_edit['row_content'],$team_select,1);
-	}
+	// 	tr($lang_edit['row_content'],$team_select,1);
+	// }
+
 	tr($lang_edit['row_check'], "<input type=\"checkbox\" name=\"visible\"" . ($row["visible"] == "yes" ? " checked=\"checked\"" : "" ) . " value=\"1\" /> ".$lang_edit['checkbox_visible']."&nbsp;&nbsp;&nbsp;".(get_user_class() >= $beanonymous_class || get_user_class() >= $torrentmanage_class ? "<input type=\"checkbox\" name=\"anonymous\"" . ($row["anonymous"] == "yes" ? " checked=\"checked\"" : "" ) . " value=\"1\" />".$lang_edit['checkbox_anonymous_note']."&nbsp;&nbsp;&nbsp;" : "").(get_user_class() >= $torrentmanage_class ? "<input type=\"checkbox\" name=\"banned\"" . (($row["banned"] == "yes") ? " checked=\"checked\"" : "" ) . " value=\"yes\" /> ".$lang_edit['checkbox_banned'] : ""), 1);
 	if (get_user_class()>= $torrentsticky_class || (get_user_class() >= $torrentmanage_class && $CURUSER["picker"] == 'yes')){
 		$pickcontent = "";
@@ -152,7 +153,7 @@ else {
 		tr($lang_edit['row_pick'], $pickcontent, 1);
 	}
 
-	print("<tr><td class=\"toolbox\" colspan=\"2\" align=\"center\"><input id=\"qr\" type=\"submit\" value=\"".$lang_edit['submit_edit_it']."\" /> <input type=\"reset\" value=\"".$lang_edit['submit_revert_changes']."\" /></td></tr>\n");
+	print("<tr><td class=\"toolbox\" colspan=\"2\" align=\"center\"><input id=\"qr\" type=\"submit\" value=\"".$lang_edit['submit_commit_it']."\" /> <input type=\"reset\" value=\"".$lang_edit['submit_revert_changes']."\" /></td></tr>\n");
 	print("</table>\n");
 	print("</form>\n");
 	print("<br /><br />");
