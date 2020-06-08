@@ -86,39 +86,39 @@ else {
 		$movecheckbox = "<input type=\"checkbox\" id=movecheck name=\"movecheck\" value=\"1\" onclick=\"disableother2('oricat','newcat')\" />";
 	}
 	tr($lang_edit['row_type']."<font color=\"red\">*</font>", $s.($allowmove ? "&nbsp;&nbsp;".$movecheckbox.$movenote.$s2 : ""), 1);
-	if ($showsource || $showmedium || $showcodec || $showaudiocodec || $showstandard || $showprocessing){
-		if ($showsource){
-			$source_select = torrent_selection($lang_edit['text_source'],"source_sel","sources",$row["source"]);
-		}
-		else $source_select = "";
+	// if ($showsource || $showmedium || $showcodec || $showaudiocodec || $showstandard || $showprocessing){
+	// 	if ($showsource){
+	// 		$source_select = torrent_selection($lang_edit['text_source'],"source_sel","sources",$row["source"]);
+	// 	}
+	// 	else $source_select = "";
 
-		if ($showmedium){
-			$medium_select = torrent_selection($lang_edit['text_medium'],"medium_sel","media",$row["medium"]);
-		}
-		else $medium_select = "";
+	// 	if ($showmedium){
+	// 		$medium_select = torrent_selection($lang_edit['text_medium'],"medium_sel","media",$row["medium"]);
+	// 	}
+	// 	else $medium_select = "";
 
-		if ($showcodec){
-			$codec_select = torrent_selection($lang_edit['text_codec'],"codec_sel","codecs",$row["codec"]);
-		}
-		else $codec_select = "";
+	// 	if ($showcodec){
+	// 		$codec_select = torrent_selection($lang_edit['text_codec'],"codec_sel","codecs",$row["codec"]);
+	// 	}
+	// 	else $codec_select = "";
 
-		if ($showaudiocodec){
-			$audiocodec_select = torrent_selection($lang_edit['text_audio_codec'],"audiocodec_sel","audiocodecs",$row["audiocodec"]);
-		}
-		else $audiocodec_select = "";
+	// 	if ($showaudiocodec){
+	// 		$audiocodec_select = torrent_selection($lang_edit['text_audio_codec'],"audiocodec_sel","audiocodecs",$row["audiocodec"]);
+	// 	}
+	// 	else $audiocodec_select = "";
 
-		if ($showstandard){
-			$standard_select = torrent_selection($lang_edit['text_standard'],"standard_sel","standards",$row["standard"]);
-		}
-		else $standard_select = "";
+	// 	if ($showstandard){
+	// 		$standard_select = torrent_selection($lang_edit['text_standard'],"standard_sel","standards",$row["standard"]);
+	// 	}
+	// 	else $standard_select = "";
 
-		if ($showprocessing){
-			$processing_select = torrent_selection($lang_edit['text_processing'],"processing_sel","processings",$row["processing"]);
-		}
-		else $processing_select = "";
+	// 	if ($showprocessing){
+	// 		$processing_select = torrent_selection($lang_edit['text_processing'],"processing_sel","processings",$row["processing"]);
+	// 	}
+	// 	else $processing_select = "";
 
-		tr($lang_edit['row_quality'], $source_select . $medium_select . $codec_select . $audiocodec_select. $standard_select . $processing_select, 1);
-	}
+	// 	tr($lang_edit['row_quality'], $source_select . $medium_select . $codec_select . $audiocodec_select. $standard_select . $processing_select, 1);
+	// }
 
 	// if ($showteam){
 	// 	if ($showteam){

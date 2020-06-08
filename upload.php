@@ -85,48 +85,48 @@ stdhead($lang_upload['head_upload']);
 				else $s2 = "";
 				tr($lang_upload['row_type']."<font color=\"red\">*</font>", ($allowtwosec ? $lang_upload['text_to_browse_section'] : "").$s.($allowtwosec ? $lang_upload['text_to_special_section'] : "").$s2.($allowtwosec ? $lang_upload['text_type_note'] : ""),1);
 
-				if ($showsource || $showmedium || $showcodec || $showaudiocodec || $showstandard || $showprocessing){
-					if ($showsource){
-						$source_select = torrent_selection($lang_upload['text_source'],"source_sel","sources");
-					}
-					else $source_select = "";
+				// if ($showsource || $showmedium || $showcodec || $showaudiocodec || $showstandard || $showprocessing){
+				// 	if ($showsource){
+				// 		$source_select = torrent_selection($lang_upload['text_source'],"source_sel","sources");
+				// 	}
+				// 	else $source_select = "";
 
-					if ($showmedium){
-						$medium_select = torrent_selection($lang_upload['text_medium'],"medium_sel","media");
-					}
-					else $medium_select = "";
+				// 	if ($showmedium){
+				// 		$medium_select = torrent_selection($lang_upload['text_medium'],"medium_sel","media");
+				// 	}
+				// 	else $medium_select = "";
 
-					if ($showcodec){
-						$codec_select = torrent_selection($lang_upload['text_codec'],"codec_sel","codecs");
-					}
-					else $codec_select = "";
+				// 	if ($showcodec){
+				// 		$codec_select = torrent_selection($lang_upload['text_codec'],"codec_sel","codecs");
+				// 	}
+				// 	else $codec_select = "";
 
-					if ($showaudiocodec){
-						$audiocodec_select = torrent_selection($lang_upload['text_audio_codec'],"audiocodec_sel","audiocodecs");
-					}
-					else $audiocodec_select = "";
+				// 	if ($showaudiocodec){
+				// 		$audiocodec_select = torrent_selection($lang_upload['text_audio_codec'],"audiocodec_sel","audiocodecs");
+				// 	}
+				// 	else $audiocodec_select = "";
 
-					if ($showstandard){
-						$standard_select = torrent_selection($lang_upload['text_standard'],"standard_sel","standards");
-					}
-					else $standard_select = "";
+				// 	if ($showstandard){
+				// 		$standard_select = torrent_selection($lang_upload['text_standard'],"standard_sel","standards");
+				// 	}
+				// 	else $standard_select = "";
 
-					if ($showprocessing){
-						$processing_select = torrent_selection($lang_upload['text_processing'],"processing_sel","processings");
-					}
-					else $processing_select = "";
+				// 	if ($showprocessing){
+				// 		$processing_select = torrent_selection($lang_upload['text_processing'],"processing_sel","processings");
+				// 	}
+				// 	else $processing_select = "";
 				
-					tr($lang_upload['row_quality'], $source_select . $medium_select. $codec_select . $audiocodec_select. $standard_select . $processing_select, 1 );
-				}
+				// 	tr($lang_upload['row_quality'], $source_select . $medium_select. $codec_select . $audiocodec_select. $standard_select . $processing_select, 1 );
+				// }
 
-				if ($showteam){
-					if ($showteam){
-						$team_select = torrent_selection($lang_upload['text_team'],"team_sel","teams");
-					}
-					else $showteam = "";
+				// if ($showteam){
+				// 	if ($showteam){
+				// 		$team_select = torrent_selection($lang_upload['text_team'],"team_sel","teams");
+				// 	}
+				// 	else $showteam = "";
 
-					tr($lang_upload['row_content'],$team_select,1);
-				}
+				// 	tr($lang_upload['row_content'],$team_select,1);
+				// }
 
 				//==== offer dropdown for offer mod  from code by S4NE
 				$offerres = sql_query("SELECT id, name FROM offers WHERE userid = ".sqlesc($CURUSER[id])." AND allowed = 'allowed' ORDER BY name ASC") or sqlerr(__FILE__, __LINE__);
