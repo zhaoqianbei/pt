@@ -2308,7 +2308,6 @@ function menu($selected = "home")
     // print("<li" . ($selected == "subtitles" ? " class=\"selected\"" : "") . "><a href=\"subtitles.php\">" . $lang_functions['text_subtitles'] . "</a></li>");
     print("<li" . ($selected == "usercp" ? " class=\"selected\"" : "") . "><a href=\"usercp.php\">" . $lang_functions['text_user_cp'] . "</a></li>");
     print("<li" . ($selected == "topten" ? " class=\"selected\"" : "") . "><a href=\"topten.php\">" . $lang_functions['text_top_ten'] . "</a></li>");
-    print("<li" . ($selected == "log" ? " class=\"selected\"" : "") . "><a href=\"log.php\">" . $lang_functions['text_log'] . "</a></li>");
     print("<li" . ($selected == "rules" ? " class=\"selected\"" : "") . "><a href=\"rules.php\">" . $lang_functions['text_rules'] . "</a></li>");
     print("<li" . ($selected == "faq" ? " class=\"selected\"" : "") . "><a href=\"faq.php\">" . $lang_functions['text_faq'] . "</a></li>");
     print("<li" . ($selected == "staff" ? " class=\"selected\"" : "") . "><a href=\"staff.php\">" . $lang_functions['text_staff'] . "</a></li>");
@@ -2317,7 +2316,8 @@ function menu($selected = "home")
     } else {
         print("<li" . ($selected == "forums" ? " class=\"selected\"" : "") . "><a href=\"" . $extforumurl . "\" target=\"_blank\">" . $lang_functions['text_forums'] . "</a></li>");
     }
-    print("<li><a href=\"https://www.zhaoqianbei.com\" target=\"_blank\">" . $lang_functions['text_zqb'] . "</a></li>");
+    print("<li" . ($selected == "log" ? " class=\"selected\"" : "") . "><a href=\"log.php\">" . $lang_functions['text_log'] . "</a></li>");
+    print("<li><a href=\"https://www.zhaoqianbei.com\" target=\"_blank\" style=\" background:#DB5140\">" . $lang_functions['text_zqb'] . "</a></li>");
     print("</ul></div>");
 
     if ($CURUSER) {
