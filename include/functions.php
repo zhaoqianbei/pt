@@ -3330,10 +3330,11 @@ $count_get = 0;
 <td class="colhead"><a href="?<?php echo $oldlink ?>sort=6&amp;type=<?php echo $link[6] ?>">完成</a></td>
 <td class="colhead"><a href="?<?php echo $oldlink ?>sort=9&amp;type=<?php echo $link[9] ?>">发布者</a></td>
 <td class="colhead"><a href="javscript:;">操作</a></td>
-<?php
+<!-- 取消行为列 -->
+<!-- <?php
 if (get_user_class() >= $torrentmanage_class) {?>
 	<td class="colhead"><?php echo $lang_functions['col_action'] ?></td>
-<?php }?>
+<?php }?> -->
 </tr>
 <?php
 $caticonrow = get_category_icon_row($CURUSER['caticon']);
