@@ -1,7 +1,7 @@
 <?php
 //Caching class (Based on file From ProjectGazelle)
 
-class CACHE extends WinCache{
+class CACHE extends Memcache{
 	var $isEnabled;
 	var $clearCache = 0;
 	var $language = 'en';
