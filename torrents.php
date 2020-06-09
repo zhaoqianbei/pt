@@ -1,13 +1,14 @@
 <?php
-require_once("include/bittorrent.php");
-dbconn(true);
-require_once(get_langfile_path("torrents.php"));
+if(!isset($sectiontype)){
+    require 'include/bittorrent.php';
+    dbconn(true);
+    $sectiontype = $browsecatmode;
+}
+require get_langfile_path("torrents.php");
 loggedinorreturn();
 parked();
-if ($showextinfo['imdb'] == 'yes')
-	require_once ("imdb/imdb.class.php");
+if ($showextinfo['imdb'] == 'yes') require_once ("imdb/imdb.class.php");
 //check searchbox
-$sectiontype = $browsecatmode;
 $showsubcat = get_searchbox_value($sectiontype, 'showsubcat');//whether show subcategory (i.e. sources, codecs) or not
 $showsource = get_searchbox_value($sectiontype, 'showsource'); //whether show sources or not
 $showmedium = get_searchbox_value($sectiontype, 'showmedium'); //whether show media or not
@@ -62,18 +63,18 @@ if ($_GET['sort'] && $_GET['type']) {
 
 	if($column == "owner")
 	{
-		$orderby = "ORDER BY pos_state DESC, torrents.anonymous, users.username " . $ascdesc;
+		$orderby = "ORDER BY pos_group DESC, torrents.anonymous, users.username " . $ascdesc;
 	}
 	else
 	{
-		$orderby = "ORDER BY pos_state DESC, torrents." . $column . " " . $ascdesc;
+		$orderby = "ORDER BY pos_group DESC, torrents." . $column . " " . $ascdesc;
 	}
 
 	$pagerlink = "sort=" . intval($_GET['sort']) . "&type=" . $linkascdesc . "&";
 
 } else {
 
-	$orderby = "ORDER BY pos_state DESC, torrents.id DESC";
+	$orderby = "ORDER BY pos_group DESC, torrents.id DESC";
 	$pagerlink = "";
 
 }
@@ -987,10 +988,10 @@ elseif($inclbookmarked == 2)
 if ($count) {
 	print($pagertop);
 	if ($sectiontype == $browsecatmode)
-		torrenttable($res, "torrents");
+		torrenttable($res, "torrents", $self_snatched_data);
 	elseif ($sectiontype == $specialcatmode) 
-		torrenttable($res, "music");
-	else torrenttable($res, "bookmarks");
+		torrenttable($res, "music", $self_snatched_data);
+	else torrenttable($res, "bookmarks", $self_snatched_data);
 	print($pagerbottom);
 }
 else {

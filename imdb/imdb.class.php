@@ -188,7 +188,18 @@
     case "Taglines": $urlname="/taglines"; break;
    }
    if ($this->usecache) {
-    @$fp = fopen ("$this->cachedir/$this->imdbID.$wt", "r");
+	$fp = fopen("$this->cachedir/$this->imdbID.$wt", "r");
+	if($fp)
+	{
+		$temp = "";
+		$temp = fread($fp,filesize("$this->cachedir/$this->imdbID.$wt"));
+	}
+	if($temp)
+	{
+		$this->page[$wt] = $temp;
+		return;
+	}	
+/*      @$fp = fopen ("$this->cachedir/$this->imdbID.$wt", "r");
     if ($fp) {
      $temp="";
      while (!feof ($fp)) {
@@ -197,8 +208,8 @@
 	if ($temp) {
 		$this->page[$wt] = $temp;
      		return;
-	}
-    }
+	} 
+    } */
    } // end cache
 
    $req = new IMDB_Request("");
@@ -206,7 +217,8 @@
    $response = $req->send();
 $responseBody = $response->getBody();
    if ($responseBody) {
-       $this->page[$wt] = utf8_encode($responseBody);
+//       $this->page[$wt] = utf8_encode($responseBody);
+		$this->page[$wt] = $responseBody;
    }
    if( $this->page[$wt] ){ //storecache
     if ($this->storecache) {
@@ -359,9 +371,9 @@ $responseBody = $response->getBody();
     if ($this->page["Title"] == "") {
      $this->openpage ("Title");
     }
-    $this->main_title = strstr ($this->page["Title"], "<title>");
-    $endpos = strpos ($this->main_title, "</title>");
-    $this->main_title = substr ($this->main_title, 7, $endpos - 7);
+    $this->main_title = strstr ($this->page["Title"], "og:title");
+    $endpos = strpos ($this->main_title, "/>");
+    $this->main_title = substr ($this->main_title, 19, $endpos - 2);
     $year_s = strpos ($this->main_title, "(", 0);
     $year_e = strpos ($this->main_title, ")", 0);
     $this->main_title = substr ($this->main_title, 0, $year_s - 1);
@@ -468,14 +480,20 @@ $responseBody = $response->getBody();
     if ($this->page["Title"] == "") {
 	$this->openpage ("Title");
     }
-    $rate_s = strpos ($this->page["Title"], "User Rating:");
-#    $rate_s = strpos ($this->page["Title"], '/ratings">');
+#    $rate_s = strpos ($this->page["Title"], "User Rating:");
+    #    $rate_s = strpos ($this->page["Title"], '/ratings">');
+	#$rate_s = strpos ($this->page["Title"], "ratingValue") + 13;
+	$rate_s = strpos ($this->page["Title"], "itemprop=\"ratingValue") + 23;
+	$this->main_rating = substr($this->page["Title"], $rate_s, 12);
+	$this->main_rating = preg_replace('/[^.0-9]/', '', $this->main_rating);
+/*
     if ( $rate_s == 0 )	return FALSE;
     if (strpos ($this->page["Title"], "awaiting 5 votes")) return false;
     $rate_s = strpos ($this->page["Title"], "<b>", $rate_s);
     $rate_e = strpos ($this->page["Title"], "/", $rate_s);
     $this->main_rating = substr ($this->page["Title"], $rate_s + 3, $rate_e - $rate_s - 3);
     if ($rate_e - $rate_s > 7) $this->main_rating = "";
+*/
     return $this->main_rating;
    }
   }
@@ -487,9 +505,9 @@ $responseBody = $response->getBody();
   function comment () {
      if ($this->main_comment == "") {
       if ($this->page["Title"] == "") $this->openpage ("Title");
-      $comment_s = strpos ($this->page["Title"], "people found the following comment useful:-");
+      $comment_s = strpos ($this->page["Title"], "User Reviews");
       if ( $comment_s == 0) return false;
-      $comment_e = strpos ($this->page["Title"], "Was the above comment useful to you?", $comment_s);
+      $comment_e = strpos ($this->page["Title"], "Was this review helpful to you?", $comment_s);
       $forward_safeval = 50;
       $comment_s_fix = $forward_safeval - strpos(substr($this->page["Title"], $comment_s - $forward_safeval, $comment_e - $comment_s + $forward_safeval),"<div class=\"small\">") - strlen("<div class=\"small\">");
       
@@ -509,13 +527,14 @@ $responseBody = $response->getBody();
   function votes () {
    if ($this->main_votes == "") {
     if ($this->page["Title"] == "") $this->openpage ("Title");
-    $vote_s = strpos ($this->page["Title"], "User Rating:");
+    $vote_s = strpos ($this->page["Title"], "ratingCount");
     if ( $vote_s == 0) return false;
     if (strpos ($this->page["Title"], "awaiting 5 votes")) return false;
 //    $vote_s = strpos ($this->page["Title"], "<a", $vote_s);
 //    $vote_e = strpos ($this->page["Title"], "votes", $vote_s);
 //    $this->main_votes = substr ($this->page["Title"], $vote_s, $vote_e - $vote_s);
-    preg_match('/href=\"ratings\".*>([0-9,][0-9,]*)/', $this->page["Title"], $matches);
+//    preg_match('/href=\"ratings\".*>([0-9,][0-9,]*)/', $this->page["Title"], $matches);
+	preg_match('/\"ratingCount\".*>([0-9][0-9,]*)/', $this->page["Title"], $matches);
     $this->main_votes = $matches[1];
     $this->main_votes = "<a href=\"http://".$this->imdbsite."/title/tt".$this->imdbID."/ratings\">" . $this->main_votes . "</a>";
    }
@@ -529,7 +548,7 @@ $responseBody = $response->getBody();
   function language () {
    if ($this->main_language == "") {
     if ($this->page["Title"] == "") $this->openpage ("Title");
-    $lang_s = strpos ($this->page["Title"], "/Sections/Languages/");
+    $lang_s = strpos ($this->page["Title"], "language/");
     if ( $lang_s == 0) return FALSE;
     $lang_s = strpos ($this->page["Title"], ">", $lang_s);
     $lang_e = strpos ($this->page["Title"], "<", $lang_s);
@@ -549,8 +568,8 @@ $responseBody = $response->getBody();
     $lang_e = 0;
     $i = 0;
     $this->main_languages = array();
-    while (strpos($this->page["Title"], "/Sections/Languages/", $lang_e) > $lang_s) {
-	$lang_s = strpos ($this->page["Title"], "/Sections/Languages/", $lang_s);
+    while (strpos($this->page["Title"], "language/", $lang_e) > $lang_s) {
+	$lang_s = strpos ($this->page["Title"], "language/", $lang_s);
 	$lang_s = strpos ($this->page["Title"], ">", $lang_s);
 	$lang_e = strpos ($this->page["Title"], "<", $lang_s);
 	$this->main_languages[$i] = substr ($this->page["Title"], $lang_s + 1, $lang_e - $lang_s - 1);
@@ -567,7 +586,7 @@ $responseBody = $response->getBody();
   function genre () {
    if ($this->main_genre == "") {
     if ($this->page["Title"] == "") $this->openpage ("Title");
-    $genre_s = strpos ($this->page["Title"], "/Sections/Genres/");
+    $genre_s = strpos ($this->page["Title"], "genre/");
     if ( $genre_s === FALSE )	return FALSE;
     $genre_s = strpos ($this->page["Title"], ">", $genre_s);
     $genre_e = strpos ($this->page["Title"], "<", $genre_s);
@@ -584,17 +603,17 @@ $responseBody = $response->getBody();
    if ($this->main_genres == "") {
     if ($this->page["Title"] == "") $this->openpage ("Title");
     $this->main_genres = array();
-    $genre_s = strpos($this->page["Title"],"/Sections/Genres/") -5;
+    $genre_s = strpos($this->page["Title"],"Genres:");
     if ($genre_s === FALSE) return array(); // no genre found
     if ($genre_s < 0) return array(); // no genre found
-    $genre_e = strpos($this->page["Title"],"/rg/title-tease/",$genre_s);
+    $genre_e = strpos($this->page["Title"],"txt-block",$genre_s);
     $block = substr($this->page["Title"],$genre_s,$genre_e-$genre_s);
     $diff = $genre_e-$genre_s;
     $genre_s = 0;
     $genre_e = 0;
     $i = 0;
-    while (strpos($block, "/Sections/Genres/", $genre_e) > $genre_s) {
-	$genre_s = strpos ($block, "/Sections/Genres/", $genre_s);
+    while (strpos($block, "genre/", $genre_e) > $genre_s) {
+	$genre_s = strpos ($block, "genre/", $genre_s);
 	$genre_s = strpos ($block, ">", $genre_s);
 	$genre_e = strpos ($block, "<", $genre_s);
 	$this->main_genres[$i] = substr ($block, $genre_s + 1, $genre_e - $genre_s - 1);
@@ -614,8 +633,8 @@ $responseBody = $response->getBody();
     $color_s = 0;
     $color_e = 0;
     $i = 0;
-    while (strpos ($this->page["Title"], "/List?color-info", $color_e) > $color_s) {
-	$color_s = strpos ($this->page["Title"], "/List?color-info", $color_s);
+    while (strpos ($this->page["Title"], "?colors=", $color_e) > $color_s) {
+	$color_s = strpos ($this->page["Title"], "?colors=", $color_s);
 	$color_s = strpos ($this->page["Title"], ">", $color_s);
 	$color_e = strpos ($this->page["Title"], "<", $color_s);
 	$this->main_colors[$i] = substr ($this->page["Title"], $color_s + 1, $color_e - $color_s - 1);
@@ -632,7 +651,7 @@ $responseBody = $response->getBody();
   function tagline () {
    if ($this->main_tagline == "") {
     if ($this->page["Title"] == "") $this->openpage ("Title");
-    $tag_s = strpos ($this->page["Title"], "Tagline:");
+    $tag_s = strpos ($this->page["Title"], "Taglines:");
     if ( $tag_s == 0) return FALSE;
     $tag_s = strpos ($this->page["Title"], ">", $tag_s);
     $tag_e = strpos ($this->page["Title"], "<", $tag_s);
@@ -648,11 +667,12 @@ $responseBody = $response->getBody();
   function plotoutline () {
     if ($this->main_plotoutline == "") {
       if ($this->page["Title"] == "") $this->openpage ("Title");
-      $plotoutline_s = strpos ($this->page["Title"], "Plot:");
+      $plotoutline_s = strpos ($this->page["Title"], "itemprop=\"description\"");
       if ( $plotoutline_s == 0) return FALSE;
       $plotoutline_s = strpos ($this->page["Title"], ">", $plotoutline_s);
-      $plotoutline_e = strpos ($this->page["Title"], "<", $plotoutline_s);
-      $this->main_plotoutline = substr ($this->page["Title"], $plotoutline_s + 1, $plotoutline_e - $plotoutline_s - 1);
+      #$plotoutline_e = strpos ($this->page["Title"], "</p>", $plotoutline_s);
+      $plotoutline_e = strpos ($this->page["Title"], "</div>", $plotoutline_s);
+      $this->main_plotoutline = strip_tags(substr ($this->page["Title"], $plotoutline_s + 1, $plotoutline_e - $plotoutline_s - 1));
     }
     return $this->main_plotoutline;
   }
@@ -709,20 +729,22 @@ $responseBody = $response->getBody();
    * @return mixed rows (FALSE if table not found, array[0..n] of strings otherwise)
    */
   function get_table_rows ( $html, $table_start ){
-   $row_s = strpos ( $html, ">".$table_start."<");
+   $row_s = strpos ( $html, $table_start);
    $row_e = $row_s;
    if ( $row_s == 0 )  return FALSE;
-   $endtable = strpos($html, "</table>", $row_s);
+   $endtable = strpos($html, "</tbody>", $row_s);
    $i=0;
-   while ( ($row_e + 5 < $endtable) && ($row_s != 0) ){
-     $row_s = strpos ( $html, "<tr>", $row_s);
-     $row_e = strpos ($html, "</tr>", $row_s);
+   
+   $row_s = strpos ($html, "<tr>", $row_e);
+   $row_e = strpos ($html, "</tr>", $row_s);
+   while ( ($row_e < $endtable) && ($row_s != 0) ){
      $temp = trim(substr ($html, $row_s + 4 , $row_e - $row_s - 4));
-     if ( strncmp( $temp, "<td valign=",10) == 0 ){
+     if ( strncmp( $temp, "<td class=",10) == 0 ){
        $rows[$i] = $temp;
        $i++;
      }
-     $row_s = $row_e;
+     $row_s = strpos ($html, "<tr>", $row_e);
+     $row_e = strpos ($html, "</tr>", $row_s);
    }
    return $rows;
   }
@@ -734,23 +756,25 @@ $responseBody = $response->getBody();
    * @return mixed rows (FALSE if table not found, array[0..n] of strings otherwise)
    */
   function get_table_rows_cast ( $html, $table_start ){
-   $row_s = strpos ( $html, '<table class="cast">');
+   $row_s = strpos ( $html, '<table class="cast');
    $row_e = $row_s;
    if ( $row_s == 0 )  return FALSE;
-   $endtable = strpos($html, "</table>", $row_s);
+   $endtable = strpos($html, "</tbody>", $row_s);
    $i=0;
-   while ( ($row_e + 5 < $endtable) && ($row_s != 0) ){
-     $row_s = strpos ( $html, "<tr", $row_s);
-     $row_e = strpos ($html, "</tr>", $row_s);
+   $rows = array();
+   
+   $row_s = strpos ($html, "<tr class=", $row_e);
+   $row_e = strpos ($html, "</tr>", $row_s);
+   while ( ($row_e < $endtable) && ($row_s != 0) ){
      $temp = trim(substr ($html, $row_s , $row_e - $row_s));
-#     $row_x = strpos( $temp, '<td valign="middle"' );
-     $row_x = strpos( $temp, '<td class="nm">' );
+     $row_x = strpos( $temp, '<td class="itemprop"' );
      $temp = trim(substr($temp,$row_x));
      if ( strncmp( $temp, "<td class=",10) == 0 ){
        $rows[$i] = $temp;
        $i++;
      }
-     $row_s = $row_e;
+     $row_s = strpos ($html, "<tr class=", $row_e);
+     $row_e = strpos ($html, "</tr>", $row_s);
    }
    return $rows;
   }
@@ -843,6 +867,7 @@ $responseBody = $response->getBody();
    if ($this->credits_cast == "") {
     if ($this->page["Credits"] == "") $this->openpage ("Credits");
    }
+   $this->credits_cast = array();
    $cast_rows = $this->get_table_rows_cast($this->page["Credits"], "Cast");
    for ( $i = 0; $i < count ($cast_rows); $i++){
 	$cels = $this->get_row_cels ($cast_rows[$i]);
@@ -872,17 +897,16 @@ $responseBody = $response->getBody();
    $writing_rows = $this->get_table_rows($this->page["Credits"], "Writing credits");
    for ( $i = 0; $i < count ($writing_rows); $i++){
      $cels = $this->get_row_cels ($writing_rows[$i]);
-     if ( count ( $cels) > 2){
-       $wrt["imdb"] = $this->get_imdbname($cels[0]);
-       $wrt["name"] = strip_tags($cels[0]);
-       $role = strip_tags($cels[2]);
-       if ( $role == ""){
-         $wrt["role"] = NULL;
-       }else{
-         $wrt["role"] = $role;
-       }
-       $this->credits_writing[$i] = $wrt;
-     }
+     if (!isset ($cels[0])) return array();
+	 $wrt["imdb"] = $this->get_imdbname($cels[0]);
+	 $wrt["name"] = strip_tags($cels[0]);
+	 $role = strip_tags($cels[2]);
+	 if ( $role == ""){
+	  $wrt["role"] = NULL;
+	 }else{
+	  $wrt["role"] = $role;
+	 }
+	 $this->credits_writing[$i] = $wrt;
    }
    return $this->credits_writing;
   }
@@ -923,13 +947,13 @@ $responseBody = $response->getBody();
     if ($this->page["Credits"] == "") $this->openpage ("Credits");
    }
    $this->credits_composer = array();
-   $composer_rows = $this->get_table_rows($this->page["Credits"], "Original Music by");
+   $composer_rows = $this->get_table_rows($this->page["Credits"], "Music by");
    for ( $i = 0; $i < count ($composer_rows); $i++){
 	$cels = $this->get_row_cels ($composer_rows[$i]);
-	if ( count ( $cels) > 2){
+	if ( count ( $cels) > 1){
 		$wrt["imdb"] = $this->get_imdbname($cels[0]);
 		$wrt["name"] = strip_tags($cels[0]);
-		$role = strip_tags($cels[2]);
+		$role = strip_tags($cels[1]);
 		if ( $role == ""){
 			$wrt["role"] = NULL;
 		}else{
@@ -949,7 +973,8 @@ $responseBody = $response->getBody();
    if ($this->main_photo == "") {
     if ($this->page["Title"] == "") $this->openpage ("Title");
 #    $tag_s = strpos ($this->page["Title"], "<img border=\"0\" alt=\"cover\"");
-    $tag_s = strpos ($this->page["Title"], "<a name=\"poster\"");
+#    $tag_s = strpos ($this->page["Title"], "<a name=\"poster\"");
+    $tag_s = strpos ($this->page["Title"], "class=\"image\"");
     if ($tag_s == 0) return FALSE;
 #    $tag_s = strpos ($this->page["Title"], "http://ia.imdb.com/media",$tag_s);
     $tag_s = strpos ($this->page["Title"], "http://",$tag_s);
@@ -1011,7 +1036,7 @@ $responseBody = $response->getBody();
    {
     if ($this->page["Title"] == "") $this->openpage ("Title");
     $this->main_country = array();
-    $country_s = strpos($this->page["Title"],"/Sections/Countries/") -5;
+    $country_s = strpos($this->page["Title"],"Country:") -5;
     if ($country_s === FALSE) return array(); // no country found
     if ($country_s < 0) return array(); // no country found
 		//print($country_s);
@@ -1021,9 +1046,9 @@ $responseBody = $response->getBody();
     $country_s = 0;
     $country_e = 0;
     $i = 0;
-    while (strpos ($block, "/Sections/Countries/", $country_e) > $country_s) 
+    while (strpos ($block, "country/", $country_e) > $country_s) 
     {
-			$country_s = strpos ($block, "/Sections/Countries/", $country_s);
+			$country_s = strpos ($block, "country/", $country_s);
 			$country_s = strpos ($block, ">", $country_s);
 			$country_e = strpos ($block, "<", $country_s);
 			$this->main_country[$i] = substr ($block, $country_s + 1, $country_e - $country_s - 1);
@@ -1040,7 +1065,7 @@ $responseBody = $response->getBody();
   function alsoknow () {
    if ($this->main_alsoknow == "") {
     if ($this->page["Title"] == "") $this->openpage ("Title");
-    $ak_s = strpos ($this->page["Title"], "Also Known As:</h5>");
+    $ak_s = strpos ($this->page["Title"], "Also Known As:</h4>");
     if ($ak_s>0) $ak_s += 19;
     if ($ak_s == 0) $ak_s = strpos ($this->page["Title"], "Alternativ:");
     if ($ak_s == 0) return array();
@@ -1213,7 +1238,7 @@ $responseBody = $response->getBody();
        if ($header = $be->getResponseHeader("Location")){
         if (strpos($header,$this->imdbsite."/find?")) {
           return $this->results($header);
-          break(4);
+          //break(4);
         }
         #--- @moonface variant (not tested)
         # $idpos = strpos($header, "/Title?") + 7;
