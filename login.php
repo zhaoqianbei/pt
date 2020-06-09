@@ -1,6 +1,8 @@
 <?php
+error_reporting (E_ALL & ~E_NOTICE);
 require_once("include/bittorrent.php");
 dbconn();
+
 $langid = 0 + $_GET['sitelanguage'];
 if ($langid)
 {
@@ -21,11 +23,12 @@ $s = "<select name=\"sitelanguage\" onchange='submit()'>\n";
 
 $langs = langlist("site_lang");
 
-foreach ($langs as $row)
-{
-	if ($row["site_lang_folder"] == get_langfolder_cookie()) $se = "selected=\"selected\""; else $se = "";
-	$s .= "<option value=\"". $row["id"] ."\" ". $se. ">" . htmlspecialchars($row["lang_name"]) . "</option>\n";
-}
+	foreach ($langs as $row)
+	{
+		if ($row["site_lang_folder"] == get_langfolder_cookie()) $se = "selected=\"selected\""; else $se = "";
+		$s .= "<option value=\"". $row["id"] ."\" ". $se. ">" . htmlspecialchars($row["lang_name"]) . "</option>\n";
+	}
+
 $s .= "\n</select>";
 ?>
 <form method="get" action="<?php echo $_SERVER['PHP_SELF'] ?>">
@@ -79,12 +82,14 @@ if (isset($returnto))
 
 ?>
 </form>
+<p>[<b><a href="complains.php"><?= $lang_login['text_complain'] ?></a></b>]</p>
 <p><?php echo $lang_login['p_no_account_signup']?></p>
 <?php
 if ($smtptype != 'none'){
 ?>
 <p><?php echo $lang_login['p_forget_pass_recover']?></p>
 <p><?php echo $lang_login['p_resend_confirm']?></p>
+<p><?= $lang_login['text_contact'] . htmlspecialchars($SITEEMAIL) ?></p>
 <?php
 }
 if ($showhelpbox_main != 'no'){?>

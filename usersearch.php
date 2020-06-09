@@ -782,7 +782,7 @@ if (count($_GET) > 0 && !$_GET['h'])
       if ($user['last_access'] == '0000-00-00 00:00:00')
       	$user['last_access'] = '---';
 
-      if ($user['ip'])
+      if ($user['ip'] && ip2long($user['ip']))
       {
 	    	$nip = ip2long($user['ip']);
         $auxres = sql_query("SELECT COUNT(*) FROM bans WHERE $nip >= first AND $nip <= last") or sqlerr(__FILE__, __LINE__);

@@ -1,13 +1,14 @@
 <?php
-require_once("include/bittorrent.php");
-dbconn(true);
-require_once(get_langfile_path("torrents.php"));
+if(!isset($sectiontype)){
+    require 'include/bittorrent.php';
+    dbconn(true);
+    $sectiontype = $browsecatmode;
+}
+require get_langfile_path("torrents.php");
 loggedinorreturn();
 parked();
-if ($showextinfo['imdb'] == 'yes')
-	require_once ("imdb/imdb.class.php");
+if ($showextinfo['imdb'] == 'yes') require_once ("imdb/imdb.class.php");
 //check searchbox
-$sectiontype = $browsecatmode;
 $showsubcat = get_searchbox_value($sectiontype, 'showsubcat');//whether show subcategory (i.e. sources, codecs) or not
 $showsource = get_searchbox_value($sectiontype, 'showsource'); //whether show sources or not
 $showmedium = get_searchbox_value($sectiontype, 'showmedium'); //whether show media or not
@@ -62,18 +63,18 @@ if ($_GET['sort'] && $_GET['type']) {
 
 	if($column == "owner")
 	{
-		$orderby = "ORDER BY pos_state DESC, torrents.anonymous, users.username " . $ascdesc;
+		$orderby = "ORDER BY pos_group DESC, torrents.anonymous, users.username " . $ascdesc;
 	}
 	else
 	{
-		$orderby = "ORDER BY pos_state DESC, torrents." . $column . " " . $ascdesc;
+		$orderby = "ORDER BY pos_group DESC, torrents." . $column . " " . $ascdesc;
 	}
 
 	$pagerlink = "sort=" . intval($_GET['sort']) . "&type=" . $linkascdesc . "&";
 
 } else {
 
-	$orderby = "ORDER BY pos_state DESC, torrents.id DESC";
+	$orderby = "ORDER BY pos_group DESC, torrents.id DESC";
 	$pagerlink = "";
 
 }
@@ -848,14 +849,22 @@ if ($count)
 	//echo $addparam;
 
 	list($pagertop, $pagerbottom, $limit) = pager($torrentsperpage, $count, "?" . $addparam);
-if ($allsec == 1 || $enablespecial != 'yes'){
-	$query = "SELECT torrents.id, torrents.sp_state, torrents.promotion_time_type, torrents.promotion_until, torrents.banned, torrents.picktype, torrents.pos_state, torrents.category, torrents.source, torrents.medium, torrents.codec, torrents.standard, torrents.processing, torrents.team, torrents.audiocodec, torrents.leechers, torrents.seeders, torrents.name, torrents.small_descr, torrents.times_completed, torrents.size, torrents.added, torrents.comments,torrents.anonymous,torrents.owner,torrents.url,torrents.cache_stamp FROM torrents ".($search_area == 3 || $column == "owner" ? "LEFT JOIN users ON torrents.owner = users.id " : "")." $where $orderby $limit";
-}
-else{
-	$query = "SELECT torrents.id, torrents.sp_state, torrents.promotion_time_type, torrents.promotion_until, torrents.banned, torrents.picktype, torrents.pos_state, torrents.category, torrents.source, torrents.medium, torrents.codec, torrents.standard, torrents.processing, torrents.team, torrents.audiocodec, torrents.leechers, torrents.seeders, torrents.name, torrents.small_descr, torrents.times_completed, torrents.size, torrents.added, torrents.comments,torrents.anonymous,torrents.owner,torrents.url,torrents.cache_stamp FROM torrents ".($search_area == 3 || $column == "owner" ? "LEFT JOIN users ON torrents.owner = users.id " : "")." LEFT JOIN categories ON torrents.category=categories.id $where $orderby $limit";
-}
+	
+	$self_snatched_data_cache = 'self_snatched_data_'.$CURUSER['id'];
+	if(!$self_snatched_data = $Cache->get_value($self_snatched_data_cache)){
+		$res = sql_query('SELECT `torrentid`, `to_go` FROM `snatched` WHERE `userid` = '.$CURUSER['id']) or sqlerr(__FILE__,__LINE__);
+		$self_snatched_data = array();
+		while($row = mysql_fetch_row($res)) $self_snatched_data[$row[0]] = $row[1];
+		$Cache->cache_value($self_snatched_data_cache,$self_snatched_data,300);
+	}
+	if ($allsec == 1 || $enablespecial != 'yes'){
+		$query = "SELECT torrents.id, torrents.sp_state, torrents.promotion_time_type, torrents.promotion_until, torrents.banned, torrents.picktype, torrents.pos_group, torrents.pos_until, torrents.category, torrents.source, torrents.medium, torrents.codec, torrents.standard, torrents.processing, torrents.team, torrents.audiocodec, torrents.leechers, torrents.seeders, torrents.name, torrents.small_descr, torrents.times_completed, torrents.size, torrents.added, torrents.comments,torrents.anonymous,torrents.owner,torrents.url,torrents.cache_stamp, torrents.hr, torrents.douban_id, torrents.douban_rating, torrents.imdb_id, torrents.imdb_rating FROM torrents ".($search_area == 3 || $column == "owner" ? "LEFT JOIN users ON torrents.owner = users.id " : "")." $where $orderby $limit";
+	}
+	else{
+		$query = "SELECT torrents.id, torrents.sp_state, torrents.promotion_time_type, torrents.promotion_until, torrents.banned, torrents.picktype, torrents.pos_group, torrents.pos_until, torrents.category, torrents.source, torrents.medium, torrents.codec, torrents.standard, torrents.processing, torrents.team, torrents.audiocodec, torrents.leechers, torrents.seeders, torrents.name, torrents.small_descr, torrents.times_completed, torrents.size, torrents.added, torrents.comments,torrents.anonymous,torrents.owner,torrents.url,torrents.cache_stamp, torrents.hr, torrents.douban_id, torrents.douban_rating, torrents.imdb_id, torrents.imdb_rating FROM torrents ".($search_area == 3 || $column == "owner" ? "LEFT JOIN users ON torrents.owner = users.id " : "")." LEFT JOIN categories ON torrents.category=categories.id $where $orderby $limit";
+	}
 
-	$res = sql_query($query) or die(mysql_error());
+		$res = sql_query($query) or sqlerr(__FILE__,__LINE__);
 }
 else
 	unset($res);
@@ -864,20 +873,21 @@ if (isset($searchstr))
 elseif ($sectiontype == $browsecatmode)
 	stdhead($lang_torrents['head_torrents']);
 else stdhead($lang_torrents['head_music']);
-print("<table align=\"left\" width=\"1200\" class=\"main\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\"><tr><td class=\"embedded\">");
+print("<table align=\"center\" width=\"1200\" class=\"main\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\"><tr><td class=\"embedded\">");
 if ($allsec != 1 || $enablespecial != 'yes'){ //do not print searchbox if showing bookmarked torrents from all sections;
 ?>
+<a class="fcs" href="https://www.zhaoqianbei.com/Index/xiaokeZhuye/k/99221774" target="_blank"><i class="icon pt-lianjie"></i> 关于PT下载相关问题，从入门到发药</a>
 <div class="social-share tal">分享给想分享的人：</div>
 
 <script type="text/javascript">
 var $config = {
 	url: window.location.href,
-	source: "找前辈网 - https://www.zhaoqianbei.com！", 
-	title: "PT时间：高速下载各种教程，高清影视资源！", 
-	description:"PT时间：免费下载各种教程，高清影视！", 
-	image: "https://www.pttime.org/ico.png", 
-	sites: ["wechat", "qq", "qzone", "weibo"], 
-	disabled: ["google", "facebook", "twitter"], 
+	source: "找前辈网 - https://www.zhaoqianbei.com！",
+	title: "PT时间：高速下载各种教程，高清影视资源！",
+	description:"PT时间：免费下载各种教程，高清影视！",
+	image: "https://www.pttime.org/ico.png",
+	sites: ["wechat", "qq", "qzone", "weibo"],
+	disabled: ["google", "facebook", "twitter"],
 	wechatQrcodeTitle: "微信扫一扫：分享",
 	wechatQrcodeHelper: "<p>微信里点“发现”，扫一下</p><p>二维码便可将本文分享至朋友圈。</p>",
 	target:"_blank"};
@@ -887,7 +897,112 @@ var $config = {
 	<table border="1" class="searchbox tac" cellspacing="0" cellpadding="5" width="100%">
 		<tbody>
 		<tr>
+		<td class="colhead" align="center" colspan="2"><a href="javascript: klappe_news('searchboxmain')"><img class="plus" src="pic/trans.gif" id="picsearchboxmain" alt="Show/Hide" /><?php echo $lang_torrents['text_search_box'] ?></a></td>
+		</tr></tbody>
+		<tbody id="ksearchboxmain" style="display: none">
+		<tr>
 			<td class="rowfollow" align="left">
+				<table>
+					<?php
+						function printcat($name, $listarray, $cbname, $wherelistina, $btname, $showimg = false)
+						{
+							global $catpadding,$catsperrow,$lang_torrents,$CURUSER,$CURLANGDIR,$catimgurl;
+
+							print("<tr><td class=\"embedded\" colspan=\"".$catsperrow."\" align=\"left\"><b>".$name."</b></td></tr><tr>");
+							$i = 0;
+							foreach($listarray as $list){
+								if ($i && $i % $catsperrow == 0){
+									print("</tr><tr>");
+								}
+								print("<td align=\"left\" class=\"bottom\" style=\"padding-bottom: 4px; padding-left: ".$catpadding."px;\"><input type=\"checkbox\" id=\"".$cbname.$list[id]."\" name=\"".$cbname.$list[id]."\"" . (in_array($list[id],$wherelistina) ? " checked=\"checked\"" : "") . " value=\"1\" />".($showimg ? return_category_image($list[id], "?") : "<a title=\"" .$list[name] . "\" href=\"?".$cbname."=".$list[id]."\">".$list[name]."</a>")."</td>\n");
+								$i++;
+							}
+							$checker = "<input name=\"".$btname."\" value='" .  $lang_torrents['input_check_all'] . "' class=\"btn medium\" type=\"button\" onclick=\"javascript:SetChecked('".$cbname."','".$btname."','". $lang_torrents['input_check_all'] ."','" . $lang_torrents['input_uncheck_all'] . "',-1,10)\" />";
+							print("<td colspan=\"2\" class=\"bottom\" align=\"left\" style=\"padding-left: 15px\">".$checker."</td>\n");
+							print("</tr>");
+						}
+					printcat($lang_torrents['text_category'],$cats,"cat",$wherecatina,"cat_check",true);
+
+					if ($showsubcat){
+						if ($showsource)
+							printcat($lang_torrents['text_source'], $sources, "source", $wheresourceina, "source_check");
+						if ($showmedium)
+							printcat($lang_torrents['text_medium'], $media, "medium", $wheremediumina, "medium_check");
+						if ($showcodec)
+							printcat($lang_torrents['text_codec'], $codecs, "codec", $wherecodecina, "codec_check");
+						if ($showaudiocodec)
+							printcat($lang_torrents['text_audio_codec'], $audiocodecs, "audiocodec", $whereaudiocodecina, "audiocodec_check");
+						if ($showstandard)
+							printcat($lang_torrents['text_standard'], $standards, "standard", $wherestandardina, "standard_check");
+						if ($showprocessing)
+							printcat($lang_torrents['text_processing'], $processings, "processing", $whereprocessingina, "processing_check");
+						if ($showteam)
+							printcat($lang_torrents['text_team'], $teams, "team", $whereteamina, "team_check");
+					}
+					?>
+				</table>
+			</td>
+			
+			<td class="rowfollow" valign="middle">
+				<table>
+					<tr>
+						<td class="bottom" style="padding: 1px;padding-left: 10px">
+							<font class="medium"><?php echo $lang_torrents['text_show_dead_active'] ?></font>
+						</td>
+				 	</tr>				
+					<tr>
+						<td class="bottom" style="padding: 1px;padding-left: 10px">
+							<select class="med" name="incldead" style="width: 100px;">
+								<option value="0"><?php echo $lang_torrents['select_including_dead'] ?></option>
+								<option value="1"<?php print($include_dead == 1 ? " selected=\"selected\"" : ""); ?>><?php echo $lang_torrents['select_active'] ?> </option>
+								<option value="2"<?php print($include_dead == 2 ? " selected=\"selected\"" : ""); ?>><?php echo $lang_torrents['select_dead'] ?></option>
+							</select>
+						</td>
+				 	</tr>
+				 	<tr>
+						<td class="bottom" style="padding: 1px;padding-left: 10px">
+							<br />
+						</td>
+				 	</tr>
+					<tr>
+						<td class="bottom" style="padding: 1px;padding-left: 10px">
+							<font class="medium"><?php echo $lang_torrents['text_show_special_torrents'] ?></font>
+						</td>
+				 	</tr>
+				 	<tr>
+						<td class="bottom" style="padding: 1px;padding-left: 10px">
+							<select class="med" name="spstate" style="width: 100px;">
+								<option value="0"><?php echo $lang_torrents['select_all'] ?></option>
+<?php echo promotion_selection($special_state, 0)?>
+							</select>
+						</td>
+					</tr>
+				 	<tr>
+						<td class="bottom" style="padding: 1px;padding-left: 10px">
+							<br />
+						</td>
+					</tr>
+					<tr>
+						<td class="bottom" style="padding: 1px;padding-left: 10px">
+							<font class="medium"><?php echo $lang_torrents['text_show_bookmarked'] ?></font>
+						</td>
+				 	</tr>
+				 	<tr>
+						<td class="bottom" style="padding: 1px;padding-left: 10px">
+							<select class="med" name="inclbookmarked" style="width: 100px;">
+								<option value="0"><?php echo $lang_torrents['select_all'] ?></option>
+								<option value="1"<?php print($inclbookmarked == 1 ? " selected=\"selected\"" : ""); ?>><?php echo $lang_torrents['select_bookmarked'] ?></option>
+								<option value="2"<?php print($inclbookmarked == 2 ? " selected=\"selected\"" : ""); ?>><?php echo $lang_torrents['select_bookmarked_exclude'] ?></option>
+							</select>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		</tbody>
+		<tbody>
+		<tr>
+			<td class="rowfollow" align="center">
 				<table>
 					<tr>
 						<td class="embedded">
@@ -987,14 +1102,15 @@ elseif($inclbookmarked == 2)
 if ($count) {
 	print($pagertop);
 	if ($sectiontype == $browsecatmode)
-		torrenttable($res, "torrents");
+		torrenttable($res, "torrents", $self_snatched_data);
 	elseif ($sectiontype == $specialcatmode) 
-		torrenttable($res, "music");
-	else torrenttable($res, "bookmarks");
+		torrenttable($res, "music", $self_snatched_data);
+	else torrenttable($res, "bookmarks", $self_snatched_data);
 	print($pagerbottom);
 }
 else {
 	if (isset($searchstr)) {
+		print("<br />");
 		stdmsg($lang_torrents['std_search_results_for'] . $searchstr_ori . "\"",$lang_torrents['std_try_again']);
 	}
 	else {

@@ -88,8 +88,21 @@ else
 	}
 	$date=sqlesc(time());
 	$text=trim($_GET["shbox_text"]);
-
-	sql_query("INSERT INTO shoutbox (userid, date, text, type) VALUES (" . sqlesc($userid) . ", $date, " . sqlesc($text) . ", ".sqlesc($type).")") or sqlerr(__FILE__, __LINE__);
+//logout fix
+if (stripos(htmlspecialchars($text), "logout.php")>0 )
+	{
+	$ip = getip();
+	$text ='我是IP为：'.$ip.'的渣渣，想入侵被发现了！I was trying to hack in and were catched by System.';
+	write_log("Someone is hacking shoutbox with logout.php.ID is ".$CURUSER[id].".Name is ".$CURUSER[username].".IP was banned - IP : ".getip(),'mod');
+	$firstlong_ban = ip2long(getip());
+	$lastlong_ban = ip2long(getip());
+	$comment_ban = sqlesc("Hacking with logout.php in shoutbox.ID is ".$CURUSER[id].".Name is ".$CURUSER[username]);
+	$added_ban = sqlesc(date("Y-m-d H:i:s"));
+	sql_query("INSERT INTO bans (added, addedby, first, last, comment) VALUES($added_ban, 0, $firstlong_ban, $lastlong_ban, $comment_ban)") or sqlerr(__FILE__, __LINE__);
+	}
+//	sql_query("INSERT INTO shoutbox (userid, date, text, type) VALUES (" . sqlesc($userid) . ", $date, " . sqlesc($text) . ", ".sqlesc($type).")") or sqlerr(__FILE__, __LINE__);
+$getip=getip();
+	sql_query("INSERT INTO shoutbox (userid, date, text, type, ip) VALUES (" . sqlesc($userid) . ", $date, " . sqlesc($text) . ", ".sqlesc($type).", ".sqlesc($getip).")") or sqlerr(__FILE__, __LINE__);
 	print "<script type=\"text/javascript\">parent.document.forms['shbox'].shbox_text.value='';</script>";
 }
 }
@@ -121,11 +134,13 @@ else
 			$del="[<a href=\"shoutbox.php?del=".$arr[id]."\">".$lang_shoutbox['text_del']."</a>]";
 		}
 		if ($arr["userid"]) {
-			$username = get_username($arr["userid"],false,true,true,true,false,false,"",true);
+			//$username = get_username($arr["userid"],false,true,true,true,false,false,"",true);
+			$username = (get_user_class() >= UC_MODERATOR?"(".$arr["ip"].")":"").get_username($arr["userid"],false,true,true,true,false,false,"",true);
 			if ($_GET["type"] != 'helpbox' && $arr["type"] == 'hb')
 				$username .= $lang_shoutbox['text_to_guest'];
 			}
-		else $username = $lang_shoutbox['text_guest'];
+		//else $username = $lang_shoutbox['text_guest'];
+		else $username = $lang_shoutbox['text_guest']."(".$arr["ip"].")";
 		if ($CURUSER['timetype'] != 'timealive')
 			$time = strftime("%m.%d %H:%M",$arr["date"]);
 		else $time = get_elapsed_time($arr["date"]).$lang_shoutbox['text_ago'];

@@ -64,7 +64,9 @@ elseif($_SERVER["REQUEST_METHOD"] == "GET" && $take_recover && isset($_GET["id"]
 	$md5 = $_GET["secret"];
 
 	if (!$id)
-	httperr();
+	{
+		httperr();
+	}
 
 	$res = sql_query("SELECT username, email, passhash, editsecret FROM users WHERE id = " . sqlesc($id)) or sqlerr(__FILE__, __LINE__);
 	$arr = mysql_fetch_array($res) or httperr();
@@ -73,9 +75,9 @@ elseif($_SERVER["REQUEST_METHOD"] == "GET" && $take_recover && isset($_GET["id"]
 
 	$sec = hash_pad($arr["editsecret"]);
 	if (preg_match('/^ *$/s', $sec))
-	httperr();
+		httperr();
 	if ($md5 != md5($sec . $email . $arr["passhash"] . $sec))
-	httperr();
+		httperr();
 
 	// generate new password;
 	$chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";

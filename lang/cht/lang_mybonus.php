@@ -6,6 +6,8 @@ $lang_mybonus = array
 	'std_karma_system_disabled' => "魔力值系統當前處於關閉中。",
 	'std_points_active' => "不過你的魔力值仍在計算中。",
 	'text_success_upload' => "祝賀你，你成功增加了<b>上傳值</b>！",
+	'text_success_download' => "祝賀你，你成功增加了<b>下載值</b>！",
+	'text_success_download_reduce' => "祝賀你，你成功減少了<b>下載值</b>！",
 	'text_success_invites' => "祝賀你，你獲得了<b>1</b>個新的邀請名額！",
 	'text_success_vip' => "祝賀你，你獲得了一個月的",
 	'text_success_vip_two' => "資格！",
@@ -76,6 +78,11 @@ $lang_mybonus = array
 	'text_uploaded_note' => "如果有足夠的魔力值，你可以用它來換取上傳量。交易完成後，你的魔力值會減少，上傳量則會增加。",
 	'text_uploaded_two' => "5.0 GB上傳量",
 	'text_uploaded_three' => "10.0 GB上傳量",
+	'text_uploaded_four' => "100.0 GB上傳量",
+	'text_downloaded_one' => "增加100.0 GB下載量",
+	'text_downloaded_reduce' => "減少100.0 GB下載量",
+	'text_downloaded_note' => "如果有足夠的魔力值，你可以用它來換取下載量。交易完成後，你的魔力值會減少，下載量則會增加。",
+	'text_downloaded_reduce_note' => "如果有足夠的魔力值，你可以用它來減少下載量。交易完成後，你的魔力值會減少，下載量也會減少。",
 	'text_buy_invite' => "1個邀請名額",
 	'text_buy_invite_note' => "如果有足夠的魔力值，你可以用它來換取邀請名額。交易完成後，你的魔力值會減少，邀請名額數則會增加。",
 	'text_custom_title' => "自定義頭銜",
@@ -86,6 +93,7 @@ $lang_mybonus = array
 	'text_bonus_gift_note' => "可能你不需要魔力值，為什麼不把它送給那些需要的人呢？你可以把自己的魔力值作為禮物送給別人。交易完成後，你的魔力值會減少，禮物接收者的魔力值則會增加。同時，接收者會收到一條關於你的饋贈的短訊。",
 	'text_error' => "錯誤",
 	'text_ratio_too_high' => "分享率已很高",
+	'text_downloaded_too_low' => "下載量已很低",
 	'text_bonus_formula_one' => "每小時獲得的魔力值點數由下面的公式給出<br />&nbsp;&nbsp;&nbsp;&nbsp;<img src=pic/bonusformulaa.png alt=\"A = sigma( ( 1 - 10 ^ ( - Ti / T0 ) ) * Si * ( 1 + sqrt( 2 ) * 10 ^ ( - ( Ni - 1 ) / ( N0 - 1 ) ) )\" title=\"A = sigma( ( 1 - 10 ^ ( - Ti / T0 ) ) * Si * ( 1 + sqrt( 2 ) * 10 ^ ( - ( Ni - 1 ) / ( N0 - 1 ) ) )\"><br />&nbsp;&nbsp;&nbsp;&nbsp;<img src=pic/bonusformulab.png alt=\"B = B0 * 2 / pi * arctan( A / L )\" title=\"B = B0 * 2 / pi * arctan( A / L )\"><br />
 式中<ul><li><b>A</b>為中間變量</li><li><b>Ti</b>為第<b>i</b>個種子的生存時間, 即自種子發布起到現在所經過的時間, 單位是周</li><li><b>T0</b>為參數。<b>T0</b> = ",
 	'text_bonus_formula_two' => "</li><li><b>Si</b>為第<b>i</b>個種子的大小，單位是GB</li><li><b>Ni</b>為第<b>i</b>個種子當前的做種者數</li><li><b>N0</b>為參數。<b>N0</b> = ",
@@ -122,7 +130,11 @@ $lang_mybonus = array
 	'bonus_amount_not_allowed_two' => "魔力值數量不允許。你每次只能贈送1000.0至50000.0個魔力值。",
 	'bonus_ratio_not_allowed' => "分享率不符合要求！只有分享率低于0.8的用戶需要慈善輔助說明。",
 	'std_no_users_need_charity' => "暫時沒有需要慈善輔助說明的用戶。",
-	'text_success_charity' => "謝謝！感謝你的慷慨捐贈。"
+	'text_success_charity' => "謝謝！感謝你的慷慨捐贈。",
+	'text_exchange_hr' => '消除一次H&R記錄',
+	'text_exchange_hr_ok' => '已使用魔力值消除一次H&R記錄',
+	'text_exchange_hr_btn' => '消除',
+	'text_exchange_hr_btn_disabled' => '無需消除',
 );
 
 ?>

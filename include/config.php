@@ -3,7 +3,7 @@
 if(!defined('IN_TRACKER'))
 die('Hacking attempt!');
 
-$CONFIGURATIONS = array('ACCOUNT', 'ADVERTISEMENT', 'ATTACHMENT', 'AUTHORITY', 'BASIC', 'BONUS', 'CODE', 'MAIN', 'SECURITY', 'SMTP', 'TORRENT', 'TWEAK');
+$CONFIGURATIONS = array('ACCOUNT', 'ADVERTISEMENT', 'ATTACHMENT', 'AUTHORITY', 'BASIC', 'BONUS', 'CODE', 'MAIN', 'SECURITY', 'SMTP', 'TORRENT', 'TWEAK', 'EXAM');
 function ReadConfig ($configname = NULL) {
 	global $CONFIGURATIONS;
 	if ($configname) {
@@ -127,9 +127,9 @@ $extforumurl = $MAIN['extforumurl'];
 $deflang = $MAIN['defaultlang'];
 $defcss = $MAIN['defstylesheet'];
 $enabledonation = $MAIN['donation'];
-$enablespecial = $MAIN['spsct'];
 $browsecatmode = (int)$MAIN['browsecat'];
 $specialcatmode = (int)$MAIN['specialcat'];
+$enablespecial = $specialcatmode > 0 ? 'yes' : 'no';
 $waitsystem = $MAIN['waitsystem'];
 $maxdlsystem = $MAIN['maxdlsystem'];
 $bitbucket = $MAIN['bitbucket'];
@@ -140,7 +140,7 @@ $invite_count = $MAIN['invite_count'];
 $invite_timeout = $MAIN['invite_timeout'];
 $seeding_leeching_time_calc_start = $MAIN['seeding_leeching_time_calc_start'];
 $logo_main = $MAIN['logo'];
-
+$secondary_zone_name_main = isset($MAIN['secondary_name']) ? $MAIN['secondary_name'] : 'ＬＩＶＥ';
 
 $emailnotify_smtp = $SMTP['emailnotify'];
 $smtptype = $SMTP['smtptype'];
@@ -209,6 +209,7 @@ $buyinvite_class = $AUTHORITY['buyinvite'];
 $seebanned_class = $AUTHORITY['seebanned'];
 $againstoffer_class = $AUTHORITY['againstoffer'];
 $userbar_class = $AUTHORITY['userbar'];
+$access_secondary_zone_class = isset($AUTHORITY['access_secondary_zone']) ? $AUTHORITY['access_secondary_zone'] : UC_VIP;
 
 $where_tweak = $TWEAK['where'];
 $iplog1 = $TWEAK['iplog1'];
@@ -292,6 +293,9 @@ $funboxreward_bonus = $BONUS['funboxreward'];
 $onegbupload_bonus = $BONUS['onegbupload'];
 $fivegbupload_bonus = $BONUS['fivegbupload'];
 $tengbupload_bonus = $BONUS['tengbupload'];
+$hundredgbupload_bonus = $BONUS['hundredgbupload'];
+$hundredgbdownload_bonus = $BONUS['hundredgbdownload'];
+$hundredgbdownload_reduce = $BONUS['hundredgbdownload_reduce'];
 $ratiolimit_bonus = $BONUS['ratiolimit'];
 $dlamountlimit_bonus = $BONUS['dlamountlimit'];
 $oneinvite_bonus = $BONUS['oneinvite'];
@@ -302,6 +306,10 @@ $basictax_bonus = 0+$BONUS['basictax'];
 $taxpercentage_bonus = 0+$BONUS['taxpercentage'];
 $prolinkpoint_bonus = $BONUS['prolinkpoint'];
 $prolinktime_bonus = $BONUS['prolinktime'];
+$attendance_initial_bonus = isset($BONUS['attendance_initial']) ? (int) $BONUS['attendance_initial'] : 10;
+$attendance_step_bonus = isset($BONUS['attendance_step']) ? (int) $BONUS['attendance_step'] : 5;
+$attendance_max_bonus = isset($BONUS['attendance_max']) ? (int) $BONUS['attendance_max'] : 1000;
+$attendance_continuous_bonus = isset($BONUS['attendance_continuous']) && is_array($BONUS['attendance_continuous']) ? $BONUS['attendance_continuous'] : array(10 => 200, 20 => 500, 30 => 1000);
 
 $neverdelete_account = $ACCOUNT['neverdelete'];
 $neverdeletepacked_account = $ACCOUNT['neverdeletepacked'];
@@ -381,6 +389,28 @@ $thirtypercentleechbecome_torrent = $TORRENT['thirtypercentleechbecome'];
 $normalbecome_torrent = $TORRENT['normalbecome'];
 $uploaderdouble_torrent = $TORRENT['uploaderdouble'];
 $deldeadtorrent_torrent = $TORRENT['deldeadtorrent'];
+
+$count_days_hnr = isset($TORRENT['count_days_hnr']) ? intval($TORRENT['count_days_hnr']) : 14;
+$release_days_hnr = isset($TORRENT['release_days_hnr']) ? intval($TORRENT['release_days_hnr']) : 30;
+$seeding_hours_hnr = isset($TORRENT['seeding_hours_hnr']) ? intval($TORRENT['seeding_hours_hnr']) : 48;
+$ratio_hnr = isset($TORRENT['ratio_hnr']) ? floatval($TORRENT['ratio_hnr']) : 2.0;
+$ban_hnr = isset($TORRENT['ban_hnr']) ? intval($TORRENT['ban_hnr']) : 10;
+$price_hnr = isset($TORRENT['price_hnr']) ? intval($TORRENT['price_hnr']) : 10000;
+$choose_userclass_hnr = isset($TORRENT['choose_userclass_hnr']) ? intval($TORRENT['choose_userclass_hnr']) : UC_UPLOADER;
+$bypass_userclass_hnr = isset($TORRENT['bypass_userclass_hnr']) ? intval($TORRENT['bypass_userclass_hnr']) : UC_VIP;
+
+$enabled_exam = isset($EXAM['enabled']) ? (bool) $EXAM['enabled'] : false;
+$deadline_exam = isset($EXAM['deadline']) ? (int) $EXAM['deadline'] : 30;
+$upload_exam = isset($EXAM['upload']) ? (int) $EXAM['upload'] : 30;
+$download_exam = isset($EXAM['download']) ? (int) $EXAM['download'] : 30;
+$bonus_exam = isset($EXAM['bonus']) ? (int) $EXAM['bonus'] : 3000;
+$sltr_exam = isset($EXAM['sltr']) ? (float) $EXAM['sltr'] : 5;
+
+$global_deadline_exam = isset($EXAM['global_deadline']) ? (int) $EXAM['global_deadline'] : 0;
+$global_upload_exam = isset($EXAM['global_upload']) ? (int) $EXAM['global_upload'] : 0;
+$global_download_exam = isset($EXAM['global_download']) ? (int) $EXAM['global_download'] : 0;
+$global_bonus_exam = isset($EXAM['global_bonus']) ? (int) $EXAM['global_bonus'] : 0;
+$global_sltr_exam = isset($EXAM['global_sltr']) ? (float) $EXAM['global_sltr'] : 0;
 
 foreach ($CONFIGURATIONS as $CONFIGURATION) {
 	unset($GLOBALS[$CONFIGURATION]);

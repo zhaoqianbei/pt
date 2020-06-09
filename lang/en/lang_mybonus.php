@@ -6,6 +6,8 @@ $lang_mybonus = array
 	'std_karma_system_disabled' => "Karma Bonus Point System is currently disabled. ",
 	'std_points_active' => "However your points is still active.",
 	'text_success_upload' => "Congratulations! You have just increased your <b>Uploaded Amount</b>!",
+	'text_success_download' => "Congratulations! You have just increased your <b>Download Amount</b>!",
+	'text_success_download_reduce' => "Congratulations! You have just reduced your <b>Download Amount</b>!",
 	'text_success_invites' => "Congratulations! You have got yourself <b>1</b> new invite!",
 	'text_success_vip' => "Congratulations! You have got yourself ",
 	'text_success_vip_two' => " status for one month!",
@@ -76,6 +78,11 @@ $lang_mybonus = array
 	'text_uploaded_note' => "With enough bonus points acquired, you are able to exchange them for an Upload Credit. The points are then removed from your Bonus Bank and the credit is added to your total uploaded amount.",
 	'text_uploaded_two' => "5.0 GB Uploaded",
 	'text_uploaded_three' => "10.0 GB Uploaded",
+	'text_uploaded_four' => "100.0 GB Uploaded",
+	'text_downloaded_one' => "add 100.0 GB Doloaded",
+	'text_downloaded_reduce' => "reduce 100.0 GB Doloaded",
+	'text_downloaded_note' => "With enough bonus points acquired, you are able to exchange them for an Download Credit. The points are then removed from your Bonus Bank and the credit is added to your total downloaded amount.",
+	'text_downloaded_reduce_note' => "With enough bonus points acquired, you are able to exchange them for an Download Reduce. The points are then removed from your Bonus Bank and your total downloaded amount is reduced too.",
 	'text_buy_invite' => "1 Invite",
 	'text_buy_invite_note' => "With enough bonus points acquired, you are able to exchange them for a few invites. The points are then removed from your Bonus Bank and the invitations are added to your invites amount.",
 	'text_custom_title' => "Custom Title!",
@@ -86,6 +93,7 @@ $lang_mybonus = array
 	'text_bonus_gift_note' => "Well perhaps you don't need the upload credit, but you know somebody that could use the Karma boost! You are now able to give your Karma credits as a gift! The points are then removed from your Bonus Bank and added to the account of a user of your choice! And they receive a PM with all the info as well as who it came from...",
 	'text_error' => "Error",
 	'text_ratio_too_high' => "Your ratio is high",
+	'text_downloaded_too_low' => "You downloaded is too low",
 	'text_bonus_formula_one' => "The number of karma points gained per hour is given by the following formula<br />&nbsp;&nbsp;&nbsp;&nbsp;<img src=\"pic/bonusformulaa.png\" alt=\"A = sigma( ( 1 - 10 ^ ( - Ti / T0 ) ) * Si * ( 1 + sqrt( 2 ) * 10 ^ ( - ( Ni - 1 ) / ( N0 - 1 ) ) )\" title=\"A = sigma( ( 1 - 10 ^ ( - Ti / T0 ) ) * Si * ( 1 + sqrt( 2 ) * 10 ^ ( - ( Ni - 1 ) / ( N0 - 1 ) ) )\" /><br />&nbsp;&nbsp;&nbsp;&nbsp;<img src=\"pic/bonusformulab.png\" alt=\"B = B0 * 2 / pi * arctan( A / L )\" title=\"B = B0 * 2 / pi * arctan( A / L )\" /><br />
 where<ul><li><b>A</b> is an intermediate variable</li><li><b>Ti</b> is the <b>i</b>th torrent's Time Alive (TA), i.e. time elapsed since the torrent was uploaded, in weeks</li><li><b>T0</b> is a parameter. <b>T0</b> = ",
 	'text_bonus_formula_two' => "</li><li><b>Si</b> is the <b>i</b>th torrent's size, in GB</li><li><b>Ni</b> is the number of current seeders of the <b>i</b>th torrent</li><li><b>N0</b> is a parameter. <b>N0</b> = ",
@@ -122,7 +130,11 @@ where<ul><li><b>A</b> is an intermediate variable</li><li><b>Ti</b> is the <b>i<
 	'bonus_amount_not_allowed_two' => "Bonus amount not allowed! You can only give away from 1000.0 to 50000.0 points every time.",
 	'bonus_ratio_not_allowed' => "Bonus ratio not allowed! Only users whose ratio below 0.8 need charity.",
 	'std_no_users_need_charity' => "No users need charity at the moment.",
-	'text_success_charity' => "Thank you! Your generosity is appreciated."
+	'text_success_charity' => "Thank you! Your generosity is appreciated.",
+	'text_exchange_hr' => 'Exempt an H&R count',
+	'text_exchange_hr_ok' => 'Your H&R count has been decreased by one.',
+	'text_exchange_hr_btn' => 'Exempt',
+	'text_exchange_hr_btn_disabled' => 'No H&R now',
 );
 
 ?>

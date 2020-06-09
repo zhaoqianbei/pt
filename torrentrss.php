@@ -25,6 +25,10 @@ if ($passkey){
 			$where .= ($where ? " AND " : "") . "torrents.id IN(" . $whereidin . ")";
 		}
 	}
+}else{
+	if(isset($_GET["myrss"])){
+		die('missing passkey');
+	}
 }
 $searchstr = mysql_real_escape_string(trim($_GET["search"]));
 if (empty($searchstr))
@@ -91,6 +95,23 @@ function get_where($tablename = "sources", $itemname = "source", $getname = "sou
 		$where .= ($where ? " AND " : "") . $itemname." IN(" . $whereitemin . ")";
 	}
 }
+if($enablespecial && !can_access_special()){
+	$categories = searchbox_item_list('categories');
+	$userdefines = [];
+	foreach($categories as $category){
+		$userdefine = "cat{$category['id']}";
+		if($category['mode'] == $specialcatmode){
+            unset($_GET[$userdefine]);
+		}elseif(isset($_GET[$userdefine])){
+            $userdefines = false;
+		}elseif(is_array($userdefines)){
+			$userdefines[] = $userdefine;
+		}
+	}
+	if($userdefines){
+		foreach($userdefines as $userdefine) $_GET[$userdefine] = 1;
+	}
+}
 get_where("categories", "category", "cat");
 get_where("sources", "source", "sou");
 get_where("media", "medium", "med");
@@ -99,11 +120,18 @@ get_where("standards", "standard", "sta");
 get_where("processings", "processing", "pro");
 get_where("teams", "team", "tea");
 get_where("audiocodecs", "audiocodec", "aud");
-if ($where)
-	$where = "WHERE ".$where;
-$query = "SELECT torrents.id, torrents.category, torrents.name, torrents.small_descr, torrents.descr, torrents.info_hash, torrents.size, torrents.added, torrents.anonymous, users.username AS username, categories.id AS cat_id, categories.name AS cat_name FROM torrents LEFT JOIN categories ON category = categories.id LEFT JOIN users ON torrents.owner = users.id $where ORDER BY torrents.added DESC LIMIT $limit";
 
-$res = sql_query($query) or die(mysql_error());
+if ($where){
+	$where = "WHERE banned = 'no' AND visible = 'yes' AND " . $where;
+}else{
+	$where = "WHERE banned = 'no' AND visible = 'yes'";
+}
+if(isset($_GET["myrss"])){
+	$query = "SELECT t.*, users.username AS username, categories.id AS cat_id, categories.name AS cat_name FROM torrents_myrss t2 INNER JOIN torrents t ON t.id = t2.torrent_id LEFT JOIN users ON t.owner = users.id LEFT JOIN categories ON t.category = categories.id $where AND t2.enable = 1 and t2.user_id = {$user['id']} ORDER BY t.added DESC LIMIT $limit";
+}else{
+	$query = "SELECT torrents.id, torrents.category, torrents.name, torrents.small_descr, torrents.descr, torrents.info_hash, torrents.size, torrents.added, torrents.anonymous, users.username AS username, categories.id AS cat_id, categories.name AS cat_name FROM torrents LEFT JOIN categories ON category = categories.id LEFT JOIN users ON torrents.owner = users.id $where ORDER BY torrents.added DESC LIMIT $limit";
+}
+$res = sql_query($query) or sqlerr(__FILE__, __LINE__);
 
 $url = get_protocol_prefix().$BASEURL;
 $year = substr($datefounded, 0, 4);
@@ -160,7 +188,7 @@ while ($row = mysql_fetch_array($res))
 	print('		<item>
 			<title><![CDATA['.$title.']]></title>
 			<link>'.$itemurl.'</link>
-			<description><![CDATA['.$content.']]></description>
+			<description><![CDATA['.($dllink?'':$content).']]></description>
 ');
 //print('			<dc:creator>'.$author.'</dc:creator>');
 print('			<author>'.$author.'@'.$_SERVER['HTTP_HOST'].' ('.$author.')</author>');

@@ -45,7 +45,9 @@ $lang_invite = array
 	'text_invite_system' => "的邀請系統",
 	'std_only' => "只有",
 	'std_or_above_can_invite' => "及以上的用戶才能發送邀請。",
-	'text_email_restriction_note' => "你只能發送邀請給以下郵箱：",
+	'text_email_restriction_note' => "你只能發送邀請給以下郵箱：",	
+	'text_permanent' => '永久邀請名額：%u',
+	'text_temporary' => '限時邀請名額：%s (有效期至%s)',
 );
 
 ?>

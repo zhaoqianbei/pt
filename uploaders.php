@@ -22,7 +22,7 @@ else $order .= ' DESC';
 stdhead($lang_uploaders['head_uploaders']);
 begin_main_frame();
 ?>
-<div style="width: 1000px">
+<div style="width: 1200px">
 <?php
 $year2 = substr($datefounded, 0, 4);
 $yearfounded = ($year2 ? $year2 : 2007);

@@ -25,7 +25,7 @@ function yesorno($title, $name, $value, $note="")
 }
 
 $action = isset($_POST['action']) ? $_POST['action'] : 'showmenu';
-$allowed_actions = array('basicsettings','mainsettings','smtpsettings','securitysettings','authoritysettings','tweaksettings', 'botsettings','codesettings','bonussettings','accountsettings','torrentsettings', 'attachmentsettings', 'advertisementsettings', 'savesettings_basic', 'savesettings_main','savesettings_smtp','savesettings_security','savesettings_authority','savesettings_tweak','savesettings_bot','savesettings_code','savesettings_bonus', 'savesettings_account','savesettings_torrent', 'savesettings_attachment', 'savesettings_advertisement', 'showmenu');
+$allowed_actions = array('basicsettings','mainsettings','smtpsettings','securitysettings','authoritysettings','tweaksettings', 'botsettings','codesettings','bonussettings','accountsettings','torrentsettings', 'attachmentsettings', 'advertisementsettings', 'examsettings', 'savesettings_basic', 'savesettings_main','savesettings_smtp','savesettings_security','savesettings_authority','savesettings_tweak','savesettings_bot','savesettings_code','savesettings_bonus', 'savesettings_account','savesettings_torrent', 'savesettings_attachment', 'savesettings_advertisement', 'savesettings_exam', 'showmenu');
 if (!in_array($action, $allowed_actions))
 $action = 'showmenu';
 $notice = "<h1 align=\"center\"><a class=\"faqlink\" href=\"settings.php\">".$lang_settings['text_website_settings']."</a></h1><table cellspacing=\"0\" cellpadding=\"10\" width=\"1200\"><tr><td colspan=\"2\" style='padding: 10px; background: black' align=\"center\">
@@ -35,7 +35,7 @@ $notice = "<h1 align=\"center\"><a class=\"faqlink\" href=\"settings.php\">".$la
 if ($action == 'savesettings_main')	// save main
 {
 	stdhead($lang_settings['head_save_main_settings']);
-	$validConfig = array('site_online','max_torrent_size','announce_interval', 'annintertwoage', 'annintertwo', 'anninterthreeage', 'anninterthree', 'signup_timeout','minoffervotes','offervotetimeout','offeruptimeout','maxsubsize','postsperpage', 'topicsperpage', 'torrentsperpage', 'maxnewsnum','max_dead_torrent_time','maxusers','torrent_dir', 'iniupload','SITEEMAIL', 'ACCOUNTANTID', 'ALIPAYACCOUNT', 'PAYPALACCOUNT', 'SLOGAN', 'icplicense', 'autoclean_interval_one', 'autoclean_interval_two', 'autoclean_interval_three','autoclean_interval_four', 'autoclean_interval_five','reportemail','invitesystem','registration','showhotmovies','showclassicmovies','showimdbinfo', 'enablenfo', 'enableschool','restrictemail','showpolls','showstats','showlastxtorrents', 'showtrackerload','showshoutbox','showfunbox','showoffer','sptime','showhelpbox','enablebitbucket', 'smalldescription','altname','extforum','extforumurl','defaultlang','defstylesheet', 'donation','spsct','browsecat','specialcat','waitsystem','maxdlsystem','bitbucket','torrentnameprefix', 'showforumstats','verification','invite_count','invite_timeout', 'seeding_leeching_time_calc_start','startsubid', 'logo');
+	$validConfig = array('site_online','max_torrent_size','announce_interval', 'annintertwoage', 'annintertwo', 'anninterthreeage', 'anninterthree', 'signup_timeout','minoffervotes','offervotetimeout','offeruptimeout','maxsubsize','postsperpage', 'topicsperpage', 'torrentsperpage', 'maxnewsnum','max_dead_torrent_time','maxusers','torrent_dir', 'iniupload','SITEEMAIL', 'ACCOUNTANTID', 'ALIPAYACCOUNT', 'PAYPALACCOUNT', 'SLOGAN', 'icplicense', 'autoclean_interval_one', 'autoclean_interval_two', 'autoclean_interval_three','autoclean_interval_four', 'autoclean_interval_five','reportemail','invitesystem','registration','showhotmovies','showclassicmovies','showimdbinfo', 'enablenfo', 'enableschool','restrictemail','showpolls','showstats','showlastxtorrents', 'showtrackerload','showshoutbox','showfunbox','showoffer','sptime','showhelpbox','enablebitbucket', 'smalldescription','altname','extforum','extforumurl','defaultlang','defstylesheet', 'donation','browsecat','specialcat','waitsystem','maxdlsystem','bitbucket','torrentnameprefix', 'showforumstats','verification','invite_count','invite_timeout', 'seeding_leeching_time_calc_start','startsubid', 'logo', 'secondary_name');
 	GetVar($validConfig);
 	unset($MAIN);
 	foreach($validConfig as $config) {
@@ -87,12 +87,20 @@ elseif ($action == 'savesettings_code') 	// save database
 elseif ($action == 'savesettings_bonus') 	// save bonus
 {
 	stdhead($lang_settings['head_save_bonus_settings']);
-	$validConfig = array('donortimes','perseeding','maxseeding','tzero','nzero','bzero','l', 'uploadtorrent','uploadsubtitle','starttopic','makepost','addcomment','pollvote','offervote', 'funboxvote','saythanks','receivethanks','funboxreward','onegbupload','fivegbupload','tengbupload', 'ratiolimit','dlamountlimit','oneinvite','customtitle','vipstatus','bonusgift', 'basictax', 'taxpercentage', 'prolinkpoint', 'prolinktime');
+	$validConfig = array('donortimes','perseeding','maxseeding','tzero','nzero','bzero','l', 'uploadtorrent','uploadsubtitle','starttopic','makepost','addcomment','pollvote','offervote', 'funboxvote','saythanks','receivethanks','funboxreward','onegbupload','fivegbupload','tengbupload','hundredgbupload','hundredgbdownload','hundredgbdownload_reduce','ratiolimit','dlamountlimit','oneinvite','customtitle','vipstatus','bonusgift', 'basictax', 'taxpercentage', 'prolinkpoint', 'prolinktime', 'attendance_initial', 'attendance_step', 'attendance_max');
 	GetVar($validConfig);
 	unset($BONUS);
 	foreach($validConfig as $config) {
 		$BONUS[$config] = $$config;
 	}
+	$BONUS['attendance_continuous'] = array();
+	if(count($_POST['attendance_continuous_day']) == count($_POST['attendance_continuous_value'])){
+		foreach($_POST['attendance_continuous_day'] as $k => $day){
+			$value = (int) $_POST['attendance_continuous_value'][$k];
+			if($day > 0 && $value > 0) $BONUS['attendance_continuous'][$day] = $value;
+		}
+	}
+	ksort($BONUS['attendance_continuous']);
 	WriteConfig('BONUS', $BONUS);
 	$actiontime = date("F j, Y, g:i a");
 	write_log("Tracker bonus settings updated by $CURUSER[username]. $actiontime",'mod');
@@ -117,7 +125,7 @@ elseif ($action == 'savesettings_account') 	// save account
 elseif($action == 'savesettings_torrent') 	// save account
 {
 	stdhead($lang_settings['head_save_torrent_settings']);
-	$validConfig = array('prorules', 'randomhalfleech','randomfree','randomtwoup','randomtwoupfree','randomtwouphalfdown','largesize', 'largepro','expirehalfleech','expirefree','expiretwoup','expiretwoupfree','expiretwouphalfleech', 'expirenormal','hotdays','hotseeder','halfleechbecome','freebecome','twoupbecome','twoupfreebecome', 'twouphalfleechbecome','normalbecome','uploaderdouble','deldeadtorrent', 'randomthirtypercentdown', 'thirtypercentleechbecome', 'expirethirtypercentleech');
+	$validConfig = array('prorules', 'randomhalfleech','randomfree','randomtwoup','randomtwoupfree','randomtwouphalfdown','largesize', 'largepro','expirehalfleech','expirefree','expiretwoup','expiretwoupfree','expiretwouphalfleech', 'expirenormal','hotdays','hotseeder','halfleechbecome','freebecome','twoupbecome','twoupfreebecome', 'twouphalfleechbecome','normalbecome','uploaderdouble','deldeadtorrent', 'randomthirtypercentdown', 'thirtypercentleechbecome', 'expirethirtypercentleech', 'count_days_hnr', 'release_days_hnr', 'seeding_hours_hnr', 'ratio_hnr', 'ban_hnr', 'price_hnr', 'choose_userclass_hnr', 'bypass_userclass_hnr');
 	GetVar($validConfig);
 	unset($TORRENT);
 	foreach($validConfig as $config) {
@@ -167,7 +175,7 @@ elseif ($action == 'savesettings_security') 	// save security
 elseif ($action == 'savesettings_authority') 	// save user authority
 {
 	stdhead($lang_settings['head_save_authority_settings']);
-	$validConfig = array('defaultclass','staffmem','newsmanage','newfunitem','funmanage','sbmanage','pollmanage','applylink', 'linkmanage', 'postmanage','commanage','forummanage','viewuserlist','torrentmanage','torrentsticky', 'torrentonpromotion', 'askreseed', 'viewnfo', 'torrentstructure','sendinvite','viewhistory','topten','log','confilog','userprofile', 'torrenthistory','prfmanage', 'cruprfmanage','uploadsub','delownsub','submanage','updateextinfo', 'viewanonymous','beanonymous','addoffer','offermanage', 'upload','uploadspecial','movetorrent','chrmanage','viewinvite', 'buyinvite','seebanned','againstoffer','userbar');
+	$validConfig = array('defaultclass','staffmem','newsmanage','newfunitem','funmanage','sbmanage','pollmanage','applylink', 'linkmanage', 'postmanage','commanage','forummanage','viewuserlist','torrentmanage','torrentsticky', 'torrentonpromotion', 'askreseed', 'viewnfo', 'torrentstructure','sendinvite','viewhistory','topten','log','confilog','userprofile', 'torrenthistory','prfmanage', 'cruprfmanage','uploadsub','delownsub','submanage','updateextinfo', 'viewanonymous','beanonymous','addoffer','offermanage', 'upload','uploadspecial','movetorrent','chrmanage','viewinvite', 'buyinvite','seebanned','againstoffer','userbar','access_secondary_zone');
 	GetVar($validConfig);
 	unset($AUTHORITY);
 	foreach($validConfig as $config) {
@@ -221,6 +229,23 @@ elseif ($action == 'savesettings_advertisement')	// save advertisement
 	WriteConfig('ADVERTISEMENT', $ADVERTISEMENT);
 	$actiontime = date("F j, Y, g:i a");
 	write_log("Tracker ADVERTISEMENT settings updated by $CURUSER[username]. $actiontime",'mod');
+	go_back();
+}
+elseif ($action == 'savesettings_exam')	// save advertisement
+{
+	stdhead('保存考核设置');
+	$validConfig = array('enabled', 'deadline', 'upload', 'download', 'bonus', 'sltr', 'global_deadline', 'global_upload', 'global_download', 'global_bonus', 'global_sltr');
+	GetVar($validConfig);
+	unset($EXAM);
+	foreach($validConfig as $config) {
+		$EXAM[$config] = $$config;
+	}
+	$EXAM['enabled'] = (bool) ($enabled == 'yes');
+	$EXAM['global_deadline'] = strtotime($EXAM['global_deadline']) ?: 0;
+
+	WriteConfig('EXAM', $EXAM);
+	$actiontime = date("F j, Y, g:i a");
+	write_log("Tracker EXAM settings updated by $CURUSER[username]. $actiontime",'mod');
 	go_back();
 }
 elseif ($action == 'tweaksettings')		// tweak settings
@@ -344,6 +369,7 @@ elseif ($action == 'authoritysettings')	//Authority settings
 	tr($lang_settings['row_see_banned_torrents'], $lang_settings['text_minimum_class'].classlist('seebanned',$maxclass,$AUTHORITY['seebanned']).$lang_settings['text_default'].get_user_class_name(UC_UPLOADER,false,true,true).$lang_settings['text_see_banned_torrents_note'],1);
 	tr($lang_settings['row_vote_against_offers'], $lang_settings['text_minimum_class'].classlist('againstoffer',$maxclass,$AUTHORITY['againstoffer']).$lang_settings['text_default'].get_user_class_name(UC_USER,false,true,true).$lang_settings['text_vote_against_offers_note'],1);
 	tr($lang_settings['row_allow_userbar'], $lang_settings['text_minimum_class'].classlist('userbar',$maxclass,$AUTHORITY['userbar']).$lang_settings['text_default'].get_user_class_name(UC_POWER_USER,false,true,true).$lang_settings['text_allow_userbar_note'],1);
+	tr('Access Secondary Zone', $lang_settings['text_minimum_class'] . classlist('access_secondary_zone', UC_MODERATOR, $access_secondary_zone_class).$lang_settings['text_default'].get_user_class_name(UC_VIP,false,true,true), true);
 	tr($lang_settings['row_save_settings'],"<input type='submit' name='save' value='".$lang_settings['submit_save_settings']."'>", 1);
 	print ("</form>");
 }
@@ -432,12 +458,33 @@ elseif ($action == 'bonussettings'){
 	tr($lang_settings['row_one_gb_credit'],$lang_settings['text_it_costs_user']."<input type='text' style=\"width: 50px\" name=onegbupload value='".(isset($BONUS["onegbupload"]) ? $BONUS["onegbupload"] : 300 )."'>".$lang_settings['text_one_gb_credit_note'], 1);
 	tr($lang_settings['row_five_gb_credit'],$lang_settings['text_it_costs_user']."<input type='text' style=\"width: 50px\" name=fivegbupload value='".(isset($BONUS["fivegbupload"]) ? $BONUS["fivegbupload"] : 800 )."'>".$lang_settings['text_five_gb_credit_note'], 1);
 	tr($lang_settings['row_ten_gb_credit'],$lang_settings['text_it_costs_user']."<input type='text' style=\"width: 50px\" name=tengbupload value='".(isset($BONUS["tengbupload"]) ? $BONUS["tengbupload"] : 1200 )."'>".$lang_settings['text_ten_gb_credit_note'], 1);
+	tr($lang_settings['row_hundred_gb_credit'],$lang_settings['text_it_costs_user']."<input type='text' style=\"width: 50px\" name=hundredgbupload value='".(isset($BONUS["hundredgbupload"]) ? $BONUS["hundredgbupload"] : 10000 )."'>".$lang_settings['text_hundred_gb_credit_note'], 1);
+	tr($lang_settings['row_hundred_gb_download'],$lang_settings['text_it_costs_user']."<input type='text' style=\"width: 50px\" name=hundredgbdownload value='".(isset($BONUS["hundredgbdownload"]) ? $BONUS["hundredgbdownload"] : 10000 )."'>".$lang_settings['text_hundred_gb_download_note'], 1);
+	tr($lang_settings['row_hundred_gb_reduce'],$lang_settings['text_it_costs_user']."<input type='text' style=\"width: 50px\" name=hundredgbdownload_reduce value='".(isset($BONUS["hundredgbdownload_reduce"]) ? $BONUS["hundredgbdownload_reduce"] : 20000 )."'>".$lang_settings['text_hundred_gb_reduce_note'], 1);
 	tr($lang_settings['row_ratio_limit'],$lang_settings['text_user_with_ratio']."<input type='text' style=\"width: 50px\" name=ratiolimit value='".(isset($BONUS["ratiolimit"]) ? $BONUS["ratiolimit"] : 6 )."'>".$lang_settings['text_uploaded_amount_above']."<input type='text' style=\"width: 50px\" name=dlamountlimit value='".(isset($BONUS["dlamountlimit"]) ? $BONUS["dlamountlimit"] : 50 )."'>".$lang_settings['text_ratio_limit_default'], 1);
 	tr($lang_settings['row_buy_an_invite'],$lang_settings['text_it_costs_user']."<input type='text' style=\"width: 50px\" name=oneinvite value='".(isset($BONUS["oneinvite"]) ? $BONUS["oneinvite"] : 1000 )."'>".$lang_settings['text_buy_an_invite_note'], 1);
 	tr($lang_settings['row_custom_title'],$lang_settings['text_it_costs_user']."<input type='text' style=\"width: 50px\" name=customtitle value='".(isset($BONUS["customtitle"]) ? $BONUS["customtitle"] : 5000 )."'>".$lang_settings['text_custom_title_note'], 1);
 	tr($lang_settings['row_vip_status'],$lang_settings['text_it_costs_user']."<input type='text' style=\"width: 50px\" name=vipstatus value='".(isset($BONUS["vipstatus"]) ? $BONUS["vipstatus"] : 8000 )."'>".$lang_settings['text_vip_status_note'], 1);
 	yesorno($lang_settings['row_allow_giving_bonus_gift'], 'bonusgift', $BONUS["bonusgift"], $lang_settings['text_giving_bonus_gift_note']);
 	tr($lang_settings['row_bonus_gift_tax'], $lang_settings['text_system_charges']."<input type='text' style=\"width: 50px\" name='basictax' value='".(isset($BONUS["basictax"]) ? $BONUS["basictax"] : 5 )."'>".$lang_settings['text_bonus_points_plus']."<input type='text' style=\"width: 50px\" name='taxpercentage' value='".(isset($BONUS["taxpercentage"]) ? $BONUS["taxpercentage"] : 10 )."'>".$lang_settings['text_bonus_gift_tax_note'], 1);
+	echo '<tr><td colspan="2" align="center"><b>签到奖励</b></td></tr>';
+	tr('初始奖励',sprintf('首次签到获得 <input type="number" style="width: 30px" name="attendance_initial" value="%u" min="0" /> 个魔力值。', $attendance_initial_bonus),true);
+	tr('奖励增量',sprintf('每次签到增加 <input type="number" style="width: 30px" name="attendance_step" value="%u" min="0" /> 个魔力值。', $attendance_step_bonus),true);
+	tr('奖励上限',sprintf('签到奖励最高 <input type="number" style="width: 50px" name="attendance_max" value="%u" min="0" /> 个魔力值。', $attendance_max_bonus),true);
+	$row = '<table><tr><td class="colhead">连续签到天数</td><td class="colhead">附加奖励</td><td class="colhead">操作</td></tr>'.PHP_EOL;
+	if(is_array($attendance_continuous_bonus)){
+		foreach($attendance_continuous_bonus as $days => $value){
+			$row .= sprintf('<tr>
+			<td><input type="number" min="0" style="width: 40px" name="attendance_continuous_day[]" value="%u" /> 天</td>
+			<td><input type="number" min="0" style="width: 50px;" name="attendance_continuous_value[]" value="%u" /> 魔力值</td>
+			<td><a href="javascript:;" onclick="DelRow(this);">删除</a></td></tr>', $days, $value);
+		}
+	}
+	$row .= '<tr><td colspan="3">请从小到大添加规则。</td></tr><tr>
+	<td><input type="number" min="0" style="width: 40px" name="attendance_continuous_day[]" value="" /> 天</td>
+	<td><input type="number" min="0" style="width: 50px;" name="attendance_continuous_value[]" value="" /> 魔力值</td>
+	<td><a href="javascript:;" onclick="NewRow(this,false);">添加</a></td></tr></table>';
+	tr('连续签到',$row,true);
 	tr($lang_settings['row_save_settings'], "<input type='submit' name='save' value='".$lang_settings['submit_save_settings']."'>", 1);
 	print ("</form>");
 }
@@ -511,6 +558,14 @@ elseif ($action == 'torrentsettings')
 	tr($lang_settings['row_auto_pick_hot'], $lang_settings['text_torrents_uploaded_within']."<input type='text' style=\"width: 50px\" name=hotdays value='".(isset($TORRENT["hotdays"]) ? $TORRENT["hotdays"] : 7 )."'>".$lang_settings['text_days_with_more_than']."<input type='text' style=\"width: 50px\" name=hotseeder value='".(isset($TORRENT["hotseeder"]) ? $TORRENT["hotseeder"] : 10 )."'>".$lang_settings['text_be_picked_as_hot']."<br />".$lang_settings['text_auto_pick_hot_default'], 1);
 	tr($lang_settings['row_uploader_get_double'], $lang_settings['text_torrent_uploader_gets']."<input type='text' style=\"width: 50px\" name=uploaderdouble value='".(isset($TORRENT["uploaderdouble"]) ? $TORRENT["uploaderdouble"] : 1 )."'>".$lang_settings['text_times_uploading_credit'].$lang_settings['text_uploader_get_double_default'], 1);
 	tr($lang_settings['row_delete_dead_torrents'], $lang_settings['text_torrents_being_dead_for']."<input type='text' style=\"width: 50px\" name=deldeadtorrent value='".(isset($TORRENT["deldeadtorrent"]) ? $TORRENT["deldeadtorrent"] : 0 )."'>".$lang_settings['text_days_be_deleted']."<br />".$lang_settings['row_delete_dead_torrents_note'], 1);
+	tr('H&amp;R', '<ol>'.
+	sprintf('<li>%s及以上用户可发布带有H&amp;R的种子。</li>', classlist('choose_userclass_hnr', UC_STAFFLEADER, $choose_userclass_hnr, UC_NEXUS_MASTER)).
+	sprintf('<li>%s及以上用户不受H&amp;R限制。</li>', classlist('bypass_userclass_hnr', UC_STAFFLEADER, $bypass_userclass_hnr, UC_POWER_USER)).
+	sprintf('<li>有H&amp;R的种子<input type="number" name="count_days_hnr" value="%u" style="width: 3em" min="0" />天内必须做种<input type="number" name="seeding_hours_hnr" value="%u" style="width: 3em" min="0" />小时或者分享率达到<input type="number" name="ratio_hnr" value="%.1f" style="width: 4em" min="0" step="0.1" />。</li>', $count_days_hnr, $seeding_hours_hnr, $ratio_hnr).
+	sprintf('<li>累计得到<input type="number" name="ban_hnr" value="%u" style="width: 3em" min="0" />个H&amp;R时禁用账号。</li>', $ban_hnr).
+	sprintf('<li>种子发布后<input type="number" name="release_days_hnr" value="%u" style="width: 3em" min="0" />天不再参与H&amp;R检查，取消前的记录继续检查。</li>', $release_days_hnr).
+	sprintf('<li>可以花费<input type="number" name="price_hnr" value="%u" style="width: 5em" min="0" />个魔力值消除一个H&amp;R记录。</li>', $price_hnr).
+	'</ol>', true);
 	tr($lang_settings['row_save_settings'],"<input type='submit' name='save' value='".$lang_settings['submit_save_settings']."'>", 1);
 	print ("</form>");
 }
@@ -546,8 +601,6 @@ elseif ($action == 'mainsettings')	// main settings
 	yesorno($lang_settings['row_show_funbox'],'showfunbox', $MAIN['showfunbox'], $lang_settings['text_show_funbox_note']);
 	yesorno($lang_settings['row_enable_offer_section'],'showoffer', $MAIN['showoffer'], $lang_settings['text_offer_section_note']);
 	yesorno($lang_settings['row_show_donation'],'donation', $MAIN['donation'], $lang_settings['text_show_donation_note']);
-	if (THISTRACKER == "HDStar")
-	yesorno($lang_settings['row_show_special_section'],'spsct', $MAIN['spsct'], $lang_settings['text_show_special_section_note']);
 	yesorno($lang_settings['row_weekend_free_uploading'],'sptime', $MAIN['sptime'], $lang_settings['text_weekend_free_uploading_note']);
 	yesorno($lang_settings['row_enable_helpbox'],'showhelpbox', $MAIN['showhelpbox'], $lang_settings['text_helpbox_note']);
 	yesorno($lang_settings['row_enable_bitbucket'],'enablebitbucket', $MAIN['enablebitbucket'], $lang_settings['text_bitbucket_note']);
@@ -557,14 +610,15 @@ elseif ($action == 'mainsettings')	// main settings
 	yesorno($lang_settings['row_use_external_forum'],'extforum', $MAIN['extforum'], $lang_settings['text_use_external_forum_note']);
 	tr($lang_settings['row_external_forum_url'],"<input type='text' style=\"width: 300px\" name=extforumurl value='".($MAIN["extforumurl"] ? $MAIN["extforumurl"] : "")."'> ".$lang_settings['text_external_forum_url_note'], 1);
 	$res = sql_query("SELECT id, name FROM searchbox") or sqlerr(__FILE__, __LINE__);
-	$catlist = "";
-	while($array = mysql_fetch_array($res)){
+	$catlist = '';
+    $scatlist = sprintf('<input type="radio" name="specialcat" value="0"%s />Disabled&nbsp;', EchoChecked($specialcatmode == 0));
+	while($array = mysql_fetch_assoc($res)){
 		$bcatlist .= "<input type=radio name=browsecat value='".$array['id']."'".($MAIN["browsecat"] == $array['id'] ? " checked" : "").">".$array['name']."&nbsp;";
 		$scatlist .= "<input type=radio name=specialcat value='".$array['id']."'".($MAIN["specialcat"] == $array['id'] ? " checked" : "").">".$array['name']."&nbsp;";
 	}
 	tr($lang_settings['row_torrents_category_mode'], $bcatlist."<br />".$lang_settings['text_torrents_category_mode_note'], 1);
-	if (THISTRACKER == "HDStar")
 	tr($lang_settings['row_special_category_mode'], $scatlist."<br />".$lang_settings['text_special_category_mode_note'], 1);
+    tr('特殊区名', sprintf('<input type="text" style="width: 100px" name="secondary_name" value="%s" />', htmlspecialchars($secondary_zone_name_main)), true);
 	$res = sql_query("SELECT * FROM language WHERE site_lang=1") or sqlerr(__FILE__, __LINE__);
 	$langlist = "";
 	while($array = mysql_fetch_array($res))
@@ -603,6 +657,25 @@ elseif ($action == 'mainsettings')	// main settings
 	tr($lang_settings['row_torrent_name_prefix'], "<input type='text' style=\"width: 100px\" name=torrentnameprefix value='".($MAIN["torrentnameprefix"] ? $MAIN["torrentnameprefix"] : "[Nexus]")."'> ".$lang_settings['text_torrent_name_prefix_note'], 1);
 	tr($lang_settings['row_save_settings'],"<input type='submit' name='save' value='".$lang_settings['submit_save_settings']."'>", 1);
 	print ("</form>");
+}elseif ($action == 'examsettings'){
+	stdhead('考核设定');
+	echo $notice;
+	echo '<form method="post" action=""><input type="hidden" name="action" value="savesettings_exam">';
+    echo '<tr><td colspan="2" align="center"><b>新人考核</b></td></tr>';
+	yesorno('考核开关', 'enabled', $enabled_exam ? 'yes' : 'no', '关闭考核后，新人考核将被暂停执行。');
+	tr('考核期限', sprintf('<input type="number" style="width: 60px" min="1" name="deadline" value="%u" /> 天', $deadline_exam), true);
+	tr('上传要求', sprintf('<input type="number" style="width: 60px" min="0" name="upload" value="%u" /> GB (设为0不要求)', $upload_exam), true);
+	tr('下载要求', sprintf('<input type="number" style="width: 60px" min="0" name="download" value="%u" /> GB (设为0不要求)', $download_exam), true);
+	tr('魔力要求', sprintf('<input type="number" style="width: 80px" min="0" name="bonus" value="%u" /> (设为0不要求)', $bonus_exam), true);
+	tr('做种率(SLTR)要求', sprintf('<input type="number" style="width: 60px" min="0" step="0.5" name="sltr" value="%.1f" /> (设为0不要求)', $sltr_exam), true);
+	echo '<tr><td colspan="2" align="center"><b>全体考核</b> <a class="faqlink" href="examine.php">[查看]</a> </td></tr>';
+    tr('考核期限', sprintf('<input type="datetime-local" name="global_deadline" value="%s" />', $global_deadline_exam ? date('Y-m-d\TH:i:s', $global_deadline_exam) : ''), true);
+    tr('上传要求', sprintf('<input type="number" style="width: 60px" min="0" name="global_upload" value="%u" /> GB (设为0不要求)', $global_upload_exam), true);
+    tr('下载要求', sprintf('<input type="number" style="width: 60px" min="0" name="global_download" value="%u" /> GB (设为0不要求)', $global_download_exam), true);
+    tr('魔力要求', sprintf('<input type="number" style="width: 80px" min="0" name="global_bonus" value="%u" /> (设为0不要求)', $global_bonus_exam), true);
+    tr('做种率(SLTR)要求', sprintf('<input type="number" style="width: 60px" min="0" step="0.5" name="global_sltr" value="%.1f" /> (设为0不要求)', $global_sltr_exam), true);
+    tr($lang_settings['row_save_settings'],"<input type='submit' name='save' value='".$lang_settings['submit_save_settings']."'>", 1);
+	echo '</form>';
 }
 elseif ($action == 'showmenu')	// settings main page
 {
@@ -616,6 +689,7 @@ elseif ($action == 'showmenu')	// settings main page
 	tr($lang_settings['row_tweak_settings'],"<form method='post' action='".$_SERVER["SCRIPT_NAME"]."'><input type='hidden' name='action' value='tweaksettings'><input type='submit' value=\"".$lang_settings['submit_tweak_settings']."\"> ".$lang_settings['text_tweak_settings_note']."</form>", 1);
 	tr($lang_settings['row_bonus_settings'], "<form method='post' action='".$_SERVER["SCRIPT_NAME"]."'><input type='hidden' name='action' value='bonussettings'><input type='submit' value=\"".$lang_settings['submit_bonus_settings']."\"> ".$lang_settings['text_bonus_settings_note']."</form>", 1);
 	tr($lang_settings['row_account_settings'], "<form method='post' action='".$_SERVER["SCRIPT_NAME"]."'><input type='hidden' name='action' value='accountsettings'><input type='submit' value=\"".$lang_settings['submit_account_settings']."\"> ".$lang_settings['text_account_settings_settings']."</form>", 1);
+	tr('考核设定', '<form method="post" action=""><input type="hidden" name="action" value="examsettings"><input type="submit" value="考核设定"> 配置考核参数。</form>', 1);
 	tr($lang_settings['row_torrents_settings'], "<form method='post' action='".$_SERVER["SCRIPT_NAME"]."'><input type='hidden' name='action' value='torrentsettings'><input type='submit' value=\"".$lang_settings['submit_torrents_settings']."\"> ".$lang_settings['text_torrents_settings_note']."</form>", 1);
 	tr($lang_settings['row_attachment_settings'], "<form method='post' action='".$_SERVER["SCRIPT_NAME"]."'><input type='hidden' name='action' value='attachmentsettings'><input type='submit' value=\"".$lang_settings['submit_attachment_settings']."\"> ".$lang_settings['text_attachment_settings_note']."</form>", 1);
 	tr($lang_settings['row_advertisement_settings'], "<form method='post' action='".$_SERVER["SCRIPT_NAME"]."'><input type='hidden' name='action' value='advertisementsettings'><input type='submit' value=\"".$lang_settings['submit_advertisement_settings']."\"> ".$lang_settings['text_advertisement_settings_note']."</form>", 1);

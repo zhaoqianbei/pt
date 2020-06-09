@@ -35,10 +35,10 @@ stdhead($lang_upload['head_upload']);
 			<?php
 			print("<p align=\"center\">".$lang_upload['text_red_star_required']."</p>");
 			?>
-			<table border="1" cellspacing="0" cellpadding="5" width="1000">
+			<table border="1" cellspacing="0" cellpadding="5" width="1200">
 				<tr>
-				<td class="rowhead nowrap" valign="top" align="right"><?php echo $lang_upload['text_tracker_url']; ?><font color="red">*</font></td>
-				<td class="rowfollow" valign="top" align="left"><span><?php echo  get_protocol_prefix() . $announce_urls[0]?></span>
+					<td class='colhead' colspan='2' align='center'>
+						<?php echo $lang_upload['text_tracker_url'] ?>: &nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo  get_protocol_prefix() . $announce_urls[0]?></b>
 						<?php
 						if(!is_writable($torrent_dir))
 						print("<br /><br /><b>ATTENTION</b>: 种子文件夹不可写，请联系管理员！");
@@ -58,6 +58,7 @@ stdhead($lang_upload['head_upload']);
 				tr($lang_upload['row_small_description'], "<input type=\"text\" style=\"width: 650px;\" name=\"small_descr\" /><br /><font class=\"medium\">".$lang_upload['text_small_description_note']."</font>", 1);
 				
 				get_external_tr();
+				get_douban_tr();
 				// if ($enablenfo_main=='yes')
 				// 	tr($lang_upload['row_nfo_file'], "<input type=\"file\" class=\"file\" name=\"nfo\" /><br /><font class=\"medium\">".$lang_upload['text_only_viewed_by'].get_user_class_name($viewnfo_class,false,true,true).$lang_upload['text_or_above']."</font>", 1);
 				print("<tr><td class=\"rowhead\" style='padding: 3px' valign=\"top\">".$lang_upload['row_description']."<font color=\"red\">*</font></td><td class=\"rowfollow\">");
@@ -126,6 +127,8 @@ stdhead($lang_upload['head_upload']);
 
 				// 	tr($lang_upload['row_content'],$team_select,1);
 				// }
+				
+				if(get_user_class() >= $choose_userclass_hnr) tr('H&amp;R', sprintf('<input type="checkbox" name="hr" value="1" id="chk_hr" /><label for="chk_hr">%s (注意：非本站人员请勿勾选此项)</label>', $lang_functions['text_yes']), true);
 
 				//==== offer dropdown for offer mod  from code by S4NE
 				$offerres = sql_query("SELECT id, name FROM offers WHERE userid = ".sqlesc($CURUSER[id])." AND allowed = 'allowed' ORDER BY name ASC") or sqlerr(__FILE__, __LINE__);

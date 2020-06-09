@@ -27,7 +27,7 @@ if (!$action) {
 	{
 		begin_main_frame();
 		print("<form method=post action=\"?action=takecontactanswered\">");
-		print("<table width=1000 border=1 cellspacing=0 cellpadding=5 align=center>\n");
+		print("<table width=1200 border=1 cellspacing=0 cellpadding=5 align=center>\n");
 		print("<tr>
 			<td class=colhead align=left>".$lang_staffbox['col_subject']."</td>
 			<td class=colhead align=center>".$lang_staffbox['col_sender']."</td>

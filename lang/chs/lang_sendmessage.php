@@ -16,7 +16,7 @@ $lang_sendmessage = array
 	'text_templates' => "模版：",
 	'submit_use' => "使用",
 	'std_no_user_id' => "没有该ID的用户。",
-	'text_message_to' => "发信息给 ",
+	'text_message_to' => "发送短讯给",
 	'checkbox_delete_message_replying_to' => "回复后删除",
 	'checkbox_save_message_to_sendbox' => "保存到发件箱"
 );

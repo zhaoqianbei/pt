@@ -21,6 +21,11 @@ $lang_cleanup_target = array
 	'msg_your_torrent_deleted' => "Your torrent was deleted",
 	'msg_your_torrent' => "Your torrent ",
 	'msg_was_deleted_because_dead' => " was deleted by system because it's been dead for a long time. However, you keep the karma bonus for uploading the torrent.",
+	'msg_new_user_exam_passed_subject' => 'Exam Passed',
+	'msg_new_user_exam_passed' => 'Congratulations! You have passed the exam for new users. This is the result:',
+	'msg_user_exam_passed' => 'Congratulations! You have passed the regular exam. This is the result:',
+	'msg_hr' => 'You have got an H&R',
+	'msg_hr_content' => 'Torrent which you have leeched %s has marked as hit and run. You did not seed for %u hours (actual %u hours) or have a ratio above %.1f (actual %.1f) in %u days.',
 ),
 	'chs' => array(
 	'msg_low_ratio_warning_removed' => "低分享率警告取消",
@@ -41,6 +46,11 @@ $lang_cleanup_target = array
 	'msg_your_torrent_deleted' => "你发布的种子被删除",
 	'msg_your_torrent' => "很遗憾，你发布的种子",
 	'msg_was_deleted_because_dead' => "因断种过久，已被系统自动删除。然而，你发布该种子时获得的魔力值没有被扣除。",
+	'msg_new_user_exam_passed_subject' => '考核通过',
+	'msg_new_user_exam_passed' => '恭喜你，新人考核计划已经通过，考核数据为：',
+	'msg_user_exam_passed' => '恭喜你，考核计划已经通过，考核数据为：',
+	'msg_hr' => '你得到一个H&R',
+	'msg_hr_content' => '你曾经下载的种子 %1$s 被判定为H&R。你没有在%6$u天期限内做种%2$u小时 (实际%3$u小时)或分享率高于%4$.1f(实际%5$.1f)。',
 ),
 	'cht' => array(
 	'msg_low_ratio_warning_removed' => "低分享率警告取消",
@@ -61,7 +71,11 @@ $lang_cleanup_target = array
 	'msg_your_torrent_deleted' => "你發布的種子被刪除",
 	'msg_your_torrent' => "很遺憾，你發布的種子",
 	'msg_was_deleted_because_dead' => "因斷種過久，已被系統自動刪除。然而，你發布該種子時獲得的魔力值沒有被扣除。",
-
+	'msg_new_user_exam_passed_subject' => '考核通過',
+	'msg_new_user_exam_passed' => '恭喜你，新人考核計畫已經通過，考核資料為：',
+	'msg_user_exam_passed' => '恭喜你，考核計畫已經通過，考核資料為：',
+	'msg_hr' => '你得到一個H&R',
+	'msg_hr_content' => '你曾經下載的種子 %1$s 被判定為H&R。你沒有在%6$u天期限內做種%2$u小時 (實際%3$u小時)或分享率高於%4$.1f(實際%5$.1f)。',
 ),
 	'ko' => array(
 	'msg_low_ratio_warning_removed' => "낮은 레이쇼로 인한 경고 제거",

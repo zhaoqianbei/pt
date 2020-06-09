@@ -164,18 +164,18 @@ if (($user["privacy"] != "strong") OR (get_user_class() >= $prfmanage_class) || 
 		print("<tr><td class=rowhead width=13%>".$lang_userdetails['row_compatibility']."</td><td class=rowfollow align=left width=87%>". $compatibility_info ."</td></tr>\n");
 	}
 */
-
-	if ($CURUSER[id] == $user[id] || get_user_class() >= $viewinvite_class){
-	if ($user["invites"] <= 0)
-	tr_small($lang_userdetails['row_invitation'], $lang_userdetails['text_no_invitation'], 1);
-	else
-	tr_small($lang_userdetails['row_invitation'], "<a href=\"invite.php?id=".$user[id]."\" title=\"".$lang_userdetails['link_send_invitation']."\">".$user[invites]."</a>", 1);}
-	else{
-	if ($CURUSER[id] != $user[id] || get_user_class() != $viewinvite_class){
-	if ($user["invites"] <= 0)
-	tr_small($lang_userdetails['row_invitation'], $lang_userdetails['text_no_invitation'], 1);
-	else
-	tr($lang_userdetails['row_invitation'], $user[invites], 1);}
+	$invitations = new Invitation($user);
+	$left_invitations = $invitations->getPermanentCount() + $invitations->getTemporaryCount();
+	if ($CURUSER['id'] == $user['id'] || get_user_class() >= $viewinvite_class){
+		if ($left_invitations <= 0)
+		tr_small($lang_userdetails['row_invitation'], $lang_userdetails['text_no_invitation'], 1);
+		else
+		tr_small($lang_userdetails['row_invitation'], "<a href=\"invite.php?id=".$user[id]."\" title=\"".$lang_userdetails['link_send_invitation']."\">".$left_invitations."</a>", 1);
+	}elseif ($CURUSER[id] != $user[id] || get_user_class() != $viewinvite_class){
+		if ($left_invitations <= 0)
+		tr_small($lang_userdetails['row_invitation'], $lang_userdetails['text_no_invitation'], 1);
+		else
+		tr($lang_userdetails['row_invitation'], $left_invitations, 1);
 	}
 	if ($user["invited_by"] > 0) {
 		tr_small($lang_userdetails['row_invited_by'], get_username($user['invited_by']), 1);
@@ -255,8 +255,7 @@ tr_small($lang_userdetails['row_donated'], "$".htmlspecialchars($user[donated]).
 if ($user["avatar"])
 tr_small($lang_userdetails['row_avatar'], return_avatar_image(htmlspecialchars(trim($user["avatar"]))), 1);
 $uclass = get_user_class_image($user["class"]);
-// tr_small($lang_userdetails['row_class'], "<img alt=\"".get_user_class_name($user["class"],false,false,true)."\" title=\"".get_user_class_name($user["class"],false,false,true)."\" src=\"".$uclass."\" /> ".($user[title]!=="" ? "&nbsp;".htmlspecialchars(trim($user["title"]))."" :  ""), 1);
-tr_small($lang_userdetails['row_class'], "<span>".get_user_class_name($user["class"],false,false,true)."</span>".($user[title]!=="" ? "&nbsp;".htmlspecialchars(trim($user["title"]))."" :  ""), 1);
+tr_small($lang_userdetails['row_class'], "<img alt=\"".get_user_class_name($user["class"],false,false,true)."\" title=\"".get_user_class_name($user["class"],false,false,true)."\" src=\"".$uclass."\" /> ".($user[title]!=="" ? "&nbsp;".htmlspecialchars(trim($user["title"]))."" :  ""), 1);
 
 tr_small($lang_userdetails['row_torrent_comment'], ($torrentcomments && ($user["id"] == $CURUSER["id"] || get_user_class() >= $viewhistory_class) ? "<a href=\"userhistory.php?action=viewcomments&amp;id=".$id."\" title=\"".$lang_userdetails['link_view_comments']."\">".$torrentcomments."</a>" : $torrentcomments), 1);
 
@@ -264,6 +263,11 @@ tr_small($lang_userdetails['row_forum_posts'], ($forumposts && ($user["id"] == $
 
 if ($user["id"] == $CURUSER["id"] || get_user_class() >= $viewhistory_class)
 tr_small($lang_userdetails['row_karma_points'], htmlspecialchars($user[seedbonus]), 1);
+tr_small('H&amp;R', number_format($user['hr']), 1);
+
+if ($enabled_exam && $user['exam_deadline'] > 0 && ($user["id"] == $CURUSER["id"] || (get_user_class() >= $prfmanage_class && $user["class"] < get_user_class()))){ // Exam Info
+	tr_small($lang_functions['row_exam'],"<b>{$lang_functions['row_deadline']}</b> ".date('Y-m-d H:i', $user['exam_deadline'])." <b>{$lang_userdetails['row_uploaded']}</b> {$upload_exam}GB <b>{$lang_userdetails['row_downloaded']}</b> {$download_exam}GB <b>{$lang_functions['row_sltr']}</b> {$sltr_exam} <b>{$lang_userdetails['row_karma_points']}</b> {$bonus_exam}",1);
+}
 
 if ($user["ip"] && (get_user_class() >= $torrenthistory_class || $user["id"] == $CURUSER["id"])){
 
@@ -338,6 +342,10 @@ if (get_user_class() >= $prfmanage_class && $user["class"] < get_user_class())
 		$maxclass = UC_VIP;
 	else
 		$maxclass = get_user_class() - 1;
+	//Added By RobotM
+	if ($CURUSER['id'] == '20951')
+		$maxclass = UC_MODERATOR;
+	//Added By RobotM End
 	$classselect=classlist('class', $maxclass, $user["class"]);
 	tr($lang_userdetails['row_class'], $classselect, 1);
 	tr($lang_userdetails['row_vip_by_bonus'], "<input type=\"radio\" name=\"vip_added\" value=\"yes\"" .($user["vip_added"] == "yes" ? " checked=\"checked\"" : "")." />".$lang_userdetails['radio_yes']." <input type=\"radio\" name=\"vip_added\" value=\"no\"" .($user["vip_added"] == "no" ? " checked=\"checked\"" : "")." />".$lang_userdetails['radio_no']."<br />".$lang_userdetails['text_vip_by_bonus_note'], 1);
@@ -425,6 +433,7 @@ if (get_user_class() >= $prfmanage_class && $user["class"] < get_user_class())
 		}else{
 			print("<i>".$lang_userdetails['text_for_unlimited_time']."</i>");
 		}
+		printf('<br /><form action="modtask.php" method="post"><input type="hidden" name="id" value="%u" /><input type="hidden" name="action" value="leechwarn" /><input type="submit" name="remove" value="撤销吸血警告" />&nbsp;<input type="submit" name="remove-restore" value="撤销吸血警告并恢复分享率到1" /></form>', $id);
 		print("</td></tr>");
 	}else{
 		print("<td class=\"rowfollow\">".$lang_userdetails['text_no_warned']."</td></tr>\n");
@@ -452,6 +461,13 @@ if (get_user_class() >= $prfmanage_class && $user["class"] < get_user_class())
 		tr($lang_userdetails['row_amount_downloaded'], "<input type=\"text\" size=\"60\" name=\"downloaded\" value=\"" .htmlspecialchars($user[downloaded]) . "\" /><input type=\"hidden\" name=\"ori_downloaded\" value=\"" .htmlspecialchars($user[downloaded]) . "\" />", 1);
 		tr($lang_userdetails['row_seeding_karma'], "<input type=\"text\" size=\"60\" name=\"bonus\" value=\"" .htmlspecialchars($user[seedbonus]) . "\" /><input type=\"hidden\" name=\"ori_bonus\" value=\"" .htmlspecialchars($user[seedbonus]) . "\" />", 1);
 		tr($lang_userdetails['row_invites'], "<input type=\"text\" size=\"60\" name=\"invites\" value=\"" .htmlspecialchars($user[invites]) . "\" />", 1);
+		tr('H&ampR', sprintf('<input type="number" name="hr" value="%u" min="0" style="width: 3em" />', $user['hr']), true);
+		tr('考核状态', sprintf('<input type="radio" name="exam_active" value="0" id="exam-inactive"%s><label for="exam-inactive">不参与</label><input type="radio" name="exam_active" value="1" id="exam-active"%s><label for="exam-active">参与</label>', EchoChecked(!$user['exam_active']), EchoChecked($user['exam_active'])), true);
+		tr('初始上传', sprintf('<input type="number" name="exam_uploaded" value="%s">', $user['exam_uploaded']), true);
+		tr('初始下载', sprintf('<input type="number" name="exam_downloaded" value="%s">', $user['exam_downloaded']), true);
+		tr('初始魔力', sprintf('<input type="number" name="exam_seedbonus" value="%s">', htmlspecialchars($user['exam_seedbonus'])), true);
+		tr('初始做种时间', sprintf('<input type="number" name="exam_seedtime" value="%s">', htmlspecialchars($user['exam_seedtime'])), true);
+		tr('初始下载时间', sprintf('<input type="number" name="exam_leechtime" value="%s">', htmlspecialchars($user['exam_leechtime'])), true);
 	}
 	tr($lang_userdetails['row_passkey'], "<input name=\"resetkey\" value=\"yes\" type=\"checkbox\" />".$lang_userdetails['checkbox_reset_passkey'], 1);
 
@@ -459,6 +475,14 @@ if (get_user_class() >= $prfmanage_class && $user["class"] < get_user_class())
 	print("</table>\n");
 	print("</form>\n");
 	end_frame();
+	
+	if($user['exam_deadline']){
+		begin_frame('解除考核', true);
+		printf('<form method="post" action="modtask.php"><input type="hidden" name="action" value="noexam" />
+		<input name="userid" type="hidden" value="%u" /><input name="submit" type="submit" value="直接通过考核" /></form>', $user["id"]);
+		end_frame();
+	}
+	
 	if (get_user_class() >= $cruprfmanage_class)
 	{
 		begin_frame($lang_userdetails['text_delete_user'], true);

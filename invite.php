@@ -6,6 +6,7 @@ loggedinorreturn();
 parked();
 $id = 0 + $_GET["id"];
 $type = unesc($_GET["type"]);
+$tadmin = get_user_class() >= UC_ADMINISTRATOR;
 
 registration_check('invitesystem',true,false);
 
@@ -28,26 +29,21 @@ print("<h1 align=center><a href=\"invite.php?id=".$id."\">".$user['username'].$l
 $res = sql_query("SELECT invites FROM users WHERE id = ".mysql_real_escape_string($id)) or sqlerr();
 $inv = mysql_fetch_assoc($res);
 
-//for one or more. "invite"/"invites"
-if ($inv["invites"] != 1){
-	$_s = $lang_invite['text_s'];
-} else {
-	$_s = "";
-}
-
-if ($type == 'new'){
-	if ($CURUSER[invites] <= 0) {
+if ($type == 'new' && $id == $CURUSER['id']){
+	$obj_i = new Invitation();
+	if (!$obj_i->canInvite()) {
 		stdmsg($lang_invite['std_sorry'],$lang_invite['std_no_invites_left'].
 		"<a class=altlink href=invite.php?id=$CURUSER[id]>".$lang_invite['here_to_go_back'],false);
 		print("</td></tr></table>");
 		stdfoot();
 		die;
 	}
+	$left = $obj_i->getPermanentCount() + $obj_i->getTemporaryCount();
 	$invitation_body =  $lang_invite['text_invitation_body'].$CURUSER[username];
 	//$invitation_body_insite = str_replace("<br />","\n",$invitation_body);
 	print("<form method=post action=takeinvite.php?id=".htmlspecialchars($id).">".
 	"<table border=1 width=1200 cellspacing=0 cellpadding=5>".
-	"<tr align=center><td colspan=2><b>".$lang_invite['text_invite_someone']."$SITENAME ($inv[invites]".$lang_invite['text_invitation'].$_s.$lang_invite['text_left'] .")</b></td></tr>".
+	"<tr align=center><td colspan=2><b>".$lang_invite['text_invite_someone'].sprintf('%s (%u%s%s%s)', $SITENAME, $left, $lang_invite['text_invitation'], add_s($left), $lang_invite['text_left']) ."</b></td></tr>".
 	"<tr><td class=\"rowhead nowrap\" valign=\"top\" align=\"right\">".$lang_invite['text_email_address']."</td><td align=left><input type=text size=40 name=email><br /><font align=left class=small>".$lang_invite['text_email_address_note']."</font>".($restrictemaildomain == 'yes' ? "<br />".$lang_invite['text_email_restriction_note'].allowedemails() : "")."</td></tr>".
 	"<tr><td class=\"rowhead nowrap\" valign=\"top\" align=\"right\">".$lang_invite['text_message']."</td><td align=left><textarea name=body rows=8 cols=120>" .$invitation_body.
 	"</textarea></td></tr>".
@@ -55,6 +51,20 @@ if ($type == 'new'){
 	"</form></table></td></tr></table>");
 
 } else {
+	$obj_i = new Invitation($id == $CURUSER['id'] ? 0 : $id);
+	$canInvite = $obj_i->canInvite();
+	if($canInvite){
+		if($tadmin) printf('<form action="massinvite.php" method="post"><input type="hidden" name="uid" value="%u" />', $id);
+		echo '<ul style="text-align: left">';
+		if($permanent = $obj_i->getPermanentCount()) printf('<li>'.$lang_invite['text_permanent'].'</li>', $permanent);
+		if($temporary = $obj_i->getTemporaryInvites()){
+			foreach($temporary as $t_invite){
+				printf('<li>'.$lang_invite['text_temporary'].'</li>', $tadmin ? sprintf('<input type="number" name="tinvite[%u]" value="%u" min="0" style="width: 2.5em" />', $t_invite['id'], $t_invite['q']) : $t_invite['q'], date('Y-m-d H:i:s', $t_invite['e']));
+			}
+		}
+		echo '</ul>';
+		if($tadmin) echo '<input type="submit" name="MOD" value="EDIT" /></form>';
+	}
 
 	$rel = sql_query("SELECT COUNT(*) FROM users WHERE invited_by = ".mysql_real_escape_string($id)) or sqlerr(__FILE__, __LINE__);
 	$arro = mysql_fetch_row($rel);
@@ -63,8 +73,7 @@ if ($type == 'new'){
 	$ret = sql_query("SELECT id, username, email, uploaded, downloaded, status, warned, enabled, donor, email FROM users WHERE invited_by = ".mysql_real_escape_string($id)) or sqlerr();
 	$num = mysql_num_rows($ret);
 
-	print("<table border=1 width=1200 cellspacing=0 cellpadding=5>".
-	"<h2 align=center>".$lang_invite['text_invite_status']." ($number)</h2><form method=post action=takeconfirm.php?id=".htmlspecialchars($id).">");
+	echo '<table border="1" width="100%" cellspacing="0" cellpadding="5"><h2 align="center">'.$lang_invite['text_invite_status']." ($number)</h2><form method=post action=takeconfirm.php?id=".htmlspecialchars($id).">";
 
 	if(!$num){
 		print("<tr><td colspan=7 align=center>".$lang_invite['text_no_invites']."</tr>");
@@ -117,7 +126,7 @@ if ($type == 'new'){
 		print("<tr><td colspan=7 align=right><input type=submit style='height: 20px' value=".$lang_invite['submit_confirm_users']."></td></tr>");
 		}
 		print("</form>");
-		print("<tr><td colspan=7 align=center><form method=post action=invite.php?id=".htmlspecialchars($id)."&type=new><input type=submit ".($CURUSER[invites] <= 0 ? "disabled " : "")." value='".$lang_invite['sumbit_invite_someone']."'></form></td></tr>");
+		print("<tr><td colspan=7 align=center><form method=post action=invite.php?id=".htmlspecialchars($id)."&type=new><input type=submit ".(!$canInvite ? "disabled " : "")." value='".$lang_invite['sumbit_invite_someone']."'></form></td></tr>");
 	}
 	print("</table>");
 
@@ -130,24 +139,30 @@ if ($type == 'new'){
 	$num1 = mysql_num_rows($rer);
 
 
-	print("<table border=1 width=1200 cellspacing=0 cellpadding=5>".
+	print('<table border="1" width="100%" cellspacing="0" cellpadding="5">'.
 	"<h2 align=center>".$lang_invite['text_sent_invites_status']." ($number1)</h2>");
 
 	if(!$num1){
 		print("<tr align=center><td colspan=6>".$lang_invite['text_no_invitation_sent']."</tr>");
 	} else {
 
-		print("<tr><td class=colhead>".$lang_invite['text_email']."</td><td class=colhead>".$lang_invite['text_hash']."</td><td class=colhead>".$lang_invite['text_send_date']."</td></tr>");
+		printf("<tr><td class=colhead>".$lang_invite['text_email']."</td><td class=colhead>".$lang_invite['text_hash']."</td><td class=colhead>".$lang_invite['text_send_date']."</td></tr>");
 		for ($i = 0; $i < $num1; ++$i)
 		{
 			$arr1 = mysql_fetch_assoc($rer);
-			print("<tr><td class=rowfollow>$arr1[invitee]<td class=rowfollow>$arr1[hash]</td><td class=rowfollow>$arr1[time_invited]</td></tr>");
+			printf('<tr><td class="rowfollow">%s<td class="rowfollow"><input type="text" value="http%s://%s/signup.php?type=invite&invitenumber=%s" style="width: 100%%" readonly /></td><td class="rowfollow">%s</td></tr>', htmlspecialchars($arr1['invitee']), $securelogin == 'no' ? '' : 's', $BASEURL, htmlspecialchars($arr1['hash']), $arr1['time_invited']);
 		}
 	}
 	print("</table>");
 	print("</td></tr></table>");
-
+	?>
+<script>
+	jQuery(function($){
+		$('input[type=text]').mouseenter(function(){
+			$(this).select();
+		});
+	});
+</script>	
+<?php
 }
 stdfoot();
-die;
-?>

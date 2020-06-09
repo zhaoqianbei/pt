@@ -48,7 +48,10 @@ Best Regards,
 	'text_invite_system' => "'s Invite System",
 	'std_only' => "Only ",
 	'std_or_above_can_invite' => " or above can send invitation.",
-	'text_email_restriction_note' => "You could only send invitation to email from those domains: ",
+	'text_email_restriction_note' => "You could only send invitation to email from those domains: ",	
+	'text_permanent' => 'Permanent Invitations: %u',
+	'text_temporary' => 'Special Invitations：%s (Expire at %s)',
+
 );
 
 ?>

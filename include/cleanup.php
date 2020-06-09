@@ -22,6 +22,7 @@ function docleanup($forceAll = 0, $printProgress = false) {
 	require_once($rootpath . '/lang/_target/lang_cleanup.php');
 
 	set_time_limit(0);
+	ini_set('memory_limit', '1024M');
 	ignore_user_abort(1);
 	$now = time();
 
@@ -70,6 +71,37 @@ function docleanup($forceAll = 0, $printProgress = false) {
 	}
 	if ($printProgress) {
 		printProgress('calculate seeding bonus');
+	}
+	
+	// clear HR flags first
+	$seedtime = $GLOBALS['seeding_hours_hnr'] * 3600;
+	sql_query(sprintf('UPDATE `snatched` SET `hr` = 0 WHERE `hr` = 1 AND `seedtime` > %u', $seedtime)) or sqlerr(__FILE__, __LINE__);
+	sql_query(sprintf('UPDATE `snatched` SET `hr` = 0 WHERE `hr` = 1 AND `downloaded` > 0 AND `downloaded` > 0 AND `uploaded` / `downloaded` > %.1F', $GLOBALS['ratio_hnr'])) or sqlerr(__FILE__, __LINE__);
+	sql_query('UPDATE `snatched` SET `hr` = 0 WHERE `hr` = 1 AND `downloaded` = 0 AND `uploaded` > 0') or sqlerr(__FILE__, __LINE__);
+	// search HR failed rows
+	$res = sql_query(sprintf('SELECT id, torrentid, userid, uploaded, downloaded, seedtime, startdat FROM snatched WHERE `hr` = 1 AND startdat < %s AND seedtime < %u AND downloaded > 0 AND uploaded / downloaded < %.1F', sqlesc(date('Y-m-d H:i:s', TIMENOW - $GLOBALS['count_days_hnr'] * 86400)), $seedtime, $GLOBALS['ratio_hnr'])) or sqlerr(__FILE__, __LINE__);
+	$hr_users = $hr_snatched = $torrent_titles = [];
+	while($row = mysql_fetch_assoc($res)){
+		$hr_snatched[] = $row['id'];
+		isset($hr_users[$row['userid']]) ? $hr_users[$row['userid']]++ : ($hr_users[$row['userid']] = 1);
+		$lang = get_user_lang($row['userid']);
+		SystemPM($row['userid'], $lang_cleanup_target[$lang]['msg_hr'], sprintf($lang_cleanup_target[$lang]['msg_hr_content'], isset($torrent_titles[$row['torrentid']]) ? $torrent_titles[$row['torrentid']] : ($torrent_titles[$row['torrentid']] = get_single_value('torrents', 'name', "WHERE id = {$row['torrentid']}")), $GLOBALS['seeding_hours_hnr'], $row['seedtime'] / 3600, $GLOBALS['ratio_hnr'], $row['uploaded'] / $row['downloaded'], $GLOBALS['count_days_hnr']));
+	}
+	// update snatched
+	if(count($hr_snatched)) sql_query(sprintf('UPDATE snatched SET hr = 2 WHERE id IN (%s)', implode(',', $hr_snatched))) or sqlerr(__FILE__, __LINE__);
+	// update users
+	$hr_updates = [];
+	foreach($hr_users as $hr_userid => $hr_count){
+		$hr_updates[$hr_count][] = $hr_userid;
+	}
+	foreach($hr_updates as $hr_count => $hr_uid_list){
+		sql_query(sprintf('UPDATE users SET hr = hr + %u WHERE id IN (%s)', $hr_count, implode(',', $hr_uid_list))) or sqlerr(__FILE__, __LINE__);
+	}
+	
+	sql_query(sprintf("UPDATE users SET enabled = 'no', modcomment = CONCAT_WS('\n', %s, `modcomment`), hr = 0 WHERE `enabled` = 'yes' AND `hr` >= %u", sqlesc(date('Y-m-d') . " - Auto banned for {$GLOBALS['ban_hnr']} H&R occurrences."), $GLOBALS['ban_hnr'])) or sqlerr(__FILE__, __LINE__);
+	
+	if ($printProgress) {
+		printProgress('update H&R');
 	}
 
 //Priority Class 2: cleanup every 30 mins
@@ -200,6 +232,9 @@ function docleanup($forceAll = 0, $printProgress = false) {
 	if ($printProgress) {
 		printProgress("delete offers if not uploaded after being voted on for some time.");
 	}
+	
+	Invitation::cleanup();
+	if ($printProgress) printProgress("remove out-dated invitations records.");
 
 	//15.cleanup torrents
 	//Start: expire torrent promotion
@@ -291,7 +326,154 @@ function torrent_promotion_expire($days, $type = 2, $targettype = 1){
 	if ($printProgress) {
 		printProgress("automatically pick hot");
 	}
-
+	global $enabled_exam, $upload_exam, $download_exam, $bonus_exam, $sltr_exam, $lang_cleanup_target;
+	// Note SQL Representation
+	if($enabled_exam){
+		$datetime = TIMENOW;
+		$r = sql_query("SELECT `id`, `username`, `uploaded`, `downloaded`, `seedtime`, `leechtime`, `seedbonus` FROM `users` WHERE `exam_deadline` > 0 AND `exam_deadline` <= $datetime") or sqlerr(__FILE__,__LINE__);
+		while($row = mysql_fetch_assoc($r)){
+			$pass = true;
+			$reason = "\n";
+			$uid = $row['id'];
+			$uploaded = $row['uploaded'] / 1073741824;
+			$downloaded = $row['downloaded'] / 1073741824;
+			$seedbonus = $row['seedbonus'];
+			if($upload_exam){
+				if($uploaded < $upload_exam){
+					$pass = false;
+					$reason .= '上传不足: '.round($uploaded,3)." GB (要求 {$upload_exam}GB)\n";
+				}
+				$upload_result = sprintf("Upload %.2f/%.2f GB;", $uploaded, $upload_exam);
+			}else{
+				$upload_result = '';
+			}
+			if($download_exam){
+				if($downloaded < $download_exam){
+					$pass = false;
+					$reason .= '下载不足: '.round($downloaded,3)." GB (要求 {$download_exam}GB)\n";
+				}
+				$download_result = sprintf("Download %.2f/%.2f GB;", $downloaded, $download_exam);
+			}else{
+				$download_result = '';
+			}
+			if($sltr_exam > 0){
+				if($row['leechtime'] > 0){
+					$sltr = round($row['seedtime'] / $row['leechtime'],3);
+					if($sltr < $sltr_exam){
+						$pass = false;
+						$reason .= "SLTR不足 $sltr (要求 {$sltr_exam})\n";
+					}
+				}else{
+					if($row['seedtime'] > 0){
+						$sltr = 'Inf.';
+					}else{
+						$sltr = 'N/A';
+						$pass = false;
+						$reason .= "SLTR不足 $sltr (要求 {$sltr_exam})\n";
+					}
+				}
+				$sltr_result = "SLTR $sltr/{$sltr_exam};";
+			}else{
+				$sltr_result = '';
+			}
+			if($bonus_exam > 0){
+				if($seedbonus < $bonus_exam){
+					$pass = false;
+					$reason .= "魔力值不足: $seedbonus (要求 {$bonus_exam})\n";
+				}
+				$bonus_result = "Bonus $seedbonus/{$bonus_exam}";
+			}else{
+				$bonus_result = '';
+			}
+			$result = $upload_result.$download_result.$sltr_result.$bonus_result;
+			if($pass){
+				$comment = sqlesc(date('Y-m-d')." - 考核通过 $result.");
+				sql_query("UPDATE `users` SET `exam_deadline` = 0, `modcomment` = CONCAT_WS('\n',$comment,`modcomment`) WHERE `id` = $uid") or sqlerr(__FILE__,__LINE__);
+				$lang = get_user_lang($uid);
+				SystemPM($uid, $lang_cleanup_target[$lang]['msg_new_user_exam_passed_subject'], $lang_cleanup_target[$lang]['msg_new_user_exam_passed'].$result, true);
+			}else{ // failed,ban
+				$comment = sqlesc(date('Y-m-d')." - 考核不通過 $result");
+				sql_query("UPDATE `users` SET `enabled` = 'no', `exam_deadline` = 0, `modcomment` = CONCAT_WS('\n',$comment,`modcomment`) WHERE `id` = $uid") or sqlerr(__FILE__,__LINE__);
+				write_log("{$row['username']}({$row['id']}) 因考核不成功而被禁用，详细 $reason",'mod');
+			}
+		}
+        if ($printProgress) {
+            printProgress("newbie examination cleanup");
+        }
+		global $global_upload_exam, $global_download_exam, $global_bonus_exam, $global_sltr_exam, $global_deadline_exam;
+		if($global_deadline_exam > 0 && $global_deadline_exam < TIMENOW){
+            $r = sql_query("SELECT `id`, `username`, `uploaded` - `exam_uploaded` AS `uploaded`, `downloaded` - `exam_downloaded` AS downloaded, `seedtime` - `exam_seedtime` AS seedtime, `leechtime` - `exam_leechtime` AS leechtime, `seedbonus` - `exam_seedbonus` AS seedbonus FROM `users` WHERE `exam_active` = 1") or sqlerr(__FILE__,__LINE__);
+            while($row = mysql_fetch_assoc($r)){
+                $pass = true;
+                $reason = "\n";
+                $uid = $row['id'];
+                $uploaded = $row['uploaded'] / 1073741824;
+                $downloaded = $row['downloaded'] / 1073741824;
+                $seedbonus = $row['seedbonus'];
+                if($global_upload_exam){
+                    if($uploaded < $global_upload_exam){
+                        $pass = false;
+                        $reason .= '上传不足: '.round($uploaded,3)." GB (要求 {$global_upload_exam}GB)\n";
+                    }
+                    $upload_result = sprintf("Upload %.2f/%.2f GB;", $uploaded, $global_upload_exam);
+                }else{
+                    $upload_result = '';
+                }
+                if($global_download_exam){
+                    if($downloaded < $global_download_exam){
+                        $pass = false;
+                        $reason .= '下载不足: '.round($downloaded,3)." GB (要求 {$global_download_exam}GB)\n";
+                    }
+                    $download_result = sprintf("Download %.2f/%.2f GB;", $downloaded, $global_download_exam);
+                }else{
+                    $download_result = '';
+                }
+                if($global_sltr_exam > 0){
+                    if($row['leechtime'] > 0){
+                        $sltr = round($row['seedtime'] / $row['leechtime'],3);
+                        if($sltr < $global_sltr_exam){
+                            $pass = false;
+                            $reason .= "SLTR不足 $sltr (要求 {$global_sltr_exam})\n";
+                        }
+                    }else{
+                        if($row['seedtime'] > 0){
+                            $sltr = 'Inf.';
+                        }else{
+                            $sltr = 'N/A';
+                            $pass = false;
+                            $reason .= "SLTR不足 $sltr (要求 {$global_sltr_exam})\n";
+                        }
+                    }
+                    $sltr_result = "SLTR $sltr/{$global_sltr_exam};";
+                }else{
+                    $sltr_result = '';
+                }
+                if($global_bonus_exam > 0){
+                    if($seedbonus < $global_bonus_exam){
+                        $pass = false;
+                        $reason .= "魔力值不足: $seedbonus (要求 {$global_bonus_exam})\n";
+                    }
+                    $bonus_result = "Bonus $seedbonus/{$global_bonus_exam}";
+                }else{
+                    $bonus_result = '';
+                }
+                $result = $upload_result.$download_result.$sltr_result.$bonus_result;
+                if($pass){
+                    $comment = sqlesc(date('Y-m-d')." - 考核通过 $result.");
+                    sql_query("UPDATE `users` SET `exam_active` = 0, `modcomment` = CONCAT_WS('\n',$comment,`modcomment`) WHERE `id` = $uid") or sqlerr(__FILE__,__LINE__);
+                    $lang = get_user_lang($uid);
+                    SystemPM($uid, $lang_cleanup_target[$lang]['msg_new_user_exam_passed_subject'], $lang_cleanup_target[$lang]['msg_user_exam_passed'].$result, true);
+                }else{ // failed,ban
+                    $comment = sqlesc(date('Y-m-d')." - 考核不通過 $result");
+                    sql_query("UPDATE `users` SET `enabled` = 'no', `exam_active` = 0, `modcomment` = CONCAT_WS('\n',$comment,`modcomment`) WHERE `id` = $uid") or sqlerr(__FILE__,__LINE__);
+                    write_log("{$row['username']}({$row['id']}) 因考核不成功而被禁用，详细 $reason",'mod');
+                }
+            }
+            if ($printProgress) {
+                printProgress("regular examination cleanup");
+            }
+		}
+	}
 //Priority Class 4: cleanup every 24 hours
 	$res = sql_query("SELECT value_u FROM avps WHERE arg = 'lastcleantime4'");
 	$row = mysql_fetch_array($res);
@@ -574,6 +756,9 @@ function user_to_peasant($down_floor_gb, $minratio){
 			sql_query("INSERT INTO messages (sender, receiver, added, subject, msg) VALUES(0, $arr[id], $dt, ".sqlesc($subject).", ".sqlesc($msg).")") or sqlerr(__FILE__, __LINE__);
 		}
 	}
+	// remove orphaned leech-warns
+	sql_query("UPDATE `users` SET `leechwarn` = 'no', `leechwarnuntil` = '0000-00-00 00:00:00' WHERE `leechwarn` = 'yes' AND `class` > 0") or sqlerr(__FILE__, __LINE__);
+	
 	if ($printProgress) {
 		printProgress("remove warning of users");
 	}

@@ -1,14 +1,12 @@
 <?php
 require "include/bittorrent.php";
 dbconn();
-require_once(get_langfile_path());
+require get_langfile_path();
 loggedinorreturn();
 
 $brsectiontype = $browsecatmode;
 $spsectiontype = $specialcatmode;
-if ($enablespecial == 'yes')
-	$allowspecial = true;
-else $allowspecial = false;
+$allowspecial = $enablespecial == 'yes' && can_access_special();
 $showsubcat = (get_searchbox_value($brsectiontype, 'showsubcat') || ($allowspecial && get_searchbox_value($spsectiontype, 'showsubcat')));
 $showsource = (get_searchbox_value($brsectiontype, 'showsource') || ($allowspecial && get_searchbox_value($spsectiontype, 'showsource'))); //whether show sources or not
 $showmedium = (get_searchbox_value($brsectiontype, 'showmedium') || ($allowspecial && get_searchbox_value($spsectiontype, 'showmedium'))); //whether show media or not
@@ -179,7 +177,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 ?>
 <h1 align="center"><?php echo $lang_getrss['text_rss_feeds']?></h1>
 <form method="post" action="getrss.php">
-<table cellspacing="1" cellpadding="5" width="1000">
+<table cellspacing="1" cellpadding="5" width="1200">
 <tr>
 <td class="rowhead"><?php echo $lang_getrss['row_categories_to_retrieve']?>
 </td>

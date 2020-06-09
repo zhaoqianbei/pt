@@ -44,6 +44,7 @@ else {
 	registration_check("normal");
 	failedloginscheck ("Signup");
 	stdhead($lang_signup['head_signup']);
+	echo '999999';
 }
 
 $s = "<select name=\"sitelanguage\" onchange='submit()'>\n";
@@ -59,14 +60,13 @@ $s .= "\n</select>";
 ?>
 <form method="get" action=<?php echo $_SERVER['PHP_SELF'] ?>>
 <?php
-if ($type == 'invite')
-print("<input type=hidden name=type value='invite'><input type=hidden name=invitenumber value='".$code."'>");
 print("<div align=right valign=top>".$lang_signup['text_select_lang']. $s . "</div>");
 ?>
 </form>
-<p>
+
 <form method="post" action="takesignup.php">
-<?php if ($type == 'invite') print("<input type=\"hidden\" name=\"inviter\" value=\"".$inviter."\"><input type=hidden name=type value='invite'");?>
+<?php if ($type == 'invite') print("<input type=\"hidden\" name=\"inviter\" value=\"".$inviter."\">");?>
+<?php if ($type == 'invite') print("<input type=hidden name=type value='invite'><input type=hidden name=invitenumber value='".$code."'>");?>
 <table border="1" cellspacing="0" cellpadding="10">
 <?php
 print("<tr><td class=text align=center colspan=2>".$lang_signup['text_cookies_note']."</td></tr>");
@@ -80,8 +80,9 @@ print("<tr><td class=text align=center colspan=2>".$lang_signup['text_cookies_no
 show_image_code ();
 ?>
 <tr><td class=rowhead><?php echo $lang_signup['row_email_address'] ?></td><td class=rowfollow align=left><input type="text" style="width: 200px" name="email" />
-<table width=250 border=0 cellspacing=0 cellpadding=0><tr><td class=embedded><font class=small><?php echo ($restrictemaildomain == 'yes' ? $lang_signup['text_email_note'].allowedemails() : "") ?></td></tr>
-</font></td></tr></table>
+<table width=250 border=0 cellspacing=0 cellpadding=0>
+<tr><td class=embedded><font class=small><?php echo ($restrictemaildomain == 'yes' ? $lang_signup['text_email_note'].allowedemails() : "") ?></font></td></tr>
+</table>
 </td></tr>
 <?php $countries = "<option value=\"8\">---- ".$lang_signup['select_none_selected']." ----</option>n";
 $ct_r = sql_query("SELECT id,name FROM countries ORDER BY name") or die;
@@ -103,7 +104,7 @@ tr($lang_signup['row_school'], "<select name=school>$schools</select>", 1);
 <input type=checkbox name=faqverify value=yes><?php echo $lang_signup['checkbox_read_faq'] ?> <br />
 <input type=checkbox name=ageverify value=yes><?php echo $lang_signup['checkbox_age'] ?></td></tr>
 <input type=hidden name=hash value=<?php echo $code?>>
-<tr><td class=toolbox colspan="2" align="center"><font color=red><b><?php echo $lang_signup['text_all_fields_required'] ?></b><p></font><input class="btn" type=submit value=<?php echo $lang_signup['submit_sign_up'] ?>></td></tr>
+<tr><td class=toolbox colspan="2" align="center"><font color=red><b><?php echo $lang_signup['text_all_fields_required'] ?></b><p></font><input type=submit value=<?php echo $lang_signup['submit_sign_up'] ?> style='height: 25px'></td></tr>
 </table>
 </form>
 <?php

@@ -117,7 +117,8 @@ if(get_user_class()>=$torrentonpromotion_class)
 		$updateset[] = "promotion_time_type = 1";
 		$updateset[] = "promotion_until = '0000-00-00 00:00:00'";
 	} elseif ($_POST["promotion_time_type"] == 2) {
-		if ($_POST["promotionuntil"] && strtotime($torrentAddedTimeString) <= strtotime($_POST["promotionuntil"])) {
+		$promotion_until = strtotime($_POST["promotionuntil"]);
+		if ($promotion_until && strtotime($row['added']) < $promotion_until) {
 			$updateset[] = "promotion_time_type = 2";
 			$updateset[] = "promotion_until = ".sqlesc($_POST["promotionuntil"]);
 		} else {
@@ -128,10 +129,9 @@ if(get_user_class()>=$torrentonpromotion_class)
 }
 if(get_user_class()>=$torrentsticky_class)
 {
-	if((0 + $_POST["sel_posstate"]) == 0)
-		$updateset[] = "pos_state = 'normal'";
-	elseif((0 + $_POST["sel_posstate"]) == 1)
-		$updateset[] = "pos_state = 'sticky'";
+	$pos_type = (int) $_POST["sel_posstate"];
+	$pos_until = !empty($_POST["pos_until"]) && TIMENOW < strtotime($_POST["pos_until"]) ? $_POST["pos_until"] : false;
+	$updateset[] = buildStickySQL($pos_type, $pos_until);
 }
 
 $pick_info = "";

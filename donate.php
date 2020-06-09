@@ -34,7 +34,8 @@ else
 	begin_main_frame();
 	print("<h2>".$lang_donate['text_donate']."</h2>");
 	print("<table width=100%><tr>");
-	print("<td colspan=2 class=text align=left>".$lang_donate['text_donation_note']."</td></tr>");
+	print("<td colspan=2 class=text align=left>".$lang_donate['text_donation_ins']."</td></tr>");
+	echo "<td colspan=2 class=text align=left>".sprintf($lang_donate['text_detail_link'], 'forums.php?action=viewtopic&forumid=4&topicid=306')."</td></tr>";
 	print("<tr>");
 	if ($showpaypal){
 ?>
@@ -52,7 +53,7 @@ else
    <select name="amount">
 <option value="" selected><?php echo $lang_donate['select_choose_donation_amount']?></option>
 <?php
-$allowedDonationUsdAmounts = array(0, 1, 5, 10, 15, 20, 30, 40, 50, 60, 100, 300);
+$allowedDonationUsdAmounts = array(0, 20, 40, 60, 100, 200, 300, 400, 1000, 1500, 2000, 3000);
 //$allowedDonationUsdAmounts = array(32, 64, 320);
 foreach ($allowedDonationUsdAmounts as $amount) {
 	if ($amount == 0) {

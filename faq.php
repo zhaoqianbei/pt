@@ -74,6 +74,7 @@ if (isset($faq_categ)) {
 		}
 	}
 	end_frame();
+
 	foreach ($faq_categ as $id => $temp) {
 		if ($faq_categ[$id][flag] == "1")
 		{

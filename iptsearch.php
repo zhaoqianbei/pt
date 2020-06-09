@@ -33,7 +33,7 @@ if($ip){
 	$count = get_row_count($table, $where);
 	list($pagertop, $pagerbottom, $limit) = pager(50, $count, sprintf('?ip=%s&type=%s&', urlencode($ip), urlencode($type)));
 	$res = sql_query("$sql $limit") or sqlerr(__FILE__, __LINE__);
-	echo $pagertop.'<table width="940" border="1" cellspacing="0" cellpadding="5" align="center">';
+	echo $pagertop.'<table width="1200" border="1" cellspacing="0" cellpadding="5" align="center">';
 	echo EchoRow('colhead', '用户名', '注册时间', '最后访问', '等级', '上传量', '下载量', 'IP', '首次连接', '最近连接', '连接数');
 	while($row = mysql_fetch_assoc($res)){
 		echo EchoRow('rowfollow', get_username($row['id']), gettime($row['added']), gettime($row['last_access']), get_user_class_name($row['class'], false, true, true), mksize($row['uploaded']), mksize($row['downloaded']), htmlspecialchars($row['ipt']), gettime($row['first']), gettime($row['last']), number_format($row['hits']));

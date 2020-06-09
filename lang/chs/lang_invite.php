@@ -46,6 +46,8 @@ $lang_invite = array
 	'std_only' => "只有",
 	'std_or_above_can_invite' => "及以上的用户才能发送邀请。",
 	'text_email_restriction_note' => "你只能发送邀请给以下邮箱：",
+	'text_permanent' => '永久邀请名额：%u',
+	'text_temporary' => '限时邀请名额：%s (有效期至%s)',
 );
 
 ?>

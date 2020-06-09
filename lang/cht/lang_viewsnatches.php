@@ -28,6 +28,7 @@ $lang_viewsnatches = array
 	'text_inf' => "無限",
 	'std_sorry' => "對不起",
 	'text_no_snatched_users' => "還沒有用戶完成該種子。",
+	'ip_finished' => '完成時IP',
 );
 
 ?>

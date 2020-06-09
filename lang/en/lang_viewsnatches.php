@@ -28,6 +28,7 @@ $lang_viewsnatches = array
 	'text_inf' => "Inf.",
 	'std_sorry' => "Sorry",
 	'std_no_snatched_users' => "No user has snatched this torrent yet.",
+	'ip_finished' => 'IP on finished',
 );
 
 ?>

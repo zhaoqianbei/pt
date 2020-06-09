@@ -38,7 +38,8 @@ input[type="checkbox"] {
     margin-right: 6px;
     margin-top:0; 
 }
-td.embedded input[type="button"]{
+
+#compose td.embedded input[type="button"] {
     background: #ddd;
     border: none;
     padding: 4px 10px;
@@ -77,12 +78,12 @@ table {
     border-left: medium none;
     border-bottom: medium none;
     border-collapse: collapse;
-    background-color: transparent
+    background-color: transparent;
 }
 
 table.head {
     background: transparent;
-    width: 1200px;
+    width: 81%;
     margin-top: 20px;
     margin-bottom: 5px;
 }
@@ -92,7 +93,8 @@ table.main {
     border-top: medium none;
     border-left: medium none;
     border-bottom: medium none;
-    background-color: transparent
+    background-color: transparent;
+    width: 90%;
 }
 
 table.mainouter {
@@ -100,7 +102,8 @@ table.mainouter {
     border-top: gray;
     border-left: gray;
     border-bottom: gray;
-    background-color: white
+    background-color: white;
+    width: 90%;
 }
 
 table.message {
@@ -183,7 +186,7 @@ td {
 .searchbox select,.searchbox input{height: 30px;}
 
 form table.searchbox td{
-    display: inline-block;
+    /* display: inline-block; */
 }
 td .codebuttons {
     font-size: 13pt;

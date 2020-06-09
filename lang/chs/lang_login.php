@@ -5,12 +5,12 @@ $lang_login = array
 	'h1_not_logged_in' => "未登录!",
 	'p_error' => "错误:",
 	'p_after_logged_in' => "该页面必须在登录后才能访问",
-	'p_need_cookies_enables' => "<b>注意</b>: 登录后你需要下载 <a href='https://www.qbittorrent.org/download.php' target='_blank'>qBittorrent</a> ，才能下载本网站所有资源",
+	'p_need_cookies_enables' => "<b>注意</b>: 你需要启用cookies才能登录或切换语言",
 	'p_fail_ban' => "次连续登录失败将导致你的IP地址被禁用!",
 	'p_you_have' => "你还有",
 	'p_remaining_tries' => "次尝试机会",
 	'p_no_account_signup' => "还没有账号? 马上<a href=\"signup.php\"><b>注册</b></a>！",
-	'p_forget_pass_recover' => "忘记了密码? 请联系管理员 QQ：162186878",
+	'p_forget_pass_recover' => "忘记了密码? 通过<a href=\"recover.php\"><b>邮件</b></a>来找回密码",
 	'p_resend_confirm' => "没有收到验证邮件或验证链接无法打开? <a href=\"confirm_resend.php\"><b>重新发送验证邮件</b></a>",
 	'rowhead_username' => "用户名：",
 	'rowhead_password' => "密码：",
@@ -31,5 +31,6 @@ $lang_login = array
 	'submit_clear' => "清空",
 	'text_select_lang' => "Select Site Language: ",
 	'head_login' => "登录",
+	'text_complain' => '如有疑问或者通过捐赠进站，点击申诉或了解.官方捐赠进站QQ群:642801835',
+	'text_contact' => '联系我们 邮箱：',
 );
-?>

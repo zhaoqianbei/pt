@@ -3,6 +3,7 @@ ob_start(); //Do not delete this line
 require_once("include/bittorrent.php");
 dbconn();
 require_once(get_langfile_path());
+require get_langfile_path('donate.php');
 if ($showextinfo['imdb'] == 'yes')
 	require_once("imdb/imdb.class.php");
 loggedinorreturn();
@@ -13,9 +14,9 @@ int_check($id);
 if (!isset($id) || !$id)
 die();
 
-$res = sql_query("SELECT torrents.cache_stamp, torrents.sp_state, torrents.url, torrents.small_descr, torrents.seeders, torrents.banned, torrents.leechers, torrents.info_hash, torrents.filename, nfo, LENGTH(torrents.nfo) AS nfosz, torrents.last_action, torrents.name, torrents.owner, torrents.save_as, torrents.descr, torrents.visible, torrents.size, torrents.added, torrents.views, torrents.hits, torrents.times_completed, torrents.id, torrents.type, torrents.numfiles, torrents.anonymous, categories.name AS cat_name, sources.name AS source_name, media.name AS medium_name, codecs.name AS codec_name, standards.name AS standard_name, processings.name AS processing_name, teams.name AS team_name, audiocodecs.name AS audiocodec_name FROM torrents LEFT JOIN categories ON torrents.category = categories.id LEFT JOIN sources ON torrents.source = sources.id LEFT JOIN media ON torrents.medium = media.id LEFT JOIN codecs ON torrents.codec = codecs.id LEFT JOIN standards ON torrents.standard = standards.id LEFT JOIN processings ON torrents.processing = processings.id LEFT JOIN teams ON torrents.team = teams.id LEFT JOIN audiocodecs ON torrents.audiocodec = audiocodecs.id WHERE torrents.id = $id LIMIT 1")
-or sqlerr();
+$res = sql_query("SELECT torrents.cache_stamp, torrents.sp_state, torrents.promotion_time_type, torrents.promotion_until, torrents.url, torrents.small_descr, torrents.seeders, torrents.banned, torrents.leechers, torrents.info_hash, torrents.filename, nfo, LENGTH(torrents.nfo) AS nfosz, torrents.last_action, torrents.name, torrents.category, torrents.owner, torrents.save_as, torrents.descr, torrents.visible, torrents.size, torrents.added, torrents.views, torrents.hits, torrents.times_completed, torrents.id, torrents.type, torrents.numfiles, torrents.anonymous, categories.name AS cat_name, sources.name AS source_name, media.name AS medium_name, codecs.name AS codec_name, standards.name AS standard_name, processings.name AS processing_name, teams.name AS team_name, audiocodecs.name AS audiocodec_name, torrents.hr FROM torrents LEFT JOIN categories ON torrents.category = categories.id LEFT JOIN sources ON torrents.source = sources.id LEFT JOIN media ON torrents.medium = media.id LEFT JOIN codecs ON torrents.codec = codecs.id LEFT JOIN standards ON torrents.standard = standards.id LEFT JOIN processings ON torrents.processing = processings.id LEFT JOIN teams ON torrents.team = teams.id LEFT JOIN audiocodecs ON torrents.audiocodec = audiocodecs.id WHERE torrents.id = $id LIMIT 1") or sqlerr(__FILE__,__LINE__);
 $row = mysql_fetch_array($res);
+if(!can_access_category($row['category'])) permissiondenied();
 
 if (get_user_class() >= $torrentmanage_class || $CURUSER["id"] == $row["owner"])
 $owned = 1;
@@ -38,13 +39,14 @@ else {
 			print("<h1 align=\"center\">".$lang_details['text_successfully_uploaded']."</h1>");
 			print("<p>".$lang_details['text_redownload_torrent_note']."</p>");
 			header("refresh: 1; url=download.php?id=$id");
+			//header("refresh: 1; url=getimdb.php?id=$id&type=1");
 		}
 		elseif ($_GET["edited"]) {
 			print("<h1 align=\"center\">".$lang_details['text_successfully_edited']."</h1>");
 			if (isset($_GET["returnto"]))
 				print("<p><b>".$lang_details['text_go_back'] . "<a href=\"".htmlspecialchars($_GET["returnto"])."\">" . $lang_details['text_whence_you_came']."</a></b></p>");
 		}
-		$sp_torrent = get_torrent_promotion_append($row[sp_state],'word');
+		$sp_torrent = get_torrent_promotion_append($row['sp_state'],'word', true, $row["added"], $row['promotion_time_type'], $row['promotion_until']).get_torrent_hitrun_icon($row);
 
 		$s=htmlspecialchars($row["name"]).($sp_torrent ? "&nbsp;&nbsp;&nbsp;".$sp_torrent : "");
 		if ($smalldescription_main == 'yes'){
@@ -119,7 +121,6 @@ else {
 
 		$size_info =  "<b>".$lang_details['text_size']."</b>" . mksize($row["size"]);
 		$type_info = "&nbsp;&nbsp;&nbsp;<b>".$lang_details['row_type'].":</b>&nbsp;".$row["cat_name"];
-		
 		if (isset($row["source_name"]))
 			$source_info = "&nbsp;&nbsp;&nbsp;<b>".$lang_details['text_source']."&nbsp;</b>".$row[source_name];
 		// if (isset($row["medium_name"]))
@@ -194,7 +195,7 @@ else {
 
 		if ($CURUSER['showdescription'] != 'no' && !empty($row["descr"])){
 		$torrentdetailad=$Advertisement->get_ad('torrentdetail');
-		tr("<a href=\"javascript: klappe_news('descr')\"><span class=\"nowrap\"><img class=\"minus\" src=\"pic/trans.gif\" alt=\"Show/Hide\" id=\"picdescr\" title=\"".$lang_detail['title_show_or_hide']."\" /> ".$lang_details['row_description']."</span></a>", "<div id='kdescr'>".($Advertisement->enable_ad() && $torrentdetailad ? "<div align=\"left\" style=\"margin-bottom: 10px\" id=\"ad_torrentdetail\">".$torrentdetailad[0]."</div>" : "").format_comment($row["descr"])."</div>", 1);
+		tr("<a href=\"javascript: klappe_news('descr')\"><span class=\"nowrap\"><img class=\"minus\" src=\"pic/trans.gif\" alt=\"Show/Hide\" id=\"picdescr\" title=\"".$lang_details['title_show_or_hide']."\" /> ".$lang_details['row_description']."</span></a>", "<div id='kdescr'>".($Advertisement->enable_ad() && $torrentdetailad ? "<div align=\"left\" style=\"margin-bottom: 10px\" id=\"ad_torrentdetail\">".$torrentdetailad[0]."</div>" : "").format_comment($row["descr"])."</div>", 1);
 		}
 
 		if (get_user_class() >= $viewnfo_class && $CURUSER['shownfo'] != 'no' && $row["nfosz"] > 0){
@@ -202,7 +203,7 @@ else {
 				$nfo = code($row["nfo"], $view == "magic");
 				$Cache->cache_value('nfo_block_torrent_id_'.$id, $nfo, 604800);
 			}
-			tr("<a href=\"javascript: klappe_news('nfo')\"><img class=\"plus\" src=\"pic/trans.gif\" alt=\"Show/Hide\" id=\"picnfo\" title=\"".$lang_detail['title_show_or_hide']."\" /> ".$lang_details['text_nfo']."</a><br /><a href=\"viewnfo.php?id=".$row[id]."\" class=\"sublink\">". $lang_details['text_view_nfo']. "</a>", "<div id='knfo' style=\"display: none;\"><pre style=\"font-size:10pt; font-family: 'Courier New', monospace;\">".$nfo."</pre></div>\n", 1);
+			tr("<a href=\"javascript: klappe_news('nfo')\"><img class=\"plus\" src=\"pic/trans.gif\" alt=\"Show/Hide\" id=\"picnfo\" title=\"".$lang_details['title_show_or_hide']."\" /> ".$lang_details['text_nfo']."</a><br /><a href=\"viewnfo.php?id=".$row[id]."\" class=\"sublink\">". $lang_details['text_view_nfo']. "</a>", "<div id='knfo' style=\"display: none;\"><pre style=\"font-size:10pt; font-family: 'Courier New', monospace;\">".$nfo."</pre></div>\n", 1);
 		}
 
 	if ($imdb_id && $showextinfo['imdb'] == 'yes' && $CURUSER['showimdb'] != 'no')
@@ -262,10 +263,15 @@ else {
 						$autodata .= "<br />\n<strong><font color=\"DarkRed\">".$lang_details['text_year']."</font></strong>" . "".$movie->year ()."<br />\n";
 						$autodata .= "<strong><font color=\"DarkRed\">".$lang_details['text_runtime']."</font></strong>".$runtimes."<br />\n";
 						$autodata .= "<strong><font color=\"DarkRed\">".$lang_details['text_votes']."</font></strong>" . "".$movie->votes ()."<br />\n";
-						$autodata .= "<strong><font color=\"DarkRed\">".$lang_details['text_rating']."</font></strong>" . "".$movie->rating ()."<br />\n";
+                        
+                        $db_imdb_rating=$movie->rating ();
+                        if($db_imdb_rating !="")
+                        {
+                            $sql_tupdate = sql_query("CALL uspUpdateTorrent_imdb_rating(". sqlesc($id).",".sqlesc($db_imdb_rating).");") or sqlerr(__FILE__, __LINE__);
+                        }
+						$autodata .= "<strong><font color=\"DarkRed\">".$lang_details['text_rating']."</font></strong>" . "".$db_imdb_rating."<br />\n";
 						$autodata .= "<strong><font color=\"DarkRed\">".$lang_details['text_language']."</font></strong>" . "".$movie->language ()."<br />\n";
 						$autodata .= "<strong><font color=\"DarkRed\">".$lang_details['text_country']."</font></strong>";
-
 						$temp = "";
 						for ($i = 0; $i < count ($country); $i++)
 						{
@@ -385,7 +391,7 @@ else {
 
 						$Cache->add_whole_row();
 						print("<tr>");
-						print("<td class=\"rowhead\"><a href=\"javascript: klappe_ext('imdb')\"><span class=\"nowrap\"><img class=\"minus\" src=\"pic/trans.gif\" alt=\"Show/Hide\" id=\"picimdb\" title=\"".$lang_detail['title_show_or_hide']."\" /> ".$lang_details['text_imdb'] . $lang_details['row_info'] ."</span></a><div id=\"posterimdb\">".  $smallth."</div></td>");
+						print("<td class=\"rowhead\"><a href=\"javascript: klappe_ext('imdb')\"><span class=\"nowrap\"><img class=\"minus\" src=\"pic/trans.gif\" alt=\"Show/Hide\" id=\"picimdb\" title=\"".$lang_details['title_show_or_hide']."\" /> ".$lang_details['text_imdb'] . $lang_details['row_info'] ."</span></a><div id=\"posterimdb\">".  $smallth."</div></td>");
 						$Cache->end_whole_row();
 						$Cache->add_row();
 						$Cache->add_part();
@@ -432,7 +438,7 @@ else {
 		if ($imdb_id)
 		{
 			$where_area = " url = " . sqlesc((int)$imdb_id) ." AND torrents.id != ".sqlesc($id);
-			$copies_res = sql_query("SELECT torrents.id, torrents.name, torrents.sp_state, torrents.size, torrents.added, torrents.seeders, torrents.leechers, categories.id AS catid, categories.name AS catname, categories.image AS catimage, sources.name AS source_name, media.name AS medium_name, codecs.name AS codec_name, standards.name AS standard_name, processings.name AS processing_name FROM torrents LEFT JOIN categories ON torrents.category=categories.id LEFT JOIN sources ON torrents.source = sources.id LEFT JOIN media ON torrents.medium = media.id  LEFT JOIN codecs ON torrents.codec = codecs.id LEFT JOIN standards ON torrents.standard = standards.id LEFT JOIN processings ON torrents.processing = processings.id WHERE " . $where_area . " ORDER BY torrents.id DESC") or sqlerr(__FILE__, __LINE__);
+			$copies_res = sql_query("SELECT torrents.id, torrents.name, torrents.sp_state, torrents.size, torrents.added, torrents.hr, torrents.seeders, torrents.leechers, categories.id AS catid, categories.name AS catname, categories.image AS catimage, sources.name AS source_name, media.name AS medium_name, codecs.name AS codec_name, standards.name AS standard_name, processings.name AS processing_name FROM torrents LEFT JOIN categories ON torrents.category=categories.id LEFT JOIN sources ON torrents.source = sources.id LEFT JOIN media ON torrents.medium = media.id  LEFT JOIN codecs ON torrents.codec = codecs.id LEFT JOIN standards ON torrents.standard = standards.id LEFT JOIN processings ON torrents.processing = processings.id WHERE " . $where_area . " ORDER BY torrents.id DESC") or sqlerr(__FILE__, __LINE__);
 
 			$copies_count = mysql_num_rows($copies_res);
 			if($copies_count > 0)
@@ -461,7 +467,7 @@ else {
 						$other_processing_info = $copy_row[processing_name].", ";
 
 					$sphighlight = get_torrent_bg_color($copy_row['sp_state']);
-					$sp_info = get_torrent_promotion_append($copy_row['sp_state']);
+					$sp_info = get_torrent_promotion_append($copy_row['sp_state']).get_torrent_hitrun_icon($copy_row);
 
 					$s .= "<tr". $sphighlight."><td class=\"rowfollow nowrap\" valign=\"middle\" style='padding: 0px'>".return_category_image($copy_row["catid"], "torrents.php?allsec=1&amp;")."</td><td class=\"rowfollow\" align=\"left\"><a href=\"" . htmlspecialchars(get_protocol_prefix() . $BASEURL . "/details.php?id=" . $copy_row["id"]. "&hit=1")."\">" . $dispname ."</a>". $sp_info."</td>" .
 					"<td class=\"rowfollow\" align=\"left\">" . rtrim(trim($other_source_info . $other_medium_info . $other_codec_info . $other_standard_info . $other_processing_info), ","). "</td>" .
@@ -472,7 +478,7 @@ else {
 					"</tr>\n";
 				}
 				$s .= "</table>\n";
-				tr("<a href=\"javascript: klappe_news('othercopy')\"><span class=\"nowrap\"><img class=\"".($copies_count > 5 ? "plus" : "minus")."\" src=\"pic/trans.gif\" alt=\"Show/Hide\" id=\"picothercopy\" title=\"".$lang_detail['title_show_or_hide']."\" /> ".$lang_details['row_other_copies']."</span></a>", "<b>".$copies_count.$lang_details['text_other_copies']." </b><br /><div id='kothercopy' style=\"".($copies_count > 5 ? "display: none;" : "display: block;")."\">".$s."</div>",1);
+				tr("<a href=\"javascript: klappe_news('othercopy')\"><span class=\"nowrap\"><img class=\"".($copies_count > 5 ? "plus" : "minus")."\" src=\"pic/trans.gif\" alt=\"Show/Hide\" id=\"picothercopy\" title=\"".$lang_details['title_show_or_hide']."\" /> ".$lang_details['row_other_copies']."</span></a>", "<b>".$copies_count.$lang_details['text_other_copies']." </b><br /><div id='kothercopy' style=\"".($copies_count > 5 ? "display: none;" : "display: block;")."\">".$s."</div>",1);
 			}
 		}
 
@@ -485,7 +491,7 @@ else {
 			return sprintf("%02x", ord($matches[0]));
 		}
 		if ($enablenfo_main=='yes')
-			tr($lang_details['row_torrent_info'], "<table><tr>" . ($files_info != "" ? "<td class=\"no_border_wide\">" . $files_info . "</td>" : "") . "<td class=\"no_border_wide\"><b>".$lang_details['row_info_hash'].":</b>&nbsp;".preg_replace_callback('/./s', "hex_esc", hash_pad($row["info_hash"]))."</td>". (get_user_class() >= $torrentstructure_class ? "<td class=\"no_border_wide\"><b>" . $lang_details['text_torrent_structure'] . "</b><a href=\"torrent_info.php?id=".$id."\">".$lang_details['text_torrent_info_note']."</a></td>" : "") . "</tr></table><span id='filelist'></span>",1);
+			tr($lang_details['row_torrent_info'], "<table><tr>" . ($files_info != "" ? "<td class=\"no_border_wide\">" . $files_info . "</td>" : "") . "<td class=\"no_border_wide\"></td></tr></table><span id='filelist'></span>",1);
 		tr($lang_details['row_hot_meter'], "<table><tr><td class=\"no_border_wide\"><b>" . $lang_details['text_views']."</b>". $row["views"] . "</td><td class=\"no_border_wide\"><b>" . $lang_details['text_hits']. "</b>" . $row["hits"] . "</td><td class=\"no_border_wide\"><b>" .$lang_details['text_snatched'] . "</b><a href=\"viewsnatches.php?id=".$id."\"><b>" . $row["times_completed"]. $lang_details['text_view_snatches'] . "</td><td class=\"no_border_wide\"><b>" . $lang_details['row_last_seeder']. "</b>" . gettime($row["last_action"]) . "</td></tr></table>",1);
 		$bwres = sql_query("SELECT uploadspeed.name AS upname, downloadspeed.name AS downname, isp.name AS ispname FROM users LEFT JOIN uploadspeed ON users.upload = uploadspeed.id LEFT JOIN downloadspeed ON users.download = downloadspeed.id LEFT JOIN isp ON users.isp = isp.id WHERE users.id=".$row['owner']);
 		$bwrow = mysql_fetch_array($bwres);
@@ -553,7 +559,131 @@ echo "<script type=\"text/javascript\">\n";
 echo $scronload;
 echo "</script>";
 		}
+		//Add 魔力值奖励功能
+		if(isset($magic_value_bonus)){
+			$bonus_array = $magic_value_bonus;
+		}else{
+			$bonus_array = '50 , 100 , 200 , 500, 1000';
+		}
+		echo '<style type="text/css">
+					ul.magic
+					{
+						cursor:pointer;
+						list-style-type:none;
+						padding-left:0px;
+					}
+					ul.magic li
+					{
+						margin:0px;text-align:center;float:left;width:40px;margin-right:15px; height:21px;background:url("styles/huise.png") no-repeat;
+						padding-left:5px;padding-right:5px;
+						line-height:20px;
+					}
+					ul.magic li:hover
+					{
+						background:url("styles/boli.png") no-repeat
+					}
+				</style>
+		';
+		$magic_value_button = '';
+		
+		if ($CURUSER['id'] <> $row['owner']) {
+			$arr_temp = explode(',',$bonus_array);
+			$bonus_has = $CURUSER['seedbonus'];
+			if(intval($bonus_has) < intval($arr_temp[0])){
+				$error_bonus_message = $lang_details['magic_have_no_enough_bonus_value'];
+				$button_name = "<input class=\"btn\" type=\"button\" value=\"".$error_bonus_message."\" disabled=\"disabled\" />";
+				$magic_value_button .= $button_name;	 		
+			}else{
+				foreach($arr_temp as $key => $each_temp){
+					$each_temp = intval($each_temp);
+					if ($each_temp > 0 && $each_temp <= $bonus_has) {
+							$button_name = $magic_value_button.$key;
+							$magic_button_id = 'magic_value_'.$key;
+							$each_temp_font = '<font style="font-size:8pt;padding-right:5px;">'.('+'.$each_temp).'</font>';
+							$error_bonus_message = $lang_details['magic_have_no_enough_bonus_value'];
+							$button_name = "<li onclick=\"saveMagicValue(".$id.",$each_temp);\">".$each_temp_font."</li>";
+							
+							$magic_value_button .= $button_name;
+					 }
+				}
+			}
+		}
+		
+		$span_description = $lang_details['span_description_have_given'];
+		$span = '<input class="btn" type="button" id="magic_add" style="display:none" value="'.$span_description.'" disabled="disabled" />&nbsp;';
+		$whether_have_give_value = 0;
+		$give_value = array();
+		$no_give = "";
+		$add_value ="";
+		
+		$tempresult = sql_query ("SELECT count( DISTINCT `userid` ) as count FROM magic WHERE torrentid=".sqlesc($id));
+		$count_user = mysql_fetch_array($tempresult);
+		$count_user_number = $count_user['count'];
+		
+		$give_value_sql = sql_query("SELECT userid,value FROM magic WHERE torrentid=".sqlesc($id)." ORDER BY id DESC");
 
+		$give_value_count = get_row_count("magic", "WHERE torrentid=".sqlesc($id));
+		$give_value_all = mysql_num_rows($give_value_sql);
+		$sum_value = 0;
+		if ($give_value_all) {
+			while($rows_t = mysql_fetch_array($give_value_sql)) {
+				$give_value_userid = $rows_t["userid"];
+				$sum_value += $rows_t["value"]*1;
+				if ($give_value_userid == $CURUSER['id']) {
+					$whether_have_give_value = 1;
+					$add_value = $rows_t["value"];			
+				}
+				$give_value[] = get_username($give_value_userid)." ";
+			}
+		}else $no_give = $lang_details['text_no_magic_added'];
+		
+		if(intval($bonus_has) < intval($arr_temp[0])){
+			
+		}else if ($whether_have_give_value == 0 ) {
+			$magic_value_button = '<ul id="listNumber" class="magic">'.$magic_value_button.'</ul>';
+		} else {
+			$add_value = str_replace("Number",$add_value,$lang_details['magic_value_number']);
+			$magic_value_button ="<input class=\"btn\" type=\"button\" value=\"".$add_value."\" disabled=\"disabled\" />";
+			//$give_value = get_username($CURUSER['id'])." ".$give_value;
+		}
+		
+		$show_list = null;
+		$show_all = null;
+		$show_list_new_number = 6;
+		$other_user_str = null;
+		$other_user_span = null;
+		if(count($give_value) > 0){
+			$count_user_span = '<span id="count_user_spa">'.$count_user_number.'</span>';
+			$magic_newest_record = '<span id="magic_newest_record">'. $lang_details['magic_newest_record'].'</span>';
+			$show_list_description ='('. $magic_newest_record.$lang_details['magic_sum_user_give_number'].')';
+			$show_list_description = str_replace('Number',$count_user_span,$show_list_description);
+			$output = array_slice($give_value, 0, $show_list_new_number);
+			foreach($output as $eachOutput){
+				$show_list .= $eachOutput.'  ';
+			}
+			//other user list
+			if(count($give_value) > $show_list_new_number){
+				$show_list .= '<span id="ellipsis">&nbsp;......&nbsp;</span>';
+				$show_all_description = '['.$lang_details['magic_show_all_description'].']';
+				$show_all = '<a herf="#" style="cursor:pointer" onclick="displayOtherUserList()">'.$show_all_description.'</a>'.'<br/>';
+				$other_user_list = array_slice($give_value, $show_list_new_number, count($give_value)); 
+				foreach($other_user_list as $each){
+					$other_user_str .= $each.'  ';
+				}
+				$other_user_span = '<span id="other_user_list" style="display:none">'.$other_user_str.'</span>';
+			}
+		}else{
+			$show_list_description = null;
+			$haveGotBonus = $no_give;
+		}
+		$current_user_magic = "<span id='current_user_magic' style='display:none'>".get_username($CURUSER['id'])."</span>&nbsp;";
+		$haveGotBonus = $lang_details['magic_haveGotBonus'].'&nbsp';
+		$spanSumAll = '<span id="spanSumAll">'.$sum_value.'</span>';
+		$haveGotBonus = str_replace('Number',$spanSumAll,$haveGotBonus);
+		$firstLine = '<div style="height:25px">'.$magic_value_button.$span.$haveGotBonus.$show_all.'</div>';
+		$otherLine = '<div>'.$current_user_magic.$show_list.$other_user_span.$show_list_description.'</div>';
+		tr($lang_details['magic_value_award'],$firstLine.$otherLine,1);
+		//End 魔力值奖励功能
 		// ------------- start thanked-by block--------------//
 
 		$torrentid = $id;

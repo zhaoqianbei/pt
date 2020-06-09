@@ -91,6 +91,47 @@ function unpreview(obj){
 	document.getElementById("previewbutton").style.display = 'block';
 }
 
+function saveMagicValue(torrentid,value)
+{
+	var list=ajax.posts('magic.php','value='+value +'&id='+torrentid);
+//	document.getElementById("thanksbutton").innerHTML = document.getElementById("thanksadded").innerHTML;
+	document.getElementById("magic_add").value += value;
+	document.getElementById("magic_add").style.display = '';
+	document.getElementById("listNumber").style.display = 'none';
+	document.getElementById("current_user_magic").style.display = '';
+	var sumAll = document.getElementById("spanSumAll").innerHTML;
+	document.getElementById("spanSumAll").innerHTML = sumAll*1 + value;
+	if(document.getElementById("count_user_spa")){
+		var userAll = document.getElementById("count_user_spa").innerHTML;
+		document.getElementById("count_user_spa").innerHTML = userAll*1 + 1;
+	}
+	
+	//document.getElementById("listNumber").innerHTML = "<input class=\"btn\" type=\"button\" id="magic_add" value=\""+value+"\" disabled=\"disabled\" />";
+	
+//	document.getElementById("addcuruser").innerHTML = document.getElementById("curuser").innerHTML;
+}
+
+function displayOtherUserList(){
+	if(document.getElementById("other_user_list").style.display == 'none'){
+		document.getElementById("other_user_list").style.display = '';
+		if(document.getElementById("ellipsis")){
+			document.getElementById("ellipsis").style.display = 'none';
+		}
+		if(document.getElementById("magic_newest_record")){
+			document.getElementById("magic_newest_record").style.display = 'none';
+		}
+	}else{
+		document.getElementById("other_user_list").style.display = 'none';
+		if(document.getElementById("ellipsis")){
+			document.getElementById("ellipsis").style.display = '';
+		}
+		if(document.getElementById("magic_newest_record")){
+			document.getElementById("magic_newest_record").style.display = '';
+		}
+		
+	}
+}
+
 // java_klappe.js
 
 function klappe(id)
@@ -371,4 +412,45 @@ if (document.getElementById("giftselect").value == '0'){
 document.getElementById("giftselect").disabled = true;
 document.getElementById("giftcustom").disabled = false;
 }
+}
+// settings.php
+function NewRow(anchor,up){
+	var thisRow = anchor.parentNode.parentNode;
+	var newRow = thisRow.cloneNode(true);
+	var InputBoxes = newRow.getElementsByTagName("input");
+	for(i=0; i<InputBoxes.length; i++) InputBoxes.item(i).value = "";
+	var position = up ? "beforeBegin" : "afterEnd";
+	thisRow.insertAdjacentElement(position,newRow);
+}
+function DelRow(anchor){
+	anchor.parentNode.parentNode.parentNode.parentNode.deleteRow(anchor.parentNode.parentNode.rowIndex);
+}
+
+// sender: the checkbox itself
+// table: the id of a table which need to be batch selected
+function BatchSelect(sender, table){
+	var mode = sender.checked;
+	var table = document.getElementById(table);
+	var Boxes = table.getElementsByTagName("INPUT");
+
+	for(var i=1;i<Boxes.length;i++){
+		if(Boxes.item(i).type == "checkbox"){
+			Boxes.item(i).checked = (mode) ? true : false;
+		}
+	}
+}
+// BlockSelect(event.shiftKey,this);
+function BlockSelect(mode,box){
+	if(mode){
+		var boxes = document.getElementsByTagName("INPUT");
+		for(var i=0;i<boxes.length;i++){
+			if(boxes.item(i) == last_box) first = i;
+			if(boxes.item(i) == box) second = i;
+		}
+		s = first < second ? first : second;
+		e = first > second ? first : second;
+		for(var j=s;j<e;j++) boxes.item(j).checked = true;
+	}else{
+		last_box = box;
+	}
 }

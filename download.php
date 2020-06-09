@@ -1,12 +1,10 @@
 <?php
 require_once("include/bittorrent.php");
 dbconn();
-$id = (int)$_GET["id"];//种子序号
-if (!$id){
+$id = (int)$_GET["id"];
+if (!$id)
 	httperr();
-}
-
-$passkey = $_GET['passkey'];//用户key
+$passkey = $_GET['passkey'];
 if ($passkey){
 	$res = sql_query("SELECT * FROM users WHERE passkey=". sqlesc($passkey)." LIMIT 1");
 	$user = mysql_fetch_array($res);
@@ -17,7 +15,9 @@ if ($passkey){
 	$oldip = $user['ip'];
 	$user['ip'] = getip();
 	$CURUSER = $user;
-}else{//不存在key
+}
+else
+{
 	loggedinorreturn();
 	parked();
 	$letdown = $_GET['letdown'];
@@ -52,27 +52,28 @@ if (@ini_get('output_handler') == 'ob_gzhandler' AND @ob_get_length() !== false)
 	header('Content-Encoding:');
 }
 */
-if ($_COOKIE["c_secure_tracker_ssl"] == base64("yeah")){
-	$tracker_ssl = true;
-}else{
-	$tracker_ssl = false;
-}
-
+if ($_COOKIE["c_secure_tracker_ssl"] == base64("yeah"))
+$tracker_ssl = true;
+else
+$tracker_ssl = false;
+$tracker_ssl = false;
 if ($tracker_ssl == true){
 	$ssl_torrent = "https://";
 	if ($https_announce_urls[0] != "")
 		$base_announce_url = $https_announce_urls[0];
 	else
 		$base_announce_url = $announce_urls[0];
-}else{
+}
+else{
 	$ssl_torrent = "http://";
 	$base_announce_url = $announce_urls[0];
 }
 
 
 
-$res = sql_query("SELECT name, filename, save_as,  size, owner,banned FROM torrents WHERE id = ".sqlesc($id)) or sqlerr(__FILE__, __LINE__);
+$res = sql_query("SELECT name, filename, save_as, size, owner, banned, category FROM torrents WHERE id = ".sqlesc($id)) or sqlerr(__FILE__, __LINE__);
 $row = mysql_fetch_assoc($res);
+if(!can_access_category($row['category'])) httperr();
 $fn = "$torrent_dir/$id.torrent";
 if ($CURUSER['downloadpos']=="no")
 	permissiondenied();
@@ -90,6 +91,7 @@ if (strlen($CURUSER['passkey']) != 32) {
 }
 
 $dict = bdec_file($fn, $max_torrent_size);
+$dict['value']['announce']["type"] = "string";
 $dict['value']['announce']['value'] = $ssl_torrent . $base_announce_url . "?passkey=$CURUSER[passkey]";
 $dict['value']['announce']['string'] = strlen($dict['value']['announce']['value']).":".$dict['value']['announce']['value'];
 $dict['value']['announce']['strlen'] = strlen($dict['value']['announce']['string']);

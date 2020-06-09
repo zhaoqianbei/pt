@@ -10,6 +10,9 @@ define('TIMENOW', time());
 $USERUPDATESET = array();
 $query_name=array();
 
+define('SPECIAL_ZONE_FILE', 'live');
+define('COMPLAINTS_COUNT_CACHE', 'staff_new_complaints_count');
+
 define ("UC_PEASANT", 0);
 define ("UC_USER", 1);
 define ("UC_POWER_USER", 2);
