@@ -1,7 +1,7 @@
 <?php
 //Caching class (Based on file From ProjectGazelle)
 
-class CACHE extends Memcache{
+class CACHE extends WinCache{
 	var $isEnabled;
 	var $clearCache = 0;
 	var $language = 'en';
@@ -259,3 +259,208 @@ class CACHE extends Memcache{
 		return (array)$this->keyHits[$type];
 	}
 }
+
+class WinCache{
+ 
+ 
+	function pconnect($host, $port){
+	if(extension_loaded('wincache'))
+	return true;
+	}
+	 
+	 
+	function delete($Key){
+	wincache_ucache_delete($Key);
+	}
+	 
+	function set($Key,$Value,$What,$Duration){
+	wincache_ucache_set($Key,$Value,$Duration);
+	}
+	 
+	function get($Key){
+	return wincache_ucache_get($Key);
+	 
+	if(wincache_ucache_exists($Key))
+	return wincache_ucache_get($Key);
+	else
+	return false;
+	}
+	 
+	}
+	 
+	 
+	class APCCache{
+	 
+	function pconnect($host, $port){
+	if(extension_loaded('apc'))
+	return true;
+	}
+	 
+	function delete($Key){
+	apc_delete($Key);
+	}
+	 
+	function set($Key,$Value,$What,$Duration){
+	apc_store($Key,$Value,$Duration);
+	}
+	 
+	function get($Key){
+	if(apc_exists($Key))
+	return apc_fetch($Key);
+	else 
+	return false;
+	}
+	 
+	}
+	 
+	 
+	class XCache{//待测试
+	 
+	 
+	function pconnect($host, $port){
+	if(extension_loaded('xcache'))
+	return true;
+	}
+	 
+	function delete($Key){
+	xcache_unset($Key);
+	}
+	 
+	function set($Key,$Value,$What,$Duration){
+	xcache_set($Key,$Value,$Duration);
+	}
+	 
+	function get($Key){
+	if (xcache_isset($Key))
+	return xcache_get($Key);
+	else 
+	return false;
+	}
+	 
+	}
+	 
+	 
+	class eAccelerator{//待测试
+	 
+	 
+	function pconnect($host, $port){
+	if(extension_loaded('eaccelerator'))
+	return true;
+	}
+	 
+	 
+	 
+	function delete($Key){
+	eaccelerator_rm($Key);
+	}
+	 
+	function set($Key,$Value,$What,$Duration){
+	eaccelerator_put($Key,$Value,$Duration);
+	}
+	 
+	function get($Key){
+	return eaccelerator_get($Key);
+	}
+	 
+	}
+	 
+	 
+	class FileCache{ 
+	/*
+	cleanup.php
+	$dp = @opendir('cache');
+	while (($file = readdir($dp)) !== false){
+	if(time() - filemtime('cache/'.$file) > 24*3600)@unlink('cache/'.$file);
+	}
+	closedir($dp);
+	*/  
+		private $lifetime = 3600;
+		private $path = 'cache';
+	 
+		function set($name,$value,$What,$time=0){
+	   if($time) $this->lifetime = $time;
+			$filename = $this->path.'/'.$name.'.cache';
+			//@unlink($filename);
+			$valuecache['cache'] = $value;
+	$valuecache['cachetimeuntil']=time()+$this->lifetime;
+			$array = "<?php\n\$filecache['".$name."']=".var_export($valuecache, true).";\n?>";
+			$strlen = file_put_contents($filename, $array);
+			@chmod($filename, 0777);
+			return $strlen;
+		} 
+	 
+	 
+		function get($name){
+	$filename = $this->path.'/'.($name).'.cache';
+	if(!file_exists($filename))return false;
+				include_once $filename;
+	if($filecache[$name]['cachetimeuntil']>time())
+				return $filecache[$name]['cache'];
+	else
+	return false;
+	   } 
+	 
+		function delete($name){
+			$filename = $this->path.'/'.($name).'.cache';
+			@unlink($filename);
+	} 
+	  
+		function pconnect(){
+			return true;
+		}
+	}
+	 
+	 
+	class SqlCache {
+	/*
+	CREATE TABLE `sqlcache` (
+	  `id` int(10) NOT NULL AUTO_INCREMENT,
+	  `keyname` char(128) NOT NULL,
+	  `keyvalue` text NOT NULL,
+	  `deadtime` int(10) NOT NULL,
+	  PRIMARY KEY (`id`),
+	  UNIQUE KEY `keyname` (`keyname`),
+	  KEY `deadtime` (`deadtime`)
+	) ENGINE=MyISAM AUTO_INCREMENT=5437 DEFAULT CHARSET=utf8;
+	//////////////////////////////////////////////////////////////
+	cleanup.php
+	sql_query("DELETE from sqlcache where deadtime <".time());
+	*/
+	function pconnect(){
+			return true;
+		}
+	 
+	 
+	function get($key) {
+	$cache = sql_query("SELECT * FROM  sqlcache WHERE keyname=".sqlesc($key));
+	if(!$cache)return false;
+	$data = mysql_fetch_assoc($cache);
+	 
+	if($data['deadtime'] < time())
+	return false;
+	 
+	return $data['keyvalue'];
+	}
+	 
+	 
+	function set($key, $value,$What, $life) {
+	$key=sqlesc($key);
+	$value=sqlesc($value);
+	$life=sqlesc($life+time());
+	return sql_query("INSERT INTO sqlcache (keyname,keyvalue,deadtime) VALUES ( $key , $value , $life ) ON DUPLICATE KEY update keyvalue=values(keyvalue) ,deadtime=values(deadtime) ");
+	}
+	 
+	 
+	function delete($key) {
+	$key=sqlesc($key);
+	return sql_query("DELETE from sqlcache where keyname = $key");
+	}
+	}
+	 
+	 
+	class NoCache{//待测试
+	function pconnect($host, $port){return true;}
+	function delete($Key){}
+	function set($Key,$Value,$What,$Duration){}
+	function get($Key){}
+	}
