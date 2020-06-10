@@ -763,3 +763,148 @@
     display: flex;
     justify-content: space-between;
 }
+
+/*宽度*/
+.w0 {
+    width: auto;
+}
+
+.w1 {
+    width: 5%;
+}
+
+.w2 {
+    width: 10%;
+}
+
+.w3 {
+    width: 15%;
+}
+
+.w4 {
+    width: 20%;
+}
+
+.w5 {
+    width: 25%;
+}
+
+.w6 {
+    width: 30%;
+}
+
+.w7 {
+    width: 35%;
+}
+
+.w8 {
+    width: 40%;
+}
+
+.w9 {
+    width: 45%;
+}
+
+.w10 {
+    width: 50%;
+}
+
+.w11 {
+    width: 55%;
+}
+
+.w12 {
+    width: 60%;
+}
+
+.w13 {
+    width: 65%;
+}
+
+.w14 {
+    width: 70%;
+}
+
+.w15 {
+    width: 75%;
+}
+
+.w16 {
+    width: 80%;
+}
+
+.w17 {
+    width: 85%;
+}
+
+.w18 {
+    width: 90%;
+}
+
+.w19 {
+    width: 95%;
+}
+
+.w20 {
+    width: 100%;
+}
+
+.w30 {
+    width: 30px;
+}
+
+.w40 {
+    width: 40px;
+}
+
+.w50 {
+    width: 50px;
+}
+
+.w60 {
+    width: 60px;
+}
+
+.w70 {
+    width: 70px;
+}
+
+.w80 {
+    width: 80px;
+}
+
+.w100 {
+    width: 100px;
+}
+
+.w150 {
+    width: 150px;
+}
+
+.w200 {
+    width: 200px;
+}
+
+.w250 {
+    width: 250px;
+}
+
+.w400 {
+    width: 400px;
+}
+
+.w1000 {
+    width: 1000px;
+}
+
+.w1100 {
+    width: 1100px;
+}
+
+.w1200 {
+    width: 1200px;
+}
+
+.w33 {
+    width: 33%;
+}

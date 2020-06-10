@@ -64,7 +64,7 @@ else {
 		else {
 			$zuozhe= (isset($row['owner']) ? get_username($row['owner'], false, false, false, false, false, false) : "<i>".$lang_details['text_unknown']."</i>");
 		}
-		$sh = '<div class="social-share tal"></div>';
+		$sh = '<div class="social-share tal w18"></div>';
 		print($sh);
 
 		$js = '<script type="text/javascript">var $config = {
