@@ -71,7 +71,7 @@ else {
 		    url: window.location.href,
 		    source: "找前辈网 - 7500学编程，手把手教到就业满意！就业没有5000元/月，少多少退多少！", 
 		    title: "'.htmlspecialchars($row["name"]).'\n'.htmlspecialchars(trim($row["small_descr"])).'", 
-		    description:"'.$fubiao.'(上传者：'.$zuozhe.'，文件大小：'.mksize($row["size"]).')", 
+		    description:"'.$fubiao.'(上传者：'.htmlspecialchars(trim($zuozhe)).'，文件大小：'.mksize($row["size"]).')", 
 		    image: "https://www.pttime.org/ico.png", 
 		    sites: ["wechat", "qq", "qzone", "weibo"], 
 		    disabled: ["google", "facebook", "twitter"], 
@@ -81,8 +81,6 @@ else {
 		</script>';
 
 		print($js);
-		$zhixing = '<script type="text/javascript">$(".social-share").share($js);</script>';
-		print($zhixing);
 		print("<h1 align=\"center\" id=\"top\">".$s."</h1>\n");
 		print("<table width=\"1200\" cellspacing=\"0\" cellpadding=\"5\">\n");
 
