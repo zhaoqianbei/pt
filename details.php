@@ -81,8 +81,8 @@ else {
 		</script>';
 
 		print($js);
-
-		
+		$zhixing = '<script type="text/javascript">$(".social-share").share($js);</script>';
+		print($zhixing);
 		print("<h1 align=\"center\" id=\"top\">".$s."</h1>\n");
 		print("<table width=\"1200\" cellspacing=\"0\" cellpadding=\"5\">\n");
 
