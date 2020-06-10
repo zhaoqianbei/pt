@@ -59,8 +59,8 @@ $lang_functions = array
 	'text_inf' => "无限",
 	'title_donor' => "捐赠者",
 	'title_warned' => "被警告者",
-	'title_inbox_new_messages' => "收件箱&nbsp;(有新短讯)",
-	'title_inbox_no_new_messages' => "收件箱&nbsp;(无新短讯)",
+	'title_inbox_new_messages' => "收件箱:",
+	'title_inbox_no_new_messages' => "收件箱:",
 	'text_yes' => "是",
 	'text_no' => "否",
 	'text_unknown' => "未知",
@@ -312,3 +312,5 @@ $lang_functions = array
     'text_donation' => '捐赠本站',
     'text_complains' => '有%s%u个待处理的申述%s',
 );
+
+?>
