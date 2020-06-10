@@ -34,8 +34,8 @@ else
 	begin_main_frame();
 	print("<h2>".$lang_donate['text_donate']."</h2>");
 	print("<table width=100%><tr>");
-	print("<td colspan=2 class=text align=left>".$lang_donate['text_donation_ins']."</td></tr>");
-	echo "<td colspan=2 class=text align=left>".sprintf($lang_donate['text_detail_link'], 'forums.php?action=viewtopic&forumid=4&topicid=306')."</td></tr>";
+	// print("<td colspan=2 class=text align=left>".$lang_donate['text_donation_ins']."</td></tr>");
+	// echo "<td colspan=2 class=text align=left>".sprintf($lang_donate['text_detail_link'], 'forums.php?action=viewtopic&forumid=4&topicid=306')."</td></tr>";
 	print("<tr>");
 	if ($showpaypal){
 ?>

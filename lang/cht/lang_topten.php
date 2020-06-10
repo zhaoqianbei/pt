@@ -8,7 +8,7 @@ $lang_topten = array
 	'std_or_above_can_view' => "及以上等級的用戶才能檢視排行榜。<br /><br />請檢視"."<a class=\"faqlink\" href=\"faq.php#id22\"><b>常見問題</b></a>了解更多關于用戶等級和許可權的資訊。<br /><br /><b></p>" .$SITENAME."管理組</b>",
 	'col_rank' => "排名",
 	'col_user' => "用戶",
-	'col_donated' => "捐贈",
+	'col_donated' => "捐赠",
 	'col_ul_speed' => "上傳速度",
 	'col_downloaded' => "下載",
 	'col_dl_speed' => "下載速度",
@@ -51,10 +51,10 @@ $lang_topten = array
 	'text_worst_seeded_torrents' => "供種率（做種/下載）最小種子",
 	'text_worst_seeded_torrents_note' => "(至少有1個下載者, 不包括完成數為0的種子)",
 
-	'text_most_donated_USD' => "美元捐贈者",
-	'text_most_donated_CNY' => "人民幣捐贈者",
-	'col_donated_usd' => "捐贈(＄)",
-	'col_donated_cny' => "捐贈(￥)",
+	'text_most_donated_USD' => "美元捐赠者",
+	'text_most_donated_CNY' => "人民幣捐赠者",
+	'col_donated_usd' => "捐赠(＄)",
+	'col_donated_cny' => "捐赠(￥)",
 	
 	'text_most_supplied' => "最大資源提供者<font class=\"small\">(不包括被移除的種子)</font>",
 	'text_most_snatched' => " 最大資源完成者<font class=\"small\">(不包括被移除的種子)</font>",
