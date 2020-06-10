@@ -2653,7 +2653,11 @@ function stdfoot() {
 	print("</div>");
 	if ($analyticscode_tweak)
 		print("\n".$analyticscode_tweak."\n");
-	print("</body></html>");
+    print("</body></html>");
+    
+    $zhixing = '<script type="text/javascript">$(".social-share").share($config);</script>';
+    print($zhixing);
+    print("</body></html>");
 
 	//echo replacePngTags(ob_get_clean());
 
