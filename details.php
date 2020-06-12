@@ -574,13 +574,19 @@ echo "</script>";
 					}
 					ul.magic li
 					{
-						margin:0px;text-align:center;float:left;width:40px;margin-right:15px; height:21px;background:url("styles/huise.png") no-repeat;
+						margin:0px;
+						text-align:center;
+						float:left;
+						width:40px;
+						margin-right:15px; 
+						height:21px;
+						background:#f1f1f1;
 						padding-left:5px;padding-right:5px;
 						line-height:20px;
 					}
 					ul.magic li:hover
 					{
-						background:url("styles/boli.png") no-repeat
+						background:#ccc
 					}
 				</style>
 		';
