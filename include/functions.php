@@ -2554,7 +2554,7 @@ if ($logo_main == "") {
                 <span class="fcr"><?php echo htmlspecialchars($SLOGAN) ?></span>
                 <span class="ml20" >本站交流：<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=37d1441cc5a7c08d8a676f675719ef1447536b3b4c3fea31984aa783547cdf9b"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="PT时间-www.pttime.org" title="PT时间-www.pttime.org"></a></span>
                 <span class="ml20" >前端技术交流：<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=13f96ae2dae781dc0ae21f2b5f865e0ba2861cb36fae4773f0d2f5c621fb98dd"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="HTML/CSS/JS/WEB前端学习" title="HTML/CSS/JS/WEB前端学习"></a></span>
-                <span class="ml20" >后端技术交流：<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=cb70d10688773f04b02a658ef995335ad3062637cefa830301cde0710c30e54d"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="PHP/Java/C++/python后端交" title="PHP/Java/C++/python后端交"></a></span>
+                <span class="ml20" >后端技术交流：<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=bdcb5e1730031fdc569c2467697cbae3300ecedda83ac4e328408c819920fa25"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="Java/PHP/Python/WEB前端" title="Java/PHP/Python/WEB前端"></a></span>
             </p>
             </div>
 <?php
