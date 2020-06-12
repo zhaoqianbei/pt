@@ -182,7 +182,6 @@ td {
     border: none;
 }
 
-.searchbox .btn{font-size: 16px;}
 .searchbox select, .searchbox input#searchinput{height: 30px;}
 
 td .codebuttons {
@@ -454,20 +453,6 @@ a.altlink_green:hover {
 
 .green {
     color: #000000
-}
-
-.btn2 {
-    border-right: #ccc 1px outset;
-    padding-right: 2px;
-    border-top: #ccc 1px outset;
-    padding-left: 2px;
-    font-weight: bold;
-    padding-bottom: 1px;
-    border-left: #ccc 1px outset;
-    cursor: pointer;
-    color: #666;
-    padding-top: 1px;
-    border-bottom: #ccc 1px outset
 }
 
 .btn {
