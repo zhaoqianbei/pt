@@ -3603,10 +3603,10 @@ $caticonrow = get_category_icon_row($CURUSER['caticon']);
             print($dissmall_descr == "" ? "" : "<br />" . htmlspecialchars($dissmall_descr));
         }
         print("</td>");
-
-        $douban_imdb = "<div style=\"text-align:right;margin-right:3px;width:50px\">";
-        $douban_imdb .= "<a href=\"" . build_douban_url("") . "\"><img src=\"/pic/icon-douban.png\" height=\"16px\" width=\"16px\"> " . ($row["douban_rating"] == "" ? "NA" : $row["douban_rating"]) . "</a><br />";
-        $douban_imdb .= "<a href=\"" . build_imdb_url($row["url"]) . "\"><img src=\"/pic/icon-imdb.png\"  height=\"16px\" width=\"16px\"> " . ($row["imdb_rating"] == "" ? "NA" : $row["imdb_rating"]) . "</a></div>";
+        $douban_imdb = '';
+        // $douban_imdb = "<div style=\"text-align:right;margin-right:3px;width:50px\">";
+        // $douban_imdb .= "<a href=\"" . build_douban_url("") . "\"><img src=\"/pic/icon-douban.png\" height=\"16px\" width=\"16px\"> " . ($row["douban_rating"] == "" ? "NA" : $row["douban_rating"]) . "</a><br />";
+        // $douban_imdb .= "<a href=\"" . build_imdb_url($row["url"]) . "\"><img src=\"/pic/icon-imdb.png\"  height=\"16px\" width=\"16px\"> " . ($row["imdb_rating"] == "" ? "NA" : $row["imdb_rating"]) . "</a></div>";
         $act = "";
         if ($CURUSER["dlicon"] != 'no' && $CURUSER["downloadpos"] != "no") {
             $act .= "<a href=\"download.php?id=" . $id . "\"><img class=\"download\" src=\"pic/trans.gif\" style='padding-bottom: 2px;' alt=\"download\" title=\"" . $lang_functions['title_download_torrent'] . "\" /></a>";
