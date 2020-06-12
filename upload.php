@@ -128,7 +128,7 @@ stdhead($lang_upload['head_upload']);
 				// 	tr($lang_upload['row_content'],$team_select,1);
 				// }
 				
-				if(get_user_class() >= $choose_userclass_hnr) tr('H&amp;R', sprintf('<input type="checkbox" name="hr" value="1" id="chk_hr" /><label for="chk_hr">%s (注意：非本站人员请勿勾选此项)</label>', $lang_functions['text_yes']), true);
+				// if(get_user_class() >= $choose_userclass_hnr) tr('H&amp;R', sprintf('<input type="checkbox" name="hr" value="1" id="chk_hr" /><label for="chk_hr">%s (注意：非本站人员请勿勾选此项)</label>', $lang_functions['text_yes']), true);
 
 				//==== offer dropdown for offer mod  from code by S4NE
 				$offerres = sql_query("SELECT id, name FROM offers WHERE userid = ".sqlesc($CURUSER[id])." AND allowed = 'allowed' ORDER BY name ASC") or sqlerr(__FILE__, __LINE__);
