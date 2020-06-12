@@ -2548,7 +2548,10 @@ if ($logo_main == "") {
 <?php
 } else {
         ?>
-			<div class="logo_img"><a href="index.php"><img width=150 src="<?php echo $logo_main ?>" alt="<?php echo htmlspecialchars($SITENAME) ?>" title="<?php echo htmlspecialchars($SITENAME) ?> - <?php echo htmlspecialchars($SLOGAN) ?>" /></a></div>
+			<div class="logo_img">
+            <a href="index.php"><img width=150 src="<?php echo $logo_main ?>" alt="<?php echo htmlspecialchars($SITENAME) ?>" title="<?php echo htmlspecialchars($SITENAME) ?> - <?php echo htmlspecialchars($SLOGAN) ?>" /></a>
+            <p class="fcr"><?php echo htmlspecialchars($SLOGAN) ?><a class="ml20" target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=37d1441cc5a7c08d8a676f675719ef1447536b3b4c3fea31984aa783547cdf9b"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="PT时间-www.pttime.org" title="PT时间-www.pttime.org"></a></p>
+            </div>
 <?php
 }
     ?>
