@@ -183,11 +183,8 @@ td {
 }
 
 .searchbox .btn{font-size: 16px;}
-.searchbox select,.searchbox input{height: 30px;}
+.searchbox select, .searchbox input#searchinput{height: 30px;}
 
-form table.searchbox td{
-    /* display: inline-block; */
-}
 td .codebuttons {
     font-size: 13pt;
     margin-right: 5px;
