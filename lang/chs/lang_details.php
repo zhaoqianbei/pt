@@ -230,4 +230,5 @@ $lang_details = array
 	'magic_show_all_description' => '查看详单',
 	'magic_haveGotBonus' => '目前发布人已获得Number个魔力值奖励。',
 	'magic_have_no_enough_bonus_value' => '需要更多魔力值。',
+	'tips_pt'=>'<p class="tal w18"><a class="fcs" href="https://www.zhaoqianbei.com/Index/xiaokeZhuye/k/99221774" target="_blank"><i class="icon pt-lianjie"></i> 关于PT下载相关问题，从入门到发药</a></p>',
 );
