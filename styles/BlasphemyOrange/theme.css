@@ -868,6 +868,13 @@ A.Peasant_Name:visited {
     margin-top: 5px;
 }
 /*种子页面促销样式*/
+:root {
+    --cg1: #36865E;
+    --cg2:#006D5C;
+    --cg3: #5AA064;
+    --cz:#7c7ff6;
+    --cb: #7ad6ea;
+  }
 font.promotion{
     color: #fff;
     padding: 0 5px;
@@ -878,43 +885,43 @@ font.promotion{
     border-radius: 3px;
 }
 font.promotion.free {
-    background-color: #99cc66
+    background-color: var(--cg1);
 }
 
 font.promotion.twoup {
-    background-color: #006D5C
+    background-color: var(--cg2);
 }
 
 font.promotion.twoupfree {
-    background-color: #5AA064;
+    background-color: var(--cg3);
 }
 
 font.promotion.halfdown {
-    background-color: #7c7ff6
+    background-color: var(--cz);
 }
 
 font.promotion.twouphalfdown {
-    background-color: #7ad6ea
+    background-color: var(--cb);
 }
 
 b.promotion.free {
-    color: #99cc66
+    color: var(--cg1);
 }
 
 b.promotion.twoup {
-    color: #006D5C
+    color: var(--cg2);
 }
 
 b.promotion.twoupfree {
-    color: #5AA064;
+    color: var(--cg3);
 }
 
 b.promotion.halfdown {
-    color: #7c7ff6
+    color: var(--cz);
 }
 
 b.promotion.twouphalfdown {
-    color: #7ad6ea
+    color: var(--cb);
 }
 
 

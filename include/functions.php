@@ -4459,6 +4459,8 @@ function get_torrent_promotion_append($promotion = 1, $forcemode = "", $showtime
             $sp_torrent = "promotion twouphalfdown";
         } elseif (($promotion == 7 && get_global_sp_state() == 1) || get_global_sp_state() == 7) {
             $sp_torrent = "promotion thirtypercent>";
+        }else{
+            $sp_torrent = 'fc4';
         }
     }
 
