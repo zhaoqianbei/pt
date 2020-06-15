@@ -972,7 +972,7 @@ if (isset($searchstr)) {
 print("<table align=\"center\" width=\"1200\" class=\"main\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\"><tr><td class=\"embedded\">");
 if ($allsec != 1 || $enablespecial != 'yes') { //do not print searchbox if showing bookmarked torrents from all sections;
     ?>
-	<?php print($lang_details['tips_pt']);?>
+	<?php print($lang_functions['tips_pt']);?>
 <div class="social-share tal">分享给想分享的人：</div>
 
 <script type="text/javascript">
