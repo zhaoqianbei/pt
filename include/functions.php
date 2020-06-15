@@ -3348,9 +3348,9 @@ function get_torrent_bookmark_state($userid, $torrentid, $text = false)
     $ret = return_torrent_bookmark_array($userid);
     if (!count($ret) || !in_array($torrentid, $ret, false)) // already bookmarked
     {
-        $act = ($text == true ? $lang_functions['title_bookmark_torrent'] : "<img class=\"delbookmark\" src=\"pic/trans.gif\" alt=\"Unbookmarked\" title=\"" . $lang_functions['title_bookmark_torrent'] . "\" />");
+        $act = ($text == true ? $lang_functions['title_bookmark_torrent'] : "<i class=\"delbookmark icon pt-wuxing fca\" alt=\"Unbookmarked\" title=\"" . $lang_functions['title_bookmark_torrent'] . "\"></i>");
     } else {
-        $act = ($text == true ? $lang_functions['title_delbookmark_torrent'] : "<img class=\"bookmark\" src=\"pic/trans.gif\" alt=\"Bookmarked\" title=\"" . $lang_functions['title_delbookmark_torrent'] . "\" />");
+        $act = ($text == true ? $lang_functions['title_delbookmark_torrent'] : "<img class=\"bookmark icon pt-wuxing fcr\" alt=\"Bookmarked\" title=\"" . $lang_functions['title_delbookmark_torrent'] . "\"></i>");
     }
 
     return $act;
@@ -3609,7 +3609,7 @@ $caticonrow = get_category_icon_row($CURUSER['caticon']);
         // $douban_imdb .= "<a href=\"" . build_imdb_url($row["url"]) . "\"><img src=\"/pic/icon-imdb.png\"  height=\"16px\" width=\"16px\"> " . ($row["imdb_rating"] == "" ? "NA" : $row["imdb_rating"]) . "</a></div>";
         $act = "";
         if ($CURUSER["dlicon"] != 'no' && $CURUSER["downloadpos"] != "no") {
-            $act .= "<a href=\"download.php?id=" . $id . "\"><img class=\"download\" src=\"pic/trans.gif\" style='padding-bottom: 2px;' alt=\"download\" title=\"" . $lang_functions['title_download_torrent'] . "\" /></a>";
+            $act .= "<a href=\"download.php?id=" . $id . "\"><i class=\"download icon pt-xiazai fcg\" alt=\"download\" title=\"" . $lang_functions['title_download_torrent'] . "\"></i></a>";
         }
 
         if ($CURUSER["bmicon"] == 'yes') {
@@ -3715,8 +3715,8 @@ $caticonrow = get_category_icon_row($CURUSER['caticon']);
         }
 
         if (get_user_class() >= $torrentmanage_class && $variant != 'rssdown') {
-            print("<td class=\"rowfollow\"><a href=\"" . htmlspecialchars("fastdelete.php?id=" . $row[id]) . "\"><img class=\"staff_delete\" src=\"pic/trans.gif\" alt=\"D\" title=\"" . $lang_functions['text_delete'] . "\" /></a>");
-            print("<br /><a href=\"edit.php?returnto=" . rawurlencode($_SERVER["REQUEST_URI"]) . "&amp;id=" . $row["id"] . "\"><img class=\"staff_edit\" src=\"pic/trans.gif\" alt=\"E\" title=\"" . $lang_functions['text_edit'] . "\" /></a></td>\n");
+            print("<td class=\"rowfollow\"><a href=\"" . htmlspecialchars("fastdelete.php?id=" . $row[id]) . "\"><i class=\"staff_delete icon pt-delete fcr\" alt=\"D\" title=\"" . $lang_functions['text_delete'] . "\"></i></a>");
+            print("<br /><a href=\"edit.php?returnto=" . rawurlencode($_SERVER["REQUEST_URI"]) . "&amp;id=" . $row["id"] . "\"><i class=\"staff_edit icon pt-gongju fcg\" alt=\"E\" title=\"" . $lang_functions['text_edit'] . "\"></i></a></td>\n");
         }
         print("</tr>\n");
         $counter++;
@@ -3831,7 +3831,8 @@ function get_ratio_img($ratio)
         $s = "52";
     }
 
-    return "<img src=\"pic/smilies/" . $s . ".gif\" alt=\"\" />";
+    // return "<img src=\"pic/smilies/" . $s . ".gif\" alt=\"\" />";
+    return '';
 }
 
 function GetVar($name)
