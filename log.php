@@ -128,7 +128,7 @@ else {
 		//echo $pagertop;
 
 			print("<table width=1200 border=1 cellspacing=0 cellpadding=5>\n");
-			print("<tr><td class=colhead align=center><img class=\"time\" src=\"pic/trans.gif\" alt=\"time\" title=\"".$lang_log['title_time_added']."\" /></td><td class=colhead align=left>".$lang_log['col_event']."</td></tr>\n");
+			print("<tr><td class=colhead align=center><i class=\"time icon pt-shijian\" alt=\"time\" title=\"".$lang_log['title_time_added']."\"></i></td><td class=colhead align=left>".$lang_log['col_event']."</td></tr>\n");
 			while ($arr = mysql_fetch_assoc($res))
 			{
 				$color = "";

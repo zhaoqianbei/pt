@@ -11,9 +11,9 @@ $Cache->add_whole_row();
 begin_main_frame();
 $secs = 900;
 $dt = TIMENOW - $secs;
-$onlineimg = "<img class=\"button_online\" src=\"pic/trans.gif\" alt=\"online\" title=\"".$lang_staff['title_online']."\" />";
-$offlineimg = "<img class=\"button_offline\" src=\"pic/trans.gif\" alt=\"offline\" title=\"".$lang_staff['title_offline']."\" />";
-$sendpmimg = "<img class=\"button_pm\" src=\"pic/trans.gif\" alt=\"pm\" />";
+$onlineimg = "<i class=\"button_online icon pt-zaixian fcg\" alt=\"online\" title=\"".$lang_staff['title_online']."\"></i>";
+$offlineimg = "<i class=\"button_offline icon pt-lixian fc4\" alt=\"offline\" title=\"".$lang_staff['title_offline']."\"></i>";
+$sendpmimg = "<i class=\"button_pm icon pt-xinxi\" alt=\"pm\"></i>";
 //--------------------- FIRST LINE SUPPORT SECTION ---------------------------//
 unset($ppl);
 $res = sql_query("SELECT * FROM users WHERE users.support='yes' AND users.status='confirmed' ORDER BY users.username") or sqlerr();
