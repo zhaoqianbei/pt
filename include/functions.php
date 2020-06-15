@@ -2569,7 +2569,7 @@ if ($logo_main == "") {
         }
     }
     if ($enabledonation == 'yes') {?>
-        <a href="donate.php" class="btn btn-danger">捐赠</a>
+        <a href="donate.php" class="btn btn-danger"><i class="icon pt-aixinjuankuan"></i> 捐赠</a>
 <?php
 }
 ?>
