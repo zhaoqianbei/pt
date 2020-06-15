@@ -3572,7 +3572,7 @@ $caticonrow = get_category_icon_row($CURUSER['caticon']);
             $max_length_of_torrent_name = 70;
         }
 
-        print("<td class=\"rowfollow\" width=\"100%\" align=\"left\"><table class=\"torrentname\" width=\"100%\"><tr" . $sphighlight . "><td class=\"embedded\">" . $stickyicon . "<a $short_torrent_name_alt $mouseovertorrent href=\"details.php?id=" . $id . "&amp;hit=1\"><b>" . htmlspecialchars($dispname) . "</b></a>");
+        print("<td class=\"rowfollow\" width=\"100%\" align=\"left\"><table class=\"torrentname\" width=\"100%\"><tr" . $sphighlight . "><td class=\"embedded\">" . $stickyicon . "<a $short_torrent_name_alt $mouseovertorrent href=\"details.php?id=" . $id . "&amp;hit=1\"><b class=\"".get_torrent_promotion_append($row['sp_state'], "sty", true, $row["added"], $row['promotion_time_type'], $row['promotion_until'])."\">" . htmlspecialchars($dispname) . "</b></a>");
         $sp_torrent = get_torrent_promotion_append($row['sp_state'], "", true, $row["added"], $row['promotion_time_type'], $row['promotion_until']) . get_torrent_hitrun_icon($row);
         $picked_torrent = "";
         if ($CURUSER['appendpicked'] != 'no') {
@@ -4321,7 +4321,7 @@ function get_torrent_promotion_append($promotion = 1, $forcemode = "", $showtime
                         }
 
                     }
-                    break;
+                    break;  
                 }
             case 3:
                 {
@@ -4446,7 +4446,22 @@ function get_torrent_promotion_append($promotion = 1, $forcemode = "", $showtime
         }
 
         $sp_torrent .= ' ' . $timeout;
+    } elseif (($CURUSER['appendpromotion'] == 'icon' && $forcemode == "sty") || $forcemode == 'icon') {
+        if (($promotion == 2 && get_global_sp_state() == 1) || get_global_sp_state() == 2) {
+            $sp_torrent = "promotion free";
+        } elseif (($promotion == 3 && get_global_sp_state() == 1) || get_global_sp_state() == 3) {
+            $sp_torrent = "promotion twoup";
+        } elseif (($promotion == 4 && get_global_sp_state() == 1) || get_global_sp_state() == 4) {
+            $sp_torrent = "promotion twoupfree";
+        } elseif (($promotion == 5 && get_global_sp_state() == 1) || get_global_sp_state() == 5) {
+            $sp_torrent = "promotion halfdown";
+        } elseif (($promotion == 6 && get_global_sp_state() == 1) || get_global_sp_state() == 6) {
+            $sp_torrent = "promotion twouphalfdown";
+        } elseif (($promotion == 7 && get_global_sp_state() == 1) || get_global_sp_state() == 7) {
+            $sp_torrent = "promotion thirtypercent>";
+        }
     }
+
     return $sp_torrent;
 }
 

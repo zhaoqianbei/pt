@@ -897,6 +897,27 @@ font.promotion.twouphalfdown {
     background-color: #7ad6ea
 }
 
+b.promotion.free {
+    color: #99cc66
+}
+
+b.promotion.twoup {
+    color: #006D5C
+}
+
+b.promotion.twoupfree {
+    color: #5AA064;
+}
+
+b.promotion.halfdown {
+    color: #7c7ff6
+}
+
+b.promotion.twouphalfdown {
+    color: #7ad6ea
+}
+
+
 .thirtypercent {
     background-color: #70328d
 }
