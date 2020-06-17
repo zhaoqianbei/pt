@@ -286,6 +286,9 @@ td.colfollow {
 table.torrents {
     text-align: center;
 }
+table.torrents tr:hover{
+    background-color: #f1f1f1;
+}
 table.torrents td{
     display: table-cell;
 }
