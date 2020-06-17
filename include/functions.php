@@ -3599,7 +3599,7 @@ $caticonrow = get_category_icon_row($CURUSER['caticon']);
             if ($count_dissmall_descr > $max_lenght_of_small_descr) {
                 $dissmall_descr = mb_substr($dissmall_descr, 0, $max_lenght_of_small_descr - 2, "UTF-8") . "..";
             }
-            print($dissmall_descr == "" ? "" : "<br />" . htmlspecialchars($dissmall_descr));
+            print($dissmall_descr == "" ? "" : "<br />" . "<span class=\"fc6\">".htmlspecialchars($dissmall_descr)."</span>");
         }
         print("</td>");
         $douban_imdb = '';
