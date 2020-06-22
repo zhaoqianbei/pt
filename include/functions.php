@@ -74,7 +74,7 @@ function stdmsg($heading, $text, $htmlstrip = false)
         $heading = htmlspecialchars(trim($heading));
         $text = htmlspecialchars(trim($text));
     }
-    print("<table align=\"left\" class=\"main\" width=\"1200\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tr><td class=\"embedded\">\n");
+    print("<table align=\"left\" class=\"main\" width=\"90%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tr><td class=\"embedded\">\n");
     if ($heading) {
         print("<h2>" . $heading . "</h2>\n");
     }
@@ -2576,7 +2576,7 @@ if ($logo_main == "") {
 	</tr>
 </table>
 
-<table class="mainouter" width="1200" cellspacing="0" cellpadding="5" align="center">
+<table class="mainouter" width="90%" cellspacing="0" cellpadding="5" align="center">
 	<tr><td id="nav_block" class="text" align="center">
 <?php if (!$CURUSER) {?>
 			<a href="login.php"><font class="big"><b><?php echo $lang_functions['text_login'] ?></b></font></a> / <a href="signup.php"><font class="big"><b><?php echo $lang_functions['text_signup'] ?></b></font></a>
@@ -2719,7 +2719,7 @@ if ($Advertisement->enable_ad()) {
 
                 }
                 if ($global_download_exam > 0) {
-                    print("<p><table width=\"1200\" border=\"1\" cellspacing=\"0\" cellpadding=\"10\"><tr><td style='padding: 10px; background: red' class=\"text\" align=\"center\">\n");
+                    print("<p><table width=\"90%\" border=\"1\" cellspacing=\"0\" cellpadding=\"10\"><tr><td style='padding: 10px; background: red' class=\"text\" align=\"center\">\n");
                     $passed = $downloaded >= $global_download_exam * 1073741824;
                     $text .= $lang_functions['text_downloaded'] . ' ' . ($passed ? $pass_text : $need_text . ' ' . mksize($global_download_exam * 1073741824 - $downloaded)) . '</span>' . '<br />';
                     if ($allpass) {
