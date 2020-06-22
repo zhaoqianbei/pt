@@ -551,13 +551,13 @@ else {
 
 		tr($lang_details['row_health'], $health, 1);*/
 		tr("<span id=\"seeders\"></span><span id=\"leechers\"></span>".$lang_details['row_peers']."<br /><span id=\"showpeer\"><a href=\"javascript: viewpeerlist(".$row['id'].");\" class=\"sublink\">".$lang_details['text_see_full_list']."</a></span><span id=\"hidepeer\" style=\"display: none;\"><a href=\"javascript: hidepeerlist();\" class=\"sublink\">".$lang_details['text_hide_list']."</a></span>", "<div id=\"peercount\"><b>".$row['seeders'].$lang_details['text_seeders'].add_s($row['seeders'])."</b> | <b>".$row['leechers'].$lang_details['text_leechers'].add_s($row['leechers'])."</b></div><div id=\"peerlist\"></div>" , 1);
-		if ($_GET['dllist'] == 1)
+		if (1 == 1)
 		{
 			$scronload = "viewpeerlist(".$row['id'].")";
 
-echo "<script type=\"text/javascript\">\n";
-echo $scronload;
-echo "</script>";
+			echo "<script type=\"text/javascript\">\n";
+			echo $scronload;
+			echo "</script>";
 		}
 		//Add 魔力值奖励功能
 		if(isset($magic_value_bonus)){
