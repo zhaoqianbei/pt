@@ -572,21 +572,22 @@ echo "</script>";
 						list-style-type:none;
 						padding-left:0px;
 					}
-					ul.magic li
-					{
-						margin:0px;
-						text-align:center;
-						float:left;
-						width:40px;
-						margin-right:15px; 
-						height:21px;
-						background:#f1f1f1;
-						padding-left:5px;padding-right:5px;
-						line-height:20px;
+					ul.magic li {
+						margin: 0px;
+						text-align: center;
+						float: left;
+						width: 40px;
+						margin-right: 15px;
+						height: 21px;
+						background: #BD4932;
+						padding-left: 5px;
+						padding-right: 5px;
+						line-height: 20px;
+						color: #fff;
 					}
 					ul.magic li:hover
 					{
-						background:#ccc
+						opacity:0.8
 					}
 				</style>
 		';
