@@ -813,13 +813,13 @@ if ($action == "viewtopic")
 
 	print($pagerbottom);
 	if ($maypost){
-	print("<br /><table style='border:1px solid #000000;'><tr>".
-"<td class=\"text\" align=\"center\"><b>".$lang_forums['text_quick_reply']."</b><br /><br />".
+	print("<br /><table width=\"90%\"><tr>".
+"<td class=\"text\" align=\"left\"><b>".$lang_forums['text_quick_reply']."</b><br /><br />".
 "<form id=\"compose\" name=\"compose\" method=\"post\" action=\"?action=post\" onsubmit=\"return postvalid(this);\">".
 "<input type=\"hidden\" name=\"id\" value=\"".$topicid."\" /><input type=\"hidden\" name=\"type\" value=\"reply\" /><br />");
 	quickreply('compose', 'body',$lang_forums['submit_add_reply']);
 	print("</form></td></tr></table>");
-	print("<p align=\"center\"><a class=\"index\" href=\"".htmlspecialchars("?action=reply&topicid=".$topicid)."\">".$lang_forums['text_add_reply']."</a></p>\n");
+	print("<p align=\"left\" class=\"w18\"><a class=\"index\" href=\"".htmlspecialchars("?action=reply&topicid=".$topicid)."\">".$lang_forums['text_add_reply']."</a></p>\n");
 	}
 	elseif ($locked)
 		print($lang_forums['text_topic_locked_new_denied']);
