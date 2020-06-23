@@ -618,7 +618,7 @@ if ($action == "viewtopic")
 	print("<td class=\"embedded nowrap\" width=\"1%\" align=\"right\">");
 	if ($maypost)
 	{
-		print("<a href=\"".htmlspecialchars("?action=reply&topicid=".$topicid)."\"><img class=\"f_reply\" src=\"pic/trans.gif\" alt=\"Add Reply\" title=\"".$lang_forums['title_reply_directly']."\" /></a>&nbsp;&nbsp;");
+		print("<a href=\"".htmlspecialchars("?action=reply&topicid=".$topicid)."\"><i class=\"f_reply icon pt-huifu\" alt=\"Add Reply\" title=\"".$lang_forums['title_reply_directly']."\"> 回复</i></a>&nbsp;&nbsp;");
 	}
 	print("</td>");
 	print("</tr></table>\n");
@@ -688,7 +688,7 @@ if ($action == "viewtopic")
 			print("<a href=\"?action=viewtopic&topicid=".$topicid."\">".$lang_forums['text_view_all_posts']."</a>");
 		else
 			print("<a href=\"".htmlspecialchars("?action=viewtopic&topicid=".$topicid."&authorid=".$posterid)."\">".$lang_forums['text_view_this_author_only']."</a>");
-		print("</td><td class=\"embedded nowrap\" width=\"1%\"><font class=\"big\">".$lang_forums['text_number']."<b>".($pn+$offset)."</b>".$lang_forums['text_lou']."&nbsp;&nbsp;</font><a href=\"#top\"><img class=\"top\" src=\"pic/trans.gif\" alt=\"Top\" title=\"".$lang_forums['text_back_to_top']."\" /></a>&nbsp;&nbsp;</td></tr>");
+		print("</td><td class=\"embedded nowrap\" width=\"1%\"><font class=\"big\">".$lang_forums['text_number']."<b>".($pn+$offset)."</b>".$lang_forums['text_lou']."&nbsp;&nbsp;</font><a href=\"#top\"><i class=\"top icon pt-zhiding\" alt=\"Top\" title=\"".$lang_forums['text_back_to_top']."\"></i></a>&nbsp;&nbsp;</td></tr>");
 
 		print("</table></div>\n");
 
@@ -710,21 +710,25 @@ if ($action == "viewtopic")
 		$body .= "<p style='vertical-align:bottom'><br />____________________<br />" . format_comment($signature,false,false,false,true,500,true,false, 1,200) . "</p>";
 
 		$stats = "<br />"."&nbsp;&nbsp;".$lang_forums['text_posts']."$forumposts<br />"."&nbsp;&nbsp;".$lang_forums['text_ul']."$uploaded <br />"."&nbsp;&nbsp;".$lang_forums['text_dl']."$downloaded<br />"."&nbsp;&nbsp;".$lang_forums['text_ratio']."$ratio";
-		print("<tr><td class=\"rowfollow\" width=\"150\" valign=\"top\" align=\"left\" style='padding: 0px'>" .
-		return_avatar_image($avatar). "<br /><br /><br />&nbsp;&nbsp;<img alt=\"".get_user_class_name($arr2["class"],false,false,true)."\" title=\"".get_user_class_name($arr2["class"],false,false,true)."\" src=\"".$uclass."\" />".$stats."</td><td class=\"rowfollow\" valign=\"top\"><br />".$body."</td></tr>\n");
+		print("<tr><td class=\"rowfollow\" width=\"180\" valign=\"top\" align=\"left\" style='padding: 0px'>" .
+		return_avatar_image($avatar). "<br />&nbsp;&nbsp;等级：<i class=\"fcr\" alt=\"".get_user_class_name($arr2["class"],false,false,true)."\" title=\"".get_user_class_name($arr2["class"],false,false,true)."\">".get_user_class_name($arr2["class"],false,false,true)."</i>".$stats."</td><td class=\"rowfollow\" valign=\"top\"><br />".$body."</td></tr>\n");
 		$secs = 900;
 		$dt = sqlesc(date("Y-m-d H:i:s",(TIMENOW - $secs))); // calculate date.
-		print("<tr><td class=\"rowfollow\" align=\"center\" valign=\"middle\">".("'".$arr2['last_access']."'">$dt?"<img class=\"f_online\" src=\"pic/trans.gif\" alt=\"Online\" title=\"".$lang_forums['title_online']."\" />":"<img class=\"f_offline\" src=\"pic/trans.gif\" alt=\"Offline\" title=\"".$lang_forums['title_offline']."\" />" )."<a href=\"sendmessage.php?receiver=".htmlspecialchars(trim($arr2["id"]))."\"><img class=\"f_pm\" src=\"pic/trans.gif\" alt=\"PM\" title=\"".$lang_forums['title_send_message_to'].htmlspecialchars($arr2["username"])."\" /></a><a href=\"report.php?forumpost=$postid\"><img class=\"f_report\" src=\"pic/trans.gif\" alt=\"Report\" title=\"".$lang_forums['title_report_this_post']."\" /></a></td>");
+		print("<tr><td class=\"rowfollow\" align=\"left\" valign=\"middle\">".("'".$arr2['last_access']."'">$dt?
+					"<i class=\"f_online icon pt-zaixian fcg mr5\" alt=\"Online\" title=\"".$lang_forums['title_online']."\"></i> 在线":
+						"<i class=\"f_offline icon pt-zaixian fc2\" alt=\"Offline\" title=\"".$lang_forums['title_offline']."\"></i> 离线" )
+					."<a class=\"fc2\" href=\"sendmessage.php?receiver=".htmlspecialchars(trim($arr2["id"]))."\"><i class=\"f_pm icon pt-xinxi ml10\" alt=\"PM\" title=\"".$lang_forums['title_send_message_to'].htmlspecialchars($arr2["username"])."\"></i> 发信</a>"
+					."<a href=\"report.php?forumpost=$postid\"><i class=\"f_report icon pt-jubao ml5\" alt=\"Report\" title=\"".$lang_forums['title_report_this_post']."\"></i> 举报</a></td>");
 		print("<td class=\"toolbox\" align=\"right\">");
 
 		if ($maypost)
-		print("<a href=\"".htmlspecialchars("?action=quotepost&postid=".$postid)."\"><img class=\"f_quote\" src=\"pic/trans.gif\" alt=\"Quote\" title=\"".$lang_forums['title_reply_with_quote']."\" /></a>");
+		print("<a href=\"".htmlspecialchars("?action=quotepost&postid=".$postid)."\"><i class=\"f_quote icon pt-quote\" alt=\"Quote\" title=\"".$lang_forums['title_reply_with_quote']."\"></i> 引用</a>");
 
 		if (get_user_class() >= $postmanage_class || $is_forummod)
-		print("<a href=\"".htmlspecialchars("?action=deletepost&postid=".$postid)."\"><img class=\"f_delete\" src=\"pic/trans.gif\" alt=\"Delete\" title=\"".$lang_forums['title_delete_post']."\" /></a>");
+		print("<a href=\"".htmlspecialchars("?action=deletepost&postid=".$postid)."\"><i class=\"f_delete icon pt-delete ml10\" alt=\"Delete\" title=\"".$lang_forums['title_delete_post']."\"></i> 删除</a>");
 
 		if (($CURUSER["id"] == $posterid && !$locked) || get_user_class() >= $postmanage_class || $is_forummod)
-		print("<a href=\"".htmlspecialchars("?action=editpost&postid=".$postid)."\"><img class=\"f_edit\" src=\"pic/trans.gif\" alt=\"Edit\" title=\"".$lang_forums['title_edit_post']."\" /></a>");
+		print("<a href=\"".htmlspecialchars("?action=editpost&postid=".$postid)."\"><i class=\"f_edit icon pt-bianji ml10\" alt=\"Edit\" title=\"".$lang_forums['title_edit_post']."\"></i> 编辑</a>");
 		print("</td></tr></table>");
 	}
 
