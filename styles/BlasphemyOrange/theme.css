@@ -286,6 +286,23 @@ td.colfollow {
 table.torrents {
     text-align: center;
 }
+table.torrents tr.sticky_top{
+    background: #ddd;
+}
+
+table.torrents tr.sticky_normal{
+    background: #dfdfdf;
+}
+
+/* 一级置顶 */
+table.torrents tr.sticky_top td.colhead, table.torrents tr.sticky_top td.rowfollow {
+    border: 1px solid #ccc;
+}
+/* 二级置顶 */
+table.torrents tr.sticky_normal td.colhead, table.torrents tr.sticky_normal td.rowfollow {
+    border: 1px solid #ccc;
+}
+
 table.torrents tr:hover{
     background-color: #eee;
 }
