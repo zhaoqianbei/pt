@@ -3491,7 +3491,7 @@ $caticonrow = get_category_icon_row($CURUSER['caticon']);
             sql_query("UPDATE `torrents` SET pos_group = 0 WHERE `id` = {$row['id']}") or sqlerr(__FILE__, __LINE__);
         }
         if ($row['pos_group'] > 0 && $CURUSER['appendsticky'] == 'yes') {
-            $stickyicon = sprintf('<i class="sticky icon pt-jiajing fcg" alt="Sticky" title="%s"></i>', $row['pos_group'] > 1 ? $lang_functions['title_top_sticky'] : $lang_functions['title_sticky']);
+            $stickyicon = sprintf('<i class="sticky icon pt-huobao fcr" alt="Sticky" title="%s"></i>', $row['pos_group'] > 1 ? $lang_functions['title_top_sticky'] : $lang_functions['title_sticky']);
             if ($row['pos_group'] > 1) {
                 $stickyicon = str_repeat($stickyicon, 2);
             }
