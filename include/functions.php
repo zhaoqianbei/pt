@@ -3700,9 +3700,9 @@ $caticonrow = get_category_icon_row($CURUSER['caticon']);
         }
 
         if (isset($mysnatched[$row['id']])) { // progress
-            printf('<td class=\"rowfollow\">%u%%</td>', (1 - $mysnatched[$row['id']] / $row['size']) * 100);
+            printf('<td class="rowfollow">%u%%</td>', (1 - $mysnatched[$row['id']] / $row['size']) * 100);
         } else {
-            echo '<td class=\"rowfollow\">-</td>';
+            echo '<td class="rowfollow">-</td>';
         }
 
         if ($row["anonymous"] == "yes" && get_user_class() >= $torrentmanage_class) {

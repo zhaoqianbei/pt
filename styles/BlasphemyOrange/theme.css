@@ -291,7 +291,7 @@ table.torrents tr.sticky_top{
 }
 
 table.torrents tr.sticky_normal{
-    background: #dfdfdf;
+    background: #e8e8e8;
 }
 
 /* 一级置顶 */
@@ -304,7 +304,6 @@ table.torrents tr.sticky_normal td.colhead, table.torrents tr.sticky_normal td.r
 }
 
 table.torrents tr:hover{
-    background-color: #eee;
 }
 table.torrents td{
     display: table-cell;
