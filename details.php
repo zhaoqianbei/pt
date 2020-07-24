@@ -750,7 +750,7 @@ if ($CURUSER['showcomment'] != 'no'){
 		print($pagerbottom);
 	}
 }
-print ("<table><tr><td class=\"text\" align=\"left\"><b>".$lang_details['text_quick_comment']."</b><form id=\"compose\" name=\"comment\" method=\"post\" action=\"".htmlspecialchars("comment.php?action=add&type=torrent")."\" onsubmit=\"return postvalid(this);\"><input type=\"hidden\" name=\"pid\" value=\"".$id."\" />");
+print ("<table width =\"90%\"><tr><td class=\"text\" align=\"left\"><b>".$lang_details['text_quick_comment']."</b><form id=\"compose\" name=\"comment\" method=\"post\" action=\"".htmlspecialchars("comment.php?action=add&type=torrent")."\" onsubmit=\"return postvalid(this);\"><input type=\"hidden\" name=\"pid\" value=\"".$id."\" />");
 quickreply('comment', 'body', $lang_details['submit_add_comment']);
 print("</form></td></tr></table>");
 }
