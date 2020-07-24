@@ -1,5 +1,4 @@
 <?php
-
 $lang_edit = array
 (
 	'head_edit_torrent' => "编辑种子 - ",
@@ -44,7 +43,7 @@ $lang_edit = array
 	'select_hot' => "热门",
 	'select_classic' => "经典",
 	'select_recommended' => "推荐",
-	'select_sticky' => "置顶",
+	'select_sticky' => "二级置顶",
 	'select_choose_if_sticky' => "选择种子是否在种子页面置顶",
 	'row_banned' => "禁止",
 	'checkbox_banned' => "禁止",
