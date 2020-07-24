@@ -81,7 +81,7 @@ else {
 		    wechatQrcodeHelper: "<p>微信里点“发现”，扫一下</p><p>二维码便可将本文分享至朋友圈。</p>",
 		    target:"_blank"};
 		</script>';
-
+		
 		print($js);
 		print("<h1 align=\"center\" id=\"top\">".$s."</h1>\n");
 		print("<table width=\"90%\" cellspacing=\"0\" cellpadding=\"5\">\n");

@@ -117,7 +117,7 @@ echo $pagertop;
 <?php
 print("<td width=\"35%\" class=\"colhead\" align=\"left\">$sender_receiver</td>");
 ?>
-<td width="1%" class="colhead" align="center"><img class="time" src="pic/trans.gif" alt="time" title="<?php echo $lang_messages['col_date'] ?>" /></td>
+<td width="1%" class="colhead" align="center"><i class="time icon pt-shijian" alt="time" title="<?php echo $lang_messages['col_date'] ?>"></i></td>
 <td width="1%" class="colhead" align="center"><?php echo $lang_messages['col_act'] ?></td>
 </tr>
 <?php
@@ -144,11 +144,11 @@ $subject = $lang_messages['text_no_subject'];
 
 if ($row['unread'] == 'yes')
 {
-echo("<tr>\n<td class=rowfollow align=center><img class=\"unreadpm\" src=\"pic/trans.gif\" alt=\"Unread\" title=".$lang_messages['title_unread']." /></td>\n");
+echo("<tr>\n<td class=rowfollow align=center><i class=\"unreadpm icon pt-xinxi\" alt=\"Unread\" title=".$lang_messages['title_unread']."></i></td>\n");
 }
 else
 {
-echo("<tr>\n<td class=rowfollow align=center><img class=\"readpm\" src=\"pic/trans.gif\" alt=\"Read\" title=".$lang_messages['title_read']." /></td>\n");
+echo("<tr>\n<td class=rowfollow align=center><i class=\"readpm icon pt-xinxi fc8 \" alt=\"Read\" title=".$lang_messages['title_read']."></i></td>\n");
 }
 echo("<td class=rowfollow align=left><a href=\"messages.php?action=viewmessage&id=" . $row['id'] . "\">" .
 $subject . "</a></td>\n");
@@ -181,8 +181,8 @@ print("</form>");
     </tr>
   
   </form><tr><td class=toolbox colspan=5>
-<div align="left" class="mt10 mb10"><img class="unreadpm" src="pic/trans.gif" alt="Unread" title="<?php echo $lang_messages['title_unread'] ?>" /><a href="messages.php?action=viewmailbox&box=<?php echo $mailbox?>&unread=yes"><?php echo $lang_messages['text_unread_messages'] ?></a>
-<img class="readpm" src="pic/trans.gif" alt="Read" title="<?php echo $lang_messages['title_read'] ?>" /><a href="messages.php?action=viewmailbox&box=<?php echo $mailbox?>&unread=no"><?php echo $lang_messages['text_read_messages'] ?></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<div align="left" class="mt10 mb10"><i class="unreadpm icon pt-xinxi" alt="Unread" title="<?php echo $lang_messages['title_unread'] ?>"></i><a href="messages.php?action=viewmailbox&box=<?php echo $mailbox?>&unread=yes"><?php echo $lang_messages['text_unread_messages'] ?></a>
+<i class="readpm icon pt-xinxi fc8 ml10" alt="Read" title="<?php echo $lang_messages['title_read'] ?>" ></i><a href="messages.php?action=viewmailbox&box=<?php echo $mailbox?>&unread=no"><?php echo $lang_messages['text_read_messages'] ?></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="messages.php?action=editmailboxes"><b><?php echo $lang_messages['text_mailbox_manager'] ?></a></b></div></td></tr></table>
 <?php
 }

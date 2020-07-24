@@ -713,6 +713,7 @@ if ($action == "viewtopic")
 		print("<tr><td class=\"rowfollow\" width=\"180\" valign=\"top\" align=\"left\" style='padding: 0px'>" .
 		return_avatar_image($avatar). "<br />&nbsp;&nbsp;等级：<i class=\"fcr\" alt=\"".get_user_class_name($arr2["class"],false,false,true)."\" title=\"".get_user_class_name($arr2["class"],false,false,true)."\">".get_user_class_name($arr2["class"],false,false,true)."</i>".$stats."</td><td class=\"rowfollow\" valign=\"top\"><br />".$body."</td></tr>\n");
 		$secs = 900;
+		
 		$dt = sqlesc(date("Y-m-d H:i:s",(TIMENOW - $secs))); // calculate date.
 		print("<tr><td class=\"rowfollow\" align=\"left\" valign=\"middle\">".("'".$arr2['last_access']."'">$dt?
 					"<i class=\"f_online icon pt-zaixian fcg mr5\" alt=\"Online\" title=\"".$lang_forums['title_online']."\"></i> 在线":
