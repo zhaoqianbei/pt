@@ -2508,7 +2508,7 @@ print(get_style_addicode());
 <link rel="stylesheet" href="<?php echo $css_uri . "DomTT.css" . $cssupdatedate ?>" type="text/css" />
 <link rel="stylesheet" href="styles/curtain_imageresizer.css<?php echo $cssupdatedate ?>" type="text/css" />
 <!-- ali_icon_xiugai -->
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1856866_uvg02m8z2.css" type="text/css" />
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1856866_l2yp3czxozk.css" type="text/css" />
 <link rel="stylesheet" href="styles/mp.css<?php echo $cssupdatedate ?>" type="text/css" />
 <?php
 if ($CURUSER) {
@@ -3491,7 +3491,7 @@ $caticonrow = get_category_icon_row($CURUSER['caticon']);
             sql_query("UPDATE `torrents` SET pos_group = 0 WHERE `id` = {$row['id']}") or sqlerr(__FILE__, __LINE__);
         }
         if ($row['pos_group'] > 0 && $CURUSER['appendsticky'] == 'yes') {
-            $stickyicon = sprintf('<img class="sticky" src="pic/trans.gif" alt="Sticky" title="%s" />', $row['pos_group'] > 1 ? $lang_functions['title_top_sticky'] : $lang_functions['title_sticky']);
+            $stickyicon = sprintf('<i class="sticky icon pt-zan" alt="Sticky" title="%s"></i>', $row['pos_group'] > 1 ? $lang_functions['title_top_sticky'] : $lang_functions['title_sticky']);
             if ($row['pos_group'] > 1) {
                 $stickyicon = str_repeat($stickyicon, 2);
             }
