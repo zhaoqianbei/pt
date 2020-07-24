@@ -393,16 +393,14 @@ a.biglink {
     font-weight: bold;
     text-decoration: none
 }
-
+a.faqlink{color: #00AAEE;}
 a.altlink:link {
     font-weight: bold;
-    color: #a83838;
     text-decoration: none
 }
 
 a.altlink:visited {
     font-weight: bold;
-    color: #a83838;
     text-decoration: none
 }
 
@@ -412,13 +410,11 @@ a.altlink:hover {
 
 a.faqlink:link {
     font-weight: bold;
-    color: #a83838;
     text-decoration: none
 }
 
 a.faqlink:visited {
     font-weight: bold;
-    color: #a83838;
     text-decoration: none
 }
 
