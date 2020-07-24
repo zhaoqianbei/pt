@@ -2508,7 +2508,7 @@ print(get_style_addicode());
 <link rel="stylesheet" href="<?php echo $css_uri . "DomTT.css" . $cssupdatedate ?>" type="text/css" />
 <link rel="stylesheet" href="styles/curtain_imageresizer.css<?php echo $cssupdatedate ?>" type="text/css" />
 <!-- ali_icon_xiugai -->
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1856866_l2yp3czxozk.css" type="text/css" />
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1856866_50z4ojmiq4e.css" type="text/css" />
 <link rel="stylesheet" href="styles/mp.css<?php echo $cssupdatedate ?>" type="text/css" />
 <?php
 if ($CURUSER) {

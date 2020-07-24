@@ -69,19 +69,19 @@ function get_topic_image($status= "read"){
 	global $lang_forums;
 	switch($status){
 		case "read": {
-			return "<img class=\"unlocked\" src=\"pic/trans.gif\" alt=\"read\" title=\"".$lang_forums['title_read']."\" />";
+			return "<i class=\"unlocked icon pt-kaisuo fc8\" alt=\"read\" title=\"".$lang_forums['title_read']."\"></i>";
 			break;
 			}
 		case "unread": {
-			return "<img class=\"unlockednew\" src=\"pic/trans.gif\" alt=\"unread\" title=\"".$lang_forums['title_unread']."\" />";
+			return "<i class=\"unlockednew icon pt-kaisuo\" alt=\"unread\" title=\"".$lang_forums['title_unread']."\"></i>";
 			break;
 		}
 		case "locked": {
-			return "<img class=\"locked\" src=\"pic/trans.gif\" alt=\"locked\" title=\"".$lang_forums['title_locked']."\" />";
+			return "<i class=\"locked icon pt-suo fc8\" src=\"pic/trans.gif\" alt=\"locked\" title=\"".$lang_forums['title_locked']."\"></i>";
 			break;
 		}
 		case "lockednew": {
-			return "<img class=\"lockednew\" src=\"pic/trans.gif\" alt=\"lockednew\" title=\"".$lang_forums['title_locked_new']."\" />";
+			return "<i class=\"lockednew icon pt-suo\" src=\"pic/trans.gif\" alt=\"lockednew\" title=\"".$lang_forums['title_locked_new']."\"></i>";
 			break;
 		}
 	}
@@ -1120,14 +1120,14 @@ if ($action == "viewforum")
 	print($forummoderators ? "&nbsp;&nbsp;<img class=\"forum_mod\" src=\"pic/trans.gif\" alt=\"Moderator\" title=\"".$lang_forums['col_moderator']."\">&nbsp;".$forummoderators : "");
 	print("</td><td class=\"embedded nowrap\" width=\"1%\">");
 	if ($maypost)
-		print("<a href=\"".htmlspecialchars("?action=newtopic&forumid=".$forumid)."\"><img class=\"f_new\" src=\"pic/trans.gif\" alt=\"New Topic\" title=\"".$lang_forums['title_new_topic']."\" /></a>&nbsp;&nbsp;");
+		print("<a href=\"".htmlspecialchars("?action=newtopic&forumid=".$forumid)."\"><i class=\"f_new icon pt-bianji\" alt=\"New Topic\" title=\"".$lang_forums['title_new_topic']."\"> 发帖</i></a>&nbsp;&nbsp;");
 	print("</td>");
 	print("</tr></table>\n");
 	if ($numtopics > 0)
 	{
 		print("<table border=\"1\" cellspacing=\"0\" cellpadding=\"5\" width=\"90%\">");
 
-		print("<tr><td class=\"colhead\" align=\"center\" width=\"99%\">".$lang_forums['col_topic']."</td><td class=\"colhead\" align=\"center\"><a href=\"".htmlspecialchars("?action=viewforum&forumid=".$forumid.$addparam."&sort=".($_GET["sort"] == 'firstpostdesc' ? "firstpostasc" : "firstpostdesc"))."\" title=\"".($_GET["sort"] == 'firstpostdesc' ?  $lang_forums['title_order_topic_asc'] : $lang_forums['title_order_topic_desc'])."\">".$lang_forums['col_author']."</a></td><td class=\"colhead\" align=\"center\">".$lang_forums['col_replies']."/".$lang_forums['col_views']."</td><td class=\"colhead\" align=\"center\"><a href=\"".htmlspecialchars("?action=viewforum&forumid=".$forumid.$addparam."&sort=".($_GET["sort"] == 'lastpostasc' ? "lastpostdesc" : "lastpostasc"))."\" title=\"".($_GET["sort"] == 'lastpostasc' ? $lang_forums['title_order_post_desc'] : $lang_forums['title_order_post_asc'])."\">".$lang_forums['col_last_post']."</a></td>\n");
+		print("<tr><td class=\"colhead\" align=\"center\" width=\"70%\">".$lang_forums['col_topic']."</td><td class=\"colhead\" align=\"center\"><a href=\"".htmlspecialchars("?action=viewforum&forumid=".$forumid.$addparam."&sort=".($_GET["sort"] == 'firstpostdesc' ? "firstpostasc" : "firstpostdesc"))."\" title=\"".($_GET["sort"] == 'firstpostdesc' ?  $lang_forums['title_order_topic_asc'] : $lang_forums['title_order_topic_desc'])."\">".$lang_forums['col_author']."</a></td><td class=\"colhead\" align=\"center\">".$lang_forums['col_replies']."/".$lang_forums['col_views']."</td><td class=\"colhead\" align=\"center\"><a href=\"".htmlspecialchars("?action=viewforum&forumid=".$forumid.$addparam."&sort=".($_GET["sort"] == 'lastpostasc' ? "lastpostdesc" : "lastpostasc"))."\" title=\"".($_GET["sort"] == 'lastpostasc' ? $lang_forums['title_order_post_desc'] : $lang_forums['title_order_post_asc'])."\">".$lang_forums['col_last_post']."</a></td>\n");
 
 		print("</tr>\n");
 		$counter = 0;
