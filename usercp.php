@@ -866,7 +866,7 @@ else{
 	tr_small($lang_usercp['row_ip_location'], $CURUSER["ip"], 1);
 }
 if ($CURUSER["avatar"])
-	tr_small($lang_usercp['row_avatar'], "<img src=\"" . $CURUSER["avatar"] . "\" border=0>", 1);
+	tr_small($lang_usercp['row_avatar'], "<img width=\"80px\" src=\"" . $CURUSER["avatar"] . "\" border=0>", 1);
 tr_small($lang_usercp['row_passkey'], $CURUSER["passkey"], 1);
 if ($prolinkpoint_bonus)
 {
