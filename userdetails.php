@@ -47,13 +47,13 @@ $arr3 = mysql_fetch_row($res);
 $forumposts = $arr3[0];
 
 	$arr = get_country_row($user[country]);
-	$country = "<img src=\"pic/flag/".$arr[flagpic]."\" alt=\"".$arr[name]."\" style='margin-left: 8pt' />";
-
+	// $country = "<img src=\"pic/flag/".$arr[flagpic]."\" alt=\"".$arr[name]."\" style='margin-left: 8pt' />$arr[name]";
+	$country = "（$arr[name]）";
 	$arr = get_downloadspeed_row($user[download]);
-	$download = "<img class=\"speed_down\" src=\"pic/trans.gif\" alt=\"Downstream Rate\" title=\"".$lang_userdetails['title_download'].$arr[name]."\" /> ".$arr[name];
+	$download = "<i class=\"speed_down icon pt-xiazai fcg\"  alt=\"Downstream Rate\" title=\"".$lang_userdetails['title_download'].$arr[name]."\"></i> ".$arr[name];
 
 	$arr = get_uploadspeed_row($user[upload]);
-	$upload = "<img class=\"speed_up\" src=\"pic/trans.gif\" alt=\"Upstream Rate\" title=\"".$lang_userdetails['title_upload'].$arr[name]."\" /> ".$arr[name];
+	$upload = "<i class=\"speed_up icon pt-shangchuan fcr\"  alt=\"Upstream Rate\" title=\"".$lang_userdetails['title_upload'].$arr[name]."\"></i> ".$arr[name];
 
 	$arr = get_isp_row($user[isp]);
 	$isp = $arr[name];
