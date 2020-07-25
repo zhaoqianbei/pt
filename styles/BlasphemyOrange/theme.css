@@ -471,7 +471,7 @@ a.altlink_green:hover {
 
 .btn {
     display: inline-block;
-    background-color: #587993;
+    background-color: #27A ;
     color: #fff;
     white-space: nowrap;
     text-align: center;
@@ -583,7 +583,7 @@ ul.menu li {
 ul.menu li a {
     color: #fff;
     border: 1px solid white;
-    background-color: #587993;
+    background-color: #27A ;
     margin-right: 1px;
     padding: 5px;
     text-decoration: none;
@@ -874,7 +874,7 @@ A.Peasant_Name:visited {
 }
 
 .logo {
-    color: #587993;
+    color: #27A ;
     line-height: normal;
 }
 
