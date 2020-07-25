@@ -61,7 +61,7 @@ $userid = (int) $az['id'];
 $dt = sqlesc(date("Y-m-d H:i:s"));
 
 // IP Log
-sql_query(sprintf('INSERT INTO `iplog_announce`(`userid`, `ip`, `first`, `last`, `hits`) VALUES (%u, %s, %s, %s, 1) ON DUPLICATE KEY UPDATE `last` = %s, `hits` = `hits` + 1', $userid, sqlesc($ip), $dt, $dt, $dt)) or err('IPL Err');
+sql_query(sprintf('INSERT INTO `iplog_announce`(`userid`, `ip`, `first`, `last`, `hits`) VALUES (%u, %s, %s, %s, 1) ON DUPLICATE KEY UPDATE `last` = %s, `hits` = `hits` + 1', $userid, sqlesc($ip), $dt, $dt, $dt)) or err('IPL 错误');
 
 //3. CHECK IF CLIENT IS ALLOWED
 $clicheck_res = check_client($peer_id,$agent,$client_familyid);
