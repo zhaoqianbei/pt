@@ -65,8 +65,11 @@ if ($tracker_ssl == true){
 		$base_announce_url = $announce_urls[0];
 }
 else{
-	$ssl_torrent = "http://";
-	$base_announce_url = $announce_urls[0];
+	$ssl_torrent = "https://";
+	if ($https_announce_urls[0] != "")
+		$base_announce_url = $https_announce_urls[0];
+	else
+		$base_announce_url = $announce_urls[0];
 }
 
 
