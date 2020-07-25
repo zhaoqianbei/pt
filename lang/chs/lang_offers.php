@@ -19,7 +19,7 @@ $lang_offers = array
 	'std_smell_rat' => "有地方不对劲！",
 	'head_offer' => "候选",
 	'submit_search' => "给我搜",
-	'text_red_star_required' => "红星号(<font color=\"red\">*</font>)标记的区域必须填写",
+	'text_red_star_required' => "(<font color=\"red\">*</font>)标记的区域必须填写",
 	'text_offers_open_to_all' => "候选区对所有用户均开放...提高分享率的好方式！",
 	'select_type_select' => "(请选择)",
 	'row_type' => "类型",

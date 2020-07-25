@@ -6,7 +6,7 @@ $lang_upload = array
 	'std_sorry' =>  "对不起...",
 	'std_unauthorized_to_upload' => "你没有发布种子的权限。请阅读(<a class=\"faqlink\" href=\"messages.php\">收件箱</a>)",
 	'std_please_offer' => "你没有发布种子的权限。如果你是普通会员，请到<a class=\"faqlink\" href=\"offers.php\">候选区</a>提交你的发布请求（请查看常见问题中的<a class=\"faqlink\" href=\"faq.php#id36\"><b>“发布”</b></a>）部分<br />",
-	'text_red_star_required' => "红星号(<font color=\"red\">*</font>)标记的区域必须填写",
+	'text_red_star_required' => "(<font color=\"red\">*</font>)标记的区域必须填写",
 	'text_tracker_url' => "Tracker服务器",
 	'row_torrent_file' => "种子文件",
 	'row_torrent_name' => "标题",

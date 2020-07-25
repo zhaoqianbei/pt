@@ -11,7 +11,7 @@ $lang_linksmanage = array
 	'text_rule_four' => "4.申请网站至少要有200名注册用户，或者平均日访问人数不少于50。",
 	'text_rule_five' => "5.本站".$SITENAME."保留可不经过任何通知，自由<strong>修改或删除</strong>本站上的链接的权力。",
 	'text_rule_six' => "6.如果你的网站符合以上条款，欢迎向我们".$SITENAME."提出交换链接的申请。然而，我们不保证接受所有申请。",
-	'text_red_star_required' => "红星号(<font color='red'>*</font>)标记的区域必须填写",
+	'text_red_star_required' => "(<font color='red'>*</font>)标记的区域必须填写",
 	'text_site_name' => "网站名",
 	'text_url' => "链接地址",
 	'text_title' => "标语",

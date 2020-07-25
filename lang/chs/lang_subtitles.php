@@ -32,7 +32,7 @@ $lang_subtitles = array
 	'text_rule_four_seven' => "&nbsp;&nbsp;&nbsp;&nbsp;5）如果以前上传的字幕时间轴有不对的，你上传的字幕时proper（正确版本）或re-synced（重新校对）的字幕，请在字幕文件末尾添加[PROPER]或[R3]。示例：One.Night.In.Taipei.2015.BluRay.720p.DD5.1.x264-HDBiger.chs[PROPER]",
 	'text_rule_five' => "5.上传的字幕必须符合以上所有要求，否则将会被删除，同时相应的魔力值也会被收回。对于多次上传不合格字幕（恶意上传）的会员或者恶意检举他人字幕的会员将予以警告，严重者将会被封禁账号。",
 	'text_rule_six' => "6.上传一个字幕奖励25魔力值，我们欢迎并鼓励上传合格的字幕",
-	'text_red_star_required' => "<p >红星号(<font color=red>*</font>)标记的区域必须填写</p>\n",
+	'text_red_star_required' => "<p >(<font color=red>*</font>)标记的区域必须填写</p>\n",
 	'text_uploading_subtitles_for_torrent' => "为种子上传字幕：",
 	'row_file' => "文件",
 	'text_maximum_file_size' => "文件最大限制：",
