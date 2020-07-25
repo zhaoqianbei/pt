@@ -1075,7 +1075,7 @@ print("<td class=\"embedded\"><input class=\"codebuttons\" style=\"font-size:11p
 <option value="6">6</option>
 <option value="7">7</option>
 </select></td>
-<td class="embedded"><a href="http://img.24di.cn/" title="欢迎使用" target="_blank" class="ml20 bb p55 fcf br2">图床</a> (不会用点我)</td> 
+<td class="embedded"><a href="http://img.24di.cn/" title="欢迎使用" target="_blank" class="ml20 bb p55 fcf br2">图床</a> (<a href="https://www.zhaoqianbei.com/Index/xiaokeZhuye/k/81631476" target="_blank">不会用点我</a>)</td> 
 </tr>
 </table>
 </td>
