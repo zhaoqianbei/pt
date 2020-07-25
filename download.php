@@ -56,7 +56,6 @@ if ($_COOKIE["c_secure_tracker_ssl"] == base64("yeah"))
 $tracker_ssl = true;
 else
 $tracker_ssl = false;
-$tracker_ssl = false;
 if ($tracker_ssl == true){
 	$ssl_torrent = "https://";
 	if ($https_announce_urls[0] != "")
@@ -65,11 +64,9 @@ if ($tracker_ssl == true){
 		$base_announce_url = $announce_urls[0];
 }
 else{
-	$ssl_torrent = "https://";
-	if ($https_announce_urls[0] != "")
-		$base_announce_url = $https_announce_urls[0];
-	else
-		$base_announce_url = $announce_urls[0];
+	
+	$ssl_torrent = "http://";
+	$base_announce_url = $announce_urls[0];
 }
 
 
