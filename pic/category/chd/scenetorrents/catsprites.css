@@ -9,12 +9,12 @@
 }
 span.c_movies:after{
     content: "电影";
-    background-color: #459961 ;
+    background-color: #27A;
 }
 span.c_anime:after
 {
     content: "动漫";
-    background-color: #006D5C ;
+    background-color:  #459961;
 }
 span.c_tvseries:after
 {
@@ -31,18 +31,18 @@ span.c_tvshows:after
 span.c_doc:after
 {
     content: "纪录片";
-    background-color: #155FAA;
+    background-color: #00AAEE;
 }
 
 span.c_mv:after
 {
     content: "游戏";
-    background-color: #694E79;
+    background-color: #DB9E36 ;
 }
 span.c_resource:after
 {
     content: "资源";
-    background-color: #DB9E36 ;
+    background-color: #694E79  ;
 }
 span.c_course:after
 {
