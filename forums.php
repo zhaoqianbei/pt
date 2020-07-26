@@ -1127,7 +1127,7 @@ if ($action == "viewforum")
 	{
 		print("<table border=\"1\" cellspacing=\"0\" cellpadding=\"5\" width=\"90%\">");
 
-		print("<tr><td class=\"colhead fs1\" align=\"center\" width=\"70%\">".$lang_forums['col_topic']."</td><td class=\"colhead fs1 fs18\" align=\"center\"><a href=\"".htmlspecialchars("?action=viewforum&forumid=".$forumid.$addparam."&sort=".($_GET["sort"] == 'firstpostdesc' ? "firstpostasc" : "firstpostdesc"))."\" title=\"".($_GET["sort"] == 'firstpostdesc' ?  $lang_forums['title_order_topic_asc'] : $lang_forums['title_order_topic_desc'])."\">".$lang_forums['col_author']."</a></td><td class=\"colhead fs1 fs18\" align=\"center\">".$lang_forums['col_replies']."/".$lang_forums['col_views']."</td><td class=\"colhead fs1 fs18\" align=\"center\"><a href=\"".htmlspecialchars("?action=viewforum&forumid=".$forumid.$addparam."&sort=".($_GET["sort"] == 'lastpostasc' ? "lastpostdesc" : "lastpostasc"))."\" title=\"".($_GET["sort"] == 'lastpostasc' ? $lang_forums['title_order_post_desc'] : $lang_forums['title_order_post_asc'])."\">".$lang_forums['col_last_post']."</a></td>\n");
+		print("<tr><td class=\"colhead fs1\" align=\"center\" width=\"70%\">".$lang_forums['col_topic']."</td><td class=\"colhead fs1\" align=\"center\"><a href=\"".htmlspecialchars("?action=viewforum&forumid=".$forumid.$addparam."&sort=".($_GET["sort"] == 'firstpostdesc' ? "firstpostasc" : "firstpostdesc"))."\" title=\"".($_GET["sort"] == 'firstpostdesc' ?  $lang_forums['title_order_topic_asc'] : $lang_forums['title_order_topic_desc'])."\">".$lang_forums['col_author']."</a></td><td class=\"colhead fs1\" align=\"center\">".$lang_forums['col_replies']."/".$lang_forums['col_views']."</td><td class=\"colhead fs1\" align=\"center\"><a href=\"".htmlspecialchars("?action=viewforum&forumid=".$forumid.$addparam."&sort=".($_GET["sort"] == 'lastpostasc' ? "lastpostdesc" : "lastpostasc"))."\" title=\"".($_GET["sort"] == 'lastpostasc' ? $lang_forums['title_order_post_desc'] : $lang_forums['title_order_post_asc'])."\">".$lang_forums['col_last_post']."</a></td>\n");
 
 		print("</tr>\n");
 		$counter = 0;
@@ -1302,7 +1302,7 @@ if ($action == "viewunread")
 		if ($n == 1)
 		{
 			print("<table border=\"1\" cellspacing=\"0\" cellpadding=\"5\">\n");
-			print("<tr><td class=\"colhead fs1 fs18\" align=\"left\">".$lang_forums['col_topic']."</td><td class=\"colhead fs1 fs18\" align=\"left\">".$lang_forums['col_forum']."</td></tr>\n");
+			print("<tr><td class=\"colhead fs1\" align=\"left\">".$lang_forums['col_topic']."</td><td class=\"colhead fs1\" align=\"left\">".$lang_forums['col_forum']."</td></tr>\n");
 		}
 		print("<tr><td class=\"rowfollow\" align=\"left\"><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\"><tr><td class=\"embedded\" style='padding-right: 10px'>" .
 		get_topic_image("unread")."</td><td class=\"embedded\">" .
@@ -1399,7 +1399,7 @@ if ($action == "search")
 
 		print($pagertop);
 		print("<table border=\"1\" cellspacing=\"0\" cellpadding=\"5\" width=\"90%\">\n");
-		print("<tr><td class=\"colhead fs1 fs18\" align=\"center\">".$lang_forums['col_post']."</td><td class=\"colhead fs1 fs18\" align=\"center\" width=\"70%\">".$lang_forums['col_topic']."</td><td class=\"colhead fs1 fs18\" align=\"left\">".$lang_forums['col_forum']."</td><td class=\"colhead fs1 fs18\" align=\"left\">".$lang_forums['col_posted_by']."</td></tr>\n");
+		print("<tr><td class=\"colhead fs1\" align=\"center\">".$lang_forums['col_post']."</td><td class=\"colhead fs1\" align=\"center\" width=\"70%\">".$lang_forums['col_topic']."</td><td class=\"colhead fs1\" align=\"left\">".$lang_forums['col_forum']."</td><td class=\"colhead fs1\" align=\"left\">".$lang_forums['col_posted_by']."</td></tr>\n");
 
 		while ($post = mysql_fetch_array($res))
 		{
@@ -1456,7 +1456,7 @@ foreach ($overforums as $a)
 	$forid = $a["id"];
 	$overforumname = $a["name"];
 
-	print("<tr><td align=\"left\" class=\"colhead fs1 fs18\" width=\"70%\">".htmlspecialchars($overforumname)."</td><td align=\"center\" class=\"colhead fs1\">".$lang_forums['col_topics']."</td>" .
+	print("<tr><td align=\"left\" class=\"colhead fs1\" width=\"70%\"><i class=\"icon pt-taolun\"></i> ".htmlspecialchars($overforumname)."</td><td align=\"center\" class=\"colhead fs1\">".$lang_forums['col_topics']."</td>" .
 	"<td align=\"center\" class=\"colhead fs1\">".$lang_forums['col_posts']."</td>" .
 	"<td align=\"left\" class=\"colhead fs1\">".$lang_forums['col_last_post']."</td><td class=\"colhead fs1\" align=\"left\">".$lang_forums['col_moderator']."</td></tr>\n");
 
