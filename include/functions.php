@@ -2215,7 +2215,7 @@ function tr_small($x, $y, $noesc = 0, $relation = '')
         $a = htmlspecialchars($y);
         //$a = str_replace("\n", "<br />\n", $a);
     }
-    print("<tr" . ($relation ? " relation = \"$relation\"" : "") . "><td width=\"1%\" class=\"rowhead nowrap\" valign=\"top\" align=\"right\">" . $x . "</td><td width=\"99%\" class=\"rowfollow\" valign=\"top\" align=\"left\">" . $a . "</td></tr>\n");
+    print("<tr" . ($relation ? " relation = \"$relation\"" : "") . "><td width=\"1%\" class=\"rowhead nowrap\" valign=\"top\" align=\"right\">" . $x . "</td><td width=\"70%\" class=\"rowfollow\" valign=\"top\" align=\"left\">" . $a . "</td></tr>\n");
 }
 
 function twotd($x, $y, $nosec = 0)
@@ -3213,7 +3213,7 @@ function commenttable($rows, $type, $parent_id, $review = false)
 
             }
         }
-        print("<div style=\"margin-top: 8pt; margin-bottom: 8pt;\"><table id=\"cid" . $row["id"] . "\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\"><tr><td class=\"embedded\" width=\"99%\">#" . $row["id"] . "&nbsp;&nbsp;<font color=\"gray\">" . $lang_functions['text_by'] . "</font>");
+        print("<div style=\"margin-top: 8pt; margin-bottom: 8pt;\"><table id=\"cid" . $row["id"] . "\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\"><tr><td class=\"embedded\" width=\"70%\">#" . $row["id"] . "&nbsp;&nbsp;<font color=\"gray\">" . $lang_functions['text_by'] . "</font>");
         print(get_username($row["user"], false, true, true, false, false, true));
         print("&nbsp;&nbsp;<font color=\"gray\">" . $lang_functions['text_at'] . "</font>" . gettime($row["added"]) .
             ($row["editedby"] && get_user_class() >= $commanage_class ? " - [<a href=\"comment.php?action=vieworiginal&amp;cid=" . $row[id] . "&amp;type=" . $type . "\">" . $lang_functions['text_view_original'] . "</a>]" : "") . "</td><td class=\"embedded nowrap\" width=\"1%\"><a href=\"#top\"><i class=\"top icon pt-zhiding\" alt=\"Top\" title=\"Top\"></i></a>&nbsp;&nbsp;</td></tr></table></div>");

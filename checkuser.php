@@ -49,14 +49,14 @@ if (!$enabled)
   print($lang_checkuser['text_account_disabled']);
 ?>
 <table width=1200 border=1 cellspacing=0 cellpadding=5>
-<tr><td class=rowhead width=1%><?php echo $lang_checkuser['row_join_date'] ?></td><td align=left width=99%><?php echo $joindate;?></td></tr>
-<tr><td class=rowhead width=1%><?php echo $lang_checkuser['row_gender'] ?></td><td align=left width=99%><?php echo $gender;?></td></tr>
-<tr><td class=rowhead width=1%><?php echo $lang_checkuser['row_email'] ?></td><td align=left width=99%><a href=mailto:<?php echo $user[email];?>><?php echo $user[email];?></a></td></tr>
+<tr><td class=rowhead width=1%><?php echo $lang_checkuser['row_join_date'] ?></td><td align=left width=70%><?php echo $joindate;?></td></tr>
+<tr><td class=rowhead width=1%><?php echo $lang_checkuser['row_gender'] ?></td><td align=left width=70%><?php echo $gender;?></td></tr>
+<tr><td class=rowhead width=1%><?php echo $lang_checkuser['row_email'] ?></td><td align=left width=70%><a href=mailto:<?php echo $user[email];?>><?php echo $user[email];?></a></td></tr>
 <?php
 if (get_user_class() >= UC_MODERATOR AND $user[ip] != '')
-	print ("<tr><td class=rowhead width=1%>".$lang_checkuser['row_ip']."</td><td align=left width=99%>$user[ip]</td></tr>");
+	print ("<tr><td class=rowhead width=1%>".$lang_checkuser['row_ip']."</td><td align=left width=70%>$user[ip]</td></tr>");
 print("<form method=post action=takeconfirm.php?id=".htmlspecialchars($id).">");
 print("<input type=hidden name=email value=$user[email]>");
 print("<tr><td class=rowhead width=1%><input type=\"checkbox\" name=\"conusr[]\" value=\"" . $id . "\" checked/></td>");
-print("<td align=left width=99%><input type=submit style='height: 20px' value=\"".$lang_checkuser['submit_confirm_this_user'] ."\"></form></tr></td></table>");
+print("<td align=left width=70%><input type=submit style='height: 20px' value=\"".$lang_checkuser['submit_confirm_this_user'] ."\"></form></tr></td></table>");
 stdfoot();

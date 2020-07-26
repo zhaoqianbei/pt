@@ -613,9 +613,9 @@ if ($action == "viewtopic")
 
 	begin_main_frame();
 	print("<table border=\"0\" class=\"main\" cellspacing=\"0\" cellpadding=\"5\" width=\"90%\"><tr>\n");
-	print("<td class=\"embedded\" width=\"99%\">&nbsp;&nbsp;".$lang_forums['there_is']."<b>".$views."</b>".$lang_forums['hits_on_this_topic']);
+	print("<td class=\"embedded\" width=\"70%\">&nbsp;&nbsp;".$lang_forums['there_is']."<b>".$views."</b>".$lang_forums['hits_on_this_topic']);
 	print("</td>\n");
-	print("<td class=\"embedded nowrap\" width=\"1%\" align=\"right\">");
+	print("<td class=\"embedded nowrap\" width=\" \" align=\"right\">");
 	if ($maypost)
 	{
 		print("<a href=\"".htmlspecialchars("?action=reply&topicid=".$topicid)."\"><i class=\"f_reply icon pt-huifu\" alt=\"Add Reply\" title=\"".$lang_forums['title_reply_directly']."\"> 回复</i></a>&nbsp;&nbsp;");
@@ -680,7 +680,7 @@ if ($action == "viewtopic")
 			}
 		}
 
-		print("<div style=\"margin-top: 8pt; margin-bottom: 8pt;\"><table id=\"pid".$postid."\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\"><tr><td class=\"embedded\" width=\"99%\"><a href=\"".htmlspecialchars("forums.php?action=viewtopic&topicid=".$topicid."&page=p".$postid."#pid".$postid)."\">#".$postid."</a>&nbsp;&nbsp;<font color=\"gray\">".$lang_forums['text_by']."</font>".$by."&nbsp;&nbsp;<font color=\"gray\">".$lang_forums['text_at']."</font>".$added);
+		print("<div style=\"margin-top: 8pt; margin-bottom: 8pt;\"><table id=\"pid".$postid."\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\"><tr><td class=\"embedded\" width=\"70%\"><a href=\"".htmlspecialchars("forums.php?action=viewtopic&topicid=".$topicid."&page=p".$postid."#pid".$postid)."\">#".$postid."</a>&nbsp;&nbsp;<font color=\"gray\">".$lang_forums['text_by']."</font>".$by."&nbsp;&nbsp;<font color=\"gray\">".$lang_forums['text_at']."</font>".$added);
 		if (is_valid_id($arr['editedby']))
 			print("");
 		print("&nbsp;&nbsp;<font color=\"gray\">|</font>&nbsp;&nbsp;");
@@ -688,7 +688,7 @@ if ($action == "viewtopic")
 			print("<a href=\"?action=viewtopic&topicid=".$topicid."\">".$lang_forums['text_view_all_posts']."</a>");
 		else
 			print("<a href=\"".htmlspecialchars("?action=viewtopic&topicid=".$topicid."&authorid=".$posterid)."\">".$lang_forums['text_view_this_author_only']."</a>");
-		print("</td><td class=\"embedded nowrap\" width=\"1%\"><font class=\"big\">".$lang_forums['text_number']."<b>".($pn+$offset)."</b>".$lang_forums['text_lou']."&nbsp;&nbsp;</font><a href=\"#top\"><i class=\"top icon pt-zhiding\" alt=\"Top\" title=\"".$lang_forums['text_back_to_top']."\"></i></a>&nbsp;&nbsp;</td></tr>");
+		print("</td><td class=\"embedded nowrap\" width=\"\"><font class=\"big\">".$lang_forums['text_number']."<b>".($pn+$offset)."</b>".$lang_forums['text_lou']."&nbsp;&nbsp;</font><a href=\"#top\"><i class=\"top icon pt-zhiding\" alt=\"Top\" title=\"".$lang_forums['text_back_to_top']."\"></i></a>&nbsp;&nbsp;</td></tr>");
 
 		print("</table></div>\n");
 
@@ -1118,7 +1118,7 @@ if ($action == "viewforum")
 	print("<table border=\"0\" class=\"main\" cellspacing=\"0\" cellpadding=\"5\" width=\"90%\"><tr>\n");
 	print("<td class=\"embedded\" width=\"90%\">");
 	print($forummoderators ? "&nbsp;&nbsp;<img class=\"forum_mod\" src=\"pic/trans.gif\" alt=\"Moderator\" title=\"".$lang_forums['col_moderator']."\">&nbsp;".$forummoderators : "");
-	print("</td><td class=\"embedded nowrap\" width=\"1%\">");
+	print("</td><td class=\"embedded nowrap\" width=\"\">");
 	if ($maypost)
 		print("<a href=\"".htmlspecialchars("?action=newtopic&forumid=".$forumid)."\"><i class=\"f_new icon pt-bianji\" alt=\"New Topic\" title=\"".$lang_forums['title_new_topic']."\"> 发帖</i></a>&nbsp;&nbsp;");
 	print("</td>");
@@ -1312,7 +1312,7 @@ if ($action == "viewunread")
 	if ($n > 0)
 	{
 		print("</table>\n");
-		print("<table border=\"0\" class=\"main\" cellspacing=\"0\" cellpadding=\"5\" width=\"1%\"><tr><td class=\"embedded\"><form method=\"get\" action=\"?\"><input type=\"hidden\" name=\"catchup\" value=\"1\" /><input type=\"submit\" value=\"".$lang_forums['text_catch_up']."\" class=\"btn\" /></form></td>");
+		print("<table border=\"0\" class=\"main\" cellspacing=\"0\" cellpadding=\"5\" width=\"\"><tr><td class=\"embedded\"><form method=\"get\" action=\"?\"><input type=\"hidden\" name=\"catchup\" value=\"1\" /><input type=\"submit\" value=\"".$lang_forums['text_catch_up']."\" class=\"btn\" /></form></td>");
 		if ($n > $maxresults){
 			print("<td class=\"embedded\"><form method=\"get\" action=\"?\"><input type=\"hidden\" name=\"action\" value=\"viewunread\" /><input type=\"hidden\" name=\"beforepostid\" value=\"".$topiclastpost."\" /><input type=\"submit\" value=\"".$lang_forums['submit_show_more']."\" class=\"btn\" /></form></td>");
 		}
@@ -1403,7 +1403,7 @@ if ($action == "search")
 
 		while ($post = mysql_fetch_array($res))
 		{
-			print("<tr><td class=\"rowfollow\" align=\"center\" width=\"1%\">".$post[id]."</td><td class=\"rowfollow\" align=\"left\"><a href=\"".htmlspecialchars("?action=viewtopic&topicid=".$post[topicid]."&highlight=".rawurlencode($keywords)."&page=p".$post[id]."#pid".$post[id])."\">" . highlight_topic(highlight($keywords,htmlspecialchars($post['subject'])), $post['hlcolor']) . "</a></td><td class=\"rowfollow nowrap\" align=\"left\"><a href=\"".htmlspecialchars("?action=viewforum&forumid=".$post['forumid'])."\"><b>" . htmlspecialchars($post["forumname"]) . "</b></a></td><td class=\"rowfollow nowrap\" align=\"left\">" . gettime($post['added'],true,false) . "&nbsp;|&nbsp;". get_username($post['userid']) ."</td></tr>\n");
+			print("<tr><td class=\"rowfollow\" align=\"center\" width=\"\">".$post[id]."</td><td class=\"rowfollow\" align=\"left\"><a href=\"".htmlspecialchars("?action=viewtopic&topicid=".$post[topicid]."&highlight=".rawurlencode($keywords)."&page=p".$post[id]."#pid".$post[id])."\">" . highlight_topic(highlight($keywords,htmlspecialchars($post['subject'])), $post['hlcolor']) . "</a></td><td class=\"rowfollow nowrap\" align=\"left\"><a href=\"".htmlspecialchars("?action=viewforum&forumid=".$post['forumid'])."\"><b>" . htmlspecialchars($post["forumname"]) . "</b></a></td><td class=\"rowfollow nowrap\" align=\"left\">" . gettime($post['added'],true,false) . "&nbsp;|&nbsp;". get_username($post['userid']) ."</td></tr>\n");
 		}
 
 		print("</table>\n");
@@ -1456,7 +1456,7 @@ foreach ($overforums as $a)
 	$forid = $a["id"];
 	$overforumname = $a["name"];
 
-	print("<tr><td align=\"left\" class=\"colhead\" width=\"99%\">".htmlspecialchars($overforumname)."</td><td align=\"center\" class=\"colhead\">".$lang_forums['col_topics']."</td>" .
+	print("<tr><td align=\"left\" class=\"colhead\" width=\"70%\">".htmlspecialchars($overforumname)."</td><td align=\"center\" class=\"colhead\">".$lang_forums['col_topics']."</td>" .
 	"<td align=\"center\" class=\"colhead\">".$lang_forums['col_posts']."</td>" .
 	"<td align=\"left\" class=\"colhead\">".$lang_forums['col_last_post']."</td><td class=\"colhead\" align=\"left\">".$lang_forums['col_moderator']."</td></tr>\n");
 
@@ -1528,7 +1528,7 @@ foreach ($overforums as $a)
 			$posttoday = "&nbsp;&nbsp;(".$lang_forums['text_today']."<b><font class=\"new\">".$posttodaycount."</font></b>)";
 		else $posttoday = "";
 		print("<tr><td class=\"rowfollow\" align=\"left\"><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\"><tr><td class=\"embedded\" style='padding-right: 10px'>".$img."</td><td class=\"embedded\"><a href=\"".htmlspecialchars("?action=viewforum&forumid=".$forumid)."\"><font class=\"big\"><b>".$forumname."</b></font></a>" .$posttoday.
-		"<br />".$forumdescription."</td></tr></table></td><td class=\"rowfollow\" align=\"center\" width=\"1%\">".$topiccount."</td><td class=\"rowfollow\" align=\"center\" width=\"1%\">".$postcount."</td>" .
+		"<br />".$forumdescription."</td></tr></table></td><td class=\"rowfollow\" align=\"center\" width=\"\">".$topiccount."</td><td class=\"rowfollow\" align=\"center\" width=\"\">".$postcount."</td>" .
 		"<td class=\"rowfollow nowrap\" align=\"left\">".$lastpost."</td><td class=\"rowfollow\" align=\"left\">".$forummoderators."</td></tr>\n");
 	}
 	$count++;
