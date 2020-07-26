@@ -1,64 +1,62 @@
-img.c_movies
-{
-width:45px;
-height:46px;
-background-position: 0 0;
+.category:after{
+    display: table;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    font-size: 10pt;
+    color: #fff;
 }
-img.c_doc
-{
-width:45px;
-height:46px;
-background-position: -45px 0;
+span.c_movies:after{
+    content: "电影";
+    background-color: #5AA064 ;
 }
-img.c_anime
+span.c_doc:after
 {
-width:45px;
-height:46px;
-background-position: 0 -46px;
+    content: "纪录片";
+    background-color: #155FAA;
 }
-img.c_tvseries
+span.c_anime:after
 {
-width:45px;
-height:46px;
-background-position: -45px -46px;
+    content: "动漫";
+    background-color: #36865E;
 }
-
-img.c_tvshows
+span.c_tvseries:after
 {
-width:45px;
-height:46px;
-background-position: 0 -92px;
-}
-img.c_mv
-{
-width:45px;
-height:46px;
-background-position: -45px -92px;
-}
-img.c_resource
-{
-width:45px;
-height:46px;
-background-position: 0 -138px;
-}
-img.c_course
-{
-width:45px;
-height:46px;
-background-position: -45px -138px;
+    content: "电视剧";
+    background-color: #231456;
 }
 
-img.c_hqaudio
+span.c_tvshows:after
 {
-width:45px;
-height:46px;
-background-position: 0 -184px;
+    content: "综艺";
+    background-color: #006D5C;
+}
+span.c_mv:after
+{
+    content: "游戏";
+    background-color: #694E79;
+}
+span.c_resource:after
+{
+    content: "资源";
+    background-color: #DB9E36 ;
+}
+span.c_course:after
+{
+    content: "教程";
+    background-color: #266097;
 }
 
-img.c_other
+span.c_hqaudio:after
 {
-width:45px;
-height:46px;
-background-position: -45px -184px;
+    content: "音乐";
+    background-color: #533B77;
+}
+
+span.c_other:after
+{
+    content: "其他";
+    background-color: #FF9302;
 }
 
