@@ -383,7 +383,7 @@ if(get_user_class() >= UC_PEASANT)
 		while ($arr = mysql_fetch_assoc($res))
 		{
 			// the number $start_subid is just for legacy support of prevoiusly uploaded subs, if the site is completely new, it should be 0 or just remove it
-			$lang = "<td class=rowfollow align=center valign=middle>" . "<img border=\"0\" src=\"pic/flag/". $arr["flagpic"] . "\" alt=\"" . $arr["lang_name"] . "\" title=\"" . $arr["lang_name"] . "\"/>" . "</td>\n";
+			$lang = "<td class=rowfollow align=center valign=middle>" . "<span border=\"0\"  alt=\"" . $arr["lang_name"] . "\" title=\"" . $arr["lang_name"] . "\">" . $arr["lang_name"] . "</span></td>\n";
 			$title = "<td class=rowfollow align=left><a href=\"" . ($arr['id'] <= $start_subid ?  "downloadsubs_legacy.php/" . $arr['filename'] : "downloadsubs.php?torrentid=" . $arr['torrent_id'] ."&subid=" .$arr['id']) . "\"<b>" . htmlspecialchars($arr["title"]) . "</b></a>" .
 			($mod || ($pu && $arr["uppedby"] == $CURUSER["id"]) ? " <font class=small><a href=?delete=$arr[id]>".$lang_subtitles['text_delete']."</a></font>" : "") ."</td>\n";
 			$addtime = gettime($arr["added"],false,false);

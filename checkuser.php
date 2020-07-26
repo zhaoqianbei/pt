@@ -36,7 +36,7 @@ $res = sql_query("SELECT name,flagpic FROM countries WHERE id=$user[country] LIM
 if (mysql_num_rows($res) == 1)
 {
   $arr = mysql_fetch_assoc($res);
-  $country = "<td class=embedded><img src=pic/flag/$arr[flagpic] alt=\"$arr[name]\" style='margin-left: 8pt'></td>";
+  $country = "<td class=embedded><span alt=\"$arr[name]\" style='margin-left: 8pt'>$arr[name]</span></td>";
 }
 
 stdhead($lang_checkuser['head_detail_for'] . $user["username"]);

@@ -20,7 +20,7 @@ $res = sql_query("SELECT * FROM users WHERE users.support='yes' AND users.status
 while ($arr = mysql_fetch_assoc($res))
 {
 	$countryrow = get_country_row($arr['country']);
-	$ppl .= "<tr><td class=embedded>". get_username($arr['id']) ."</td><td class=embedded><img width=24 height=15 src=\"pic/flag/".$countryrow[flagpic]."\" title=\"".$countryrow['name']."\" style=\"padding-bottom:1px;\"></td>
+	$ppl .= "<tr><td class=embedded>". get_username($arr['id']) ."</td><td class=embedded><span width=24 height=15 title=\"".$countryrow['name']."\" style=\"padding-bottom:1px;\">".$countryrow['name']."</span></td>
  <td class=embedded> ".(strtotime($arr['last_access']) > $dt ? $onlineimg : $offlineimg)."</td>".
  "<td class=embedded><a href=sendmessage.php?receiver=".$arr['id']." title=\"".$lang_staff['title_send_pm']."\">".$sendpmimg."</a></td>".
  "<td class=embedded>".$arr['supportlang']."</td>".
@@ -58,7 +58,7 @@ $res = sql_query("SELECT * FROM users WHERE users.picker='yes' AND users.status=
 while ($arr = mysql_fetch_assoc($res))
 {
 	$countryrow = get_country_row($arr['country']);
-	$ppl .= "<tr height=15><td class=embedded>". get_username($arr['id']) ."</td><td class=embedded ><img width=24 height=15 src=\"pic/flag/".$countryrow['flagpic']."\" title=\"".$countryrow['name']."\" style=\"padding-bottom:1px;\"></td>
+	$ppl .= "<tr height=15><td class=embedded>". get_username($arr['id']) ."</td><td class=embedded ><span width=24 height=15 src=\"pic/flag/".$countryrow['flagpic']."\" title=\"".$countryrow['name']."\" style=\"padding-bottom:1px;\">".$countryrow['name']."</span></td>
  <td class=embedded> ".(strtotime($arr['last_access']) > $dt ? $onlineimg : $offlineimg)."</td>".
  "<td class=embedded><a href=sendmessage.php?receiver=".$arr['id']." title=\"".$lang_staff['title_send_pm']."\">".$sendpmimg."</a></td>".
  "<td class=embedded>".$arr['pickfor']."</td></tr>\n";
@@ -100,7 +100,7 @@ while ($arr = mysql_fetch_assoc($res))
 		$forums .= "<a href=forums.php?action=viewforum&forumid=".$forumrow['id'].">".$forumrow['name']."</a>, ";
 	}
 	$forums = rtrim(trim($forums),",");
-	$ppl .= "<tr height=15><td class=embedded>". get_username($arr['userid']) ."</td><td class=embedded ><img width=24 height=15 src=\"pic/flag/".$countryrow['flagpic']."\" title=\"".$countryrow['name']."\" style=\"padding-bottom:1px;\"></td>
+	$ppl .= "<tr height=15><td class=embedded>". get_username($arr['userid']) ."</td><td class=embedded ><span width=24 height=15 src=\"pic/flag/".$countryrow['flagpic']."\" title=\"".$countryrow['name']."\" style=\"padding-bottom:1px;\">".$countryrow['name']."</span></td>
  <td class=embedded> ".(strtotime($arr['last_access']) > $dt ? $onlineimg : $offlineimg)."</td>".
  "<td class=embedded><a href=sendmessage.php?receiver=".$arr['userid']." title=\"".$lang_staff['title_send_pm']."\">".$sendpmimg."</a></td>".
  "<td class=embedded>".$forums."</td></tr>\n";
@@ -151,7 +151,7 @@ while ($arr = mysql_fetch_assoc($res))
 		$ppl .= "<tr height=15><td class=embedded colspan=5><hr color=\"#4040c0\"></td></tr>";
 	}
 	$countryrow = get_country_row($arr['country']);
-	$ppl .= "<tr><td class=embedded>". get_username($arr['id']) ."</td><td class=embedded ><img width=24 height=15 src=\"pic/flag/".$countryrow['flagpic']."\" title=\"".$countryrow['name']."\" style=\"padding-bottom:1px;\"></td>
+	$ppl .= "<tr><td class=embedded>". get_username($arr['id']) ."</td><td class=embedded ><span width=24 height=15 title=\"".$countryrow['name']."\" style=\"padding-bottom:1px;\">".$countryrow['name']."</span></td>
  <td class=embedded> ".(strtotime($arr['last_access']) > $dt ? $onlineimg : $offlineimg)."</td>".
  "<td class=embedded><a href=sendmessage.php?receiver=".$arr['id']." title=\"".$lang_staff['title_send_pm']."\">".$sendpmimg."</a></td>".
  "<td class=embedded>".$arr['stafffor']."</td></tr>\n";
@@ -177,7 +177,7 @@ $res = sql_query("SELECT * FROM users WHERE class=".UC_VIP." AND status='confirm
 while ($arr = mysql_fetch_assoc($res))
 {
 	$countryrow = get_country_row($arr['country']);
-	$ppl .= "<tr><td class=embedded>". get_username($arr['id']) ."</td><td class=embedded><img width=24 height=15 src=\"pic/flag/".$countryrow['flagpic']."\" title=\"".$countryrow['name']."\" style=\"padding-bottom:1px;\"></td>
+	$ppl .= "<tr><td class=embedded>". get_username($arr['id']) ."</td><td class=embedded><span width=24 height=15 title=\"".$countryrow['name']."\" style=\"padding-bottom:1px;\">".$countryrow['name']."</span></td>
  <td class=embedded> ".(strtotime($arr['last_access']) > $dt ? $onlineimg : $offlineimg)."</td>".
  "<td class=embedded><a href=sendmessage.php?receiver=".$arr['id']." title=\"".$lang_staff['title_send_pm']."\">".$sendpmimg."</a></td>".
  "<td class=embedded>".$arr['stafffor']."</td></tr>\n";
