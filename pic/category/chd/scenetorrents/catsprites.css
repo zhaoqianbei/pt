@@ -9,29 +9,31 @@
 }
 span.c_movies:after{
     content: "电影";
-    background-color: #5AA064 ;
-}
-span.c_doc:after
-{
-    content: "纪录片";
-    background-color: #155FAA;
+    background-color: #459961 ;
 }
 span.c_anime:after
 {
     content: "动漫";
-    background-color: #36865E;
+    background-color: #459961;
 }
 span.c_tvseries:after
 {
     content: "电视剧";
-    background-color: #231456;
+    background-color: #017A85  ;
 }
 
 span.c_tvshows:after
 {
     content: "综艺";
-    background-color: #006D5C;
+    background-color: #39A8AE;
 }
+
+span.c_doc:after
+{
+    content: "纪录片";
+    background-color: #155FAA;
+}
+
 span.c_mv:after
 {
     content: "游戏";
@@ -45,7 +47,7 @@ span.c_resource:after
 span.c_course:after
 {
     content: "教程";
-    background-color: #266097;
+    background-color: #069DD5;
 }
 
 span.c_hqaudio:after
