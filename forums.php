@@ -612,10 +612,10 @@ if ($action == "viewtopic")
 	//------ Print table
 
 	begin_main_frame();
-	print("<table border=\"0\" class=\"main\" cellspacing=\"0\" cellpadding=\"5\" width=\"90%\"><tr>\n");
-	print("<td class=\"embedded\" width=\"70%\">&nbsp;&nbsp;".$lang_forums['there_is']."<b>".$views."</b>".$lang_forums['hits_on_this_topic']);
+	print("<table border=\"0\" class=\"topic\" cellspacing=\"0\" cellpadding=\"5\" width=\"100%\"><tr>\n");
+	print("<td class=\"embedded\" width=\"90%\">&nbsp;&nbsp;".$lang_forums['there_is']."<b>".$views."</b>".$lang_forums['hits_on_this_topic']);
 	print("</td>\n");
-	print("<td class=\"embedded nowrap\" width=\" \" align=\"right\">");
+	print("<td class=\"embedded nowrap tar\" width=\" \" align=\"right\">");
 	if ($maypost)
 	{
 		print("<a href=\"".htmlspecialchars("?action=reply&topicid=".$topicid)."\"><i class=\"f_reply icon pt-huifu\" alt=\"Add Reply\" title=\"".$lang_forums['title_reply_directly']."\"> 回复</i></a>&nbsp;&nbsp;");
@@ -680,7 +680,7 @@ if ($action == "viewtopic")
 			}
 		}
 
-		print("<div style=\"margin-top: 8pt; margin-bottom: 8pt;\"><table id=\"pid".$postid."\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\"><tr><td class=\"embedded\" width=\"70%\"><a href=\"".htmlspecialchars("forums.php?action=viewtopic&topicid=".$topicid."&page=p".$postid."#pid".$postid)."\">#".$postid."</a>&nbsp;&nbsp;<font color=\"gray\">".$lang_forums['text_by']."</font>".$by."&nbsp;&nbsp;<font color=\"gray\">".$lang_forums['text_at']."</font>".$added);
+		print("<div style=\"margin-top: 8pt; margin-bottom: 8pt;\"><table id=\"pid".$postid."\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\"><tr><td class=\"embedded\" width=\"90%\"><a href=\"".htmlspecialchars("forums.php?action=viewtopic&topicid=".$topicid."&page=p".$postid."#pid".$postid)."\">#".$postid."</a>&nbsp;&nbsp;<font color=\"gray\">".$lang_forums['text_by']."</font>".$by."&nbsp;&nbsp;<font color=\"gray\">".$lang_forums['text_at']."</font>".$added);
 		if (is_valid_id($arr['editedby']))
 			print("");
 		print("&nbsp;&nbsp;<font color=\"gray\">|</font>&nbsp;&nbsp;");
@@ -688,7 +688,7 @@ if ($action == "viewtopic")
 			print("<a href=\"?action=viewtopic&topicid=".$topicid."\">".$lang_forums['text_view_all_posts']."</a>");
 		else
 			print("<a href=\"".htmlspecialchars("?action=viewtopic&topicid=".$topicid."&authorid=".$posterid)."\">".$lang_forums['text_view_this_author_only']."</a>");
-		print("</td><td class=\"embedded nowrap\" width=\"\"><font class=\"big\">".$lang_forums['text_number']."<b>".($pn+$offset)."</b>".$lang_forums['text_lou']."&nbsp;&nbsp;</font><a href=\"#top\"><i class=\"top icon pt-zhiding\" alt=\"Top\" title=\"".$lang_forums['text_back_to_top']."\"></i></a>&nbsp;&nbsp;</td></tr>");
+		print("</td><td class=\"embedded nowrap tar\" width=\"\"><font class=\"big\">".$lang_forums['text_number']."<b>".($pn+$offset)."</b>".$lang_forums['text_lou']."&nbsp;&nbsp;</font><a href=\"#top\"><i class=\"top icon pt-zhiding\" alt=\"Top\" title=\"".$lang_forums['text_back_to_top']."\"></i></a></td></tr>");
 
 		print("</table></div>\n");
 
@@ -742,23 +742,23 @@ if ($action == "viewtopic")
 		print("<tr><td class=\"embedded\"><form method=\"post\" action=\"?action=setsticky\">\n");
 		print("<input type=\"hidden\" name=\"topicid\" value=\"".$topicid."\" />\n");
 		print("<input type=\"hidden\" name=\"returnto\" value=\"".htmlspecialchars($_SERVER[REQUEST_URI])."\" />\n");
-		print("<input type=\"hidden\" name=\"sticky\" value=\"".($sticky ? 'no' : 'yes')."\" /><input type=\"submit\" class=\"medium\" value=\"".($sticky ? $lang_forums['submit_unsticky'] : $lang_forums['submit_sticky'])."\" /></form></td>\n");
+		print("<input type=\"hidden\" name=\"sticky\" value=\"".($sticky ? 'no' : 'yes')."\" /><input type=\"submit\" class=\"normal\" value=\"".($sticky ? $lang_forums['submit_unsticky'] : $lang_forums['submit_sticky'])."\" /></form></td>\n");
 		print("<td class=\"embedded\"><form method=\"post\" action=\"?action=setlocked\">\n");
 		print("<input type=\"hidden\" name=\"topicid\" value=\"".$topicid."\" />\n");
 		print("<input type=\"hidden\" name=\"returnto\" value=\"".htmlspecialchars($_SERVER[REQUEST_URI])."\" />\n");
-		print("<input type=\"hidden\" name=\"locked\" value=\"".($locked ? 'no' : 'yes')."\" /><input type=\"submit\" class=\"medium\" value=\"".($locked ? $lang_forums['submit_unlock'] : $lang_forums['submit_lock'])."\" /></form></td>\n");
+		print("<input type=\"hidden\" name=\"locked\" value=\"".($locked ? 'no' : 'yes')."\" /><input type=\"submit\" class=\"normal\" value=\"".($locked ? $lang_forums['submit_unlock'] : $lang_forums['submit_lock'])."\" /></form></td>\n");
 		print("<td class=\"embedded\"><form method=\"get\" action=\"?\">\n");
 		print("<input type=\"hidden\" name=\"action\" value=\"deletetopic\" />\n");
 		print("<input type=\"hidden\" name=\"topicid\" value=\"".$topicid."\" />\n");
 		print("<input type=\"hidden\" name=\"forumid\" value=\"".$forumid."\" />\n");
-		print("<input type=\"submit\" class=\"medium\" value=\"".$lang_forums['submit_delete_topic']."\" /></form></td>\n");
+		print("<input type=\"submit\" class=\"normal\" value=\"".$lang_forums['submit_delete_topic']."\" /></form></td>\n");
 		print("<td class=\"embedded\"><form method=\"post\" action=\"".htmlspecialchars("?action=movetopic&topicid=".$topicid)."\">\n"."&nbsp;".$lang_forums['text_move_thread_to']."&nbsp;<select class=\"med\" name=\"forumid\">");
 		$forums = get_forum_row();
 		foreach ($forums as $arr){
 			if ($arr["id"] != $forumid && get_user_class() >= $arr["minclasswrite"])
 				print("<option value=\"" . $arr["id"] . "\">" . htmlspecialchars($arr["name"]) . "</option>\n");
 		}
-		print("</select> <input type=\"submit\" class=\"medium\" value=\"".$lang_forums['submit_move']."\" /></form></td>");
+		print("</select> <input type=\"submit\" class=\"normal\" value=\"".$lang_forums['submit_move']."\" /></form></td>");
 		print("<td class=\"embedded\"><form method=\"post\" action=\"".htmlspecialchars("?action=hltopic&topicid=".$topicid)."\">\n"."&nbsp;".$lang_forums['text_highlight_topic']."&nbsp;<select class=\"med\" name=\"color\">");
 		print("<option value='0'>".$lang_forums['select_color']."</option>
 <option style='background-color: black' value=\"1\">Black</option>
@@ -1118,7 +1118,7 @@ if ($action == "viewforum")
 	print("<table border=\"0\" class=\"main\" cellspacing=\"0\" cellpadding=\"5\" width=\"90%\"><tr>\n");
 	print("<td class=\"embedded\" width=\"90%\">");
 	print($forummoderators ? "&nbsp;&nbsp;<img class=\"forum_mod\" src=\"pic/trans.gif\" alt=\"Moderator\" title=\"".$lang_forums['col_moderator']."\">&nbsp;".$forummoderators : "");
-	print("</td><td class=\"embedded nowrap\" width=\"\">");
+	print("</td><td class=\"embedded nowrap tar\" width=\"\">");
 	if ($maypost)
 		print("<a href=\"".htmlspecialchars("?action=newtopic&forumid=".$forumid)."\"><i class=\"f_new icon pt-bianji\" alt=\"New Topic\" title=\"".$lang_forums['title_new_topic']."\"> 发帖</i></a>&nbsp;&nbsp;");
 	print("</td>");

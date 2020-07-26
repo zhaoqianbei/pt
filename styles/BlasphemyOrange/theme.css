@@ -200,6 +200,9 @@ td.embedded {
     text-align: left;
     color: #333
 }
+td.embedded.tar{
+    text-align: right;
+}
 
 td.no_border {
     border-right: medium none;
