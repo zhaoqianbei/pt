@@ -18,7 +18,7 @@ $lang_aboutnexus = array
 	'text_authorization_note' => "如果你有意使用".PROJECTNAME."来架设你的分享网站，请<a href=\"#contact\" class=\"faqlink\">联系我们</a>。",
 	'text_translation' => "关于翻译",
 	'text_translation_note' => "支持用户端的多语言切换。我们的主要语言为英语。<br /><br />如果你的语言当前未被支持（unavailable），而且你有意帮助我们翻译，请在阅读过<a href=\"faq.php#id71\" class=\"faqlink\">翻译说明</a>后<a href=\"#contact\" class=\"faqlink\">联系我们</a>。我们永远欢迎新的翻译。另外，已有的翻译经常需要维护，特别是以下被标记为过期（outdate），不完整（incomplete）或需要新翻译（need-new）的语言。",
-	'text_flag' => "旗",
+	'text_flag' => "国家",
 	'text_language' => "语言",
 	'text_state' => "状态",
 	'text_stylesheet' => "关于界面风格",
