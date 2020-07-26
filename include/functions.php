@@ -2306,6 +2306,11 @@ function menu($selected = "home")
     print("<li" . ($selected == "home" ? " class=\"selected\"" : "") . "><a href=\"index.php\">" . $lang_functions['text_home'] . "</a></li>");
 
     print("<li" . ($selected == "torrents" ? " class=\"selected\"" : "") . "><a href=\"torrents.php\">" . $lang_functions['text_torrents'] . "</a></li>");
+    if ($enableextforum != 'yes') {
+        print("<li" . ($selected == "forums" ? " class=\"selected\"" : "") . "><a href=\"forums.php\">" . $lang_functions['text_forums'] . "</a></li>");
+    } else {
+        print("<li" . ($selected == "forums" ? " class=\"selected\"" : "") . "><a href=\"" . $extforumurl . "\" target=\"_blank\">" . $lang_functions['text_forums'] . "</a></li>");
+    }
     if ($enablespecial == 'yes') {
         print("<li" . ($selected == "music" ? " class=\"selected\"" : "") . "><a href=\"music.php\">" . $lang_functions['text_music'] . "</a></li>");
     }
@@ -2319,17 +2324,14 @@ function menu($selected = "home")
     }
 
     print("<li" . ($selected == "upload" ? " class=\"selected\"" : "") . "><a href=\"upload.php\">" . $lang_functions['text_upload'] . "</a></li>");
+    
     // print("<li" . ($selected == "subtitles" ? " class=\"selected\"" : "") . "><a href=\"subtitles.php\">" . $lang_functions['text_subtitles'] . "</a></li>");
     print("<li" . ($selected == "usercp" ? " class=\"selected\"" : "") . "><a href=\"usercp.php\">" . $lang_functions['text_user_cp'] . "</a></li>");
     print("<li" . ($selected == "topten" ? " class=\"selected\"" : "") . "><a href=\"topten.php\">" . $lang_functions['text_top_ten'] . "</a></li>");
     print("<li" . ($selected == "rules" ? " class=\"selected\"" : "") . "><a href=\"rules.php\">" . $lang_functions['text_rules'] . "</a></li>");
     print("<li" . ($selected == "faq" ? " class=\"selected\"" : "") . "><a href=\"faq.php\">" . $lang_functions['text_faq'] . "</a></li>");
     print("<li" . ($selected == "staff" ? " class=\"selected\"" : "") . "><a href=\"staff.php\">" . $lang_functions['text_staff'] . "</a></li>");
-    if ($enableextforum != 'yes') {
-        print("<li" . ($selected == "forums" ? " class=\"selected\"" : "") . "><a href=\"forums.php\">" . $lang_functions['text_forums'] . "</a></li>");
-    } else {
-        print("<li" . ($selected == "forums" ? " class=\"selected\"" : "") . "><a href=\"" . $extforumurl . "\" target=\"_blank\">" . $lang_functions['text_forums'] . "</a></li>");
-    }
+    
     print("<li" . ($selected == "log" ? " class=\"selected\"" : "") . "><a href=\"log.php\">" . $lang_functions['text_log'] . "</a></li>");
     print("<li><a href=\"https://www.zhaoqianbei.com\" target=\"_blank\" style=\" background:#017A85\">" . $lang_functions['text_zqb'] . "</a></li>");
     print("</ul></div>");
