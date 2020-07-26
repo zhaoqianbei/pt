@@ -692,7 +692,7 @@ if ($action == "viewtopic")
 
 		print("</table></div>\n");
 
-		print("<table class=\"main\" style=\"width: 100%\" border=\"1\" cellspacing=\"0\" cellpadding=\"5\">\n");
+		print("<table class=\"main\" style=\"width: 100%;border-bottom:1px dashed #ccc\" border=\"1\" cellspacing=\"0\" cellpadding=\"5\">\n");
 
 		$body = "<div id=\"pid".$postid."body\">".format_comment($arr["body"]);
 
@@ -814,13 +814,13 @@ if ($action == "viewtopic")
 
 	print($pagerbottom);
 	if ($maypost){
-	print("<br /><table width=\"90%\"><tr>".
-"<td class=\"text\" align=\"left\"><b>".$lang_forums['text_quick_reply']."</b><br /><br />".
+	print("<table width=\"90%\"><tr>".
+"<td class=\"text\" align=\"left\"><b>".$lang_forums['text_quick_reply']."</b>".
 "<form id=\"compose\" name=\"compose\" method=\"post\" action=\"?action=post\" onsubmit=\"return postvalid(this);\">".
-"<input type=\"hidden\" name=\"id\" value=\"".$topicid."\" /><input type=\"hidden\" name=\"type\" value=\"reply\" /><br />");
+"<input type=\"hidden\" name=\"id\" value=\"".$topicid."\" /><input type=\"hidden\" name=\"type\" value=\"reply\" />");
 	quickreply('compose', 'body',$lang_forums['submit_add_reply']);
 	print("</form></td></tr></table>");
-	print("<p align=\"left\" class=\"w18\"><a class=\"index\" href=\"".htmlspecialchars("?action=reply&topicid=".$topicid)."\">".$lang_forums['text_add_reply']."</a></p>\n");
+	// print("<p align=\"left\" class=\"w18\"><a class=\"index\" href=\"".htmlspecialchars("?action=reply&topicid=".$topicid)."\">".$lang_forums['text_add_reply']."</a></p>\n");
 	}
 	elseif ($locked)
 		print($lang_forums['text_topic_locked_new_denied']);
@@ -1127,7 +1127,7 @@ if ($action == "viewforum")
 	{
 		print("<table border=\"1\" cellspacing=\"0\" cellpadding=\"5\" width=\"90%\">");
 
-		print("<tr><td class=\"colhead fs1\" align=\"center\" width=\"70%\">".$lang_forums['col_topic']."</td><td class=\"colhead fs1\" align=\"center\"><a href=\"".htmlspecialchars("?action=viewforum&forumid=".$forumid.$addparam."&sort=".($_GET["sort"] == 'firstpostdesc' ? "firstpostasc" : "firstpostdesc"))."\" title=\"".($_GET["sort"] == 'firstpostdesc' ?  $lang_forums['title_order_topic_asc'] : $lang_forums['title_order_topic_desc'])."\">".$lang_forums['col_author']."</a></td><td class=\"colhead fs1\" align=\"center\">".$lang_forums['col_replies']."/".$lang_forums['col_views']."</td><td class=\"colhead fs1\" align=\"center\"><a href=\"".htmlspecialchars("?action=viewforum&forumid=".$forumid.$addparam."&sort=".($_GET["sort"] == 'lastpostasc' ? "lastpostdesc" : "lastpostasc"))."\" title=\"".($_GET["sort"] == 'lastpostasc' ? $lang_forums['title_order_post_desc'] : $lang_forums['title_order_post_asc'])."\">".$lang_forums['col_last_post']."</a></td>\n");
+		print("<tr><td class=\"colhead fs1\" align=\"left\" width=\"70%\"><i class=\"icon pt-taolun\"></i> ".$lang_forums['col_topic']."</td><td class=\"colhead fs1\" align=\"center\"><a href=\"".htmlspecialchars("?action=viewforum&forumid=".$forumid.$addparam."&sort=".($_GET["sort"] == 'firstpostdesc' ? "firstpostasc" : "firstpostdesc"))."\" title=\"".($_GET["sort"] == 'firstpostdesc' ?  $lang_forums['title_order_topic_asc'] : $lang_forums['title_order_topic_desc'])."\">".$lang_forums['col_author']."</a></td><td class=\"colhead fs1\" align=\"center\">".$lang_forums['col_replies']."/".$lang_forums['col_views']."</td><td class=\"colhead fs1\" align=\"center\"><a href=\"".htmlspecialchars("?action=viewforum&forumid=".$forumid.$addparam."&sort=".($_GET["sort"] == 'lastpostasc' ? "lastpostdesc" : "lastpostasc"))."\" title=\"".($_GET["sort"] == 'lastpostasc' ? $lang_forums['title_order_post_desc'] : $lang_forums['title_order_post_asc'])."\">".$lang_forums['col_last_post']."</a></td>\n");
 
 		print("</tr>\n");
 		$counter = 0;
