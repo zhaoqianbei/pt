@@ -1,5 +1,5 @@
 .category:after{
-    display: table;
+    display: inline-block;
     width: 45px;
     height: 45px;
     line-height: 45px;
