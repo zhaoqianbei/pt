@@ -311,7 +311,9 @@ $lang_functions = array
 	'row_progress' => '进度',
     'text_donation' => '捐赠本站',
 	'text_complains' => '有%s%u个待处理的申述%s',
-	'tips_pt'=>'<p class="tal w18"><a class="fcs" href="https://www.zhaoqianbei.com/Index/xiaokeZhuye/k/99221774" target="_blank"><i class="icon pt-lianjie"></i> 关于PT下载相关问题，从入门到发药</a></p>',
+	'tips_pt'=>'<span class="tal"><a class="fcs" href="https://www.zhaoqianbei.com/Index/xiaokeZhuye/k/99221774" target="_blank"><i class="icon pt-lianjie"></i> 关于PT下载相关问题，从入门到发药</a></span>',
+	'tips_zhiding'=>'<span class="tal ml10"><a class="fcs" href="/forums.php?action=viewtopic&topicid=3&page=p3#pid3" target="_blank"><i class="icon pt-lianjie"></i> 种子置顶规则</a></span>',
+
 );
 
 ?>
