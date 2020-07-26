@@ -5031,7 +5031,7 @@ function return_category_image($categoryid, $link = "")
         $categoryrow = get_category_row($categoryid);
         $catimgurl = get_cat_folder($categoryid);
         // $catImg[$categoryid] = $catimg = "<img" . ($categoryrow['class_name'] ? " class=\"" . $categoryrow['class_name'] . "\"" : "") . " src=\"pic/cattrans.gif\" alt=\"" . $categoryrow["name"] . "\" title=\"" . $categoryrow["name"] . "\" style=\"background-image: url(pic/" . $catimgurl . $categoryrow["image"] . ");\" />";
-        $catImg[$categoryid] = $catimg = "<span" . ($categoryrow['class_name'] ? " class=\" category " . $categoryrow['class_name'] . "\"" : "") . " alt=\"" . $categoryrow["name"] . "\" title=\"" . $categoryrow["name"] . "\"></span>";
+        $catImg[$categoryid] = $catimg = "<span" . ($categoryrow['class_name'] ? " class=\"category " . $categoryrow['class_name'] . "\"" : "") . " alt=\"" . $categoryrow["name"] . "\" title=\"" . $categoryrow["name"] . "\"></span>";
     }
     if ($link) {
         $catimg = "<a href=\"" . $link . "cat=" . $categoryid . "\">" . $catimg . "</a>";
