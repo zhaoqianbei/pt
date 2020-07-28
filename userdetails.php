@@ -256,7 +256,7 @@ if ($user["avatar"])
 tr_small($lang_userdetails['row_avatar'], return_avatar_image(htmlspecialchars(trim($user["avatar"]))), 1);
 $uclass = get_user_class_image($user["class"]);
 // 用户详情等级图片
-tr_small($lang_userdetails['row_class'], "<b class=\"fcr\" alt=\"".get_user_class_name($user["class"],false,false,true)."\" title=\"".get_user_class_name($user["class"],false,false,true)."\">".get_user_class_name($user["class"],false,false,true)."</b> ".($user[title]!=="" ? "&nbsp;".htmlspecialchars(trim($user["title"]))."" :  ""), 1);
+tr_small($lang_userdetails['row_class'], "<img alt=\"".get_user_class_name($user["class"],false,false,true)."\" title=\"".get_user_class_name($user["class"],false,false,true)."\" src=\"http://img.24di.cn/2020/07/28/71ef92e6f4d62.png\" /><b class=\"fcr\" alt=\"".get_user_class_name($user["class"],false,false,true)."\" title=\"".get_user_class_name($user["class"],false,false,true)."\">".get_user_class_name($user["class"],false,false,true)."</b> ".($user[title]!=="" ? "&nbsp;".htmlspecialchars(trim($user["title"]))."" :  ""), 1);
 // tr_small($lang_userdetails['row_class'], "<img alt=\"".get_user_class_name($user["class"],false,false,true)."\" title=\"".get_user_class_name($user["class"],false,false,true)."\" src=\"".$uclass."\" /> ".($user[title]!=="" ? "&nbsp;".htmlspecialchars(trim($user["title"]))."" :  ""), 1);
 tr_small($lang_userdetails['row_torrent_comment'], ($torrentcomments && ($user["id"] == $CURUSER["id"] || get_user_class() >= $viewhistory_class) ? "<a href=\"userhistory.php?action=viewcomments&amp;id=".$id."\" title=\"".$lang_userdetails['link_view_comments']."\">".$torrentcomments."</a>" : $torrentcomments), 1);
 
