@@ -2512,7 +2512,7 @@ print(get_style_addicode());
 <link rel="stylesheet" href="<?php echo $css_uri . "DomTT.css" . $cssupdatedate ?>" type="text/css" />
 <link rel="stylesheet" href="styles/curtain_imageresizer.css<?php echo $cssupdatedate ?>" type="text/css" />
 <!-- ali_icon_xiugai -->
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1856866_gjjaxnjof58.css" type="text/css" />
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1856866_ha7neklsrum.css" type="text/css" />
 <link rel="stylesheet" href="styles/mp.css<?php echo $cssupdatedate ?>" type="text/css" />
 <?php
 if ($CURUSER) {
@@ -3611,8 +3611,15 @@ $caticonrow = get_category_icon_row($CURUSER['caticon']);
         // $douban_imdb .= "<a href=\"" . build_douban_url("") . "\"><img src=\"/pic/icon-douban.png\" height=\"16px\" width=\"16px\"> " . ($row["douban_rating"] == "" ? "NA" : $row["douban_rating"]) . "</a><br />";
         // $douban_imdb .= "<a href=\"" . build_imdb_url($row["url"]) . "\"><img src=\"/pic/icon-imdb.png\"  height=\"16px\" width=\"16px\"> " . ($row["imdb_rating"] == "" ? "NA" : $row["imdb_rating"]) . "</a></div>";
         $act = "";
-        if ($CURUSER["dlicon"] != 'no' && $CURUSER["downloadpos"] != "no") {
-            $act .= "<a href=\"download.php?id=" . $id . "\"><i class=\"download icon pt-xiazai fcg\" alt=\"download\" title=\"" . $lang_functions['title_download_torrent'] . "\"></i></a>";
+        // 下载的按钮
+        if($row['keyStr'] !=0){
+            if ($CURUSER["dlicon"] != 'no' && $CURUSER["downloadpos"] != "no") {
+                $act .= "<a href=\"download.php?id=" . $row['id'] . "\"><i class=\"download icon pt-key4 fcb\" alt=\"download\" title=\"" . $lang_functions['title_download_torrent'] . "\"></i></a>";
+            }
+        }else{
+            if ($CURUSER["dlicon"] != 'no' && $CURUSER["downloadpos"] != "no") {
+                $act .= "<a href=\"download.php?id=" . $row['id'] . "\"><i class=\"download icon pt-xiazai fcg\" alt=\"download\" title=\"" . $lang_functions['title_download_torrent'] . "\"></i></a>";
+            }
         }
 
         if ($CURUSER["bmicon"] == 'yes') {
