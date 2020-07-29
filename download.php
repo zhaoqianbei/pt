@@ -95,7 +95,7 @@ $dict['value']['announce']['value'] = $ssl_torrent . $base_announce_url . "?pass
 $dict['value']['announce']['string'] = strlen($dict['value']['announce']['value']).":".$dict['value']['announce']['value'];
 $dict['value']['announce']['strlen'] = strlen($dict['value']['announce']['string']);
 
-if($row['keyStr'] != 0){
+if($row['keyStr'] != ''){
 	// key不等于0，需要先验证key
 	// @通过：返回种子
 	// @不通过：返回错误码
