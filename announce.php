@@ -81,7 +81,7 @@ elseif ($az['showclienterror'] == 'yes'){
 // check torrent based on info_hash
 $torrentCacheKey = 'torrent_hash_'.bin2hex($info_hash).'_content';
 if (!$torrent = $Cache->get_value($torrentCacheKey)){
-	$res = sql_query("SELECT id, owner, sp_state, seeders, leechers, UNIX_TIMESTAMP(added) AS ts, banned, hr, category FROM torrents WHERE " . hash_where("info_hash", $info_hash));
+	$res = sql_query("SELECT id, owner, sp_state, seeders, leechers, UNIX_TIMESTAMP(added) AS ts, banned, hr, category, keyStr FROM torrents WHERE " . hash_where("info_hash", $info_hash));
 	$torrent = mysql_fetch_array($res);
 	$Cache->cache_value($torrentCacheKey, $torrent, 350);
 }
