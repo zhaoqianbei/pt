@@ -3614,7 +3614,7 @@ $caticonrow = get_category_icon_row($CURUSER['caticon']);
         // 下载的按钮
         if($row['keyStr'] !=''){
             if ($CURUSER["dlicon"] != 'no' && $CURUSER["downloadpos"] != "no") {
-                $act .= "<a href=\"download.php?id=" . $row['id'] . "\"><i class=\"download icon pt-key4 fcb\" alt=\"download\" title=\"" . $lang_functions['title_download_torrent'] . "\"></i></a>";
+                $act .= "<a href=\"download.php?id=" . $row['id'] . "\"><i class=\"download icon pt-key4 fcy\" alt=\"download\" title=\"" . $lang_functions['title_download_torrent'] . "\"></i></a>";
             }
         }else{
             if ($CURUSER["dlicon"] != 'no' && $CURUSER["downloadpos"] != "no") {
