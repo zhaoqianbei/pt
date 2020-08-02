@@ -83,7 +83,6 @@ if (isset($returnto))
 ?>
 </form>
 <p><?php echo $lang_login['p_no_account_signup']?></p>
-<p>[<b><a href="complains.php"><?= $lang_login['text_complain'] ?></a></b>]</p>
 <p><b><?= $lang_login['text_qq_group'] ?></b></p>
 
 <?php
@@ -91,7 +90,8 @@ if ($smtptype != 'none'){
 ?>
 <p><?php echo $lang_login['p_forget_pass_recover']?></p>
 <!-- <p><?php echo $lang_login['p_resend_confirm']?></p> -->
-<p><?= $lang_login['text_contact'] . htmlspecialchars($SITEEMAIL) ?></p>
+<!-- <p><?= $lang_login['text_contact'] . htmlspecialchars($SITEEMAIL) ?></p> -->
+<p class="mt20">[<b><a href="complains.php"><?= $lang_login['text_complain'] ?></a></b>]</p>
 <?php
 }
 if ($showhelpbox_main != 'no'){?>

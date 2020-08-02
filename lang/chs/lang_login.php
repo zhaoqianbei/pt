@@ -10,7 +10,7 @@ $lang_login = array
 	'p_you_have' => "你还有",
 	'p_remaining_tries' => "次尝试机会",
 	'p_no_account_signup' => "还没有账号? 马上<a href=\"signup.php\"><b>注册</b></a>！",
-	'p_forget_pass_recover' => "忘记了密码? 请联系管理员 QQ：162186880",
+	'p_forget_pass_recover' => "忘记了密码? 请联系管理员QQ：162186880 <a target='_blank' href='http://wpa.qq.com/msgrd?v=3&uin=&site=qq&menu=yes'><img src='//pub.idqqimg.com/wpa/images/counseling_style_52.png' title='管理员' class='logo_img'></a>",
 	'p_resend_confirm' => "没有收到验证邮件或验证链接无法打开? <a href=\"confirm_resend.php\"><b>重新发送验证邮件</b></a>",
 	'rowhead_username' => "用户名：",
 	'rowhead_password' => "密码：",
@@ -32,7 +32,7 @@ $lang_login = array
 	'text_select_lang' => "Select Site Language: ",
 	'head_login' => "登录",
 	'text_complain' => '如有疑问或者通过捐赠进站，点击申诉。',
-	'text_qq_group' =>'<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=37d1441cc5a7c08d8a676f675719ef1447536b3b4c3fea31984aa783547cdf9b">官方QQ群:818369831<img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="PT时间-www.pttime.org" title="PT时间-www.pttime.org"></a>',
+	'text_qq_group' =>'<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=37d1441cc5a7c08d8a676f675719ef1447536b3b4c3fea31984aa783547cdf9b">官方QQ群:818369831 <img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="PT时间-www.pttime.org" title="PT时间-www.pttime.org"></a>',
 	'text_contact' => '联系我们 邮箱：',
 );
 ?>
