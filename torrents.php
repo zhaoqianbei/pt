@@ -976,14 +976,14 @@ if ($allsec != 1 || $enablespecial != 'yes') { //do not print searchbox if showi
     <?php print($lang_functions['tips_pt']);?>
     <?php print($lang_functions['tips_zhiding']);?>
     <?php print($lang_functions['tips_huodong']);?>
-<div class="social-share tal">分享给想分享的人：</div>
 
+<div class="social-share tal">分享给想分享的人：</div>
 <script type="text/javascript">
 var $config = {
 	url: window.location.href,
-	source: "找前辈网 - https://www.zhaoqianbei.com！",
-	title: "PT时间：高速下载各种教程，高清影视资源！",
-	description:"PT时间：免费下载各种教程，高清影视！",
+	source: \"PT时间 - https://www.pttime.org！\",
+	title: "PT时间：发你想发之种子，下你想下之资源！！",
+	description:"PT时间：发你想发之种子，下你想下之资源！",
 	image: "https://www.pttime.org/ico.png",
 	sites: ["wechat", "qq", "qzone", "weibo"],
 	disabled: ["google", "facebook", "twitter"],

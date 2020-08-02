@@ -606,6 +606,20 @@ if ($action == "viewtopic")
 	begin_main_frame("",true);
 
 	print("<h1 align=\"center\"><a class=\"faqlink\" href=\"forums.php\">".$SITENAME."&nbsp;".$lang_forums['text_forums']."</a>--><a class=\"faqlink\" href=\"".htmlspecialchars("?action=viewforum&forumid=".$forumid)."\">".$forumname."</a><b>--></b><span id=\"top\">".$subject.($locked ? "&nbsp;&nbsp;<b>[<font class=\"striking\">".$lang_forums['text_locked']."</font>]</b>" : "")."</span></h1>\n");
+	print("<div class=\"social-share tal\">分享给想分享的人：</div>
+	<script type=\"text/javascript\">
+	var \$config = {
+		url: window.location.href,
+		source: \"PT时间 - https://www.pttime.org！\",
+		title: \"PT时间最新奖励活动：".$subject."！\",
+		description:\"PT时间：发你想发之种子，下你想下之资源！\",
+		image: \"https://www.pttime.org/ico.png\",
+		sites: [\"wechat\", \"qq\", \"qzone\", \"weibo\"],
+		disabled: [\"google\", \"facebook\", \"twitter\"],
+		wechatQrcodeTitle: \"微信扫一扫：分享\",
+		wechatQrcodeHelper: \"<p>微信里点“发现”，扫一下</p><p>二维码便可将本文分享至朋友圈。</p>\",
+		target:\"_blank\"};
+	</script>");
 	end_main_frame();
 	print($pagertop);
 
