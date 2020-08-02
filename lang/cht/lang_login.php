@@ -31,6 +31,6 @@ $lang_login = array
 	'submit_clear' => "清空",
 	'text_select_lang' => "Select Site Language: ",
 	'head_login' => "登录",
-	'text_complain' => '如有疑问或者通过捐赠进站，点击申诉或了解.官方捐赠进站QQ群:642801835',
+	'text_complain' => '如有疑问或者通过捐赠进站，点击申诉或了解。官方捐赠进站QQ群:818369831',
 	'text_contact' => '联系我们 邮箱：',
 );
