@@ -981,7 +981,7 @@ if ($allsec != 1 || $enablespecial != 'yes') { //do not print searchbox if showi
 <script type="text/javascript">
 var $config = {
 	url: window.location.href,
-	source: \"PT时间 - https://www.pttime.org！\",
+	source: "PT时间 - https://www.pttime.org！",
 	title: "PT时间：发你想发之种子，下你想下之资源！！",
 	description:"PT时间：发你想发之种子，下你想下之资源！",
 	image: "https://www.pttime.org/ico.png",
