@@ -774,7 +774,7 @@ if ($action == "viewtopic")
 <option style='background-color: olive' value=\"11\">Olive</option>
 <option style='background-color: green' value=\"12\">Green</option>
 <option style='background-color: teal' value=\"13\">Teal</option>
-<option style='background-color: blue' value=\"14\">Blue</option>
+<option style='background-color: #00AAEE' value=\"14\">#00AAEE</option>
 <option style='background-color: slategray' value=\"15\">Slate Gray</option>
 <option style='background-color: dimgray' value=\"16\">Dim Gray</option>
 <option style='background-color: red' value=\"17\">Red</option>

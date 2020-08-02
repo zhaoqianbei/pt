@@ -975,6 +975,7 @@ if ($allsec != 1 || $enablespecial != 'yes') { //do not print searchbox if showi
     <?php print($lang_functions['tips_zuozhong']);?>
     <?php print($lang_functions['tips_pt']);?>
     <?php print($lang_functions['tips_zhiding']);?>
+    <?php print($lang_functions['tips_huodong']);?>
 <div class="social-share tal">分享给想分享的人：</div>
 
 <script type="text/javascript">

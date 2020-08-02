@@ -383,7 +383,7 @@ font.gray {
     color: gray;
 }
 
-a:link {
+a{
     color: #333;
     text-decoration: none
 }

@@ -1011,7 +1011,7 @@ print("<td class=\"embedded\"><input class=\"codebuttons\" style=\"font-size:11p
 <option style="background-color: olive" value="Olive">Olive</option>
 <option style="background-color: green" value="Green">Green</option>
 <option style="background-color: teal" value="Teal">Teal</option>
-<option style="background-color: blue" value="Blue">Blue</option>
+<option style="background-color: #00AAEE" value="Blue">#00AAEE</option>
 <option style="background-color: slategray" value="SlateGray">Slate Gray</option>
 <option style="background-color: dimgray" value="DimGray">Dim Gray</option>
 <option style="background-color: red" value="Red">Red</option>
@@ -2512,7 +2512,7 @@ print(get_style_addicode());
 <link rel="stylesheet" href="<?php echo $css_uri . "DomTT.css" . $cssupdatedate ?>" type="text/css" />
 <link rel="stylesheet" href="styles/curtain_imageresizer.css<?php echo $cssupdatedate ?>" type="text/css" />
 <!-- ali_icon_xiugai -->
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1856866_ha7neklsrum.css" type="text/css" />
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1856866_ucohm4kogw.css" type="text/css" />
 <link rel="stylesheet" href="styles/mp.css<?php echo $cssupdatedate ?>" type="text/css" />
 <?php
 if ($CURUSER) {
@@ -4811,7 +4811,7 @@ function get_hl_color($color = 0)
         case 11:return "Olive";
         case 12:return "Green";
         case 13:return "Teal";
-        case 14:return "Blue";
+        case 14:return "#00AAEE";
         case 15:return "SlateGray";
         case 16:return "DimGray";
         case 17:return "Red";
