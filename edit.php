@@ -227,7 +227,6 @@ jQuery(function($){
 		}
 	}).change();
 	var series = $json_sticky_series;
-	// 置顶时间计算
 	series.forEach(function(elem){
 		var label = elem >= 24 ? parseInt(parseInt(elem) / 24) + "{$lang_functions['text_day']}" : elem + "{$lang_functions['text_hour']}";
 		pos_until_select.append('<option value="' + elem + '">' + label + '</option>');
