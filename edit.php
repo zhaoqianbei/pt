@@ -189,7 +189,8 @@ else {
 	print("<tr><td class=\"toolbox\" colspan=\"2\" align=\"center\"><input type=\"submit\" style='height: 25px' value=\"".$lang_edit['submit_delete_it']."\" /></td></tr>\n");
 	print("</table>");
 	print("</form>\n");
-	$json_sticky_series = json_encode(array(4, 6, 12, 24, 36, 48, 72, 168, 360));
+	// 配置置顶时间
+	$json_sticky_series = json_encode(array(1, 12, 24, 168, 360, 720, 2160, 4320));
 	echo <<<EOT
 <script>
 jQuery(function($){
@@ -226,10 +227,12 @@ jQuery(function($){
 		}
 	}).change();
 	var series = $json_sticky_series;
+	// 置顶时间计算
 	series.forEach(function(elem){
-		var label = elem >= 72 ? parseInt(parseInt(elem) / 24) + "{$lang_functions['text_day']}" : elem + "{$lang_functions['text_hour']}";
+		var label = elem >= 24 ? parseInt(parseInt(elem) / 24) + "{$lang_functions['text_day']}" : elem + "{$lang_functions['text_hour']}";
 		pos_until_select.append('<option value="' + elem + '">' + label + '</option>');
 	});
+
 	pos_until_select.change(function(){
 		var value = $(this).val();
 		if(value == -1){
