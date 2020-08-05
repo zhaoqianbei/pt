@@ -71,7 +71,7 @@ else {
 
 		$js = '<script type="text/javascript">var $config = {
 		    url: window.location.href,
-			source: \"PT时间 - https://www.pttime.org！\",
+			source: "PT时间 - https://www.pttime.org！",
 		    title: "'.htmlspecialchars($row["name"]).'\n'.htmlspecialchars(trim($row["small_descr"])).'", 
 		    description:"'.$fubiao.'(上传者：'.htmlspecialchars(trim($zuozhe)).'，文件大小：'.mksize($row["size"]).')", 
 		    image: "https://www.pttime.org/ico.png", 
