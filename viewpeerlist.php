@@ -58,7 +58,7 @@ function dltable($name, $arr, $torrent)
 		}
 		elseif (get_user_class() >= $userprofile_class){
 			$location = $e["ip"];
-			$s .= "<td class=rowfollow align=center width=1%><nobr>" . $location . "</nobr></td>\n";
+			$s .= "<td class=rowfollow align=center width=1%><nobr>" . $location . "</nobr>".$e["ip"]."</td>\n";
 		}
 		else $location = "";
 
