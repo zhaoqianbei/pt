@@ -54,11 +54,11 @@ function dltable($name, $arr, $torrent)
 		if ($enablelocation_tweak == 'yes'){
 			list($loc_pub, $loc_mod) = get_ip_location($e["ip"]);
 			$location = get_user_class() >= $userprofile_class ? "<div title='" . $loc_mod . "'>" . $loc_pub . "</div>" : $loc_pub;
-			$s .= "<td class=rowfollow align=center width=1%><nobr>" . $location . "</nobr></td>\n";
+			$s .= "<td class=rowfollow align=center width=1%><nobr>" . $location . "</nobr>".$e["ip"]."</td>\n";
 		}
 		elseif (get_user_class() >= $userprofile_class){
 			$location = $e["ip"];
-			$s .= "<td class=rowfollow align=center width=1%><nobr>" . $location . "</nobr>".$e["ip"]."</td>\n";
+			$s .= "<td class=rowfollow align=center width=1%><nobr>" . $location . "</nobr></td>\n";
 		}
 		else $location = "";
 
