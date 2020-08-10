@@ -3457,14 +3457,14 @@ $count_get = 0;
         print("<td class=\"colhead\">" . $lang_functions['col_wait'] . "</td>\n");
     }
     if ($CURUSER['showcomnum'] != 'no') {?>
-<td class="colhead"><a href="?<?php echo $oldlink ?>sort=3&amp;type=<?php echo $link[3] ?>"><img class="comments" src="pic/trans.gif" alt="comments" title="评论数">评论</a></td>
+<td class="colhead"><a href="?<?php echo $oldlink ?>sort=3&amp;type=<?php echo $link[3] ?>"><iconv_mime_decode class="comments" alt="comments" title="评论数"></i>评论</a></td>
 <?php }?>
 
-<td class="colhead"><a href="?<?php echo $oldlink ?>sort=4&amp;type=<?php echo $link[4] ?>"><img class="time" src="pic/trans.gif" alt="time" title="存活时间">存活</a></td>
-<td class="colhead"><a href="?<?php echo $oldlink ?>sort=5&amp;type=<?php echo $link[5] ?>"><img class="size" src="pic/trans.gif" alt="size" title="大小">大小</td>
-<td class="colhead"><a href="?<?php echo $oldlink ?>sort=7&amp;type=<?php echo $link[7] ?>"><img class="seeders" src="pic/trans.gif" alt="seeders" title="种子数">做种</a></td>
-<td class="colhead"><a href="?<?php echo $oldlink ?>sort=8&amp;type=<?php echo $link[8] ?>"><img class="leechers" src="pic/trans.gif" alt="leechers" title="下载数">下载</a></td>
-<td class="colhead"><a href="?<?php echo $oldlink ?>sort=6&amp;type=<?php echo $link[6] ?>"><img class="snatched" src="pic/trans.gif" alt="snatched" title="完成数">完成</a></td>
+<td class="colhead"><a href="?<?php echo $oldlink ?>sort=4&amp;type=<?php echo $link[4] ?>"><i class="time" alt="time" title="存活时间"></i>存活</a></td>
+<td class="colhead"><a href="?<?php echo $oldlink ?>sort=5&amp;type=<?php echo $link[5] ?>"><i class="size" alt="size" title="大小"></i>大小</td>
+<td class="colhead"><a href="?<?php echo $oldlink ?>sort=7&amp;type=<?php echo $link[7] ?>"><i class="seeders" alt="seeders" title="种子数"></i>做种</a></td>
+<td class="colhead"><a href="?<?php echo $oldlink ?>sort=8&amp;type=<?php echo $link[8] ?>"><i class="leechers" alt="leechers" title="下载数"></i>下载</a></td>
+<td class="colhead"><a href="?<?php echo $oldlink ?>sort=6&amp;type=<?php echo $link[6] ?>"><i class="snatched" alt="snatched" title="完成数"></i>完成</a></td>
 <td class="colhead"><?php echo $lang_functions['row_progress'] ?></td>
 <td class="colhead"><a href="?<?php echo $oldlink ?>sort=9&amp;type=<?php echo $link[9] ?>"><?php echo $lang_functions['col_uploader'] ?></a></td>
 <?php
