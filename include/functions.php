@@ -3457,7 +3457,7 @@ $count_get = 0;
         print("<td class=\"colhead\">" . $lang_functions['col_wait'] . "</td>\n");
     }
     if ($CURUSER['showcomnum'] != 'no') {?>
-<td class="colhead"><a href="?<?php echo $oldlink ?>sort=3&amp;type=<?php echo $link[3] ?>"><iconv_mime_decode class="comments" alt="comments" title="评论数"></i>评论</a></td>
+<td class="colhead"><a href="?<?php echo $oldlink ?>sort=3&amp;type=<?php echo $link[3] ?>"><i class="comments" alt="comments" title="评论数"></i>评论</a></td>
 <?php }?>
 
 <td class="colhead"><a href="?<?php echo $oldlink ?>sort=4&amp;type=<?php echo $link[4] ?>"><i class="time" alt="time" title="存活时间"></i>存活</a></td>
