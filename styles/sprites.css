@@ -186,44 +186,44 @@ background:url(icons.gif) -11px -148px;
 }
 img.comments
 {
-width:16px;
-height:16px;
+width:0px;
+height:0px;
 background:url(icons.gif) 0 -25px;
 }
 img.files
 {
-width:13px;
-height:16px;
+width:0px;
+height:0px;
 background:url(icons.gif) -16px -25px;
 }
 img.time
 {
-width:16px;
-height:16px;
+width:0px;
+height:0px;
 background:url(icons.gif) -29px -25px;
 }
 img.size
 {
-width:16px;
-height:16px;
+width:0px;
+height:0px;
 background:url(icons.gif) -45px -25px;
 }
 img.seeders
 {
-width:15px;
-height:16px;
+width:0px;
+height:0px;
 background:url(icons.gif) -61px -25px;
 }
 img.leechers
 {
-width:15px;
-height:16px;
+width:0px;
+height:0px;
 background:url(icons.gif) -76px -25px;
 }
 img.snatched
 {
-width:14px;
-height:16px;
+width:0px;
+height:0px;
 background:url(icons.gif) -91px -25px;
 }
 img.disabledbig
