@@ -1075,7 +1075,7 @@ print("<td class=\"embedded\"><input class=\"codebuttons\" style=\"font-size:11p
 <option value="6">6</option>
 <option value="7">7</option>
 </select></td>
-<td class="embedded"><a href="http://img.24di.cn/" title="欢迎使用" target="_blank" class="ml20 bb p55 fcf br2">图床</a> (<a href="https://www.zhaoqianbei.com/Index/xiaokeZhuye/k/81631476" target="_blank">不会用点我</a>)</td> 
+<td class="embedded"><a href="http://img.24di.cn/" title="欢迎使用" target="_blank" class="ml20 bb p55 fcf br2">图床</a> (<a href="https://www.zhaoqianbei.com/Index/xiaokeZhuye/k/81631476" target="_blank">不会用点我</a>)</td>
 </tr>
 </table>
 </td>
@@ -2324,17 +2324,17 @@ function menu($selected = "home")
     }
 
     print("<li" . ($selected == "upload" ? " class=\"selected\"" : "") . "><a href=\"upload.php\">" . $lang_functions['text_upload'] . "</a></li>");
-    
+
     // print("<li" . ($selected == "subtitles" ? " class=\"selected\"" : "") . "><a href=\"subtitles.php\">" . $lang_functions['text_subtitles'] . "</a></li>");
     print("<li" . ($selected == "usercp" ? " class=\"selected\"" : "") . "><a href=\"usercp.php\">" . $lang_functions['text_user_cp'] . "</a></li>");
     print("<li" . ($selected == "topten" ? " class=\"selected\"" : "") . "><a href=\"topten.php\">" . $lang_functions['text_top_ten'] . "</a></li>");
     print("<li" . ($selected == "rules" ? " class=\"selected\"" : "") . "><a href=\"rules.php\">" . $lang_functions['text_rules'] . "</a></li>");
     print("<li" . ($selected == "faq" ? " class=\"selected\"" : "") . "><a href=\"faq.php\">" . $lang_functions['text_faq'] . "</a></li>");
     print("<li" . ($selected == "staff" ? " class=\"selected\"" : "") . "><a href=\"staff.php\">" . $lang_functions['text_staff'] . "</a></li>");
-    
     print("<li" . ($selected == "log" ? " class=\"selected\"" : "") . "><a href=\"log.php\">" . $lang_functions['text_log'] . "</a></li>");
     print("<li><a href=\"https://www.zhaoqianbei.com\" target=\"_blank\" style=\" background:#017A85\">" . $lang_functions['text_zqb'] . "</a></li>");
-    print("</ul></div>");
+    print("</ul>");
+    print("</div>");
 
     if ($CURUSER) {
         if ($where_tweak == 'yes') {
@@ -2684,10 +2684,23 @@ if (get_user_class() >= $staffmem_class) {
 
 	</span></td>
 	</tr></table></td>
+    
 </tr></table>
-
-</td></tr>
+<table id="tips" cellpadding="4" cellspacing="0" border="0" width="90%"><tr>
+	<tr>
+    <td>
+    <?php 
+    print($lang_functions['tips_pt']);
+        print($lang_functions['tips_zuozhong']);
+        print($lang_functions['tips_zhiding']);
+        print($lang_functions['tips_huodong']);?>
+    </td>
+    </tr></table>
+</td>
+</tr>
 <tr>
+    
+
     <td id="outer" align="center" class="outer">
 <?php
 if ($Advertisement->enable_ad()) {
@@ -2884,7 +2897,8 @@ msgalert("invite.php?id=".$CURUSER[id],$text, "red");
         if ($offlinemsg) {
             print("<p><table width=\"737\" border=\"1\" cellspacing=\"0\" cellpadding=\"10\"><tr><td style='padding: 10px; background: red' class=\"text\" align=\"center\">\n");
             print("<font color=\"white\">" . $lang_functions['text_website_offline_warning'] . "</font>");
-            print("</td></tr></table></p><br />\n");
+            print("</td></tr></table>");
+            print("</p><br />\n");
         }
     }
 }
@@ -3603,7 +3617,7 @@ $caticonrow = get_category_icon_row($CURUSER['caticon']);
             if ($count_dissmall_descr > $max_lenght_of_small_descr) {
                 $dissmall_descr = mb_substr($dissmall_descr, 0, $max_lenght_of_small_descr - 2, "UTF-8") . "..";
             }
-            print($dissmall_descr == "" ? "" : "<br />" . "<span class=\"fc6\">".htmlspecialchars($dissmall_descr)."</span>");
+            print($dissmall_descr == "" ? "" : "<br />" . "<span class=\"fc6\">" . htmlspecialchars($dissmall_descr) . "</span>");
         }
         print("</td>");
         $douban_imdb = '';
@@ -3612,11 +3626,11 @@ $caticonrow = get_category_icon_row($CURUSER['caticon']);
         // $douban_imdb .= "<a href=\"" . build_imdb_url($row["url"]) . "\"><img src=\"/pic/icon-imdb.png\"  height=\"16px\" width=\"16px\"> " . ($row["imdb_rating"] == "" ? "NA" : $row["imdb_rating"]) . "</a></div>";
         $act = "";
         // 下载的按钮
-        if($row['keyStr'] !=''){
+        if ($row['keyStr'] != '') {
             if ($CURUSER["dlicon"] != 'no' && $CURUSER["downloadpos"] != "no") {
                 $act .= "<a href=\"download.php?id=" . $row['id'] . "\"><i class=\"download icon pt-key4 fcy\" alt=\"download\" title=\"" . $lang_functions['title_download_torrent'] . "\"></i></a>";
-            }  
-        }else{
+            }
+        } else {
             if ($CURUSER["dlicon"] != 'no' && $CURUSER["downloadpos"] != "no") {
                 $act .= "<a href=\"download.php?id=" . $row['id'] . "\"><i class=\"download icon pt-xiazai fcg\" alt=\"download\" title=\"" . $lang_functions['title_download_torrent'] . "\"></i></a>";
             }

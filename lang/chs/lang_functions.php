@@ -318,7 +318,6 @@ $lang_functions = array
 	'tips_zhiding'=>'<span class="tal ml10"><a class="fcs" href="/forums.php?action=viewtopic&topicid=3&page=p3#pid3" target="_blank"><i class="icon pt-lianjie"></i> 种子置顶规则</a></span>',
 	'tips_zuozhong'=>'<span class="tal ml10"><a class="fcs" href="https://www.zhaoqianbei.com/Index/xiaokeZhuye/k/96974100" target="_blank"><i class="icon pt-lianjie"></i> PT之做种、保钟、辅种相关问题</a></span>',
 	'tips_huodong'=>'<span class="tal ml10"><a class="fcr" href="https://www.pttime.org/forums.php?action=viewforum&forumid=7" target="_blank"><i class="icon pt-huodong"></i> 奖励、活动</a></span>'
-
 );
 
 ?>

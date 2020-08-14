@@ -54,8 +54,6 @@ else {
 		}else{
 			$fubiao = '无';
 		}
-		// PT下载方式
-		print($lang_functions['tips_pt']);
 		// 分享按钮
 		if($row['anonymous'] == 'yes') {
 			if (get_user_class() < $viewanonymous_class)
