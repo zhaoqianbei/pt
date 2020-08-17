@@ -912,6 +912,9 @@ font.promotion{
     display: inline-block;
     border-radius: 3px;
 }
+font.promotion.normal {
+    background-color: var(--cg0);
+}
 font.promotion.free {
     background-color: var(--cg1);
 }

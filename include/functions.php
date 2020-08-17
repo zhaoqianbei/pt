@@ -4925,6 +4925,41 @@ function promotion_selection($selected = 0, $hide = 0)
     return $selection;
 }
 
+function promotion_link($selected = 0, $hide = 0)
+{
+    global $lang_functions;
+    $selection = "";
+    if ($hide != 1) {
+        $selection .= "<a href=\"torrents.php?incldead=1&spstate=1&inclbookmarked=0&search=&search_area=0&search_mode=0\"><font class=\"fc8\">" . $lang_functions['text_normal'] . "</font></a> | ";
+    }
+
+    if ($hide != 2) {
+        $selection .= "<a href=\"torrents.php?incldead=1&spstate=2&inclbookmarked=0&search=&search_area=0&search_mode=0\"><font class=\"promotion free\">" . $lang_functions['text_free'] . "</font></a> | ";
+    }
+
+    if ($hide != 3) {
+        $selection .= "<a href=\"torrents.php?incldead=1&spstate=3&inclbookmarked=0&search=&search_area=0&search_mode=0\"><font class=\"promotion twoup\">" . $lang_functions['text_two_times_up'] . "</font></a> | ";
+    }
+
+    if ($hide != 4) {
+        $selection .= "<a href=\"torrents.php?incldead=1&spstate=4&inclbookmarked=0&search=&search_area=0&search_mode=0\"><font class=\"promotion twoupfree\">" . $lang_functions['text_free_two_times_up'] . "</font></a> | ";
+    }
+
+    if ($hide != 5) {
+        $selection .= "<a href=\"torrents.php?incldead=1&spstate=5&inclbookmarked=0&search=&search_area=0&search_mode=0\"><font class=\"promotion halfdown\">" . $lang_functions['text_half_down'] . "</font></a> | ";
+    }
+
+    if ($hide != 6) {
+        $selection .= "<a href=\"torrents.php?incldead=1&spstate=6&inclbookmarked=0&search=&search_area=0&search_mode=0\"><font class=\"promotion twouphalfdown\">" . $lang_functions['text_half_down_two_up'] . "</font></a> | ";
+    }
+
+    if ($hide != 7) {
+        $selection .= "<a href=\"torrents.php?incldead=1&spstate=7&inclbookmarked=0&search=&search_area=0&search_mode=0\"><font class=\"promotion thirtypercent\">" . $lang_functions['text_thirty_percent_down'] . "</font></a>";
+    }
+
+    return $selection;
+}
+
 function get_post_row($postid)
 {
     global $Cache;

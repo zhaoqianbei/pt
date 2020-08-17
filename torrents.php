@@ -1195,6 +1195,11 @@ $Cache->new_page('hot_search', 3670, true);
 		</tbody>
 	</table>
 	</form>
+    <div class="tac">
+    <span>高亮种子搜索：</span>
+    <a href="torrents.php?incldead=1&spstate=0&inclbookmarked=0&search=&search_area=0&search_mode=0"><?php echo $lang_torrents['select_all'] ?></a> | 
+    <?php echo promotion_link($special_state, 0) ?>
+    </div>
 <?php
 }
 if ($Advertisement->enable_ad()) {
