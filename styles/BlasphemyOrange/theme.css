@@ -897,6 +897,7 @@ A.Peasant_Name:visited {
 }
 /*种子页面促销样式*/
 :root {
+    --cg0:##27A;
     --cg1: #5AA064;
     --cg2:#006D5C;
     --cg3: #5AA064;
