@@ -895,6 +895,28 @@ A.Peasant_Name:visited {
     color: #BD4932;
     margin-top: 5px;
 }
+/* 进度条样式 */
+progress
+{
+    width: 500px;
+    height: 5px;
+   color:orange; /*兼容IE10的已完成进度背景*/
+   border:none;
+   background:#d7d7d7;/*这个属性也可当作Chrome的已完成进度背景，只不过被下面的::progress-bar覆盖了*/      
+   
+}
+
+progress::-webkit-progress-bar
+
+{
+   background:#d7d7d7;
+}
+
+progress::-webkit-progress-value,
+progress::-moz-progress-bar
+{
+     background:orange;
+}
 /*种子页面促销样式*/
 :root {
     --cg0:##27A;

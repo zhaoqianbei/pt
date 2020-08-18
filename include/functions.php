@@ -3590,7 +3590,7 @@ $caticonrow = get_category_icon_row($CURUSER['caticon']);
             $max_length_of_torrent_name = 70;
         }
 
-        print("<td class=\"rowfollow\" width=\"100%\" align=\"left\"><table class=\"torrentname\" width=\"100%\"><tr" . $sphighlight . "><td class=\"embedded\">" . $stickyicon . "<a $short_torrent_name_alt $mouseovertorrent href=\"details.php?id=" . $id . "&amp;hit=1\"><b class=\"" . get_torrent_promotion_append($row['sp_state'], "sty", true, $row["added"], $row['promotion_time_type'], $row['promotion_until']) . "\">" . htmlspecialchars($dispname) . "</b></a>");
+        print("<td class=\"rowfollow\" width=\"100%\" align=\"left\"><table class=\"torrentname\" width=\"100%\"><tr" . $sphighlight . "><td class=\"embedded\"><div>" . $stickyicon . "<a $short_torrent_name_alt $mouseovertorrent href=\"details.php?id=" . $id . "&amp;hit=1\"><b class=\"" . get_torrent_promotion_append($row['sp_state'], "sty", true, $row["added"], $row['promotion_time_type'], $row['promotion_until']) . "\">" . htmlspecialchars($dispname) . "</b></a>");
         $sp_torrent = get_torrent_promotion_append($row['sp_state'], "", true, $row["added"], $row['promotion_time_type'], $row['promotion_until']) . get_torrent_hitrun_icon($row);
         $picked_torrent = "";
         if ($CURUSER['appendpicked'] != 'no') {
@@ -3609,6 +3609,7 @@ $caticonrow = get_category_icon_row($CURUSER['caticon']);
 
         $banned_torrent = ($row["banned"] == 'yes' ? " <b>(<font class=\"striking\">" . $lang_functions['text_banned'] . "</font>)</b>" : "");
         print($banned_torrent . $picked_torrent . $sp_torrent);
+        print('</div>');
         if ($displaysmalldescr) {
             //small descr
             $dissmall_descr = trim($row["small_descr"]);
@@ -3617,14 +3618,22 @@ $caticonrow = get_category_icon_row($CURUSER['caticon']);
             if ($count_dissmall_descr > $max_lenght_of_small_descr) {
                 $dissmall_descr = mb_substr($dissmall_descr, 0, $max_lenght_of_small_descr - 2, "UTF-8") . "..";
             }
-            print($dissmall_descr == "" ? "" : "<br />" . "<span class=\"fc6\">" . htmlspecialchars($dissmall_descr) . "</span>");
+            print($dissmall_descr == "" ? "" : "" . "<p class=\"fc6\">" . htmlspecialchars($dissmall_descr) . "</p>");
         }
+        // 完成率-进度
+        if (isset($mysnatched[$row['id']])) { // progress      
+        print('<div><progress value="'.((1 - $mysnatched[$row['id']] / $row['size']) * 100).'" max="100" class="hot">');
+        print((1 - $mysnatched[$row['id']] / $row['size']) * 100);
+        print('</div>');
         print("</td>");
+        }
+        // 豆瓣\imdb
         $douban_imdb = '';
         // $douban_imdb = "<div style=\"text-align:right;margin-right:3px;width:50px\">";
         // $douban_imdb .= "<a href=\"" . build_douban_url("") . "\"><img src=\"/pic/icon-douban.png\" height=\"16px\" width=\"16px\"> " . ($row["douban_rating"] == "" ? "NA" : $row["douban_rating"]) . "</a><br />";
         // $douban_imdb .= "<a href=\"" . build_imdb_url($row["url"]) . "\"><img src=\"/pic/icon-imdb.png\"  height=\"16px\" width=\"16px\"> " . ($row["imdb_rating"] == "" ? "NA" : $row["imdb_rating"]) . "</a></div>";
         $act = "";
+
         // 下载的按钮
         if ($row['keyStr'] != '') {
             if ($CURUSER["dlicon"] != 'no' && $CURUSER["downloadpos"] != "no") {
@@ -3718,12 +3727,14 @@ $caticonrow = get_category_icon_row($CURUSER['caticon']);
             print("<td class=\"rowfollow\">0</td>\n");
         }
 
+        // 完成
         if ($row["times_completed"] >= 1) {
             print("<td class=\"rowfollow\"><a href=\"viewsnatches.php?id=" . $row[id] . "\"><b>" . number_format($row["times_completed"]) . "</b></a></td>\n");
         } else {
             print("<td class=\"rowfollow\">" . number_format($row["times_completed"]) . "</td>\n");
         }
 
+        // 进度
         if (isset($mysnatched[$row['id']])) { // progress
             printf('<td class="rowfollow">%u%%</td>', (1 - $mysnatched[$row['id']] / $row['size']) * 100);
         } else {
