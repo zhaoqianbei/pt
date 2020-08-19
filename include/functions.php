@@ -5087,7 +5087,7 @@ function valid_class_name($filename)
 function return_avatar_image($url)
 {
     global $CURLANGDIR;
-    return "<img class=\"db\" src=\"" . $url . "\" alt=\"avatar\" width=\"150px\" onload=\"check_avatar(this, '" . $CURLANGDIR . "');\" />";
+    return "<img class=\"db\" src=\"" . $url . "\" alt=\"avatar\" height=\"70px\" onload=\"check_avatar(this, '" . $CURLANGDIR . "');\" />";
 }
 function return_category_image($categoryid, $link = "")
 {
