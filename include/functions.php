@@ -2552,7 +2552,7 @@ if ($logo_main == "") {
 } else {
         ?>
 			<div class="logo_img">
-            <a href="index.php"><img width=150 src="<?php echo $logo_main ?>" alt="<?php echo htmlspecialchars($SITENAME) ?>" title="<?php echo htmlspecialchars($SITENAME) ?> - <?php echo htmlspecialchars($SLOGAN) ?>" /></a>
+            <a href="index.php"><img height=70 src="<?php echo $logo_main ?>" alt="<?php echo htmlspecialchars($SITENAME) ?>" title="<?php echo htmlspecialchars($SITENAME) ?> - <?php echo htmlspecialchars($SLOGAN) ?>" /></a>
             <p class="fc2">
                 <span class="fcr"><?php echo htmlspecialchars($SLOGAN) ?></span>
                 <span class="ml20" >本站交流群（818369831）：<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=37d1441cc5a7c08d8a676f675719ef1447536b3b4c3fea31984aa783547cdf9b"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="PT时间-www.pttime.org" title="PT时间-www.pttime.org"></a></span>
@@ -5087,7 +5087,7 @@ function valid_class_name($filename)
 function return_avatar_image($url)
 {
     global $CURLANGDIR;
-    return "<img class=\"db\" src=\"" . $url . "\" alt=\"avatar\" height=\"70px\" onload=\"check_avatar(this, '" . $CURLANGDIR . "');\" />";
+    return "<img class=\"db\" src=\"" . $url . "\" alt=\"avatar\" width=\"150px\" onload=\"check_avatar(this, '" . $CURLANGDIR . "');\" />";
 }
 function return_category_image($categoryid, $link = "")
 {
