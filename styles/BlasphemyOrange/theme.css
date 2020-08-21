@@ -895,17 +895,25 @@ A.Peasant_Name:visited {
     color: #BD4932;
     margin-top: 5px;
 }
+:root {
+    --cgg:#006D5C;
+    --cg0:#27A;
+    --cg1: #5AA064;
+    --cg2:#006D5C;
+    --cg3: #5AA064;
+    --cz:#7c7ff6;
+    --cb: #00AAEE;
+  }
 /* 进度条样式 */
 progress
 {
     width: 500px;
     height: 5px;
-    color:#36865E; /*兼容IE10的已完成进度背景*/
+    color:var(--cgg); /*兼容IE10的已完成进度背景*/
     border:none;
     background:#d7d7d7;/*这个属性也可当作Chrome的已完成进度背景，只不过被下面的::progress-bar覆盖了*/      
    
 }
-
 progress::-webkit-progress-bar{
    background:#d7d7d7;
 }
@@ -913,17 +921,10 @@ progress::-webkit-progress-bar{
 progress::-webkit-progress-value,
 progress::-moz-progress-bar
 {
-     background:#36865E;
+     background:var(--cgg);
 }
 /*种子页面促销样式*/
-:root {
-    --cg0:##27A;
-    --cg1: #5AA064;
-    --cg2:#006D5C;
-    --cg3: #5AA064;
-    --cz:#7c7ff6;
-    --cb: #00AAEE;
-  }
+
 font.promotion{
     color: #fff;
     padding: 0 5px;
