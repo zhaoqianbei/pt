@@ -3621,7 +3621,7 @@ $caticonrow = get_category_icon_row($CURUSER['caticon']);
             print($dissmall_descr == "" ? "" : "" . "<p class=\"fc6\">" . htmlspecialchars($dissmall_descr) . "</p>");
         }
         // 完成率-进度
-        if (isset($mysnatched[$row['id']]) && ((1 - $mysnatched[$row['id']] / $row['size']) * 100) !=0.01) { // progress      
+        if (isset($mysnatched[$row['id']]) && ((1 - $mysnatched[$row['id']] / $row['size']) * 100) >=0.01) { // progress      
         print('<div><progress value="'.((1 - $mysnatched[$row['id']] / $row['size']) * 100).'" max="100">');
         print((1 - $mysnatched[$row['id']] / $row['size']) * 100);
         print('</div>');
