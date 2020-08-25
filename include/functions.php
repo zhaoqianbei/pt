@@ -3588,7 +3588,7 @@ $caticonrow = get_category_icon_row($CURUSER['caticon']);
             $max_length_of_torrent_name = 70;
         }
 
-        print("<td class=\"rowfollow\" width=\"100%\" align=\"left\"><table class=\"torrentname\" width=\"100%\"><tr" . $sphighlight . "><td class=\"embedded\"><div>" . $stickyicon . "<a $short_torrent_name_alt $mouseovertorrent href=\"details.php?id=" . $id . "&amp;hit=1\"><b class=\"" . get_torrent_promotion_append($row['sp_state'], "sty", true, $row["added"], $row['promotion_time_type'], $row['promotion_until']) . "\">" . htmlspecialchars($dispname) . "</b></a>");
+        print("<td class=\"rowfollow\" width=\"100%\" align=\"left\"><table class=\"torrentname\" width=\"100%\"><tr" . $sphighlight . "><td class=\"embedded\">" . $stickyicon . "<a $short_torrent_name_alt $mouseovertorrent href=\"details.php?id=" . $id . "&amp;hit=1\"><b class=\"" . get_torrent_promotion_append($row['sp_state'], "sty", true, $row["added"], $row['promotion_time_type'], $row['promotion_until']) . "\">" . htmlspecialchars($dispname) . "</b></a>");
         $sp_torrent = get_torrent_promotion_append($row['sp_state'], "", true, $row["added"], $row['promotion_time_type'], $row['promotion_until']) . get_torrent_hitrun_icon($row);
         $picked_torrent = "";
         if ($CURUSER['appendpicked'] != 'no') {
@@ -3607,7 +3607,6 @@ $caticonrow = get_category_icon_row($CURUSER['caticon']);
 
         $banned_torrent = ($row["banned"] == 'yes' ? " <b>(<font class=\"striking\">" . $lang_functions['text_banned'] . "</font>)</b>" : "");
         print($banned_torrent . $picked_torrent . $sp_torrent);
-        print('</div>');
         if ($displaysmalldescr) {
             //small descr
             $dissmall_descr = trim($row["small_descr"]);
@@ -3616,7 +3615,7 @@ $caticonrow = get_category_icon_row($CURUSER['caticon']);
             if ($count_dissmall_descr > $max_lenght_of_small_descr) {
                 $dissmall_descr = mb_substr($dissmall_descr, 0, $max_lenght_of_small_descr - 2, "UTF-8") . "..";
             }
-            print($dissmall_descr == "" ? "" : "" . "<p class=\"fc6\">" . htmlspecialchars($dissmall_descr) . "</p>");
+            print($dissmall_descr == "" ? "" : "" . "<br>" . htmlspecialchars($dissmall_descr) . "");
         }
         // 完成率-进度
         if (isset($mysnatched[$row['id']]) && ((1 - $mysnatched[$row['id']] / $row['size']) * 100) >=1) { // progress      
