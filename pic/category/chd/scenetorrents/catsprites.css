@@ -56,9 +56,15 @@ span.c_hqaudio:after
     background-color: #533B77;
 }
 
+span.c_sex:after
+{
+    content: "18禁";
+    background-color: #FF8705;
+}
+
 span.c_other:after
 {
-    content: "其他";
+    content: "其它";
     background-color: #FF9302;
 }
 
