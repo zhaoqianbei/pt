@@ -2691,6 +2691,7 @@ if (get_user_class() >= $staffmem_class) {
     print($lang_functions['tips_pt']);
         print($lang_functions['tips_zuozhong']);
         print($lang_functions['tips_zhiding']);
+        print($lang_functions['tips_yanjin']);
         print($lang_functions['tips_huodong']);?>
     </td>
     </tr></table>
