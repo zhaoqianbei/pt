@@ -37,12 +37,12 @@ span.c_doc:after
 span.c_mv:after
 {
     content: "游戏";
-    background-color: #DB9E36 ;
+    background-color: #4B495E ;
 }
 span.c_resource:after
 {
     content: "资源";
-    background-color: #694E79  ;
+    background-color: #006D5C ;
 }
 span.c_course:after
 {
@@ -65,6 +65,6 @@ span.c_sex:after
 span.c_other:after
 {
     content: "其它";
-    background-color: #FF9302;
+    background-color: #58666E;
 }
 
