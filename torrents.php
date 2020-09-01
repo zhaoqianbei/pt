@@ -1007,7 +1007,9 @@ function printcat($name, $listarray, $cbname, $wherelistina, $btname, $showimg =
         print("<tr><td class=\"embedded\" colspan=\"" . $catsperrow . "\" align=\"left\"><b>" . $name . "</b></td></tr><tr>");
         $i = 0;
         foreach ($listarray as $list) {
-            if ($i && $i % $catsperrow == 0) {
+            // 修正分页为20
+            // if ($i && $i % $catsperrow == 0) {
+            if ($i && $i % 20 == 0) {
                 print("</tr><tr>");
             }
             print("<td align=\"left\" class=\"bottom\" style=\"padding-bottom: 4px; padding-left: " . $catpadding . "px;\"><input type=\"checkbox\" id=\"" . $cbname . $list[id] . "\" name=\"" . $cbname . $list[id] . "\"" . (in_array($list[id], $wherelistina) ? " checked=\"checked\"" : "") . " value=\"1\" />" . ($showimg ? return_category_image($list[id], "?") : "<a title=\"" . $list[name] . "\" href=\"?" . $cbname . "=" . $list[id] . "\">" . $list[name] . "</a>") . "</td>\n");
