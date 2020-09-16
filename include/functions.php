@@ -2332,7 +2332,6 @@ function menu($selected = "home")
     // print("<li" . ($selected == "faq" ? " class=\"selected\"" : "") . "><a href=\"faq.php\">" . $lang_functions['text_faq'] . "</a></li>");
     print("<li" . ($selected == "staff" ? " class=\"selected\"" : "") . "><a href=\"staff.php\">" . $lang_functions['text_staff'] . "</a></li>");
     print("<li" . ($selected == "log" ? " class=\"selected\"" : "") . "><a href=\"log.php\">" . $lang_functions['text_log'] . "</a></li>");
-    print("<li><a href=\"https://www.zhaoqianbei.com\" target=\"_blank\" style=\" background:#017A85\">" . $lang_functions['text_zqb'] . "</a></li>");
     print("</ul>");
     print("</div>");
 
