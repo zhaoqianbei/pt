@@ -314,11 +314,11 @@ $lang_functions = array
 	'row_progress' => '进度',
     'text_donation' => '捐赠本站',
 	'text_complains' => '有%s%u个待处理的申述%s',
-	'tips_pt'=>'<span class="tal"><a class="fcs" href="https://www.zhaoqianbei.com/Index/xiaokeZhuye/k/99221774" target="_blank"><i class="icon pt-lianjie"></i> 关于PT，从入门到发药</a></span>',
-	'tips_zhiding'=>'<span class="tal ml10"><a class="fcs" href="/forums.php?action=viewtopic&topicid=3&page=p3#pid3" target="_blank"><i class="icon pt-lianjie"></i> 种子置顶规则</a></span>',
+	'tips_pt'=>'<span class="tal"><a class="fcs" href="/forums.php?action=viewtopic&topicid=10&page=last#pid13" target="_blank"><i class="icon pt-lianjie"></i> 关于PT，从入门到发药</a></span>',
+	'tips_zuozhong'=>'<span class="tal"><a class="fcs" href="/forums.php?action=viewtopic&topicid=10&page=last#pid13" target="_blank"><i class="icon pt-lianjie"></i> PT之做种、保钟、辅种相关问题</a></span>',
+	'tips_zhiding'=>'<span class="tal ml10"><a class="fcs" href="/forums.php?action=viewtopic&topicid=3&page=p3#pid3" target="_blank"><i class="icon pt-lianjie"></i> 置顶规则</a></span>',
 	'tips_yanjin'=>'<span class="tal ml10"><a class="fcr" href="/forums.php?action=viewtopic&topicid=9&page=p11#pid11" target="_blank"><i class="icon pt-lianjie"></i> 严禁上传说明</a></span>',
-	'tips_zuozhong'=>'<span class="tal ml10"><a class="fcs" href="https://www.zhaoqianbei.com/Index/xiaokeZhuye/k/96974100" target="_blank"><i class="icon pt-lianjie"></i> PT之做种、保钟、辅种相关问题</a></span>',
-	'tips_huodong'=>'<span class="tal ml10"><a class="fcr" href="https://www.pttime.org/forums.php?action=viewforum&forumid=7" target="_blank"><i class="icon pt-huodong"></i> 奖励、活动</a></span>'
+	'tips_huodong'=>'<span class="tal ml10"><a class="fcr" href="/forums.php?action=viewforum&forumid=7" target="_blank"><i class="icon pt-huodong"></i> 奖励、活动</a></span>'
 );
 
 ?>
